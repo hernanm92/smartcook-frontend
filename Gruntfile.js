@@ -138,7 +138,7 @@ module.exports = function(grunt) {
         },
         constants: {
           config: {
-            domain: 'http://fury-api.melifrontends.com',
+            domain: 'http://localhost:5000',
             styleFolder: 'common',
             applicationPrefix: ''
           }
@@ -151,7 +151,7 @@ module.exports = function(grunt) {
         },
         constants: {
           config: {
-            domain: 'http://fury-api.stage.com:80',
+            domain: 'http://localhost:5000',
             styleFolder: 'stage',
             applicationPrefix: 'stage-'
           }
