@@ -1,0 +1,13 @@
+node_modules/
+.idea/
+mock/node_modules/
+mock/mock.log
+public/javascripts/config.js
+nohup.out
+coverage/
+mock.log
+npm-debug.log
+.DS_Store
+*.log
+public/.DS_Store
+public/minified/

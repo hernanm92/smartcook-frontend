@@ -1,0 +1,14 @@
+{
+  "name": "outsider-api-mock",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "~4.0.0",
+    "request": "2.55.x",
+    "morgan": "1.5.x",
+    "body-parser": "1.12.x"
+  }
+}
