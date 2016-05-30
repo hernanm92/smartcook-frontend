@@ -1,5 +1,4 @@
-
-var app = angular.module('MainApp', ['ngRoute', 'config', 'applicationModule']);
+var app = angular.module('MainApp', ['ngRoute', 'config', 'ingredientModule']);
 
 app.service('selectedParams', function ($location) {
     return {
@@ -28,7 +27,6 @@ app.service('selectedParams', function ($location) {
 });
 
 app.config(['$httpProvider', function ($httpProvider) {
-    //Reset headers to avoid OPTIONS request (aka preflight)
     $httpProvider.defaults.headers.common = {};
     $httpProvider.defaults.headers.post = {};
     $httpProvider.defaults.headers.put = {};
@@ -38,6 +36,8 @@ app.config(['$httpProvider', function ($httpProvider) {
 }]);
 
 app.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/', {templateUrl: 'applications/list', controller: 'ApplicationListController'});
+    $routeProvider.when('/', {templateUrl: 'general/home', controller: 'HomeController'});
 }]);
+
+
 

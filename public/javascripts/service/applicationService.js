@@ -1,3 +1,3 @@
-module.service('applicationService', function($rootScope, selectedParams, eventService, applicationFactory){
+module.service('exampleService', function($rootScope, eventService){
   //service
 });

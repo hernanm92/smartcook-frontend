@@ -22,25 +22,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
 
-var env = 'development';
-
-// development only
-if ('development' == app.get('env'))
-{
-    app.use(express.errorHandler());
-    app.get('/tests', function (req, res) {
-        res.render('tests/test-application');
-    });
-}
-
-app.get('/test', function (req, res) {
-    res.render('test-application');
-});
 app.get('/', function (req, res) {
     res.render('index');
 });
-app.get('/applications/list', function (req, res) {
-    res.render('applications/list');
+app.get('/general/home', function (req, res) {
+    res.render('general/home');
 });
 
 http.createServer(app).listen(app.get('port'), function ()
