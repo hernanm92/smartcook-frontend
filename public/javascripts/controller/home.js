@@ -1,5 +1,5 @@
 app.controller('HomeController',
-    function ($scope, ingredientFactory, selectedParams, eventService) {
+    function ($scope, ingredientFactory, eventService) {
         $scope.variable = 1;
     }
 );
