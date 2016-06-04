@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
   var fileList = [
-      "public/javascripts/config.js",
+    "public/javascripts/config.js",
     "public/javascripts/app.js",
 
     "public/javascripts/plugins/angular-css-injector.js",

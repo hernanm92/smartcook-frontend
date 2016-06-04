@@ -10,8 +10,8 @@ var accessLogStream = fs.createWriteStream('mock.log', {flags: 'w'});
 app.use(morgan('common', {stream: accessLogStream}));
 
 app.use(bodyParser.json())
-var applications = [
-	{"name": "application1","description": "application1"},
+var ingredients = [
+	{"name": "papa","description": "es una papa"},
 ];
 
 
@@ -22,10 +22,15 @@ app.use(function(req, res, next) {
   next();
 });
 
-//Applications
-app.get('/applications', function(req, res) {
+//ingredients
+app.get('/ingredients', function(req, res) {
   res.status(200);
-  res.send(applications);
+  res.send(ingredients);
+});
+
+app.get('/ingredients/:id', function(req, res) {
+  res.status(200);
+  res.send(ingredients[0]);
 });
 
 var server = app.listen(5000, function() {
