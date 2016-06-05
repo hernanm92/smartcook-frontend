@@ -28,6 +28,9 @@ app.get('/', function (req, res) {
 app.get('/general/home', function (req, res) {
     res.render('general/home');
 });
+app.get('/general/profile', function (req, res) {
+    res.render('general/profile');
+});
 
 http.createServer(app).listen(app.get('port'), function ()
 {

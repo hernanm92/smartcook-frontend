@@ -11,6 +11,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {templateUrl: 'general/home', controller: 'HomeController'});
+    $routeProvider.when('/profile', {templateUrl: 'general/profile', controller: 'ProfileController'});
 }]);
 
 
