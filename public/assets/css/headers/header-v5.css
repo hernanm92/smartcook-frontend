@@ -341,6 +341,7 @@
 
 .header-v5 .navbar {
     margin: 0;
+    margin-top: 0px;
 }
 
 @media (max-width: 991px) {
@@ -350,8 +351,8 @@
 }
 
 .header-v5 .navbar-default {
-    border: none;
     background: none;
+    border: none;
 }
 
 /*Navbar Header*/
@@ -798,7 +799,7 @@
 }
 
 .header-fixed .header-v5.header-fixed-shrink .navbar-nav > li > .dropdown-menu {
-    margin-top: -8px;
+    margin-top: -4px;
 }
 
 /*Badge List*/

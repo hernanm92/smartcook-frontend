@@ -74,14 +74,7 @@ var App = function () {
     }
 
     function handleHeader() {
-         jQuery(window).scroll(function() {
-            if (jQuery(window).scrollTop()>100){
-                jQuery(".header-fixed .header-static").addClass("header-fixed-shrink");
-            }
-            else {
-                jQuery(".header-fixed .header-static").removeClass("header-fixed-shrink");
-            }
-        });
+
     }
 
     function handleMegaMenu() {
