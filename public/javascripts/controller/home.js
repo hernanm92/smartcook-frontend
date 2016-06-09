@@ -1,5 +1,5 @@
 app.controller('HomeController',
-    function ($scope, ingredientFactory, eventService) {
+    function ($scope, ingredientFactory, recipeFactory, eventService) {
 
         $scope.$on('$viewContentLoaded', function(){
             App.init();
@@ -13,11 +13,18 @@ app.controller('HomeController',
         $scope.getIngredients = function(){
             ingredientFactory.query({},function(ingredients){
                 $scope.ingredients=ingredients;
-                console.log($scope.ingredients)
             });
         };
 
         $scope.getIngredients();
+
+        $scope.getRecipes = function(){
+            recipeFactory.query({},function(recipes){
+                $scope.recipes=recipes;
+            });
+        };
+
+        $scope.getRecipes();
 
     }
 );

@@ -1,7 +1,7 @@
 <!--=== Product Content ===-->
-<div class="container content-md" style="padding-top: 90px;">
+<div class="container content-md" style="padding-top: 90px; padding-bottom: 0px;">
     <!--=== Illustration v2 ===-->
-    <div class="illustration-v2 margin-bottom-60">
+    <div class="illustration-v2">
         <ul class="list-inline owl-slider">
             <li class="item" ng-repeat="ingredient in ingredients" on-finish-ingredients-render>
                 <div class="product-img">
@@ -10,7 +10,7 @@
                         <div style="background-image: url({{ingredient.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
                     </a>
                     <a class="product-review" href="shop-ui-inner.html">Remover</a>
-                    <a class="add-to-cart" href="#">Ver detalle</a>
+                    <a class="add-to-cart" href="#">Ver ingrediente</a>
                 </div>
                 <div class="product-description product-description-brd">
                     <div class="overflow-h margin-bottom-5">
@@ -44,18 +44,18 @@
   <div class="row">
     <div class="col-md-12">
       <div class="filter-results">
-        <div class="list-product-description product-description-brd margin-bottom-30">
+        <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="recipe in recipes">
           <div class="row">
             <div class="col-sm-4">
               <a href="shop-ui-inner.html">
                 <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
-                <div style="background-image: url({{'img/chicken-food.jpg'}}); height:290px; background-position:center;background-size: cover;"></div>
+                <div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
               </a>
             </div>
             <div class="col-sm-8 product-description">
               <div class="overflow-h margin-bottom-5">
                 <ul class="list-inline overflow-h">
-                  <li><h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">Pollo a la griega</a></h4></li>
+                  <li><h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a></h4></li>
                   <li class="pull-right">
                     <ul class="list-inline product-ratings">
                       <li><i class="rating-selected fa fa-star"></i></li>
@@ -70,7 +70,7 @@
                   <span class="title-price margin-right-10">$60.00</span>
                   <span class="title-price line-through">$95.00</span>
                 </div>
-                <p class="margin-bottom-20" style="height: 100px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin erat nec ornarevolu tpat. Etiam ut felis nec nisl eleifend lobortis. Aenean nibh est, hendrerit non conva.</p>
+                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
                 <ul class="list-inline add-to-wishlist margin-bottom-20">
                   <li class="wishlist-in">
                     <i class="fa fa-heart"></i>
@@ -86,181 +86,8 @@
             </div>
           </div>
         </div>
-
-        <div class="list-product-description product-description-brd margin-bottom-30">
-          <div class="row">
-            <div class="col-sm-4">
-              <a href="shop-ui-inner.html"><img class="img-responsive sm-margin-bottom-20" src="assets/img/blog/17.jpg" alt=""></a>
-            </div>
-            <div class="col-sm-8 product-description">
-              <div class="overflow-h margin-bottom-5">
-                <ul class="list-inline overflow-h">
-                  <li><h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4></li>
-                  <li><span class="gender text-uppercase">Men</span></li>
-                  <li class="pull-right">
-                    <ul class="list-inline product-ratings">
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="margin-bottom-10">
-                  <span class="title-price margin-right-10">$60.00</span>
-                  <span class="title-price line-through">$95.00</span>
-                </div>
-                <p class="margin-bottom-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin erat nec ornarevolu tpat. Etiam ut felis nec nisl eleifend lobortis. Aenean nibh est, hendrerit non conva.</p>
-                <ul class="list-inline add-to-wishlist margin-bottom-20">
-                  <li class="wishlist-in">
-                    <i class="fa fa-heart"></i>
-                    <a href="#">Add to Wishlist</a>
-                  </li>
-                  <li class="compare-in">
-                    <i class="fa fa-exchange"></i>
-                    <a href="#">Add to Compare</a>
-                  </li>
-                </ul>
-                <button type="button" class="btn-u btn-u-sea-shop">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="list-product-description product-description-brd margin-bottom-30">
-          <div class="row">
-            <div class="col-sm-4">
-              <a href="shop-ui-inner.html"><img class="img-responsive sm-margin-bottom-20" src="assets/img/blog/21.jpg" alt=""></a>
-            </div>
-            <div class="col-sm-8 product-description">
-              <div class="overflow-h margin-bottom-5">
-                <ul class="list-inline overflow-h">
-                  <li><h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4></li>
-                  <li><span class="gender text-uppercase">Men</span></li>
-                  <li class="pull-right">
-                    <ul class="list-inline product-ratings">
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="margin-bottom-10">
-                  <span class="title-price margin-right-10">$60.00</span>
-                  <span class="title-price line-through">$95.00</span>
-                </div>
-                <p class="margin-bottom-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin erat nec ornarevolu tpat. Etiam ut felis nec nisl eleifend lobortis. Aenean nibh est, hendrerit non conva.</p>
-                <ul class="list-inline add-to-wishlist margin-bottom-20">
-                  <li class="wishlist-in">
-                    <i class="fa fa-heart"></i>
-                    <a href="#">Add to Wishlist</a>
-                  </li>
-                  <li class="compare-in">
-                    <i class="fa fa-exchange"></i>
-                    <a href="#">Add to Compare</a>
-                  </li>
-                </ul>
-                <button type="button" class="btn-u btn-u-sea-shop">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="list-product-description product-description-brd margin-bottom-30">
-          <div class="row">
-            <div class="col-sm-4">
-              <a href="shop-ui-inner.html"><img class="img-responsive sm-margin-bottom-20" src="assets/img/blog/22.jpg" alt=""></a>
-            </div>
-            <div class="col-sm-8 product-description">
-              <div class="overflow-h margin-bottom-5">
-                <ul class="list-inline overflow-h">
-                  <li><h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4></li>
-                  <li><span class="gender text-uppercase">Men</span></li>
-                  <li class="pull-right">
-                    <ul class="list-inline product-ratings">
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="margin-bottom-10">
-                  <span class="title-price margin-right-10">$60.00</span>
-                  <span class="title-price line-through">$95.00</span>
-                </div>
-                <p class="margin-bottom-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin erat nec ornarevolu tpat. Etiam ut felis nec nisl eleifend lobortis. Aenean nibh est, hendrerit non conva.</p>
-                <ul class="list-inline add-to-wishlist margin-bottom-20">
-                  <li class="wishlist-in">
-                    <i class="fa fa-heart"></i>
-                    <a href="#">Add to Wishlist</a>
-                  </li>
-                  <li class="compare-in">
-                    <i class="fa fa-exchange"></i>
-                    <a href="#">Add to Compare</a>
-                  </li>
-                </ul>
-                <button type="button" class="btn-u btn-u-sea-shop">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="list-product-description product-description-brd">
-          <div class="row">
-            <div class="col-sm-4">
-              <a href="shop-ui-inner.html"><img class="img-responsive sm-margin-bottom-20" src="assets/img/blog/23.jpg" alt=""></a>
-            </div>
-            <div class="col-sm-8 product-description">
-              <div class="overflow-h margin-bottom-5">
-                <ul class="list-inline overflow-h">
-                  <li><h4 class="title-price"><a href="shop-ui-inner.html">Double-breasted</a></h4></li>
-                  <li><span class="gender text-uppercase">Men</span></li>
-                  <li class="pull-right">
-                    <ul class="list-inline product-ratings">
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="margin-bottom-10">
-                  <span class="title-price margin-right-10">$60.00</span>
-                  <span class="title-price line-through">$95.00</span>
-                </div>
-                <p class="margin-bottom-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin erat nec ornarevolu tpat. Etiam ut felis nec nisl eleifend lobortis. Aenean nibh est, hendrerit non conva.</p>
-                <ul class="list-inline add-to-wishlist margin-bottom-20">
-                  <li class="wishlist-in">
-                    <i class="fa fa-heart"></i>
-                    <a href="#">Add to Wishlist</a>
-                  </li>
-                  <li class="compare-in">
-                    <i class="fa fa-exchange"></i>
-                    <a href="#">Add to Compare</a>
-                  </li>
-                </ul>
-                <button type="button" class="btn-u btn-u-sea-shop">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div><!--/end filter resilts-->
 
-      <div class="text-center">
-        <ul class="pagination pagination-v2">
-          <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-          <li><a href="#">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-        </ul>
-      </div><!--/end pagination-->
     </div>
   </div><!--/end row-->
 </div><!--/end container-->
