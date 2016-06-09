@@ -14,4 +14,5 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/profile', {templateUrl: 'general/profile', controller: 'ProfileController'});
     $routeProvider.when('/login', {templateUrl: 'general/login', controller: 'LoginController'});
     $routeProvider.when('/register', {templateUrl: 'general/register', controller: 'RegisterController'});
+    $routeProvider.when('/top-listings', {templateUrl: 'general/top-listings', controller: 'TopListingsController'});
 }]);
