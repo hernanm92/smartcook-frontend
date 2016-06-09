@@ -5,7 +5,7 @@ app.controller('HomeController',
             App.init();
             App.initScrollBar();
             App.initParallaxBg();
-            OwlCarousel.initOwlCarousel();
+            //OwlCarousel.initOwlCarousel();
             RevolutionSlider.initRSfullWidth();
             StyleSwitcher.initStyleSwitcher();
         });
@@ -13,6 +13,7 @@ app.controller('HomeController',
         $scope.getIngredients = function(){
             ingredientFactory.query({},function(ingredients){
                 $scope.ingredients=ingredients;
+                console.log($scope.ingredients)
             });
         };
 
@@ -20,3 +21,17 @@ app.controller('HomeController',
 
     }
 );
+
+//forma que encontre para que ejecute este jquery cuando terminan de cargarse todas las fotos
+app.directive('onFinishIngredientsRender', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                element.ready(function () {
+                    OwlCarousel.initOwlCarousel();
+                });
+            }
+        }
+    }
+});
