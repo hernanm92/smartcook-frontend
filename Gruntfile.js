@@ -28,6 +28,8 @@ module.exports = function(grunt) {
     "public/javascripts/controller/menu.js",
     "public/javascripts/controller/home.js",
     "public/javascripts/controller/profile.js",
+    "public/javascripts/controller/login.js",
+    "public/javascripts/controller/register.js",
 
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",
