@@ -11,7 +11,10 @@ app.use(morgan('common', {stream: accessLogStream}));
 
 app.use(bodyParser.json())
 var ingredients = [
-	{"name": "papa","description": "es una papa"},
+	{name: 'papa', category: 'tuberculo', image_url: 'img/potatoe.jpg'},
+  {name: 'papa', category: 'tuberculo', image_url: 'img/potatoe.jpg'},
+  {name: 'papa', category: 'tuberculo', image_url: 'img/potatoe.jpg'},
+  {name: 'papa', category: 'tuberculo', image_url: 'img/potatoe.jpg'},
 ];
 
 
