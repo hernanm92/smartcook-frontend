@@ -2,11 +2,10 @@ app.controller('ProfileController',
     function ($scope, ingredientFactory, eventService) {
         $scope.$on('$viewContentLoaded', function(){
             App.init();
-            App.initScrollBar();
-            App.initParallaxBg();
-            OwlCarousel.initOwlCarousel();
-            RevolutionSlider.initRSfullWidth();
-            StyleSwitcher.initStyleSwitcher();
+			App.initScrollBar();
+			OwlCarousel.initOwlCarousel();
+			StyleSwitcher.initStyleSwitcher();
+			MasterSliderShowcase2.initMasterSliderShowcase2();
         });
     }
 );
