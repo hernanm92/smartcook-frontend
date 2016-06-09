@@ -34,6 +34,9 @@ app.get('/general/profile', function (req, res) {
 app.get('/general/login', function (req, res) {
     res.render('general/login');
 });
+app.get('/general/register', function (req, res) {
+    res.render('general/register');
+});
 
 http.createServer(app).listen(app.get('port'), function ()
 {

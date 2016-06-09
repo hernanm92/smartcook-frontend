@@ -3,9 +3,8 @@ app.controller('RegisterController',
         $scope.$on('$viewContentLoaded', function(){
             App.init();
 			App.initScrollBar();
-			OwlCarousel.initOwlCarousel();
+			Registration.initRegistration();
 			StyleSwitcher.initStyleSwitcher();
-			MasterSliderShowcase2.initMasterSliderShowcase2();
         });
     }
 );
