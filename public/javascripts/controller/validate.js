@@ -6,6 +6,7 @@ app.controller('ValidateController',
             MouseWheel.initMouseWheel();
             StyleSwitcher.initStyleSwitcher();
             RevolutionSlider.initRSfullWidth();
+            App.initParallaxBg();
         });
 
         $scope.getRecipes = function(){
