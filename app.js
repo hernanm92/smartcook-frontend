@@ -37,8 +37,12 @@ app.get('/general/login', function (req, res) {
 app.get('/general/register', function (req, res) {
     res.render('general/register');
 });
-app.get('/general/top-listings', function (req, res) {
-    res.render('general/top-listings');
+app.get('/general/listing', function (req, res) {
+    res.render('general/listing');
+});
+
+app.get('/general/top-listing', function (req, res) {
+    res.render('general/top-listing');
 });
 
 http.createServer(app).listen(app.get('port'), function ()
