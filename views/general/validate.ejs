@@ -1,0 +1,198 @@
+<!--=== Slider ===-->
+<div class="tp-banner-container">
+    <div class="tp-banner">
+        <ul>
+            <!-- SLIDE -->
+            <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+                <!-- MAIN IMAGE -->
+                <img src="assets/img/1.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+
+                <div class="tp-caption revolution-ch1 sft start"
+                    data-x="center"
+                    data-hoffset="0"
+                    data-y="100"
+                    data-speed="1500"
+                    data-start="500"
+                    data-easing="Back.easeInOut"
+                    data-endeasing="Power1.easeIn"
+                    data-endspeed="300">
+                    The New <br>
+                    <strong>Collection</strong><br>
+                    is here
+                </div>
+
+                <!-- LAYER -->
+                <div class="tp-caption sft"
+                    data-x="center"
+                    data-hoffset="0"
+                    data-y="380"
+                    data-speed="1600"
+                    data-start="1800"
+                    data-easing="Power4.easeOut"
+                    data-endspeed="300"
+                    data-endeasing="Power1.easeIn"
+                    data-captionhidden="off"
+                    style="z-index: 6">
+                    <a href="#/" class="btn-u btn-brd btn-brd-hover btn-u-light">Shop Now</a>
+                </div>
+            </li>
+            <!-- END SLIDE -->
+
+            <!-- SLIDE -->
+            <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 2">
+                <!-- MAIN IMAGE -->
+                <img src="assets/img/5.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+
+                <div class="tp-caption revolution-ch3 sft start"
+                    data-x="center"
+                    data-hoffset="0"
+                    data-y="140"
+                    data-speed="1500"
+                    data-start="500"
+                    data-easing="Back.easeInOut"
+                    data-endeasing="Power1.easeIn"
+                    data-endspeed="300">
+                    Latest <strong>Fashion</strong> Trends
+                </div>
+
+                <!-- LAYER -->
+                <div class="tp-caption revolution-ch4 sft"
+                    data-x="center"
+                    data-hoffset="-14"
+                    data-y="210"
+                    data-speed="1400"
+                    data-start="2000"
+                    data-easing="Power4.easeOut"
+                    data-endspeed="300"
+                    data-endeasing="Power1.easeIn"
+                    data-captionhidden="off"
+                    style="z-index: 6">
+                    Cras non dui et quam auctor pretium.<br>
+                    Aenean enim tortr, tempus et iteus m
+                </div>
+
+                <!-- LAYER -->
+                <div class="tp-caption sft"
+                    data-x="center"
+                    data-hoffset="0"
+                    data-y="300"
+                    data-speed="1600"
+                    data-start="1800"
+                    data-easing="Power4.easeOut"
+                    data-endspeed="300"
+                    data-endeasing="Power1.easeIn"
+                    data-captionhidden="off"
+                    style="z-index: 6">
+                    <a href="#/" class="btn-u btn-brd btn-brd-hover btn-u-light">Shop Now</a>
+                </div>
+            </li>
+            <!-- END SLIDE -->
+
+            <!-- SLIDE -->
+            <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 3">
+                <!-- MAIN IMAGE -->
+                <img src="assets/img/3.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="right top" data-bgrepeat="no-repeat">
+
+                <div class="tp-caption revolution-ch3 sft start"
+                    data-x="right"
+                    data-hoffset="5"
+                    data-y="130"
+                    data-speed="1500"
+                    data-start="500"
+                    data-easing="Back.easeInOut"
+                    data-endeasing="Power1.easeIn"
+                    data-endspeed="300">
+                    <strong>Luxury</strong> Watches
+                </div>
+
+                <!-- LAYER -->
+                <div class="tp-caption revolution-ch4 sft"
+                    data-x="right"
+                    data-hoffset="0"
+                    data-y="210"
+                    data-speed="1400"
+                    data-start="2000"
+                    data-easing="Power4.easeOut"
+                    data-endspeed="300"
+                    data-endeasing="Power1.easeIn"
+                    data-captionhidden="off"
+                    style="z-index: 6">
+                    lectus. Cras non dui et quam auctor.<br>
+                    Aenean enim tortor, tempus et im
+                </div>
+
+                <!-- LAYER -->
+                <div class="tp-caption sft"
+                    data-x="right"
+                    data-hoffset="0"
+                    data-y="300"
+                    data-speed="1600"
+                    data-start="2800"
+                    data-easing="Power4.easeOut"
+                    data-endspeed="300"
+                    data-endeasing="Power1.easeIn"
+                    data-captionhidden="off"
+                    style="z-index: 6">
+                    <a href="#/" class="btn-u btn-brd btn-brd-hover btn-u-light">Shop Now</a>
+                </div>
+            </li>
+            <!-- END SLIDE -->
+        </ul>
+        <div class="tp-bannertimer tp-bottom"></div>
+    </div>
+</div>
+<!--=== End Slider ===-->
+
+<!--=== Content Part ===-->
+<div class="content container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="filter-results">
+        <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="recipe in recipes">
+          <div class="row">
+            <div class="col-sm-4">
+              <a href="shop-ui-inner.html">
+                <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
+                <div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
+              </a>
+            </div>
+            <div class="col-sm-8 product-description">
+              <div class="overflow-h margin-bottom-5">
+                <ul class="list-inline overflow-h">
+                  <li><h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a></h4></li>
+                  <li class="pull-right">
+                    <ul class="list-inline product-ratings">
+                      <li><i class="rating-selected fa fa-star"></i></li>
+                      <li><i class="rating-selected fa fa-star"></i></li>
+                      <li><i class="rating-selected fa fa-star"></i></li>
+                      <li><i class="rating fa fa-star"></i></li>
+                      <li><i class="rating fa fa-star"></i></li>
+                    </ul>
+                  </li>
+                </ul>
+                <div class="margin-bottom-10">
+                  <span class="title-price margin-right-10">$60.00</span>
+                  <span class="title-price line-through">$95.00</span>
+                </div>
+                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
+                <ul class="list-inline add-to-wishlist margin-bottom-20">
+                  <li class="wishlist-in">
+                    <i class="fa fa-heart"></i>
+                    <a href="#">Agregar a favoritos</a>
+                  </li>
+                  <li class="compare-in">
+                    <i class="fa fa-exchange"></i>
+                    <a href="#">Add to Compare</a>
+                  </li>
+                </ul>
+                <button type="button" class="btn-u btn-u-sea-shop">Ver receta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!--/end filter resilts-->
+
+    </div>
+  </div><!--/end row-->
+</div><!--/end container-->
+<!--=== End Content Part ===-->

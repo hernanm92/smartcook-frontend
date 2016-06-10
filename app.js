@@ -40,9 +40,11 @@ app.get('/general/register', function (req, res) {
 app.get('/general/listing', function (req, res) {
     res.render('general/listing');
 });
-
 app.get('/general/top-listing', function (req, res) {
     res.render('general/top-listing');
+});
+app.get('/general/validate', function (req, res) {
+    res.render('general/validate');
 });
 
 http.createServer(app).listen(app.get('port'), function ()

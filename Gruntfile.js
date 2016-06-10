@@ -33,6 +33,7 @@ module.exports = function(grunt) {
     "public/javascripts/controller/register.js",
     "public/javascripts/controller/listing.js",
     "public/javascripts/controller/top-listing.js",
+    "public/javascripts/controller/validate.js",
 
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",
