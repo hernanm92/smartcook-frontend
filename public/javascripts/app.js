@@ -17,4 +17,5 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/listing', {templateUrl: 'general/listing', controller: 'ListingController'});
     $routeProvider.when('/top-listing', {templateUrl: 'general/top-listing', controller: 'TopListingController'});
     $routeProvider.when('/validate', {templateUrl: 'general/validate', controller: 'ValidateController'});
+    $routeProvider.when('/createRecipe', {templateUrl: 'general/createRecipe', controller: 'CreateRecipeController'});
 }]);

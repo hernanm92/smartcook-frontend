@@ -34,6 +34,7 @@ module.exports = function(grunt) {
     "public/javascripts/controller/listing.js",
     "public/javascripts/controller/top-listing.js",
     "public/javascripts/controller/validate.js",
+    "public/javascripts/controller/createRecipe.js",
 
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",
@@ -48,7 +49,8 @@ module.exports = function(grunt) {
     "public/stylesheets/loaders.min.css",
     "public/stylesheets/select.min.css",
     "public/stylesheets/font-awesome.min.css",
-    "public/stylesheets/angular-ui-switch.css"
+    "public/stylesheets/angular-ui-switch.css",
+    "public/stylesheets/createRecipe.css"
   ]
 
   var stageCss = ["public/stylesheets/*.css",

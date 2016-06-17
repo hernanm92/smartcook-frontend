@@ -46,6 +46,9 @@ app.get('/general/top-listing', function (req, res) {
 app.get('/general/validate', function (req, res) {
     res.render('general/validate');
 });
+app.get('/general/createRecipe', function (req, res) {
+    res.render('general/createRecipe');
+});
 
 http.createServer(app).listen(app.get('port'), function ()
 {

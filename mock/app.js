@@ -10,6 +10,7 @@ var accessLogStream = fs.createWriteStream('mock.log', {flags: 'w'});
 app.use(morgan('common', {stream: accessLogStream}));
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin','*');
@@ -52,6 +53,12 @@ app.get('/recipes', function(req, res) {
 app.get('/recipes/:id', function(req, res) {
   res.status(200);
   res.send(recipes[0]);
+});
+
+app.post('/recipes',function (req,res) {
+  res.status(200);  
+  res.send('Llego correctamente la receta');
+  console.log(req.body);
 });
 
 var server = app.listen(5000, function() {

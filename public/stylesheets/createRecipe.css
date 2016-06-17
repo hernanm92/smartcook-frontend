@@ -1,0 +1,13 @@
+.label-form-ingredient{
+    color:#687074;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.panel-align{
+    padding-top: 20px;
+    border-left-width: 20px;
+    padding-left: 15px;
+    border-right-width: 15px;
+}
