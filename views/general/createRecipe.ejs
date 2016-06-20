@@ -1,63 +1,62 @@
-<div class = "container" style = "padding-top: 90px;">
-    <div class = "row">
-        <div class = "col-md-6">
-            <div>
+<div class="container" style="padding-top: 90px;">
+    <form name="recipeForm" ng-submit="validateForm(recipeForm.$valid)" novalidate>
+        <div class="row">
+            <div class="col-md-6">
                 <div>
-                    <img src="img/recipePhoto.jpg">
-                </div>   
+                    <div>
+                        <img src="img/recipePhoto.jpg">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="label-form-ingredient"> Nombre Receta </label>
+                    <input name="nameRecipe" ng-model="nameRecipe" type="text" class="form-control" placeholder="Nombre" required>
+                    <p ng-show="recipeForm.nameRecipe.$invalid && !recipeForm.nameRecipe.$pristine" sytle="color:red;">La receta debe tener un nombre</p>
+                </div>
+                <div>
+                    <label class="label-form-ingredient"> Ingredientes </label>
+                    <tags-input ng-model="ingredients" placeholder="Ingrediente">
+                        <auto-complete min-length="0" source="loadIngredients($query)"></auto-complete>
+                    </tags-input>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-                <form>
-                    <div class = "form-group">
-                        <label class="label-form-ingredient"> Nombre Receta </label>
-                        <input ng-model="nameRecipe" type = "text" class= "form-control" placeholder="Nombre">
-                    </div> 
-                    <div class = "form-group">
-                        <label class="label-form-ingredient"> Ingrediente </label>
-                        <input type = "text" class= "form-control" placeholder="Nombre">
-                    </div>   
-                </form>    
-            <div >
-                <h3 class = "text-uppercase"> Ingredientes Seleccionados </h3>
-                <input type = "text" class= "form-control">
-            </div>    
-        </div>
-    </div>
-    <div class = "row">
-        <div class = col-md-12 style="padding-top: 20px;">
-            <div class="row">
-                <form >
+        <div class="row">
+            <div class="col-md-12" style="padding-top: 20px;">
+                <div class="row">
                     <div class="form-group">
-                        <div class="col-md-10">
-                            <input ng-model="stepToAdd" type = "text" class= "form-control" placeholder="Escriba el paso aqui" style="height: 40px;">
+                        <div class="col-md-8">
+                            <input ng-model="stepToAdd" type="text" class="form-control" placeholder="Escriba el paso aqui" style="height: 40px;">
+                            <p  ng-show =" stepErrorMessage" style="color:red;">{{stepErrorMessage}}</p>
                         </div>
-                        <div class="col-md-2" style="text-align:right">
+                        <div class="col-md-4">
                             <button type="button" ng-click="addStep()" class="btn-u btn-u-sea-shop btn-u-md">Agregar Paso </button>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class ="row panel-align" style="margin-right:0px">
-                <div class= "panel panel-default">
-                    <div class = "panel-heading">
-                        <h3 class = "panel-title">Pasos para la preparacion de la receta</h3>
-                    </div>
-                    <div class = "panel-body">
-                        <div ng-repeat="step in steps track by $index">
-                            <div class = "highlight" style="margin-top: 10px; margin-bottom: 10px;">
-                                <h4> Paso {{$index + 1 }}</h4>
-                                <p>{{step.step}}</p>
+                </div>
+                <div class="row panel-align">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Pasos para la preparacion de la receta</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div ng-repeat="step in steps track by $index">
+                                <div class="highlight" style="margin-top: 10px; margin-bottom: 10px;">
+                                    <h4> Paso {{$index + 1 }}</h4>
+                                    <p>{{step.step}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class = "row">
-        <div class = col-md-12 style="margin-bottom: 20px;">
-            <button type="button" ng-click="saveRecipe()" class="btn-u btn-u-sea-shop btn-u-md">Guardar Receta</button>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 20px;">
+                <button type="submit" class="btn-u btn-u-sea-shop btn-u-md" ng-disabled="recipeForm.$invalid">Guardar Receta</button>
+                <p  ng-show =" recipeErrorMessage" style="color:red;">{{recipeErrorMessage}}</p>
+            </div>
         </div>
-    </div>
+    </form>
 </div>

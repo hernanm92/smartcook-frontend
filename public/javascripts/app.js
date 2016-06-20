@@ -1,4 +1,4 @@
-var app = angular.module('MainApp', ['ngRoute', 'config', 'ingredientModule', 'recipeModule']);
+var app = angular.module('MainApp', ['ngRoute', 'config', 'ingredientModule', 'recipeModule','ngTagsInput','ui.bootstrap']);
 
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.common = {};

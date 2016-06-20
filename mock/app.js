@@ -39,9 +39,22 @@ app.get('/ingredients', function(req, res) {
   res.send(ingredients);
 });
 
-app.get('/ingredients/:id', function(req, res) {
+app.get('/ingredients/id/:id', function(req, res) {
   res.status(200);
   res.send(ingredients[0]);
+});
+
+app.get('/ingredients/:text', function(req, res) {
+  var text = req.params.text
+  var ingToSend = [];
+  for (var i = 0; i < ingredients.length; i++) {
+    var ingredient = ingredients[i];
+    if (ingredient.name.toLowerCase().indexOf(req.params.text.toLowerCase()) > -1){
+      ingToSend.push(ingredient.name);
+    }
+  }
+  res.status(200);
+  res.send(ingToSend);
 });
 
 //recipes

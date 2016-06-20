@@ -29,7 +29,8 @@ app.controller('HomeController',
     }
 );
 
-//forma que encontre para que ejecute este jquery cuando terminan de cargarse todas las fotos
+//forma que encontre para que ejecute este jquery cuando terminan de cargarse todas las fotos,
+//se podria probar con $q.
 app.directive('onFinishIngredientsRender', function () {
     return {
         restrict: 'A',

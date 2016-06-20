@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   var fileList = [
     "public/javascripts/config.js",
     "public/javascripts/app.js",
-
+    
     "public/javascripts/plugins/angular-css-injector.js",
     "public/javascripts/plugins/ui-bootstrap-tpls-0.13.0.min.js",
     "public/javascripts/plugins/angular-selection-model-custom.js",
@@ -21,6 +21,7 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/angular-moment.min.js",
     "public/javascripts/plugins/scrollglue.min.js",
     "public/javascripts/plugins/angular-ui-switch.js",
+    "public/javascripts/plugins/ng-tags-input.min.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
@@ -35,6 +36,7 @@ module.exports = function(grunt) {
     "public/javascripts/controller/top-listing.js",
     "public/javascripts/controller/validate.js",
     "public/javascripts/controller/createRecipe.js",
+    "public/javascripts/controller/modal.js",
 
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",
@@ -50,7 +52,9 @@ module.exports = function(grunt) {
     "public/stylesheets/select.min.css",
     "public/stylesheets/font-awesome.min.css",
     "public/stylesheets/angular-ui-switch.css",
-    "public/stylesheets/createRecipe.css"
+    "public/stylesheets/createRecipe.css",
+    "public/stylesheets/ng-tag/ng-tags-input.min.css",
+    "public/stylesheets/ui-bootstrap-csp.css"
   ]
 
   var stageCss = ["public/stylesheets/*.css",
@@ -116,15 +120,15 @@ module.exports = function(grunt) {
         }
       }
     },
-    watch: {
-      scripts: {
-        files: 'public/javascripts/**/*.js',
+    watch: {  public: {
+      files: ['public/stylesheets/*.css', 'public/javascripts/**/*.js','public/stylesheets/**/*.css'],
         tasks: ['development'],
         options: {
           event: ['added', 'deleted', 'changed'],
-          livereaload: true
+          livereaload: true,
+          reload : true
         }
-      }
+    }
     },
     ngconstant: {
       development: {
