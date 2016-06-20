@@ -49,6 +49,9 @@ app.get('/general/validate', function (req, res) {
 app.get('/general/createRecipe', function (req, res) {
     res.render('general/createRecipe');
 });
+app.get('/general/confirmForm', function (req, res) {
+    res.render('general/confirmForm');
+});
 
 http.createServer(app).listen(app.get('port'), function ()
 {
