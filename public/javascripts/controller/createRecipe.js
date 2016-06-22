@@ -1,5 +1,5 @@
 app.controller('CreateRecipeController',
-    function ($scope, recipeFactory,$modal,ingredientFactory) {
+    function ($scope, recipeFactory, $modal, ingredientFactory) {
         //global variables
         $scope.steps = [];
         $scope.ingredients = [];
@@ -8,9 +8,9 @@ app.controller('CreateRecipeController',
         $scope.loadIngredients = loadIngredients;
         $scope.confirmForm = confirmForm;
         $scope.validateForm = validateForm;
-
+ 
         function addStep() {
-             $scope.stepErrorMessage = null;
+            $scope.stepErrorMessage = null;
             if($scope.stepToAdd){
                 var step = {
                     "step" : $scope.stepToAdd
@@ -23,25 +23,23 @@ app.controller('CreateRecipeController',
         };
 
         function validateForm(isValid){
-            $scope.recipeErrorMessage = null;
-            var condition1 = $scope.steps.length>0;
-            var condition2 =  $scope.ingredients.length>0;
-            if(isValid && condition1 && condition2){
+            $scope.submitted = true;
+            var existSteps = $scope.steps.length > 0;
+            var existIngredients =  $scope.ingredients.length > 0;   
+            if(isValid && existSteps && existIngredients){
                 confirmForm();
-            }else{
-                $scope.recipeErrorMessage = "Debe completar los ingredientes y los pasos";
             }
         };
 
         function confirmForm(){
             var confirmation = $modal.open({
-                animation: $scope.animationsEnabled,
+                animation: true,
                 templateUrl: '/general/confirmForm',
                 controller: 'ModalController',
                 size:'sm',
                 resolve:{
                     message:function () {
-                        return 'La receta sera guardada, desaea continuar?';
+                        return 'La receta sera guardada, desea continuar?';
                     }
                 },
                 windowClass:'menu-bar-space'

@@ -50,7 +50,11 @@ app.get('/ingredients/:text', function(req, res) {
   for (var i = 0; i < ingredients.length; i++) {
     var ingredient = ingredients[i];
     if (ingredient.name.toLowerCase().indexOf(req.params.text.toLowerCase()) > -1){
-      ingToSend.push(ingredient.name);
+      var ing = {
+        "name":ingredient.name,
+        "id":ingredient.id
+      }
+      ingToSend.push(ing);
     }
   }
   res.status(200);

@@ -11,14 +11,15 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="label-form-ingredient"> Nombre Receta </label>
-                    <input name="nameRecipe" ng-model="nameRecipe" type="text" class="form-control" placeholder="Nombre" required>
-                    <p ng-show="recipeForm.nameRecipe.$invalid && !recipeForm.nameRecipe.$pristine" sytle="color:red;">La receta debe tener un nombre</p>
+                    <input name="nameRecipe" ng-model="nameRecipe" type="text" class="form-control" placeholder="Escriba el nombre de la receta aqui" required>
+                    <p ng-show="recipeForm.nameRecipe.$invalid && submitted" style="color:red;">La receta debe tener un nombre</p>
                 </div>
                 <div>
                     <label class="label-form-ingredient"> Ingredientes </label>
-                    <tags-input ng-model="ingredients" placeholder="Ingrediente">
+                    <tags-input name = "ingredients" ng-model="ingredients" placeholder="Escriba el ingrediente aqui" display-property="name" add-from-autocomplete-only = "true" >
                         <auto-complete min-length="0" source="loadIngredients($query)"></auto-complete>
                     </tags-input>
+                    <p ng-show=" !(ingredients.length > 0)  && submitted" style="color:red;">La receta debe de tener al menos un Ingrediente</p>
                 </div>
             </div>
         </div>
@@ -26,36 +27,47 @@
             <div class="col-md-12" style="padding-top: 20px;">
                 <div class="row">
                     <div class="form-group">
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <input ng-model="stepToAdd" type="text" class="form-control" placeholder="Escriba el paso aqui" style="height: 40px;">
-                            <p  ng-show =" stepErrorMessage" style="color:red;">{{stepErrorMessage}}</p>
+                            <p  ng-show =" stepErrorMessage" style="color: red;">{{stepErrorMessage}}</p>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2" style="text-align:right">
                             <button type="button" ng-click="addStep()" class="btn-u btn-u-sea-shop btn-u-md">Agregar Paso </button>
                         </div>
                     </div>
+                    
                 </div>
-                <div class="row panel-align">
+                <div class="row panel-align" style="margin-right:0px;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Pasos para la preparacion de la receta</h3>
                         </div>
                         <div class="panel-body">
-                            <div ng-repeat="step in steps track by $index">
-                                <div class="highlight" style="margin-top: 10px; margin-bottom: 10px;">
-                                    <h4> Paso {{$index + 1 }}</h4>
-                                    <p>{{step.step}}</p>
+                            <div class = "list-group">
+                                <div  ng-repeat="step in steps track by $index">
+                                    <div class="highlight" style="margin-top: 10px; margin-bottom: 10px;">
+                                            <h4> Paso {{$index + 1 }}</h4>
+                                            <div class="col-md-6">
+                                                <p>{{step.step}}</p>
+                                            </div>
+                                            <div class = "col-md-6">
+                                                <div class="btn-group" role="group" >
+                                                    <button type="button" class="btn btn-default">Editar</button>
+                                                    <button type="button" class="btn btn-default">Eliminar</button>
+                                                </div>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <p ng-show=" !(steps.length > 0) && submitted" style="color:red;">La receta debe de tener al menos un Paso</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12" style="margin-bottom: 20px;">
-                <button type="submit" class="btn-u btn-u-sea-shop btn-u-md" ng-disabled="recipeForm.$invalid">Guardar Receta</button>
-                <p  ng-show =" recipeErrorMessage" style="color:red;">{{recipeErrorMessage}}</p>
+                <button type="submit" class="btn-u btn-u-sea-shop btn-u-md">Guardar Receta</button>
             </div>
         </div>
     </form>
