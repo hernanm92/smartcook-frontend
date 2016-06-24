@@ -8,6 +8,7 @@ app.controller('CreateRecipeController',
         $scope.loadIngredients = loadIngredients;
         $scope.confirmForm = confirmForm;
         $scope.validateForm = validateForm;
+        $scope.deleteStep = deleteStep;
  
         function addStep() {
             $scope.stepErrorMessage = null;
@@ -31,27 +32,31 @@ app.controller('CreateRecipeController',
             }
         };
 
-        function confirmForm(){
-            var confirmation = $modal.open({
+        function openModal(message) {
+            return $modal.open({
                 animation: true,
                 templateUrl: '/general/confirmForm',
                 controller: 'ModalController',
                 size:'sm',
                 resolve:{
                     message:function () {
-                        return 'La receta sera guardada, desea continuar?';
+                        return message;
                     }
                 },
                 windowClass:'menu-bar-space'
             });
+        };
 
-            confirmation.result.then(function(){
+        function confirmForm(){
+            var message = 'La receta sera guardada, desea continuar?';
+            openModal(message).result.then(function(){
                 saveRecipe();
             })
         };
 
         function saveRecipe() {
             var recipe = {
+                "userId":1,//se vera de dnd se saca.
                 "name":$scope.nameRecipe,
                 "ingredients":$scope.ingredients,
                 "steps":$scope.steps
@@ -59,15 +64,22 @@ app.controller('CreateRecipeController',
             $scope.recipe = new recipeFactory();
             $scope.recipe.data = recipe;
             recipeFactory.save($scope.recipe,function (res) {
-
+                openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion');
             })
-        }
+        };
 
         function loadIngredients(text) {
             //traer ingredientes por texto.Se trndia q validar tambien el perfil
-            // del cliente.Ejemplo no puede traer leche si es celiaco. 
+            // del cliente.Ejemplo no puede traer leche si es celiaco. //Repensando esto
+            //nose si es necesario ya que cualqueri persona puede crear una reeta culquiera
           
             return ingredientFactory.query({text:text}).$promise; //traer los ids 
         }
+
+        function deleteStep(index){
+            openModal('Desea eliminar este paso?').result.then(function () {
+                $scope.steps.splice(index,1);    
+            })
+        };
     }
 );

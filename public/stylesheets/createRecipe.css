@@ -16,3 +16,28 @@
   padding-top: 90px;
   border-radius: 0px;
 }
+
+.step-textArea{
+    font-size:large; 
+    margin-left:20px; 
+    width: 100%; 
+    border: none; 
+    outline: none; 
+    resize: none; 
+    overflow: hidden; 
+    word-wrap: break-word; 
+    height: 30px; 
+    background: none;
+    border-radius: 20px;
+    margin-top: 5px;
+}
+
+.step-textArea:hover{
+    background-color: #18ba9b;
+    color: white;
+}
+
+.numberStep{
+    float: left;
+    
+}
