@@ -54,6 +54,7 @@ module.exports = function(grunt) {
     "public/stylesheets/font-awesome.min.css",
     "public/stylesheets/angular-ui-switch.css",
     "public/stylesheets/createRecipe.css",
+    "public/stylesheets/userProfile.css",
     "public/stylesheets/ng-tag/ng-tags-input.min.css",
     "public/stylesheets/ui-bootstrap-csp.css"
   ]

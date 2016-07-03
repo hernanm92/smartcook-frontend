@@ -1,5 +1,5 @@
 app.controller('CreateRecipeController',
-    function ($scope, recipeFactory, $modal, ingredientFactory) {
+    function ($scope, recipeFactory,$modal,ingredientFactory) {
         //global variables
         $scope.steps = [];
         $scope.ingredients = [];
@@ -8,10 +8,9 @@ app.controller('CreateRecipeController',
         $scope.loadIngredients = loadIngredients;
         $scope.confirmForm = confirmForm;
         $scope.validateForm = validateForm;
-        $scope.deleteStep = deleteStep;
- 
+
         function addStep() {
-            $scope.stepErrorMessage = null;
+             $scope.stepErrorMessage = null;
             if($scope.stepToAdd){
                 var step = {
                     "step" : $scope.stepToAdd
@@ -24,39 +23,37 @@ app.controller('CreateRecipeController',
         };
 
         function validateForm(isValid){
-            $scope.submitted = true;
-            var existSteps = $scope.steps.length > 0;
-            var existIngredients =  $scope.ingredients.length > 0;   
-            if(isValid && existSteps && existIngredients){
+            $scope.recipeErrorMessage = null;
+            var condition1 = $scope.steps.length>0;
+            var condition2 =  $scope.ingredients.length>0;
+            if(isValid && condition1 && condition2){
                 confirmForm();
+            }else{
+                $scope.recipeErrorMessage = "Debe completar los ingredientes y los pasos";
             }
         };
 
-        function openModal(message) {
-            return $modal.open({
-                animation: true,
+        function confirmForm(){
+            var confirmation = $modal.open({
+                animation: $scope.animationsEnabled,
                 templateUrl: '/general/confirmForm',
                 controller: 'ModalController',
                 size:'sm',
                 resolve:{
                     message:function () {
-                        return message;
+                        return 'La receta sera guardada, desaea continuar?';
                     }
                 },
                 windowClass:'menu-bar-space'
             });
-        };
 
-        function confirmForm(){
-            var message = 'La receta sera guardada, desea continuar?';
-            openModal(message).result.then(function(){
+            confirmation.result.then(function(){
                 saveRecipe();
             })
         };
 
         function saveRecipe() {
             var recipe = {
-                "userId":1,//se vera de dnd se saca.
                 "name":$scope.nameRecipe,
                 "ingredients":$scope.ingredients,
                 "steps":$scope.steps
@@ -64,22 +61,15 @@ app.controller('CreateRecipeController',
             $scope.recipe = new recipeFactory();
             $scope.recipe.data = recipe;
             recipeFactory.save($scope.recipe,function (res) {
-                openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion');
+
             })
-        };
+        }
 
         function loadIngredients(text) {
             //traer ingredientes por texto.Se trndia q validar tambien el perfil
-            // del cliente.Ejemplo no puede traer leche si es celiaco. //Repensando esto
-            //nose si es necesario ya que cualqueri persona puede crear una reeta culquiera
-          
-            return ingredientFactory.query({text:text}).$promise; //traer los ids 
-        }
+            // del cliente.Ejemplo no puede traer leche si es celiaco.
 
-        function deleteStep(index){
-            openModal('Desea eliminar este paso?').result.then(function () {
-                $scope.steps.splice(index,1);    
-            })
-        };
+            return ingredientFactory.query({text:text}).$promise; //traer los ids
+        }
     }
 );
