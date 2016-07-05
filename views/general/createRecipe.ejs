@@ -40,11 +40,11 @@
                                         <textarea id="item"  class="step-textArea" msd-elastic ng-model = "steps[$index].step " placeholder="Escriba su paso aqui..." >
                                             {{step.step}}
                                         </textarea>
-                                        <div class="row" style="margin-left:30px">
+                                    </div>
+                                    <div class="col-md-8">
                                             <button ng-mouseover ng-show="true" type="button" class="btn btn-default btn-xs" ng-click="deleteStep($index)">
                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -52,10 +52,12 @@
                                 <div class="col-md-8">
                                     <br>
                                     <textarea  class="step-textArea" msd-elastic ng-model="stepToAdd" placeholder="Escriba su paso aqui..."></textarea>
-                                    <p ng-show=" stepErrorMessage" style="color: red;">{{stepErrorMessage}}</p>
-                                    <button style="margin-left: 20px;  color: #18ba9b; border-color: #18ba9b;" ng-click="addStep()"  type="button" class="btn btn-default">
-                                        <i class="glyphicon glyphicon-plus"> </i>
-                                    </button>
+                                    <p class="step-location" ng-show=" stepErrorMessage" style="color: red;">{{stepErrorMessage}}</p>
+                                    <div class ="step-location" > 
+                                        <button style ="border-color: #18ba9b; color: #18ba9b; background-color: #fff;" ng-click="addStep()"  type="button" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-plus"> </i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

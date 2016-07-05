@@ -20,7 +20,7 @@
 .step-textArea{
     font-size:large; 
     margin-left:20px; 
-    width: 100%; 
+    width: 70%; 
     border: none; 
     outline: none; 
     resize: none; 
@@ -41,9 +41,6 @@
     float: left;
 }
 
-.center-div{
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
+.step-location{
+    margin-left: 3%;
 }
