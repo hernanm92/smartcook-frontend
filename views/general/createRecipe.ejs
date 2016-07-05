@@ -17,7 +17,7 @@
                 </div>
                 <div>
                     <label class="label-form-ingredient"> Ingredientes </label>
-                    <tags-input name="ingredients" ng-model="ingredients" placeholder="Escriba el ingrediente aqui" display-property="name" add-from-autocomplete-only="true">
+                    <tags-input  name="ingredients" ng-model="ingredients" placeholder="Escriba el ingrediente aqui" display-property="name" add-from-autocomplete-only="true">
                         <auto-complete min-length="0" source="loadIngredients($query)"></auto-complete>
                     </tags-input>
                     <p ng-show=" !(ingredients.length > 0)  && submitted" style="color:red;">La receta debe de tener al menos un Ingrediente</p>
@@ -31,7 +31,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title text-center">Pasos para la preparacion de la receta</h3>
                         </div>
-                        <div class="panel-body" style="margin-left: 300px;">
+                        <div class="panel-body" >
                             <h3>Pasos</h3>
                             <div ng-repeat="step in steps track by $index">
                                 <div class = "row">
@@ -53,7 +53,7 @@
                                     <br>
                                     <textarea  class="step-textArea" msd-elastic ng-model="stepToAdd" placeholder="Escriba su paso aqui..."></textarea>
                                     <p ng-show=" stepErrorMessage" style="color: red;">{{stepErrorMessage}}</p>
-                                    <button style="margin-left: 20px;" ng-click="addStep()"  type="button" class="btn btn-default">
+                                    <button style="margin-left: 20px;  color: #18ba9b; border-color: #18ba9b;" ng-click="addStep()"  type="button" class="btn btn-default">
                                         <i class="glyphicon glyphicon-plus"> </i>
                                     </button>
                                 </div>
@@ -65,9 +65,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" style="margin-bottom: 20px; margin-left: 500px">
+            <div class="col-md-4" style="margin-bottom: 20px;">
                 <button type="submit" class="btn-u btn-u-sea-shop btn-u-md">Guardar Receta</button>
             </div>
         </div>
     </form>
 </div>
+
+ <script type="text/ng-template" id="my-custom-template">
+      <div class="left-panel">
+        <img ng-src="http://mbenford.github.io/ngTagsInput/images/flags/{{data.flag}}" />
+      </div>
+      <div class="right-panel">
+        <span ng-bind-html="$highlight($getDisplayText())"></span>
+        <span>({{data.rank}})</span>
+        <span>{{data.confederation}}</span>
+      </div>
+    </script>

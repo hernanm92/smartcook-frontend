@@ -1,0 +1,29 @@
+.profile-username{
+font-size:36px;
+}
+.profile-email{
+font-weight:normal;
+}
+.profile-restrictions{
+    font-size:24px;
+}
+.userRecipe>img{
+position:absolute;
+}
+.recipeEdit{
+position:relative;
+bottom:35px;
+background-color:black;
+opacity:0.5;
+}
+.recipeEdit>a, .recipeEdit>a:visited{
+color:white;
+}
+.restrictionItem{
+font-weight:normal;
+font-size:22px;
+}
+.restrictionItem>input{
+-webkit-transform:scale(1.8);
+margin-right: 5px;
+}
