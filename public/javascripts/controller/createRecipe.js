@@ -1,6 +1,6 @@
 app.controller('CreateRecipeController',
     function ($scope, recipeFactory,$modal,ingredientFactory) {
-        //global variablessds
+        //global variablessdssdsd
         $scope.steps = [];
         $scope.ingredients = [];
         $scope.addStep = addStep;
