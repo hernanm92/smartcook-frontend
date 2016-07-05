@@ -23,6 +23,9 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/angular-ui-switch.js",
     "public/javascripts/plugins/ng-tags-input.min.js",
     "public/javascripts/plugins/elastic.js",
+    "public/javascripts/plugins/flow.min.js",
+    "public/javascripts/plugins/ng-flow.min.js",
+
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",

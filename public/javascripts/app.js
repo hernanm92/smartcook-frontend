@@ -5,7 +5,8 @@ var app = angular.module('MainApp', [
       'recipeModule',
       'ngTagsInput',
       'ui.bootstrap',
-      'monospaced.elastic'
+      'monospaced.elastic',
+      'flow'
       ]);
 
 app.config(['$httpProvider', function ($httpProvider) {
