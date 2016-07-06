@@ -29,6 +29,7 @@ module.exports = function(grunt) {
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
+    "public/javascripts/factory/restriction.js",
 
     "public/javascripts/controller/base.js",
     "public/javascripts/controller/menu.js",

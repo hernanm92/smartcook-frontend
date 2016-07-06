@@ -1,9 +1,11 @@
 app.controller('ProfileController',
-    function ($scope) {
+    function ($scope,restrictionFactory) {
         $scope.userName = 'Nombre de Usuario';
         $scope.userEmail = 'Email@emaildeejemplo.com';
-        $scope.userRestrictions = ['Vegano','Vegetariano','Celiaco','Diabetico'];
+        $scope.loadRestrictions = loadRestrictions;
+        $scope.restrictions = $scope.loadRestrictions();
         $scope.restrictionsSelection = ['Vegetariano']; // selected restrictions
+        $scope.userAvatar = 'img/profile-avatar.jpg';
         $scope.userRecipes = [
             {
             photo:'img/chicken-potatoe.jpg',
@@ -30,6 +32,12 @@ app.controller('ProfileController',
             else {
                 $scope.selection.push(restriction);// is newly selected
             }
+        }
+
+        function loadRestrictions(){
+            return restrictionFactory.query({},function(response){
+                return response.data;
+            });
         }
     }
 );

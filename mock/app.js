@@ -34,6 +34,15 @@ var recipes = [
   { id: 4, name: 'Suprema napolitana', image_url: 'img/chicken-pizza.jpg', stars: 4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin erat nec ornarevolu tpat. Etiam ut felis nec nisl eleifend lobortis. Aenean nibh est, hendrerit non conva.' }
 ];
 
+var restrictions = [
+  { id: 1, name: 'Vegetariano'},
+  { id: 2, name: 'Vegano'},
+  { id: 3, name: 'Celiaco'},
+  { id: 4, name: 'Diabetico'}
+];
+
+//TODO: Add mock user
+
 //ingredients
 app.get('/ingredients', function (req, res) {
   res.status(200);
@@ -78,6 +87,13 @@ app.post('/recipes', function (req, res) {
   res.send('Llego correctamente la receta');
   console.log(req.body);
 });
+
+//restrictions
+app.get('/restrictions', function (req, res) {
+  res.status(200);
+  res.send(restrictions);
+});
+
 //login
 app.post('/login', function (req, res) {
   var user = {

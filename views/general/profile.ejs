@@ -1,12 +1,15 @@
 <div class="container" style="padding-top: 90px;">
     <form name="recipeForm" ng-submit="validateForm(recipeForm.$valid)" novalidate>
         <div class="row">
-            <div class="col-md-6">
-                <div>
-                    <img src="img/profile-avatar.jpg" width="300px" height="300px">
+            <div flow-init class="col-sm-6">
+                <div flow-drop>
+                    <img flow-img="$flow.files[0]" ng-src="{{userAvatar}}" width="300px" height="300px">
+                </div>
+                <div class="col-sm-12" style="padding-left:0px">
+                <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <div class="row">
                     <label class="profile-username">{{userName}}</label>
                 </div>
@@ -19,27 +22,27 @@
                 <div class="row">
                     <label class="profile-restrictions">Restricciones Alimenticias</label>
                 </div>
-                <div ng-repeat="restriction in userRestrictions" ng-if="$index % 2 == 0" class="row">
-                    <div class="col-xs-4">
+                <div ng-repeat="restriction in restrictions" ng-if="$index % 2 == 0" class="row">
+                    <div class="col-sm-6">
                         <label class="restrictionItem">
                             <input
                                     type="checkbox"
                                     name="selectedRestrictions[]"
-                                    value="{{userRestrictions[$index]}}"
-                                    ng-checked="restrictionsSelection.indexOf(userRestrictions[$index]) > -1"
-                                    ng-click="toggleSelection(userRestrictions[$index])"
-                            > {{userRestrictions[$index]}}
+                                    value="{{restrictions[$index].name}}"
+                                    ng-checked="restrictionsSelection.indexOf(restrictions[$index].name) > -1"
+                                    ng-click="toggleSelection(restrictions[$index].name)"
+                            > {{restrictions[$index].name}}
                         </label>
                     </div>
-                    <div class="col-xs-4" ng-if="userRestrictions.length > ($index + 1)">
+                    <div class="col-sm-6" ng-if="restrictions.length > ($index + 1)">
                         <label class="restrictionItem">
                             <input
                                     type="checkbox"
                                     name="selectedRestrictions[]"
-                                    value="{{userRestrictions[$index+1]}}"
-                                    ng-checked="restrictionsSelection.indexOf(userRestrictions[$index+1]) > -1"
-                                    ng-click="toggleSelection(userRestrictions[$index+1])"
-                            > {{userRestrictions[$index+1]}}
+                                    value="{{restrictions[$index+1].name}}"
+                                    ng-checked="restrictionsSelection.indexOf(restrictions[$index+1].name) > -1"
+                                    ng-click="toggleSelection(restrictions[$index+1].name)"
+                            > {{restrictions[$index+1].name}}
                         </label>
                     </div>
                 </div>
@@ -55,15 +58,15 @@
                         <div class="panel-body">
 
                                 <div class="col-xs-6 col-md-3 userRecipe" ng-repeat="recipe in userRecipes" style="text-align:center">
+                                    <label>
+                                        {{recipe.name}}
+                                    </label>
                                     <a class="thumbnail">
                                         <img ng-src="{{recipe.photo}}" alt="...">
                                     </a>
                                     <div class="recipeEdit">
                                         <a href="">Editar</a>
                                     </div>
-                                    <label>
-                                        {{recipe.name}}
-                                    </label>
                                 </div>
 
 

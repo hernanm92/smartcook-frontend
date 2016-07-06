@@ -3,6 +3,7 @@ var app = angular.module('MainApp', [
      'config', 
      'ingredientModule',
       'recipeModule',
+      'restrictionModule',
       'ngTagsInput',
       'ui.bootstrap',
       'monospaced.elastic',
