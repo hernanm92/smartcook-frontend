@@ -10,7 +10,8 @@ development:
 
 production:
 	node -e "require('grunt').tasks(['production']);"
-	nohup nodejs app.js &
+	nohup node mock/app.js &
+	nohup node app.js &
 
 stage:
 	node -e "require('grunt').tasks(['stage']);"

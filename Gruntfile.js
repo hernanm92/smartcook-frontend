@@ -157,7 +157,7 @@ module.exports = function(grunt) {
         },
         constants: {
           config: {
-            domain: 'http://localhost:5000',
+            domain: 'http://13.85.79.112:5000',
             styleFolder: 'common',
             applicationPrefix: ''
           }
