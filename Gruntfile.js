@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   var fileList = [
     "public/javascripts/config.js",
     "public/javascripts/app.js",
-    
+
     "public/javascripts/plugins/angular-css-injector.js",
     "public/javascripts/plugins/ui-bootstrap-tpls-0.13.0.min.js",
     "public/javascripts/plugins/angular-selection-model-custom.js",
@@ -170,7 +170,7 @@ module.exports = function(grunt) {
         },
         constants: {
           config: {
-            domain: 'http://localhost:5000',
+            domain: 'http://13.85.79.112:5000',
             styleFolder: 'stage',
             applicationPrefix: 'stage-'
           }
