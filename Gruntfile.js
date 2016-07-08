@@ -25,11 +25,13 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/elastic.js",
     "public/javascripts/plugins/flow.min.js",
     "public/javascripts/plugins/ng-flow.min.js",
-
+    "public/javascripts/plugins/ngStorage.min.js", 
+    "public/javascripts/plugins/angular-messages.min.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
     "public/javascripts/factory/restriction.js",
+    "public/javascripts/factory/user.js",
 
     "public/javascripts/controller/base.js",
     "public/javascripts/controller/menu.js",
@@ -46,7 +48,8 @@ module.exports = function(grunt) {
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",
     "public/javascripts/service/callbackHandler.js",
-    "public/javascripts/service/failedRequestHandler.js"
+    "public/javascripts/service/failedRequestHandler.js",
+    "public/javascripts/service/userSession.js"
   ]
 
   var cssFileList = [

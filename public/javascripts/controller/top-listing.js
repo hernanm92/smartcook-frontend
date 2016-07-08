@@ -1,5 +1,5 @@
 app.controller('TopListingController',
-    function ($scope, recipeFactory, eventService) {
+    function ($scope, recipeFactory) {
         $scope.$on('$viewContentLoaded', function(){
             App.init();
             App.initScrollBar();

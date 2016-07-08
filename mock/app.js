@@ -100,7 +100,7 @@ app.post('/login', function (req, res) {
     name: "admin",
     role: "admin"
   }
-  if (req.body.username === 'admin' && req.body.pass === 1234) {
+  if (req.body.username === 'admin@gmail.com' && req.body.pass === 1234) {
     var token = jwt.sign(user, app.get('superSecret'), {
       expiresIn: 1440
     });

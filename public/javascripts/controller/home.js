@@ -1,5 +1,5 @@
 app.controller('HomeController',
-    function ($scope, ingredientFactory, recipeFactory, eventService) {
+    function ($scope, ingredientFactory, recipeFactory) {
 
         $scope.$on('$viewContentLoaded', function(){
             App.init();
