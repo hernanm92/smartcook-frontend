@@ -100,19 +100,20 @@ app.post('/login', function (req, res) {
     name: "admin",
     role: "admin"
   }
-  if (req.body.username === 'admin@gmail.com' && req.body.pass === 1234) {
+  console.log(req.body);
+  if (req.body.username === 'admin' && req.body.pass === '1234') {
     var token = jwt.sign(user, app.get('superSecret'), {
       expiresIn: 1440
     });
     res.json({
       success: true,
-      message: 'Enjoy your token',
-      token: token
+      token: token,
+      nameUser:'Admin',
+      idUser:1
     });
   } else {
     res.json({
-      success: true,
-      message: 'El usuario o contraseña son incorrectos'
+      success: false
     });
   }
 });

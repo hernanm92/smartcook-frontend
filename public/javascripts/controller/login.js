@@ -1,9 +1,9 @@
 app.controller('LoginController',LoginController);
     
-    function LoginController($scope, UserSession, userFactory) {
+    function LoginController($scope, UserSession, userFactory, $location) {
 
         $scope.login = login;
-
+        $scope.handleLoginResponse = handleLoginResponse;
         $scope.$on('$viewContentLoaded', function(){
             App.init();
             Login.initLogin();
@@ -16,15 +16,26 @@ app.controller('LoginController',LoginController);
             $scope.formSubmited = true;
             if(isValid){
                 var user = {
-                    email:$scope.userEmail,
+                    username:$scope.username,
                     pass:$scope.userPass
                 }
                 userFactory.save(user,function (res) {
-                    $scope.messageLogin = res.message; 
+                    $scope.handleLoginResponse(res);
                 });
                 $scope.formSubmited = false;
                 return;
             }
             $scope.messageLogin = '';
+        }
+
+        function handleLoginResponse(res){
+            if (res.success) {
+                //redirect al inicio y mostrar nombre de usuario.
+                UserSession.setUsername(res.nameUser);
+                UserSession.setToken(res.token);
+                $location.path('/');
+            }else{
+                $scope.messageLogin = "Usuario o contraseña incorrectas. Intente de nuevo"
+            }
         }
     }

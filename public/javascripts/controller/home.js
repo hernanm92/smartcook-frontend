@@ -1,6 +1,9 @@
 app.controller('HomeController',
     function ($scope, ingredientFactory, recipeFactory) {
-
+        
+        $scope.getIngredients = getIngredients;
+        $scope.getRecipes = getRecipes;
+        $scope.init = init;
         $scope.$on('$viewContentLoaded', function(){
             App.init();
             App.initScrollBar();
@@ -10,22 +13,24 @@ app.controller('HomeController',
             StyleSwitcher.initStyleSwitcher();
         });
 
-        $scope.getIngredients = function(){
+        $scope.init();
+
+        function init (){
+            $scope.getIngredients();
+            $scope.getRecipes();
+        }
+
+        function getIngredients (){
             ingredientFactory.query({},function(ingredients){
                 $scope.ingredients=ingredients;
             });
         };
 
-        $scope.getIngredients();
-
-        $scope.getRecipes = function(){
+        function getRecipes (){
             recipeFactory.query({},function(recipes){
                 $scope.recipes=recipes;
             });
         };
-
-        $scope.getRecipes();
-
     }
 );
 
