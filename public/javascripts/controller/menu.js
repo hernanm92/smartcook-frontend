@@ -22,5 +22,4 @@ app.controller('MenuController', function ($scope, UserSession,$location) {
         UserSession.deleteUser();
         $location.path('/');
     }
-
 });

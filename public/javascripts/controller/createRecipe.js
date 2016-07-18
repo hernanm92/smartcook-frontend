@@ -10,14 +10,8 @@ app.controller('CreateRecipeController',
         $scope.validateForm = validateForm;
         $scope.deleteStep = deleteStep;
         $scope.openModal = openModal;
-        $scope.addPhoto = addPhoto;
-
-        function addPhoto(file,event,flow) {
-            console.log(file);
-            console.log(event);
-            console.log(flow);
-        }
-        
+        $scope.obj = {}; //para usar la foto
+           
         function addStep() {
              $scope.stepErrorMessage = null;
             if($scope.stepToAdd){
@@ -55,7 +49,7 @@ app.controller('CreateRecipeController',
                 },
                 windowClass:'menu-bar-space'
             });
-        }
+        };
             
         function confirmForm(){
              var message = 'La receta sera guardada, desea continuar?';
@@ -69,7 +63,10 @@ app.controller('CreateRecipeController',
                 "userId":1,//se vera de dnd se saca.
                 "name":$scope.nameRecipe,
                 "ingredients":$scope.ingredients,
-                "steps":$scope.steps
+                "steps":$scope.steps,
+                "description":$scope.recipeDescription
+
+
             };
             $scope.recipe = new recipeFactory();
             $scope.recipe.data = recipe;
@@ -85,10 +82,10 @@ app.controller('CreateRecipeController',
             return ingredientFactory.query({text:text}).$promise; //traer los ids
         };
 
-         function deleteStep(index){
-             openModal('Desea eliminar este paso?').result.then(function () {
-                 $scope.steps.splice(index,1);    
-                })
-            };
+        function deleteStep(index){
+            openModal('Desea eliminar este paso?').result.then(function () {
+                $scope.steps.splice(index,1);
+            });
+        };
 });
 

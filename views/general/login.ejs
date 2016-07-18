@@ -38,13 +38,13 @@
 
       <div class="col-md-5">
         <form id="sky-form1" name ="userLogin" novalidate class="log-reg-block sky-form" ng-submit="login(userLogin.$valid)">
-          <h2>Log in to your account</h2>
+          <h2>Ingresar</h2>
 
           <section ng-class="{ 'has-error': userForm.username.$invalid}">
             <label class="input login-input">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="username" placeholder="Username " name="username" class="form-control" ng-model="username" required>
+                <input type="username" placeholder="Nombre de usuario " name="username" class="form-control" ng-model="username" required>
               </div>
             </label>
           </section>
@@ -52,7 +52,7 @@
             <label class="input login-input no-border-top">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" placeholder="Password" name="password" class="form-control" ng-model="userPass" required>
+                <input type="password" placeholder="Contraseña" name="password" class="form-control" ng-model="userPass" required>
               </div>
             </label>
           </section>
@@ -61,29 +61,32 @@
               <label class="checkbox">
                 <input type="checkbox" name="checkbox"/>
                 <i></i>
-                Remember me
+                No cerrar sesion
               </label>
             </div>
             <div class="col-xs-6 text-right">
-              <a href="#">Forget your Password?</a>
+              <a href="#">Olvido su contraseña?</a>
             </div>
           </div>
           <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Log in</button>
-            <div ng-messages="userLogin.username.$error" ng-if="formSubmited">
-                <p style=" color:red;" ng-message="required">Your username is required.</p>
-            </div>
-            <div ng-messages="userLogin.password.$error" ng-if="formSubmited">
-                <p style=" color:red;" ng-message="required">Your password is required.</p>
-            </div>
             <div>
                 <p style=" color:red;">{{messageLogin}}</p>
             </div>
         </form>
 
         <div class="margin-bottom-20"></div>
-        <p class="text-center">Don't have account yet? Learn more and <a href="#/register">Sign Up</a></p>
+        <p class="text-center">No tenes cuenta? Registrate  <a href="#/register">aqui</a></p>
       </div>
     </div><!--/end row-->
   </div><!--/end container-->
 </div>
 <!--=== End Login ===-->
+<div class="shop-subscribe">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 md-margin-bottom-20">
+        <h2> No pierdas tiempo y convertite en un <strong>SmartCook</strong></h2>
+      </div>
+    </div>
+  </div><!--/end container-->
+</div>

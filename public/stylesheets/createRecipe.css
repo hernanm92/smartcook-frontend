@@ -21,7 +21,7 @@
     font-size:large; 
     margin-left:20px; 
     width: 70%; 
-    border: none; 
+    border: none;
     outline: none; 
     resize: none; 
     overflow: hidden; 
@@ -44,3 +44,13 @@
 .step-location{
     margin-left: 3%;
 }
+
+.desc-text-area{
+    width: 100%; 
+    outline: none;
+    background: none;
+    resize: none;
+    height: 30%;
+    border : 1px solid #ccc;
+}
+
