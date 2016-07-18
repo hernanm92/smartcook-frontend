@@ -2,6 +2,15 @@
     <form name="recipeForm" ng-submit="validateForm(recipeForm.$valid)" novalidate>
         <div class="row">
             <div flow-init class="col-sm-6">
+                <div>
+                    <label class="profile-username">{{userName}}</label>
+                </div>
+                <div>
+                    <label class="profile-email">{{userEmail}}</label>
+                </div>
+                <div style="width:300px">
+                    <hr>
+                </div>
                 <div flow-drop>
                     <img flow-img="$flow.files[0]" ng-src="{{userAvatar}}" width="300px" height="300px">
                 </div>
@@ -10,15 +19,6 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="row">
-                    <label class="profile-username">{{userName}}</label>
-                </div>
-                <div class="row">
-                    <label class="profile-email">{{userEmail}}</label>
-                </div>
-                <div class="row">
-                    <hr>
-                </div>
                 <div class="row">
                     <label class="profile-restrictions">Restricciones Alimenticias</label>
                 </div>
@@ -46,7 +46,16 @@
                         </label>
                     </div>
                 </div>
+                <div class="row">
+                    <label class="profile-restrictions">Categorias Excluidas</label>
+                </div>
+                <div class="row">
+                    <label class="profile-restrictions">Ingredientes Excluidos</label>
+                </div>
             </div>
+        </div>
+        <div class="row">
+
         </div>
         <div class="row">
             <div class="col-md-12" style="padding-top: 20px;">

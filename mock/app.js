@@ -41,8 +41,6 @@ var restrictions = [
   { id: 4, name: 'Diabetico'}
 ];
 
-//TODO: Add mock user
-
 //ingredients
 app.get('/ingredients', function (req, res) {
   res.status(200);
