@@ -4,6 +4,7 @@ var app = angular.module('MainApp', [
      'ingredientModule',
       'recipeModule',
       'restrictionModule',
+      'categoryModule',
       'userModule',
       'ngTagsInput',
       'ui.bootstrap',

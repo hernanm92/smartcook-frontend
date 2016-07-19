@@ -1,5 +1,5 @@
 app.controller('ProfileController',
-    function ($scope,restrictionFactory,ingredientFactory) {
+    function ($scope,restrictionFactory,ingredientFactory, categoriesFactory) {
         $scope.userName = 'Nombre de Usuario';
         $scope.userEmail = 'Email@emaildeejemplo.com';
         $scope.restrictions = loadRestrictions();
@@ -26,22 +26,21 @@ app.controller('ProfileController',
             }
         ];
         $scope.toggleSelection = function toggleSelection(restriction) { // toggle selection for a given fruit by name
-            var index = $scope.selection.indexOf(restriction);
+            var index = $scope.restrictionsSelection.indexOf(restriction);
             if (index > -1) { // is currently selected
-                $scope.selection.splice(index,1)
+                $scope.restrictionsSelection.splice(index,1)
             }
             else {
-                $scope.selection.push(restriction);// is newly selected
+                $scope.restrictionsSelection.push(restriction);// is newly selected
             }
         }
 
-//        $scope.loadExcludedCategories = function(query) {
-//            return $http.get('/categories?query=' + query);
-//        };
+        $scope.loadExcludedCategories = function(text) {
+            return categoriesFactory.query({text:text}).$promise;
+        };
 
         $scope.loadExcludedIngredients = function(text) {
             return ingredientFactory.query({text:text}).$promise;
-            //return $http.get('/ingredients?query=' + query);
         };
 
         function loadRestrictions(){

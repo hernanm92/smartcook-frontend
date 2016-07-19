@@ -41,6 +41,30 @@ var restrictions = [
   { id: 4, name: 'Diabetico'}
 ];
 
+var categories = [
+  { id: 1, name: 'Pescados'},
+  { id: 2, name: 'Frutas'},
+  { id: 3, name: 'Verduras'},
+  { id: 3, name: 'Carnes'}
+];
+
+app.get('/categories/:text', function (req, res) {
+  var text = req.params.text
+  var catToSend = [];
+  for (var i = 0; i < categories.length; i++) {
+    var category = categories[i];
+    if (category.name.toLowerCase().indexOf(req.params.text.toLowerCase()) > -1) {
+      var cat = {
+        "name": category.name,
+        "id": category.id
+      }
+      catToSend.push(cat);
+    }
+  }
+  res.status(200);
+  res.send(catToSend);
+});
+
 //ingredients
 app.get('/ingredients', function (req, res) {
   res.status(200);
@@ -90,6 +114,12 @@ app.post('/recipes', function (req, res) {
 app.get('/restrictions', function (req, res) {
   res.status(200);
   res.send(restrictions);
+});
+
+//categories
+app.get('/categories',function(req,res){
+  res.status(200);
+  res.send(categories);
 });
 
 //login

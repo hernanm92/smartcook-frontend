@@ -15,7 +15,7 @@
                     <img flow-img="$flow.files[0]" ng-src="{{userAvatar}}" width="300px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
-                <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
+                    <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -46,16 +46,19 @@
                         </label>
                     </div>
                 </div>
-                <!--<div class="row">
+                <div class="row">
                     <label class="profile-restrictions">Categorias Excluidas</label>
-                    <tags-input ng-model="excludedCategories">
-                        <auto-complete source="loadExcludedCategories($query)"></auto-complete>
+                    <tags-input ng-model="excludedCategories" display-property="name" add-from-autocomplete-only="true">
+                        <auto-complete highlight-matched-text=false min-length="1"
+                                       source="loadExcludedCategories($query)"></auto-complete>
                     </tags-input>
-                </div>-->
+                </div>
                 <div class="row">
                     <label class="profile-restrictions">Ingredientes Excluidos</label>
-                    <tags-input ng-model="excludedIngredients" display-property="name" add-from-autocomplete-only="true">
-                        <auto-complete  highlight-matched-text = false min-length="1" source="loadExcludedIngredients($query)"></auto-complete>
+                    <tags-input ng-model="excludedIngredients" display-property="name"
+                                add-from-autocomplete-only="true">
+                        <auto-complete highlight-matched-text=false min-length="1"
+                                       source="loadExcludedIngredients($query)"></auto-complete>
                     </tags-input>
                 </div>
             </div>
@@ -72,17 +75,18 @@
                         </div>
                         <div class="panel-body">
 
-                                <div class="col-xs-6 col-md-3 userRecipe" ng-repeat="recipe in userRecipes" style="text-align:center">
-                                    <label>
-                                        {{recipe.name}}
-                                    </label>
-                                    <a class="thumbnail">
-                                        <img ng-src="{{recipe.photo}}" alt="...">
-                                    </a>
-                                    <div class="recipeEdit">
-                                        <a href="">Editar</a>
-                                    </div>
+                            <div class="col-xs-6 col-md-3 userRecipe" ng-repeat="recipe in userRecipes"
+                                 style="text-align:center">
+                                <label>
+                                    {{recipe.name}}
+                                </label>
+                                <a class="thumbnail">
+                                    <img ng-src="{{recipe.photo}}" alt="...">
+                                </a>
+                                <div class="recipeEdit">
+                                    <a href="">Editar</a>
                                 </div>
+                            </div>
 
 
                         </div>
