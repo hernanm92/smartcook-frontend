@@ -1,11 +1,12 @@
 app.controller('ProfileController',
-    function ($scope,restrictionFactory) {
+    function ($scope,restrictionFactory,ingredientFactory) {
         $scope.userName = 'Nombre de Usuario';
         $scope.userEmail = 'Email@emaildeejemplo.com';
-        $scope.loadRestrictions = loadRestrictions;
-        $scope.restrictions = $scope.loadRestrictions();
+        $scope.restrictions = loadRestrictions();
         $scope.restrictionsSelection = ['Vegetariano']; // selected restrictions
         $scope.userAvatar = 'img/profile-avatar.jpg';
+        $scope.excludedCategories = [];
+        $scope.excludedIngredients= [];
         $scope.userRecipes = [
             {
             photo:'img/chicken-potatoe.jpg',
@@ -33,6 +34,15 @@ app.controller('ProfileController',
                 $scope.selection.push(restriction);// is newly selected
             }
         }
+
+//        $scope.loadExcludedCategories = function(query) {
+//            return $http.get('/categories?query=' + query);
+//        };
+
+        $scope.loadExcludedCategories = function(text) {
+            return ingredientFactory.query({text:text}).$promise;
+            //return $http.get('/ingredients?query=' + query);
+        };
 
         function loadRestrictions(){
             return restrictionFactory.query({},function(response){

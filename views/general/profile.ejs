@@ -46,11 +46,17 @@
                         </label>
                     </div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <label class="profile-restrictions">Categorias Excluidas</label>
-                </div>
+                    <tags-input ng-model="excludedCategories">
+                        <auto-complete source="loadExcludedCategories($query)"></auto-complete>
+                    </tags-input>
+                </div>-->
                 <div class="row">
                     <label class="profile-restrictions">Ingredientes Excluidos</label>
+                    <tags-input ng-model="excludedIngredients" add-from-autocomplete-only="true">
+                        <auto-complete source="loadExcludedIngredients($query)"></auto-complete>
+                    </tags-input>
                 </div>
             </div>
         </div>
