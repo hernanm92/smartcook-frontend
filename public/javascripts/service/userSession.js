@@ -3,7 +3,7 @@ angular
     .module('MainApp')
     .service('UserSession',UserSession);
 
-function UserSession($localStorage) {
+function UserSession($sessionStorage) {
     var service = {
         //services
         setUsername:setUsername,
@@ -15,23 +15,23 @@ function UserSession($localStorage) {
     return service;
 
     function setUsername(username) {
-        $localStorage.username = username;
+        $sessionStorage.username = username;
     }
 
     function getUsername() {
-        return $localStorage.username;
+        return $sessionStorage.username;
     }
 
     function setToken(token) {
-        $localStorage.token = token;
+        $sessionStorage.token = token;
     }
 
     function getToken() {
-        return $localStorage.token;
+        return $sessionStorage.token;
     }
 
     function deleteUser() {
-        delete $localStorage.username;
-        delete $localStorage.token;
+        delete $sessionStorage.username;
+        delete $sessionStorage.token;
     }
 }
