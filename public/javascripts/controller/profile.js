@@ -39,7 +39,7 @@ app.controller('ProfileController',
 //            return $http.get('/categories?query=' + query);
 //        };
 
-        $scope.loadExcludedCategories = function(text) {
+        $scope.loadExcludedIngredients = function(text) {
             return ingredientFactory.query({text:text}).$promise;
             //return $http.get('/ingredients?query=' + query);
         };

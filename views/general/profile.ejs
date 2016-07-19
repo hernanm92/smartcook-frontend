@@ -54,8 +54,8 @@
                 </div>-->
                 <div class="row">
                     <label class="profile-restrictions">Ingredientes Excluidos</label>
-                    <tags-input ng-model="excludedIngredients" add-from-autocomplete-only="true">
-                        <auto-complete source="loadExcludedIngredients($query)"></auto-complete>
+                    <tags-input ng-model="excludedIngredients" display-property="name" add-from-autocomplete-only="true">
+                        <auto-complete  highlight-matched-text = false min-length="1" source="loadExcludedIngredients($query)"></auto-complete>
                     </tags-input>
                 </div>
             </div>

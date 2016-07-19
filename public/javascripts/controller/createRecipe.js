@@ -13,7 +13,7 @@ app.controller('CreateRecipeController',
         $scope.obj = {}; //para usar la foto
            
         function addStep() {
-             $scope.stepErrorMessage = null;
+            $scope.stepErrorMessage = null;
             if($scope.stepToAdd){
                 var step = {
                     "step" : $scope.stepToAdd
@@ -65,9 +65,8 @@ app.controller('CreateRecipeController',
                 "ingredients":$scope.ingredients,
                 "steps":$scope.steps,
                 "description":$scope.recipeDescription
-
-
             };
+            
             $scope.recipe = new recipeFactory();
             $scope.recipe.data = recipe;
             recipeFactory.save($scope.recipe,function (res) {
