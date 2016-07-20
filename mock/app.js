@@ -48,6 +48,11 @@ var categories = [
   { id: 3, name: 'Carnes'}
 ];
 
+var users = [
+{ id:1, name: 'Boba Fett', email: 'starwars@smartcook.com', avatar:'img/profile-avatar.jpg' },
+{ id:2, name: 'Jabba the Hutt', email: 'badguy@smartcook.com', avatar:'img/profile-avatar.jpg' }
+];
+
 app.get('/categories/:text', function (req, res) {
   var text = req.params.text
   var catToSend = [];
@@ -65,7 +70,7 @@ app.get('/categories/:text', function (req, res) {
   res.send(catToSend);
 });
 
-//ingredients
+//-------------------------ingredients
 app.get('/ingredients', function (req, res) {
   res.status(200);
   res.send(ingredients);
@@ -93,7 +98,7 @@ app.get('/ingredients/:text', function (req, res) {
   res.send(ingToSend);
 });
 
-//recipes
+//-------------------------recipes
 app.get('/recipes', function (req, res) {
   res.status(200);
   res.send(recipes);
@@ -110,19 +115,19 @@ app.post('/recipes', function (req, res) {
   console.log(req.body);
 });
 
-//restrictions
+//-------------------------restrictions
 app.get('/restrictions', function (req, res) {
   res.status(200);
   res.send(restrictions);
 });
 
-//categories
+//-------------------------categories
 app.get('/categories',function(req,res){
   res.status(200);
   res.send(categories);
 });
 
-//login
+//-------------------------login
 app.post('/login', function (req, res) {
   var user = {
     name: "admin",
@@ -146,6 +151,25 @@ app.post('/login', function (req, res) {
   }
 });
 
+//-------------------------users
+
+app.get('/user/:text', function (req, res) {
+  var text = req.params.text
+  for (var i = 0; i < users.length; i++) {
+    var user = users[i];
+    if (user.id == req.params.text) {
+      var user = {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+        "avatar":user.avatar
+      }
+      break;
+    }
+  }
+  res.status(200);
+  res.send(user);
+});
 
 var server = app.listen(5000, function () {
   console.log("Api started in port: 5000");
