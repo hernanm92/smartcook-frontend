@@ -3,8 +3,7 @@
     <!--=== Illustration v2 ===-->
     <div class="illustration-v2">
         <ul  class="list-inline owl-slider" >
-            <l
-            i class="item" ng-repeat="ingredient in ingredients" on-finish-ingredients-render >
+            <li class="item" ng-repeat="ingredient in ingredients" on-finish-ingredients-render >
                 <div ng-include="'general/ingredients/empty-ing-template'" ng-show="isEmpty(ingredient)"></div>
                 <div ng-include="'general/ingredients/ing-template'" ng-show="!isEmpty(ingredient)"></div>
             </li>
