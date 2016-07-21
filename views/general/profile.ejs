@@ -3,16 +3,16 @@
         <div class="row">
             <div flow-init class="col-sm-6">
                 <div>
-                    <label class="profile-username">{{userName}}</label>
+                    <label class="profile-username">{{user.name}}</label>
                 </div>
                 <div>
-                    <label class="profile-email">{{userEmail}}</label>
+                    <label class="profile-email">{{user.email}}</label>
                 </div>
                 <div style="width:300px">
                     <hr>
                 </div>
                 <div flow-drop>
-                    <img flow-img="$flow.files[0]" ng-src="{{userAvatar}}" width="300px" height="300px">
+                    <img flow-img="$flow.files[0]" ng-src="{{user.avatar}}" width="300px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
@@ -46,9 +46,9 @@
                         </label>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" >
                     <label class="profile-restrictions">Categorias Excluidas</label>
-                    <tags-input ng-model="excludedCategories" display-property="name" add-from-autocomplete-only="true">
+                    <tags-input ng- ng-model="excludedCategories" display-property="name" add-from-autocomplete-only="true">
                         <auto-complete highlight-matched-text=false min-length="1"
                                        source="loadExcludedCategories($query)"></auto-complete>
                     </tags-input>
