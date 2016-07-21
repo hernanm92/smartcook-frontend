@@ -52,6 +52,12 @@ app.get('/general/createRecipe', function (req, res) {
 app.get('/general/confirmForm', function (req, res) {
     res.render('general/confirmForm');
 });
+app.get('/general/ingredients/empty-ing-template', function (req, res) {
+    res.render('general/ingredients/empty-ing-template');
+});
+app.get('/general/ingredients/ing-template', function (req, res) {
+    res.render('general/ingredients/ing-template');
+});
 
 http.createServer(app).listen(app.get('port'), function ()
 {

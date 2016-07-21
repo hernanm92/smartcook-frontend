@@ -1,34 +1,59 @@
 app.controller('HomeController',
-    function ($scope, ingredientFactory, recipeFactory) {
-        
+    function ($scope, ingredientFactory, recipeFactory, homeHelper) {
+
         $scope.getIngredients = getIngredients;
         $scope.getRecipes = getRecipes;
-        $scope.init = init;
-        $scope.$on('$viewContentLoaded', function(){
+        $scope.ingredients = [];
+        $scope.isEmpty = isEmpty;
+        $scope.removeIngredient = removeIngredient;
+        $scope.updateIngredientToFull = updateIngredientToFull;
+        $scope.$on('$viewContentLoaded', function () {
             App.init();
             App.initScrollBar();
             App.initParallaxBg();
-            //OwlCarousel.initOwlCarousel();
             RevolutionSlider.initRSfullWidth();
             StyleSwitcher.initStyleSwitcher();
         });
 
-        $scope.init();
+        init();
 
-        function init (){
-            $scope.getIngredients();
-            $scope.getRecipes();
+        function updateIngredientToFull(ing, index) {
+            $scope.ingredients[index].name = ing.name;
+            $scope.ingredients[index].image = ing.image;
+            $scope.ingredients[index].templateType = 'full';
+            $scope.ingredients[index].id = ing.id;
+            $scope.ingredients[index].category = ing.category;
         }
 
-        function getIngredients (){
-            ingredientFactory.query({},function(ingredients){
-                $scope.ingredients=ingredients;
-            });
+        function updateIngredientToEmpty(index) {
+            $scope.ingredients[index].name = '';
+            $scope.ingredients[index].image = 'assets/img/blog/09.jpg';
+            $scope.ingredients[index].templateType = 'empty';
+            $scope.ingredients[index].id = null;
+            $scope.ingredients[index].category = null;
+        }
+
+        function removeIngredient(index) {
+            updateIngredientToEmpty(index);
+        }
+
+        function isEmpty(ingredient) {
+            return ingredient.templateType === 'empty';
+        }
+
+        function init() {
+            $scope.ingredients = homeHelper.initIngredients();
+            $scope.getRecipes();
         };
 
-        function getRecipes (){
-            recipeFactory.query({},function(recipes){
-                $scope.recipes=recipes;
+        function getIngredients(text) {
+            //getProfileRestriccions() para usar sus preferencias si esta logueado
+            return ingredientFactory.query({ text: text }).$promise;
+        };
+
+        function getRecipes() {
+            recipeFactory.query({}, function (recipes) {
+                $scope.recipes = recipes;
             });
         };
     }

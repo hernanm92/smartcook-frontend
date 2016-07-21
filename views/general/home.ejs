@@ -2,36 +2,10 @@
 <div class="container content-md" style="padding-top: 90px; padding-bottom: 0px;">
     <!--=== Illustration v2 ===-->
     <div class="illustration-v2">
-        <ul class="list-inline owl-slider">
-            <li class="item" ng-repeat="ingredient in ingredients" on-finish-ingredients-render>
-                <div class="product-img">
-                    <a href="shop-ui-inner.html">
-                        <!--<img class="full-width img-responsive" style="height: 290px;" src="assets/img/blog/09.jpg" alt="">-->
-                        <div style="background-image: url({{ingredient.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
-                    </a>
-                    <a class="product-review" href="shop-ui-inner.html">Remover</a>
-                    <a class="add-to-cart" href="#/">Ver ingrediente</a>
-                </div>
-                <div class="product-description product-description-brd">
-                    <div class="overflow-h margin-bottom-5">
-                        <div class="pull-left">
-                            <h4 class="title-price text-uppercase"><a href="shop-ui-inner.html">{{ingredient.name}}</a></h4>
-                            <span class="gender">{{ingredient.category}}</span>
-                            <span class="gender">50 cal/g</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="title-price">$95.00</span>
-                        </div>
-                    </div>
-                    <ul class="list-inline product-ratings">
-                        <li><i class="rating-selected fa fa-star"></i></li>
-                        <li><i class="rating-selected fa fa-star"></i></li>
-                        <li><i class="rating-selected fa fa-star"></i></li>
-                        <li><i class="rating fa fa-star"></i></li>
-                        <li><i class="rating fa fa-star"></i></li>
-                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#/"><i class="fa fa-heart"></i></a></li>
-                    </ul>
-                </div>
+        <ul  class="list-inline owl-slider" >
+            <li class="item" ng-repeat="ingredient in ingredients" on-finish-ingredients-render >
+                <div ng-include="'general/ingredients/empty-ing-template'" ng-show="isEmpty(ingredient)"></div>
+                <div ng-include="'general/ingredients/ing-template'" ng-show="!isEmpty(ingredient)"></div>
             </li>
         </ul>
     </div>
@@ -41,56 +15,61 @@
 
 <!--=== Content Part ===-->
 <div class="content container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="filter-results">
-        <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="recipe in recipes">
-          <div class="row">
-            <div class="col-sm-4">
-              <a href="shop-ui-inner.html">
-                <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
-                <div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
-              </a>
-            </div>
-            <div class="col-sm-8 product-description">
-              <div class="overflow-h margin-bottom-5">
-                <ul class="list-inline overflow-h">
-                  <li><h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a></h4></li>
-                  <li class="pull-right">
-                    <ul class="list-inline product-ratings">
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="margin-bottom-10">
-                  <span class="title-price margin-right-10">$60.00</span>
-                  <span class="title-price line-through">$95.00</span>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="filter-results">
+                <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="recipe in recipes">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a href="shop-ui-inner.html">
+                                <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
+                                <div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
+                            </a>
+                        </div>
+                        <div class="col-sm-8 product-description">
+                            <div class="overflow-h margin-bottom-5">
+                                <ul class="list-inline overflow-h">
+                                    <li>
+                                        <h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a></h4>
+                                    </li>
+                                    <li class="pull-right">
+                                        <ul class="list-inline product-ratings">
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating fa fa-star"></i></li>
+                                            <li><i class="rating fa fa-star"></i></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="margin-bottom-10">
+                                    <span class="title-price margin-right-10">$60.00</span>
+                                    <span class="title-price line-through">$95.00</span>
+                                </div>
+                                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
+                                <ul class="list-inline add-to-wishlist margin-bottom-20">
+                                    <li class="wishlist-in">
+                                        <i class="fa fa-heart"></i>
+                                        <a href="#/">Agregar a favoritos</a>
+                                    </li>
+                                    <li class="compare-in">
+                                        <i class="fa fa-exchange"></i>
+                                        <a href="#/">Add to Compare</a>
+                                    </li>
+                                </ul>
+                                <button type="button" class="btn-u btn-u-sea-shop">Ver receta</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
-                <ul class="list-inline add-to-wishlist margin-bottom-20">
-                  <li class="wishlist-in">
-                    <i class="fa fa-heart"></i>
-                    <a href="#/">Agregar a favoritos</a>
-                  </li>
-                  <li class="compare-in">
-                    <i class="fa fa-exchange"></i>
-                    <a href="#/">Add to Compare</a>
-                  </li>
-                </ul>
-                <button type="button" class="btn-u btn-u-sea-shop">Ver receta</button>
-              </div>
             </div>
-          </div>
-        </div>
-      </div><!--/end filter resilts-->
+            <!--/end filter resilts-->
 
+        </div>
     </div>
-  </div><!--/end row-->
-</div><!--/end container-->
+    <!--/end row-->
+</div>
+<!--/end container-->
 <!--=== End Content Part ===-->
 
 <!--=== Product Content ===-->
@@ -98,7 +77,9 @@
 
     <div class="heading heading-v1 margin-bottom-20">
         <h2>Featured products</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed odio elit, ultrices vel cursus sed, placerat ut leo. Phasellus in magna erat. Etiam gravida convallis augue non tincidunt. Nunc lobortis dapibus neque quis lacinia. Nam dapibus tellus sit amet odio venenatis</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed odio elit, ultrices vel cursus sed, placerat ut leo.
+            Phasellus in magna erat. Etiam gravida convallis augue non tincidunt. Nunc lobortis dapibus neque quis lacinia.
+            Nam dapibus tellus sit amet odio venenatis</p>
     </div>
 
     <!--=== Illustration v2 ===-->
@@ -132,7 +113,8 @@
                         <li><i class="rating-selected fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
-                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#/"><i class="fa fa-heart"></i></a></li>
+                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips"
+                                href="#/"><i class="fa fa-heart"></i></a></li>
                     </ul>
                 </div>
             </li>
@@ -160,7 +142,8 @@
                         <li><i class="rating-selected fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
-                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#/"><i class="fa fa-heart"></i></a></li>
+                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips"
+                                href="#/"><i class="fa fa-heart"></i></a></li>
                     </ul>
                 </div>
             </li>
@@ -188,7 +171,8 @@
                         <li><i class="rating-selected fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
-                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#/"><i class="fa fa-heart"></i></a></li>
+                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips"
+                                href="#/"><i class="fa fa-heart"></i></a></li>
                     </ul>
                 </div>
             </li>
@@ -216,7 +200,8 @@
                         <li><i class="rating-selected fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
-                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#/"><i class="fa fa-heart"></i></a></li>
+                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips"
+                                href="#/"><i class="fa fa-heart"></i></a></li>
                     </ul>
                 </div>
             </li>
@@ -243,7 +228,8 @@
                         <li><i class="rating-selected fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
-                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#/"><i class="fa fa-heart"></i></a></li>
+                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips"
+                                href="#/"><i class="fa fa-heart"></i></a></li>
                     </ul>
                 </div>
             </li>
@@ -271,7 +257,8 @@
                         <li><i class="rating-selected fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
                         <li><i class="rating fa fa-star"></i></li>
-                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#/"><i class="fa fa-heart"></i></a></li>
+                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips"
+                                href="#/"><i class="fa fa-heart"></i></a></li>
                     </ul>
                 </div>
             </li>
@@ -299,16 +286,19 @@
 
             <div class="carousel-inner">
                 <div class="item active">
-                    <p>Unify has reached 10000 plus sales and we just want to thank you to our all customers for being part of the Unify Template success <a href="http://bit.ly/1c0UN3Y">http://bit.ly/1c0UN3Y</a><p>
-                    <p><a href="https://twitter.com/htmlstream">@htmlstream</a></p>
-                    <ul class="list-inline twitter-icons">
-                        <li><a href="#/"><i class="fa fa-reply"></i></a></li>
-                        <li><a href="#/"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#/"><i class="fa fa-star"></i></a></li>
-                    </ul>
+                    <p>Unify has reached 10000 plus sales and we just want to thank you to our all customers for being part
+                        of the Unify Template success <a href="http://bit.ly/1c0UN3Y">http://bit.ly/1c0UN3Y</a>
+                        <p>
+                            <p><a href="https://twitter.com/htmlstream">@htmlstream</a></p>
+                            <ul class="list-inline twitter-icons">
+                                <li><a href="#/"><i class="fa fa-reply"></i></a></li>
+                                <li><a href="#/"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#/"><i class="fa fa-star"></i></a></li>
+                            </ul>
                 </div>
                 <div class="item">
-                    <p>the majority have suffered #alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum</p>
+                    <p>the majority have suffered #alteration in some form, by injected humour, or randomised words which don't
+                        look even slightly believable. If you are going to use a passage of Lorem Ipsum</p>
                     <p><a href="https://twitter.com/htmlstream">@twbootstrap</a></p>
                     <ul class="list-inline twitter-icons">
                         <li><a href="#/"><i class="fa fa-reply"></i></a></li>
@@ -372,18 +362,22 @@
             <a href="#/">+Read More</a>
         </div>
     </div>
-</div><!--/end row-->
+</div>
+<!--/end row-->
 <!--=== End Product Service ===-->
 
 <div class="container">
 
-</div><!--/end container-->
+</div>
+<!--/end container-->
 
 <!--=== Sponsors ===-->
 <div class="container content">
     <div class="heading heading-v1 margin-bottom-40">
         <h2>Sponsors</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed odio elit, ultrices vel cursus sed, placerat ut leo. Phasellus in magna erat. Etiam gravida convallis augue non tincidunt. Nunc lobortis dapibus neque quis lacinia. Nam dapibus tellus sit amet odio venenatis</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed odio elit, ultrices vel cursus sed, placerat ut leo.
+            Phasellus in magna erat. Etiam gravida convallis augue non tincidunt. Nunc lobortis dapibus neque quis lacinia.
+            Nam dapibus tellus sit amet odio venenatis</p>
     </div>
     <ul class="list-inline owl-slider-v2">
         <li class="item first-child">
@@ -422,7 +416,8 @@
         <li class="item">
             <img src="assets/img/clients/12.png" alt="">
         </li>
-    </ul><!--/end owl-carousel-->
+    </ul>
+    <!--/end owl-carousel-->
 </div>
 <!--=== End Sponsors ===-->
 
@@ -442,6 +437,7 @@
                 </div>
             </div>
         </div>
-    </div><!--/end container-->
+    </div>
+    <!--/end container-->
 </div>
 <!--=== End Shop Suvbscribe ===-->

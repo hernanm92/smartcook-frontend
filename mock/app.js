@@ -84,7 +84,9 @@ app.get('/ingredients/:text', function (req, res) {
     if (ingredient.name.toLowerCase().indexOf(req.params.text.toLowerCase()) > -1) {
       var ing = {
         "name": ingredient.name,
-        "id": ingredient.id
+        "id": ingredient.id,
+        "image":ingredient.image_url,
+        "category":ingredient.category
       }
       ingToSend.push(ing);
     }

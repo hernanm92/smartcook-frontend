@@ -49,7 +49,7 @@
                     <!-- Profile -->
                     <li class="dropdown"  >
                         <a href="#profile" ng-if="token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
-                            {{username}}
+                            <div ng-bind="username"></div>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#profile">Perfil</a></li>

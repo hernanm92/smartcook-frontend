@@ -1,0 +1,16 @@
+<div class="product-img">
+    <a>
+        <!--<img class="full-width img-responsive" style="height: 290px;" src="assets/img/blog/09.jpg" alt="">-->
+        <div style="background-image: url({{ingredient.image}}); height:290px; background-position:center;background-size: cover;"></div>
+    </a>
+    <a class="product-review" ng-click="removeIngredient($index)" href="">Remover</a>
+    <a class="add-to-cart" ng-click="viewIngredient($index)" href="">Ver ingrediente</a>
+</div>
+<div class="product-description product-description-brd">
+    <div class="overflow-h margin-bottom-5">
+        <div class="pull-left">
+            <h4 class="title-price text-uppercase">{{ingredient.name}}</h4>
+            <span  class="gender">{{ingredient.category}}</span>
+        </div>
+    </div>
+</div>
