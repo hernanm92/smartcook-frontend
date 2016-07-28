@@ -1,16 +1,28 @@
 <!--=== Content Part ===-->
 <div class="content container">
     <div class="container" style="padding-top: 90px;">
+        <div class="row" style="margin-bottom:10px">
+            <button type="button" class="btn btn-info" ng-click="runBootstro()">Mostrar DEMO</button>
+        </div>
         <div class="row row-eq-height">
-            <div class="col-xs-1 validateRecipe-check" ng-click="nextRecipe();"></div>
-            <div class="col-xs-10 validateRecipe-Recipe">
+            <div data-bootstro-title="Validar Positivamente"
+                 data-bootstro-content="Toca en esta zona para indicar que es una receta valida. Podes apretar la L(Like)"
+                 data-bootstro-placement="right" data-bootstro-step=1
+                 class="col-xs-1 validateRecipe-check bootstro" ng-click="nextRecipe();"></div>
+            <div data-bootstro-title="Receta a Validar"
+                 data-bootstro-content="Aca podes ver toda la informacion de la receta a validar"
+                 data-bootstro-placement="top" data-bootstro-step=0
+                 class="col-xs-10 validateRecipe-Recipe bootstro">
                 <div class="row validateRecipe-Title"><h4>{{validateCurrentRecipe.name}}</h4></div>
                 <div class="row validateRecipe-Image">
                     <div style="background-image: url({{validateCurrentRecipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
                 </div>
                 <div class="row validateRecipe-Description"><h5>{{validateCurrentRecipe.description}}</h5></div>
             </div>
-            <div class="col-xs-1 validateRecipe-cross" ng-click="nextRecipe();"></div>
+            <div data-bootstro-title="Validar Negativamente"
+                 data-bootstro-content="Toca en esta zona para indicar que es una receta invalida. Podes apretar la D(Dislike)"
+                 data-bootstro-placement="left" data-bootstro-step=2
+                 class="col-xs-1 validateRecipe-cross bootstro" ng-click="nextRecipe();"></div>
         </div>
     </div>
     <div class="row">
