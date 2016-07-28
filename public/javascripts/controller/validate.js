@@ -1,20 +1,29 @@
 app.controller('ValidateController',
     function ($scope, recipeFactory, eventService) {
-        $scope.$on('$viewContentLoaded', function(){
-            App.init();
-            App.initScrollBar();
-            MouseWheel.initMouseWheel();
-            StyleSwitcher.initStyleSwitcher();
-            RevolutionSlider.initRSfullWidth();
-            App.initParallaxBg();
-        });
+        $scope.validateRecipeIndex = 0;
+        $scope.validateCurrentRecipe = {};
 
-        $scope.getRecipes = function(){
+        function getRecipes(){
             recipeFactory.query({},function(recipes){
                 $scope.recipes=recipes;
+                $scope.validateCurrentRecipe = recipes[0];
             });
         };
 
-        $scope.getRecipes();
+        getRecipes();
+
+        function setNextRecipe(){
+            if($scope.validateRecipeIndex < ($scope.recipes.length - 1)){
+                $scope.validateRecipeIndex++;
+                $scope.validateCurrentRecipe = $scope.recipes[$scope.validateRecipeIndex];
+            }
+        }
+
+        $scope.nextRecipe = function(){
+            $('.validateRecipe-Recipe').animate({opacity: 0}, 500,function(){
+                setNextRecipe();
+                $('.validateRecipe-Recipe').animate({opacity: 1}, 500);
+            });
+        };
     }
 );
