@@ -29,12 +29,14 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/angular-animate.min.js",
     "public/javascripts/plugins/ngStorage.min.js",
     "public/javascripts/plugins/angular-messages.min.js",
+    "public/javascripts/plugins/notify.min.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
     "public/javascripts/factory/restriction.js",
     "public/javascripts/factory/category.js",
     "public/javascripts/factory/user.js",
+    "public/javascripts/factory/validate.js",
 
     "public/javascripts/controller/base.js",
     "public/javascripts/controller/menu.js",

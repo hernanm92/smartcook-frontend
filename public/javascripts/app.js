@@ -6,6 +6,7 @@ var app = angular.module('MainApp', [
       'restrictionModule',
       'categoryModule',
       'userModule',
+      'validateModule',
       'ngTagsInput',
       'ui.bootstrap',
       'monospaced.elastic',

@@ -70,7 +70,7 @@ app.get('/categories/:text', function (req, res) {
   res.send(catToSend);
 });
 
-//-------------------------ingredients
+//-------------------------ingredients-------------------------
 app.get('/ingredients', function (req, res) {
   res.status(200);
   res.send(ingredients);
@@ -100,7 +100,7 @@ app.get('/ingredients/:text', function (req, res) {
   res.send(ingToSend);
 });
 
-//-------------------------recipes
+//-------------------------recipes-------------------------
 app.get('/recipes', function (req, res) {
   res.status(200);
   res.send(recipes);
@@ -117,19 +117,25 @@ app.post('/recipes', function (req, res) {
   console.log(req.body);
 });
 
-//-------------------------restrictions
+//-------------------------restrictions-------------------------
 app.get('/restrictions', function (req, res) {
   res.status(200);
   res.send(restrictions);
 });
 
-//-------------------------categories
+//-------------------------categories-------------------------
 app.get('/categories',function(req,res){
   res.status(200);
   res.send(categories);
 });
 
-//-------------------------login
+//-------------------------validation-------------------------
+app.post('/validateRecipe',function(req,res){
+  res.status(200);
+  res.send('Receta Validada');
+});
+
+//-------------------------login-------------------------
 app.post('/login', function (req, res) {
   var user = {
     name: "admin",
@@ -153,7 +159,7 @@ app.post('/login', function (req, res) {
   }
 });
 
-//-------------------------users
+//-------------------------users-------------------------
 
 app.get('/user/:text', function (req, res) {
   var text = req.params.text
