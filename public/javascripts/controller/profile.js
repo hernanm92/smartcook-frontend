@@ -3,10 +3,7 @@ app.controller('ProfileController',
         $scope.user = {};
         loadUser();
         $scope.restrictions = loadRestrictions();
-        $scope.restrictionsSelection = ['Vegetariano']; // selected restrictions
-        $scope.userAvatar = '';
-        $scope.excludedCategories = [];
-        $scope.excludedIngredients= [];
+        $scope.restrictionsSelection = ['Vegetariano']; // TODO: Load selected mock
         $scope.userRecipes = [
             {
             photo:'img/chicken-potatoe.jpg',
