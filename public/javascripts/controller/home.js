@@ -19,7 +19,7 @@ app.controller('HomeController',
 
         function updateIngredientToFull(ing, index) {
             $scope.ingredients[index].name = ing.name;
-            $scope.ingredients[index].image = ing.image;
+            $scope.ingredients[index].image = ing.image_url;
             $scope.ingredients[index].templateType = 'full';
             $scope.ingredients[index].id = ing.id;
             $scope.ingredients[index].category = ing.category;

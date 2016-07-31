@@ -33,6 +33,7 @@ module.exports = function(grunt) {
     "public/javascripts/factory/restriction.js",
     "public/javascripts/factory/category.js",
     "public/javascripts/factory/user.js",
+    "public/javascripts/factory/item.js",
 
     "public/javascripts/controller/base.js",
     "public/javascripts/controller/menu.js",
@@ -67,7 +68,8 @@ module.exports = function(grunt) {
     "public/stylesheets/ng-tag/ng-tags-input.css",
     "public/stylesheets/ng-tag/ng-tags-input.bootstrap.css",
     "public/stylesheets/userProfile.css",
-    "public/stylesheets/ui-bootstrap-csp.css"
+    "public/stylesheets/ui-bootstrap-csp.css",
+    "public/stylesheets/home/home.css"
   ]
 
   var stageCss = ["public/stylesheets/*.css",
