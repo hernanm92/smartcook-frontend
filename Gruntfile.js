@@ -24,9 +24,12 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/ng-tags-input.min.js",
     "public/javascripts/plugins/elastic.js",
     "public/javascripts/plugins/flow.min.js",
+    "public/javascripts/plugins/bootstro.js",
     "public/javascripts/plugins/ng-flow.min.js",
-    "public/javascripts/plugins/ngStorage.min.js", 
+    "public/javascripts/plugins/angular-animate.min.js",
+    "public/javascripts/plugins/ngStorage.min.js",
     "public/javascripts/plugins/angular-messages.min.js",
+    "public/javascripts/plugins/notify.min.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
@@ -34,6 +37,8 @@ module.exports = function(grunt) {
     "public/javascripts/factory/category.js",
     "public/javascripts/factory/user.js",
     "public/javascripts/factory/item.js",
+    "public/javascripts/factory/validate.js",
+
 
     "public/javascripts/controller/base.js",
     "public/javascripts/controller/menu.js",
@@ -65,6 +70,8 @@ module.exports = function(grunt) {
     "public/stylesheets/font-awesome.min.css",
     "public/stylesheets/angular-ui-switch.css",
     "public/stylesheets/createRecipe.css",
+    "public/stylesheets/validateRecipe.css",
+    "public/stylesheets/bootstro.css",
     "public/stylesheets/ng-tag/ng-tags-input.css",
     "public/stylesheets/ng-tag/ng-tags-input.bootstrap.css",
     "public/stylesheets/userProfile.css",

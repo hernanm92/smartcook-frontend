@@ -1,0 +1,35 @@
+.validateRecipe-Title{
+    font-family:'Open Sans', sans-serif;
+    text-align:center;
+}
+.validateRecipe-Image{
+    text-align:center;
+}
+.validateRecipe-Description{
+    text-align:justify;
+}
+.validateRecipe-check{
+    transition: background-color 0.5s ease;
+    background-color:palegreen;
+}
+.validateRecipe-check:hover{
+    cursor: pointer;
+    background-color:limegreen;
+}
+.validateRecipe-cross{
+    transition: background-color 0.5s ease;
+    background-color:lightsalmon;
+}
+.validateRecipe-cross:hover{
+    cursor: pointer;
+    background-color:tomato;
+}
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.validateRecipe-Recipe{
+}

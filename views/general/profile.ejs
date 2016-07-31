@@ -12,7 +12,7 @@
                     <hr>
                 </div>
                 <div flow-drop>
-                    <img flow-img="$flow.files[0]" ng-src="{{user.avatar}}" width="300px" height="300px">
+                    <img flow-img="$flow.files[$flow.files.length-1]" ng-src="{{user.avatar}}" width="300px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
