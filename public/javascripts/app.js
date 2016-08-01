@@ -12,7 +12,8 @@ var app = angular.module('MainApp', [
       'monospaced.elastic',
       'flow',
       'ngStorage',
-      'ngMessages'
+      'ngMessages',
+      'itemModule'
       ]);
 
 app.config(['$httpProvider', function ($httpProvider) {

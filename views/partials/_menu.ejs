@@ -44,10 +44,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-responsive-collapse">
                 <!-- Nav Menu -->
-                <ul class="nav navbar-nav" style="margin-right: 0px;">
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
 
                     <!-- Profile -->
-                    <li class="dropdown"  >
+                    <li class="dropdown" style ="position: relative" >
                         <a href="#profile" ng-if="token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                             <div ng-bind="username"></div>
                         </a>
@@ -59,7 +59,7 @@
                     <!-- End Profile -->
 
                     <!-- Search -->
-                    <li class="dropdown">
+                    <li class="dropdown" style ="position: relative" >
                         <a href="#/" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                             Buscar
                         </a>
@@ -82,17 +82,30 @@
 
                     <!-- Validate -->
                     <li class="dropdown">
-                        <a href="#/validate"  ng-if="token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                        <a href="#validate" ng-if="token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                             Validar
                         </a>
                     </li>
                     <!-- End Validate -->
                     <li class="dropdown">
-                        <a href="#/login"  ng-if="!token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                        <a href="#/login" ng-if="!token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                             Ingresar
                         </a>
-                    </li>     
+                    </li>
                 </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        
+                        <input 
+                            ng-model = "itemSeleted" 
+                            typeahead-min-length="3" 
+                            typeahead-append-to-body="false"  
+                            typeahead-on-select="showModal(item)" 
+                            typeahead = "item as item.name for item in getItem($viewValue)" 
+                            type="text" class=" search-input form-control" 
+                            placeholder="Busque recetas, ingredientes">
+                    </div>
+                </form>
                 <!-- End Nav Menu -->
             </div>
         </div>

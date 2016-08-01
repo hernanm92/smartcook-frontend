@@ -35,37 +35,27 @@ var recipes = [
 ];
 
 var restrictions = [
-  { id: 1, name: 'Vegetariano'},
-  { id: 2, name: 'Vegano'},
-  { id: 3, name: 'Celiaco'},
-  { id: 4, name: 'Diabetico'}
+  { id: 1, name: 'Vegetariano' },
+  { id: 2, name: 'Vegano' },
+  { id: 3, name: 'Celiaco' },
+  { id: 4, name: 'Diabetico' }
 ];
 
 var categories = [
-  { id: 1, name: 'Pescados'},
-  { id: 2, name: 'Frutas'},
-  { id: 3, name: 'Verduras'},
-  { id: 3, name: 'Carnes'}
+  { id: 1, name: 'Pescados' },
+  { id: 2, name: 'Frutas' },
+  { id: 3, name: 'Verduras' },
+  { id: 3, name: 'Carnes' }
 ];
 
 var users = [
-{ id:1, name: 'Boba Fett', email: 'starwars@smartcook.com', avatar:'img/profile-avatar.jpg' },
-{ id:2, name: 'Jabba the Hutt', email: 'badguy@smartcook.com', avatar:'img/profile-avatar.jpg' }
+  { id: 1, name: 'Boba Fett', email: 'starwars@smartcook.com', avatar: 'img/profile-avatar.jpg' },
+  { id: 2, name: 'Jabba the Hutt', email: 'badguy@smartcook.com', avatar: 'img/profile-avatar.jpg' }
 ];
 
 app.get('/categories/:text', function (req, res) {
   var text = req.params.text
-  var catToSend = [];
-  for (var i = 0; i < categories.length; i++) {
-    var category = categories[i];
-    if (category.name.toLowerCase().indexOf(req.params.text.toLowerCase()) > -1) {
-      var cat = {
-        "name": category.name,
-        "id": category.id
-      }
-      catToSend.push(cat);
-    }
-  }
+  var catToSend = getItemsByNameIn(categories,text,mapCategory)
   res.status(200);
   res.send(catToSend);
 });
@@ -82,22 +72,9 @@ app.get('/ingredients/id/:id', function (req, res) {
 });
 
 app.get('/ingredients/:text', function (req, res) {
-  var text = req.params.text
-  var ingToSend = [];
-  for (var i = 0; i < ingredients.length; i++) {
-    var ingredient = ingredients[i];
-    if (ingredient.name.toLowerCase().indexOf(req.params.text.toLowerCase()) > -1) {
-      var ing = {
-        "name": ingredient.name,
-        "id": ingredient.id,
-        "image":ingredient.image_url,
-        "category":ingredient.category
-      }
-      ingToSend.push(ing);
-    }
-  }
+  var name = req.params.text
   res.status(200);
-  res.send(ingToSend);
+  res.send(getItemsByNameIn(ingredients,name,mapIngredient));
 });
 
 //-------------------------recipes-------------------------
@@ -114,7 +91,6 @@ app.get('/recipes/:id', function (req, res) {
 app.post('/recipes', function (req, res) {
   res.status(200);
   res.send('Llego correctamente la receta');
-  console.log(req.body);
 });
 
 //-------------------------restrictions-------------------------
@@ -141,16 +117,15 @@ app.post('/login', function (req, res) {
     name: "admin",
     role: "admin"
   }
-  console.log(req.body);
-  if (req.body.username === 'admin' && req.body.pass === '1234') {
+  if (req.body.username.toLowerCase() === 'admin' && req.body.pass === '1234') {
     var token = jwt.sign(user, app.get('superSecret'), {
       expiresIn: 1440
     });
     res.json({
       success: true,
       token: token,
-      nameUser:'Admin',
-      idUser:1
+      nameUser: 'Admin',
+      idUser: 1
     });
   } else {
     res.json({
@@ -160,7 +135,6 @@ app.post('/login', function (req, res) {
 });
 
 //-------------------------users-------------------------
-
 app.get('/user/:text', function (req, res) {
   var text = req.params.text
   for (var i = 0; i < users.length; i++) {
@@ -170,7 +144,7 @@ app.get('/user/:text', function (req, res) {
         "id": user.id,
         "name": user.name,
         "email": user.email,
-        "avatar":user.avatar
+        "avatar": user.avatar
       }
       break;
     }
@@ -178,6 +152,45 @@ app.get('/user/:text', function (req, res) {
   res.status(200);
   res.send(user);
 });
+
+//-------------------------items-----------------------
+app.get('/items/:text', function (req, res) {
+  var items = [];
+  var text = req.params.text;
+  var ings = getItemsByNameIn(ingredients,text, mapIngredient);
+  var recps = getItemsByNameIn(recipes,text,mapRecipe);
+  res.status(200);
+  res.send(ings.concat(recps));
+});
+
+//------------------------Helpers
+function mapIngredient(ingredient) {
+  //Cuando el ingrediente tenga mas datos(descripcion) se va a necesitar mapear.
+  return ingredient;
+}
+
+function mapRecipe(recipe) {
+  return {
+    id:recipe.id,
+    name:recipe.name
+  }
+}
+
+function mapCategory(category){
+  return category;
+}
+
+function getItemsByNameIn(array, filter, fmap ) {
+  var itemsFiltered = [];
+  for (var i = 0; i < array.length; i++) {
+    var item = array[i];
+    if (item.name.toLowerCase().includes(filter.toLowerCase())) {
+      var itemDTO = fmap(item);
+      itemsFiltered.push(itemDTO);
+    }
+  }
+  return itemsFiltered;
+}
 
 var server = app.listen(5000, function () {
   console.log("Api started in port: 5000");
