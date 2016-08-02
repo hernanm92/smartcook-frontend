@@ -3,7 +3,6 @@ app.controller('LoginController',LoginController);
     function LoginController($scope, UserSession, userLoginFactory, $location) {
 
         $scope.login = login;
-        $scope.handleLoginResponse = handleLoginResponse;
         $scope.$on('$viewContentLoaded', function(){
             App.init();
             Login.initLogin();
@@ -20,7 +19,7 @@ app.controller('LoginController',LoginController);
                     pass:$scope.userPass
                 }
                 userLoginFactory.save(user,function (res) {
-                    $scope.handleLoginResponse(res);
+                    handleLoginResponse(res);
                 });
                 $scope.formSubmited = false;
                 return;
@@ -30,9 +29,12 @@ app.controller('LoginController',LoginController);
 
         function handleLoginResponse(res){
             if (res.success) {
-                //redirect al inicio y mostrar nombre de usuario.
-                UserSession.setUsername(res.nameUser);
-                UserSession.setToken(res.token);
+                var user = {
+                    token:res.token,
+                    username:res.nameUser,
+                    rememberUser:$scope.rememberUser
+                };
+                UserSession.setUser(user);
                 $location.path('/');    
             }else{
                 $scope.messageLogin = "Usuario o contraseña incorrectas. Intente de nuevo"
