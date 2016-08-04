@@ -10,7 +10,7 @@ app.controller('MenuController', function ($scope, UserSession,$location,$http,i
     }
      
     function token(){
-         $scope.username = UserSession.getUsername();
+        $scope.username = UserSession.getUsername();
         return UserSession.getToken();
     }
 

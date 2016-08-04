@@ -13,7 +13,9 @@ var app = angular.module('MainApp', [
       'flow',
       'ngStorage',
       'ngMessages',
-      'itemModule'
+      'itemModule',
+      'blockUI',
+      'angularSpinner'
       ]);
 
 app.config(['$httpProvider', function ($httpProvider) {
@@ -34,4 +36,16 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/top-listing', {templateUrl: 'general/top-listing', controller: 'TopListingController'});
     $routeProvider.when('/validate', {templateUrl: 'general/validate', controller: 'ValidateController'});
     $routeProvider.when('/Recipe/Create', {templateUrl: 'general/createRecipe', controller: 'CreateRecipeController'});
+}]);
+
+app.config(function(blockUIConfig) {
+
+  // Change the default overlay message
+  blockUIConfig.message = 'Please stop clicking!';
+  blockUIConfig.autoBlock = false;
+  blockUIConfig.template = '<div us-spinner style = "width: 100%; height: 100%; opacity: .5; background-color: #fff "></div>'
+});
+
+app.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
+    usSpinnerConfigProvider.setDefaults({position:'fixed',zIndex :1, length:0,opacity:0});
 }]);

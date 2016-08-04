@@ -30,6 +30,9 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/ngStorage.min.js",
     "public/javascripts/plugins/angular-messages.min.js",
     "public/javascripts/plugins/notify.min.js",
+    "public/javascripts/plugins/angular-block-ui.min.js",
+    "public/javascripts/plugins/spin.js",
+    "public/javascripts/plugins/angular-spinner.min.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
@@ -77,7 +80,8 @@ module.exports = function(grunt) {
     "public/stylesheets/userProfile.css",
     "public/stylesheets/register.css",
     "public/stylesheets/ui-bootstrap-csp.css",
-    "public/stylesheets/home/home.css"
+    "public/stylesheets/home/home.css",
+    "public/stylesheets/angular-block-ui.min.css"
   ]
 
   var stageCss = ["public/stylesheets/*.css",

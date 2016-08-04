@@ -95,15 +95,16 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        
                         <input 
                             ng-model = "itemSeleted" 
                             typeahead-min-length="3" 
                             typeahead-append-to-body="false"  
                             typeahead-on-select="showModal(item)" 
                             typeahead = "item as item.name for item in getItem($viewValue)" 
-                            type="text" class=" search-input form-control" 
-                            placeholder="Busque recetas, ingredientes">
+                            type="text" 
+                            class=" search-input form-control" 
+                            placeholder="Buscar recetas, ingredientes"
+                            >
                     </div>
                 </form>
                 <!-- End Nav Menu -->
