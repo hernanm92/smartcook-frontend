@@ -60,7 +60,8 @@ module.exports = function(grunt) {
     "public/javascripts/service/callbackHandler.js",
     "public/javascripts/service/failedRequestHandler.js",
     "public/javascripts/service/userSession.js",
-
+    "public/javascripts/service/facebook.js",
+    
     "public/javascripts/service/helpers/home-helper.js"
   ]
 

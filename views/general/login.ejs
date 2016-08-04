@@ -2,7 +2,8 @@
 <div class="breadcrumbs-v4" style="padding-top: 90px; padding-bottom: 200px; background-image: url(../img/Food.jpg);">
   <div class="container">
     <span class="page-name">Log In</span>
-  </div><!--/end container-->
+  </div>
+  <!--/end container-->
 </div>
 <!--=== End Breadcrumbs v4 ===-->
 
@@ -12,7 +13,9 @@
     <div class="row">
       <div class="col-md-7 md-margin-bottom-50">
         <h2 class="welcome-title">Bienvenidos a SmartCook</h2>
-        <p>Suspendisse et tincidunt ipsum, et dignissim urna. Vestibulum nisl tortor, gravida at magna et, suscipit vehicula massa.</p><br>
+        <p>Suspendisse et tincidunt ipsum, et dignissim urna. Vestibulum nisl tortor, gravida at magna et, suscipit vehicula
+          massa.
+        </p><br>
         <div class="info-block-v2">
           <i class="icon icon-layers"></i>
           <div class="info-block-in">
@@ -37,7 +40,7 @@
       </div>
 
       <div class="col-md-5">
-        <form id="sky-form1" name ="userLogin" novalidate class="log-reg-block sky-form" ng-submit="login(userLogin.$valid)">
+        <form id="sky-form1" name="userLogin" novalidate class="log-reg-block sky-form" ng-submit="login(userLogin.$valid)">
           <h2>Ingresar</h2>
 
           <section ng-class="{ 'has-error': userForm.username.$invalid}">
@@ -58,7 +61,7 @@
           </section>
           <div class="row margin-bottom-5">
             <div class="col-xs-6">
-              <label class="checkbox" >
+              <label class="checkbox">
                 <input type="checkbox" ng-model = "rememberUser" name="checkbox"/>
                 <i></i>
                 No cerrar sesion
@@ -69,24 +72,36 @@
             </div>
           </div>
           <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Log in</button>
-            <div>
-                <p style=" color:red;">{{messageLogin}}</p>
+          <div>
+            <p style=" color:red;">{{messageLogin}}</p>
+          </div>
+                  <div class="border-wings">
+             <span>or</span>
+           </div>
+ 
+          <div class="row columns-space-removes">
+            <div class="xs-col-lg-6 margin-bottom-10">
+              <button ng-click="loginFacebook()" type="button" class="btn-u btn-u-md btn-u-fb btn-block"><i class="fa fa-facebook"></i> Facebook Log In</button>
             </div>
         </form>
 
         <div class="margin-bottom-20"></div>
-        <p class="text-center">No tenes cuenta? Registrate  <a href="#/register">aqui</a></p>
+        <p class="text-center">No tenes cuenta? Registrate <a href="#/register">aqui</a></p>
       </div>
-    </div><!--/end row-->
-  </div><!--/end container-->
+    </div>
+    <!--/end row-->
+  </div>
+  <!--/end container-->
 </div>
 <!--=== End Login ===-->
+
+</div>
 <div class="shop-subscribe">
   <div class="container">
     <div class="row">
       <div class="col-md-8 md-margin-bottom-20">
         <h2> No pierdas tiempo y convertite en un <strong>SmartCook</strong></h2>
-      </div>
     </div>
-  </div><!--/end container-->
+  </div>
 </div>
+  <!--/end container-->

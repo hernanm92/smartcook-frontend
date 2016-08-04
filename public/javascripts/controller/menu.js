@@ -17,6 +17,9 @@ app.controller('MenuController', function ($scope, UserSession,$location,$http,i
     function logOut(){
         UserSession.deleteUser();
         $location.path('/');
+        FB.logout(function(response){
+            console.log(response);
+        });
     }
 
     function getItem(text) {
