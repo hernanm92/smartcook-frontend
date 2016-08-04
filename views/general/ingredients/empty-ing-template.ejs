@@ -7,9 +7,15 @@
 <div class="product-description product-description-brd empty-ing-pos" style="padding:15px; padding-bottom:18px;" >
     <div class="overflow-h margin-bottom-5">
         <div ng-show="isEmpty(ingredient)">
-            <input type="text" ng-model="ingredientSelected" placeholder="Escriba el ingrediente" typeahead="ing as ing.name for ing in getIngredients($viewValue)"
-                class="form-control"  typeahead-append-to-body="true" typeahead-on-select="updateIngredientToFull(ingredientSelected, $index)"
-                typeahead-editable="false" typeahead-input-formatter="empty">
+            <input type="text" 
+                   ng-model="ingredientSelected" 
+                   placeholder="Escriba el ingrediente" 
+                   typeahead="ing as ing.name for ing in getIngredients($viewValue)"
+                   class="form-control"  
+                   typeahead-append-to-body="true" 
+                   typeahead-on-select="updateIngredientToFull(ingredientSelected, $index)"
+                   typeahead-editable="false" 
+                   typeahead-input-formatter="empty">
         </div>
     </div>
 </div>
