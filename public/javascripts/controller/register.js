@@ -15,6 +15,11 @@ app.controller('RegisterController',
             email : '',
             password : ''
         };
+        $scope.myDate = new Date();
+        $scope.registerMaxDate = new Date(
+              $scope.myDate.getFullYear(),
+              $scope.myDate.getMonth(),
+              $scope.myDate.getDate()-1);
 
         $scope.test = function() { console.log($scope.user.gender) };
     }
