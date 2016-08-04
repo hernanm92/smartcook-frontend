@@ -6,5 +6,16 @@ app.controller('RegisterController',
 			Registration.initRegistration();
 			StyleSwitcher.initStyleSwitcher();
         });
+        $scope.user = {
+            firstName : '',
+            lastName : '',
+            gender : 'Genero',
+            dateOfBirth: '',
+            userName : '',
+            email : '',
+            password : ''
+        };
+
+        $scope.test = function() { console.log($scope.user.gender) };
     }
 );

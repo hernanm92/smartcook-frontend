@@ -54,25 +54,25 @@ var Registration = function () {
 	                },
 	                email:
 	                {
-	                    required: 'Please enter your email address',
-	                    email: 'Please enter a VALID email address'
+	                    required: 'Por favor escriba una direccion de email',
+	                    email: 'Por favor escriba una direccion de email valida'
 	                },
 	                password:
 	                {
-	                    required: 'Please enter your password'
+	                    required: 'Por favor ingrese su contraseña'
 	                },
 	                passwordConfirm:
 	                {
-	                    required: 'Please enter your password one more time',
-	                    equalTo: 'Please enter the same password as above'
+	                    required: 'Por favor ingrese la contraseña una vez mas',
+	                    equalTo: 'La contraseñas no coinciden'
 	                },
 	                firstname:
 	                {
-	                    required: 'Please select your first name'
+	                    required: 'Por favor ingrese su primer nombre'
 	                },
 	                lastname:
 	                {
-	                    required: 'Please select your last name'
+	                    required: 'Por favor ingrese su apellido'
 	                },
 	                terms:
 	                {
