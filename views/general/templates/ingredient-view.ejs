@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h3 class="modal-title"></h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="shop-ui-inner.html">
+                <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
+                <div style="background-image: url({{ingredient.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
+            </a>
+        </div>
+        <div class="col-sm-8 product-description">
+            <div class="overflow-h margin-bottom-5">
+                <ul class="list-inline overflow-h">
+                    <li>
+                        <h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{ingredient.name}}</a></h4>
+                    </li>
+                    <li class="pull-right">
+                        <ul class="list-inline product-ratings">
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating fa fa-star"></i></li>
+                            <li><i class="rating fa fa-star"></i></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="margin-bottom-10">
+                    <span class="title-price margin-right-10">Calorias: </span>
+                    <span class="title-price">95.00 cal</span>
+                </div>
+                <p class="margin-bottom-20" >{{ingredient.category}}</p>
+                <p class="margin-bottom-20" style="height: 100px;">Un ingrediente es una sustancia que forma parte de una mezcla (en términos generales). En el mundo culinario,
+                    por ejemplo, una receta especifica qué ingredientes son necesarios para preparar un plato determinado.
+                    Muchos productos comerciales contienen un "ingrediente secreto" que los diferencia de los productos de
+                    la competencia. En la industria farmacéutica un ingrediente activo es el componente de la fórmula responsable
+                    del efecto deseado por el cliente. Las leyes nacionales normalmente requieren que se especifique una
+                    lista de los ingredientes, especialmente cuando se trata de aditivos.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn-u btn-u-sea-shop btn-u-sm" type="button" ng-click="ok()">Cerrar</button>
+</div>

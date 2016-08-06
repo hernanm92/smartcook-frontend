@@ -61,7 +61,12 @@ app.get('/general/ingredients/ing-template', function (req, res) {
 app.get('/general/channel', function (req, res) {
     res.render('general/channel');
 });
-http.createServer(app).listen(app.get('port'), function ()
-{
+app.get('/general/templates/ingredient-view', function (req, res) {
+    res.render('general/templates/ingredient-view');
+});
+app.get('/general/templates/recipe-view', function (req, res) {
+    res.render('general/templates/recipe-view');
+});
+http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });

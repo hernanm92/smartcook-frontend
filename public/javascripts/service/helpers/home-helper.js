@@ -2,9 +2,10 @@ angular
     .module('MainApp')
     .service('homeHelper', homeHelper);
 
-function homeHelper() {
+function homeHelper($modal) {
     return {
-        initIngredients:initIngredients
+        initIngredients: initIngredients,
+        openModal: openModal
     }
 
     function createEmptyIngredient() {
@@ -24,5 +25,21 @@ function homeHelper() {
             ingredients.push(ing);
         };
         return ingredients;
+    };
+
+
+    function openModal(item, template, controller) {
+        return $modal.open({
+            animation: true,
+            templateUrl: template,
+            controller: controller,
+            size: 'lg',
+            resolve: {
+                item: function () {
+                    return item;
+                }
+            },
+            windowClass: 'menu-bar-space'
+        });
     };
 }
