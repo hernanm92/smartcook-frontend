@@ -1,28 +1,73 @@
-app.controller('MenuController', function ($scope, UserSession,$location,$http,itemFactory) {
-     
+app.controller('MenuController', function ($scope,
+    UserSession, $location, itemFactory, $modal, ingredientFactory, recipeFactory) {
+
     $scope.token = token;
     $scope.isNavActive = isNavActive;
     $scope.logOut = logOut;
     $scope.getItem = getItem;
+    $scope.getDetails = getDetails;
 
-    function isNavActive (id) {
+    function isNavActive(id) {
         return $location.path() == id
     }
-     
-    function token(){
+
+    function token() {
         $scope.username = UserSession.getUsername();
         return UserSession.getToken();
     }
 
-    function logOut(){
+    function logOut() {
         UserSession.deleteUser();
         $location.path('/');
-        FB.logout(function(response){
+        //utilizar $q o  hacer una llamada al servico de facebook
+        FB.logout(function (response) {
             console.log(response);
         });
     }
 
     function getItem(text) {
-        return itemFactory.query({text:text}).$promise;
+        return itemFactory.query({ text: text }).$promise;
+    }
+
+    //1 -> ingrediente;  0-> receta, esto se debera configurar como constantes
+    function getDetails(item) {
+        var template = '';
+        if (item.type === 1) {
+
+            getDetailIng(item.id);
+        } else {
+            getDeteailRecipe(item.id);
+        };
+    }
+
+    function openModal(item, template, controller) {
+        return $modal.open({
+            animation: true,
+            templateUrl: template,
+            controller: controller,
+            size: 'lg',
+            resolve: {
+                item: function () {
+                    return item;
+                }
+            },
+            windowClass: 'menu-bar-space'
+        });
+    };
+
+    function getDetailIng(id) {
+        template = '/general/templates/ingredient-view';
+        controller = 'IngredientViewController';
+        ingredientFactory.get({ id: id }, function (ing) {
+            openModal(ing, template, controller);
+        });
+    }
+
+    function getDeteailRecipe(id) {
+        template = '/general/templates/recipe-view';
+        controller = 'RecipeViewController';
+        recipeFactory.get({ id: id }, function (recipe) {
+            openModal(recipe, template, controller);
+        })
     }
 });

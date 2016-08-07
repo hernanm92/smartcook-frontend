@@ -55,26 +55,27 @@ var users = [
 
 app.get('/categories/:text', function (req, res) {
   var text = req.params.text
-  var catToSend = getItemsByNameIn(categories,text,mapCategory)
+  var catToSend = getItemsByNameIn(categories, text, mapCategory)
   res.status(200);
   res.send(catToSend);
 });
 
 //-------------------------ingredients-------------------------
 app.get('/ingredients', function (req, res) {
-  res.status(200);
-  res.send(ingredients);
+  var text = req.query.text;
+  if (typeof text === 'undefined') {
+    res.status(200);
+    res.send(ingredients);
+  } else {
+    res.status(200);
+    res.send(getItemsByNameIn(ingredients, text, mapIngredient));
+  }
 });
 
-app.get('/ingredients/id/:id', function (req, res) {
+app.get('/ingredients/:id', function (req, res) {
+  var id = req.params.id -1;
   res.status(200);
-  res.send(ingredients[0]);
-});
-
-app.get('/ingredients/:text', function (req, res) {
-  var name = req.params.text
-  res.status(200);
-  res.send(getItemsByNameIn(ingredients,name,mapIngredient));
+  res.send(ingredients[id]);
 });
 
 //-------------------------recipes-------------------------
@@ -85,7 +86,7 @@ app.get('/recipes', function (req, res) {
 
 app.get('/recipes/:id', function (req, res) {
   res.status(200);
-  res.send(recipes[0]);
+  res.send(recipes[req.params.id-1]);
 });
 
 app.post('/recipes', function (req, res) {
@@ -100,13 +101,13 @@ app.get('/restrictions', function (req, res) {
 });
 
 //-------------------------categories-------------------------
-app.get('/categories',function(req,res){
+app.get('/categories', function (req, res) {
   res.status(200);
   res.send(categories);
 });
 
 //-------------------------validation-------------------------
-app.post('/validateRecipe',function(req,res){
+app.post('/validateRecipe', function (req, res) {
   res.status(200);
   res.send('Receta Validada');
 });
@@ -157,8 +158,8 @@ app.get('/user/:text', function (req, res) {
 app.get('/items/:text', function (req, res) {
   var items = [];
   var text = req.params.text;
-  var ings = getItemsByNameIn(ingredients,text, mapIngredient);
-  var recps = getItemsByNameIn(recipes,text,mapRecipe);
+  var ings = getItemsByNameIn(ingredients, text, mapIngSearch);
+  var recps = getItemsByNameIn(recipes, text, mapRecipeSearch);
   res.status(200);
   res.send(ings.concat(recps));
 });
@@ -169,18 +170,35 @@ function mapIngredient(ingredient) {
   return ingredient;
 }
 
-function mapRecipe(recipe) {
+function mapIngSearch(ing) {
   return {
-    id:recipe.id,
-    name:recipe.name
+    id: ing.id,
+    name: ing.name,
+    image: ing.image_url,
+    type: 1
   }
 }
 
-function mapCategory(category){
+function mapRecipeSearch(recipe) {
+  return {
+    id: recipe.id,
+    name: recipe.name,
+    type: 0
+  }
+}
+
+function mapRecipe(recipe) {
+  return {
+    id: recipe.id,
+    name: recipe.name,
+  }
+}
+
+function mapCategory(category) {
   return category;
 }
 
-function getItemsByNameIn(array, filter, fmap ) {
+function getItemsByNameIn(array, filter, fmap) {
   var itemsFiltered = [];
   for (var i = 0; i < array.length; i++) {
     var item = array[i];
