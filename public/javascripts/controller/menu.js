@@ -31,9 +31,7 @@ app.controller('MenuController', function ($scope,
 
     //1 -> ingrediente;  0-> receta, esto se debera configurar como constantes
     function getDetails(item) {
-        var template = '';
         if (item.type === 1) {
-
             getDetailIng(item.id);
         } else {
             getDeteailRecipe(item.id);
@@ -56,18 +54,14 @@ app.controller('MenuController', function ($scope,
     };
 
     function getDetailIng(id) {
-        template = '/general/templates/ingredient-view';
-        controller = 'IngredientViewController';
+        template = '/general/modals/ingredient';
+        controller = 'IngredientModalController';
         ingredientFactory.get({ id: id }, function (ing) {
             openModal(ing, template, controller);
         });
     }
 
     function getDeteailRecipe(id) {
-        template = '/general/templates/recipe-view';
-        controller = 'RecipeViewController';
-        recipeFactory.get({ id: id }, function (recipe) {
-            openModal(recipe, template, controller);
-        })
+        $location.path('/recipe/'+id+'/detail');
     }
 });

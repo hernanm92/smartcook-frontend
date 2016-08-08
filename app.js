@@ -61,12 +61,18 @@ app.get('/general/ingredients/ing-template', function (req, res) {
 app.get('/general/channel', function (req, res) {
     res.render('general/channel');
 });
-app.get('/general/templates/ingredient-view', function (req, res) {
-    res.render('general/templates/ingredient-view');
+app.get('/general/modals/ingredient', function (req, res) {
+    res.render('general/modals/ingredient');
 });
-app.get('/general/templates/recipe-view', function (req, res) {
-    res.render('general/templates/recipe-view');
+app.get('/general/modals/recipe', function (req, res) {
+    res.render('general/modals/recipe');
 });
+app.get('/general/detail-recipe', function (req, res) { 
+    res.render('general/detail-recipe');
+})
+app.get('/general/recipe-detail-template', function (req, res) { 
+    res.render('general/recipe-detail-template');
+})
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });

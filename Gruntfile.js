@@ -53,9 +53,11 @@ module.exports = function(grunt) {
     "public/javascripts/controller/top-listing.js",
     "public/javascripts/controller/validate.js",
     "public/javascripts/controller/createRecipe.js",
+    "public/javascripts/controller/base-recipe.js",
     "public/javascripts/controller/modal.js",
-    "public/javascripts/controller/modals/ingredient-view.js",
-    "public/javascripts/controller/modals/recipe-view.js",
+    "public/javascripts/controller/modals/ingredient.js",
+    "public/javascripts/controller/modals/recipe.js",
+    "public/javascripts/controller/recipe-view.js",
 
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",
@@ -84,7 +86,8 @@ module.exports = function(grunt) {
     "public/stylesheets/register.css",
     "public/stylesheets/ui-bootstrap-csp.css",
     "public/stylesheets/home/home.css",
-    "public/stylesheets/angular-block-ui.min.css"
+    "public/stylesheets/angular-block-ui.min.css",
+    "public/stylesheets/detail-recipe.css"
   ]
 
   var stageCss = ["public/stylesheets/*.css",

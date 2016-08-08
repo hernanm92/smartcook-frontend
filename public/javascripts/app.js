@@ -36,10 +36,10 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/top-listing', {templateUrl: 'general/top-listing', controller: 'TopListingController'});
     $routeProvider.when('/validate', {templateUrl: 'general/validate', controller: 'ValidateController'});
     $routeProvider.when('/Recipe/Create', {templateUrl: 'general/createRecipe', controller: 'CreateRecipeController'});
+    $routeProvider.when('/recipe/:id/detail',{templateUrl:'general/detail-recipe',controller:'RecipeViewController'});
 }]);
 
 app.config(function(blockUIConfig) {
-
   // Change the default overlay message
   blockUIConfig.message = 'Please stop clicking!';
   blockUIConfig.autoBlock = false;

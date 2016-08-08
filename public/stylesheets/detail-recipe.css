@@ -1,0 +1,28 @@
+.detail-step {
+    font-size: large;
+    width: 100%;
+    border: none;
+    outline: 0;
+    resize: none;
+    overflow: hidden;
+    word-wrap: break-word;
+    height: 30px;
+    background: 0 0;
+    margin-top: 5px;
+}
+
+.steps-container {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.tips-container{
+    margin-right: 25%;
+}
+
+.tip-area{
+    width: 95% !important ; 
+    resize: none;
+    height: 20%; 
+    margin-left: 1.5%;
+}
