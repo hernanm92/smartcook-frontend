@@ -1,5 +1,11 @@
 app.controller('baseRecipeController', function ($scope) {
     $scope.addToFavorites = addToFavorites;
+    $scope.addTip = addTip;
+    $scope.addToFavorites = addToFavorites;
+
+    function addTip() {
+        
+    }
 
     function addToFavorites() {
 

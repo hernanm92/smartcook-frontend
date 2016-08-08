@@ -71,8 +71,8 @@ app.controller('HomeController',
         function getDetailsRecipe(id){
         template = '/general/modals/recipe';
         controller = 'RecipeModalController';
-        ingredientFactory.get({ id: id }, function (ing) {
-            homeHelper.openModal(ing, template, controller);
+        recipeFactory.get({ id: id }, function (recipe) {
+            homeHelper.openModal(recipe, template, controller);
         });
         }
     }
