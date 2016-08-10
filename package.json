@@ -37,6 +37,7 @@
     "gulp-replace-task": "^0.1.0",
     "jasmine-core": "^2.2.0",
     "mocha": "^2.2.4",
-    "yargs": "^3.8.0"
+    "yargs": "^3.8.0",
+    "connect-multiparty": "^1.0.4"
   }
 }

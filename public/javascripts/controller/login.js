@@ -1,6 +1,6 @@
 app.controller('LoginController', LoginController);
 
-function LoginController($scope, UserSession, userLoginFactory, $location, facebookService, $q, blockUI) {
+function LoginController($scope, UserSession, userLoginFactory, $location, facebookService, blockUI,$http) {
 
     $scope.login = login;
     $scope.loginFacebook = loginFacebook;

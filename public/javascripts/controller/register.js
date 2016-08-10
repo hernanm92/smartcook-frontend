@@ -1,57 +1,56 @@
 app.controller('RegisterController',
     function ($scope, ingredientFactory, eventService) {
-        $scope.$on('$viewContentLoaded', function(){
+        $scope.$on('$viewContentLoaded', function () {
             App.init();
-			App.initScrollBar();
-			Registration.initRegistration();
-			StyleSwitcher.initStyleSwitcher();
+            App.initScrollBar();
+            Registration.initRegistration();
+            StyleSwitcher.initStyleSwitcher();
         });
+
+
         $scope.user = {
-            firstName : '',
-            lastName : '',
-            gender : 'Genero',
+            firstName: '',
+            lastName: '',
+            gender: 'Genero',
             dateOfBirth: '',
-            userName : '',
-            email : '',
-            password : ''
+            userName: '',
+            email: '',
+            password: ''
         };
 
+        //---------------------------------DATE PICKER SECTION---------------------------------
 
-//---------------------------------DATE PICKER SECTION---------------------------------
-        $scope.today = function() {
+        function initDatepicker() {
             $scope.dt = new Date();
-          };
-        $scope.today();
+            $scope.minDate = new Date(1900, 01, 01);
+            $scope.myDate = new Date();
+            $scope.registerMaxDate = new Date(
+                $scope.myDate.getFullYear(),
+                $scope.myDate.getMonth(),
+                $scope.myDate.getDate() - 1);
 
-        $scope.clear = function() {
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1
+            };
+        }
+
+        initDatepicker();
+        
+        $scope.clear = function () {
             $scope.dt = null;
-          };
-
-        $scope.format = 'dd-MMMM-yyyy';
-
-        $scope.popup1 = {
-            opened: false
         };
 
-        $scope.open1 = function() {
-            $scope.popup1.opened = true;
-        };
+        $scope.format = 'dd-MMMM-yyyy'
 
-        $scope.myDate = new Date();
-        $scope.registerMaxDate = new Date(
-                      $scope.myDate.getFullYear(),
-                      $scope.myDate.getMonth(),
-                      $scope.myDate.getDate()-1);
-        $scope.dateOptions = {
-            maxDate: $scope.registerMaxDate,
-            showWeeks:true,
-            startingDay: 1
+        $scope.open1 = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.opened = true;
         };
 
 
 
-
-
-        $scope.test = function() { console.log($scope.user.gender) };
+        $scope.test = function () { console.log($scope.user.gender) };
     }
 );

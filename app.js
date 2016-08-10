@@ -21,6 +21,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+var flow = require('./flow-node.js')('images');
 
 app.get('/', function (req, res) {
     res.render('index');
@@ -73,6 +76,39 @@ app.get('/general/detail-recipe', function (req, res) {
 app.get('/general/recipe-detail-template', function (req, res) { 
     res.render('general/recipe-detail-template');
 })
+
+// Handle uploads through Flow.js
+app.post('/upload', multipartMiddleware, function(req, res) {
+  flow.post(req, function(status, filename, original_filename, identifier) {
+    console.log('POST', status, original_filename, identifier);
+    res.status(status).send();
+  });
+});
+
+
+app.options('/upload', function(req, res){
+  console.log('OPTIONS');
+  res.status(200).send();
+});
+
+// Handle status checks on chunks through Flow.js
+app.get('/upload', function(req, res) {
+  flow.get(req, function(status, filename, original_filename, identifier) {
+    console.log('GET', status);
+    if (status == 'found') {
+      status = 200;
+    } else {
+      status = 204;
+    }
+    res.status(status).send();
+  });
+});
+
+app.get('/download/:identifier', function(req, res) {
+  flow.write(req.params.identifier, res);
+});
+
+app.listen(3000)
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });

@@ -1,5 +1,5 @@
 app.controller('MenuController', function ($scope,
-    UserSession, $location, itemFactory, $modal, ingredientFactory, recipeFactory) {
+    UserSession, $location, itemFactory, $modal, ingredientFactory, recipeFactory, facebookService) {
 
     $scope.token = token;
     $scope.isNavActive = isNavActive;
@@ -17,11 +17,9 @@ app.controller('MenuController', function ($scope,
     }
 
     function logOut() {
-        UserSession.deleteUser();
-        $location.path('/');
-        //utilizar $q o  hacer una llamada al servico de facebook
-        FB.logout(function (response) {
-            console.log(response);
+        facebookService.logOut().then(function (response) {
+            UserSession.deleteUser();
+            $location.path('/');
         });
     }
 
@@ -29,7 +27,8 @@ app.controller('MenuController', function ($scope,
         return itemFactory.query({ text: text }).$promise;
     }
 
-    //1 -> ingrediente;  0-> receta, esto se debera configurar como constantes
+    //1 -> ingrediente;  0-> receta, esto se debera configurar 
+    //como constantes en un app.config
     function getDetails(item) {
         if (item.type === 1) {
             getDetailIng(item.id);
@@ -62,6 +61,6 @@ app.controller('MenuController', function ($scope,
     }
 
     function getDeteailRecipe(id) {
-        $location.path('/recipe/'+id+'/detail');
+        $location.path('/recipe/' + id + '/detail');
     }
 });

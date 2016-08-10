@@ -10,7 +10,9 @@ app.controller('CreateRecipeController',
         $scope.validateForm = validateForm;
         $scope.deleteStep = deleteStep;
         $scope.openModal = openModal;
+        $scope.fileSuccess = fileSuccess;
         $scope.obj = {}; //para usar la foto
+        $scope.photoRecipe = {};
            
         function addStep() {
             $scope.stepErrorMessage = null;
@@ -64,9 +66,10 @@ app.controller('CreateRecipeController',
                 "name":$scope.nameRecipe,
                 "ingredients":$scope.ingredients,
                 "steps":$scope.steps,
-                "description":$scope.recipeDescription
+                "description":$scope.recipeDescription,
+                "photoRecipe" :$scope.photoRecipe
             };
-            
+            console.log($scope.photoRecipe);
             $scope.recipe = new recipeFactory();
             $scope.recipe.data = recipe;
             recipeFactory.save($scope.recipe,function (res) {
@@ -85,6 +88,13 @@ app.controller('CreateRecipeController',
             openModal('Desea eliminar este paso?').result.then(function () {
                 $scope.steps.splice(index,1);
             });
+        };
+
+        function fileSuccess(msg,file) {
+            $scope.photoRecipe = {
+                name:file.name,
+                id:file.uniqueIdentifier
+            };
         };
 });
 
