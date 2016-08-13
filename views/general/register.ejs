@@ -44,11 +44,11 @@
                         <div class="row margin-bottom-10">
                             <div class="col-sm-12">
                                 <p class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
-                                           ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions"
-                                           ng-required="true" close-text="Cerrar"/>
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}"  min-date ="minDate" max-date = "registerMaxDate"
+                                           ng-model="dt" is-open="opened" datepicker-options="dateOptions" 
+                                           ng-required="true" close-text="Cerrar" />
                                 <span class="input-group-btn">
-                                  <button type="button" class="btn btn-default" ng-click="open1()" style="height: 40.142858000000004px">
+                                  <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 40.142858000000004px">
                                       <i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                                 </p>

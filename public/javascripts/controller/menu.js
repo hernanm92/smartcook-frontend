@@ -1,5 +1,5 @@
 app.controller('MenuController', function ($scope,
-    UserSession, $location, itemFactory, $modal, ingredientFactory, recipeFactory) {
+    UserSession, $location, itemFactory, $modal, ingredientFactory, recipeFactory, facebookService) {
 
     $scope.token = token;
     $scope.isNavActive = isNavActive;
@@ -17,11 +17,9 @@ app.controller('MenuController', function ($scope,
     }
 
     function logOut() {
-        UserSession.deleteUser();
-        $location.path('/');
-        //utilizar $q o  hacer una llamada al servico de facebook
-        FB.logout(function (response) {
-            console.log(response);
+        facebookService.logOut().then(function (response) {
+            UserSession.deleteUser();
+            $location.path('/');
         });
     }
 
@@ -29,11 +27,10 @@ app.controller('MenuController', function ($scope,
         return itemFactory.query({ text: text }).$promise;
     }
 
-    //1 -> ingrediente;  0-> receta, esto se debera configurar como constantes
+    //1 -> ingrediente;  0-> receta, esto se debera configurar 
+    //como constantes en un app.config
     function getDetails(item) {
-        var template = '';
         if (item.type === 1) {
-
             getDetailIng(item.id);
         } else {
             getDeteailRecipe(item.id);
@@ -56,18 +53,14 @@ app.controller('MenuController', function ($scope,
     };
 
     function getDetailIng(id) {
-        template = '/general/templates/ingredient-view';
-        controller = 'IngredientViewController';
+        template = '/general/modals/ingredient';
+        controller = 'IngredientModalController';
         ingredientFactory.get({ id: id }, function (ing) {
             openModal(ing, template, controller);
         });
     }
 
     function getDeteailRecipe(id) {
-        template = '/general/templates/recipe-view';
-        controller = 'RecipeViewController';
-        recipeFactory.get({ id: id }, function (recipe) {
-            openModal(recipe, template, controller);
-        })
+        $location.path('/recipe/' + id + '/detail');
     }
 });

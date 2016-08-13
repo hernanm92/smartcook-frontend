@@ -8,8 +8,7 @@ function UserSession($sessionStorage, $localStorage) {
         getUsername: getUsername,
         deleteUser: deleteUser,
         getToken: getToken,
-        setUser: setUser,
-        watchAuthenticationStatusChange: watchAuthenticationStatusChange
+        setUser: setUser
     }
     return service;
 
@@ -49,26 +48,5 @@ function UserSession($sessionStorage, $localStorage) {
         }
         delete $sessionStorage.username;
         delete $sessionStorage.token;
-    }
-
-    function watchAuthenticationStatusChange() {
-
-        FB.Event.subscribe('auth.authResponseChange', function (res) {
-
-            if (res.status === 'connected') {
-                console.log(res);
-                $localStorage.remember = true;
-                $localStorage.username = getUserInfo();
-                $localStorage.token = res.authResponse.accessToken;  
-            }
-            if( res.status ==='not_authorized'){
-                console.log('no logueado en la app');
-                deleteUser();
-            }
-            if(res.status ==='unknown'){
-                deleteUser();
-                console.log('no esta logueado en ningun lado');
-            }
-        });
     }
 }

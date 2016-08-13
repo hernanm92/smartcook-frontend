@@ -1,7 +1,6 @@
-app.controller('RecipeViewController',
+app.controller('IngredientModalController',
     function ($scope, item,$modalInstance) {
-        $scope.recipe = item;
-        
+        $scope.ingredient = item;
         $scope.ok = function () {
             $modalInstance.close();
         };

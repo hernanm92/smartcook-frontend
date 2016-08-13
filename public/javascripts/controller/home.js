@@ -1,5 +1,5 @@
 app.controller('HomeController',
-    function ($scope, ingredientFactory, recipeFactory, homeHelper) {
+    function ($scope, ingredientFactory, recipeFactory, homeHelper,$location) {
 
         $scope.getIngredients = getIngredients;
         $scope.getRecipes = getRecipes;
@@ -7,6 +7,9 @@ app.controller('HomeController',
         $scope.isEmpty = isEmpty;
         $scope.removeIngredient = removeIngredient;
         $scope.updateIngredientToFull = updateIngredientToFull;
+        $scope.getDetailIng = getDetailIng;
+        $scope.getDetailsRecipe = getDetailsRecipe;
+
         $scope.$on('$viewContentLoaded', function () {
             App.init();
             App.initScrollBar();
@@ -56,6 +59,22 @@ app.controller('HomeController',
                 $scope.recipes = recipes;
             });
         };
+
+        function getDetailIng(id) {
+            template = '/general/modals/ingredient';
+            controller = 'IngredientModalController';
+            ingredientFactory.get({ id: id }, function (ing) {
+                homeHelper.openModal(ing, template, controller);
+            });
+        }
+
+        function getDetailsRecipe(id){
+        template = '/general/modals/recipe';
+        controller = 'RecipeModalController';
+        recipeFactory.get({ id: id }, function (recipe) {
+            homeHelper.openModal(recipe, template, controller);
+        });
+        }
     }
 );
 
