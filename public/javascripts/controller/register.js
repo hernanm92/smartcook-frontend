@@ -24,7 +24,7 @@ app.controller('RegisterController',
         $scope.today();
 
         $scope.clear = function() {
-            $scope.dt = null;
+            $scope.dt = null;        $scope.today();
           };
 
         $scope.format = 'dd-MMMM-yyyy';
@@ -42,6 +42,7 @@ app.controller('RegisterController',
                       $scope.myDate.getFullYear(),
                       $scope.myDate.getMonth(),
                       $scope.myDate.getDate()-1);
+
         $scope.dateOptions = {
             maxDate: $scope.registerMaxDate,
             showWeeks:true,
