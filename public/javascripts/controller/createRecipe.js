@@ -1,5 +1,5 @@
 app.controller('CreateRecipeController',
-    function ($scope, recipeFactory,$modal,ingredientFactory) {
+    function ($scope, recipeFactory,$modal,ingredientFactory,Recipe) {
         //global variables
         $scope.steps = [];
         $scope.ingredients = [];
@@ -69,6 +69,8 @@ app.controller('CreateRecipeController',
                 "description":$scope.recipeDescription,
                 "photoRecipe" :$scope.photoRecipe
             };
+
+            var recipe = new Recipe(1,$scope.nameRecipe,$scope.ingredients,$scope.steps,$scope.recipeDescription,$scope.photoRecipe)
             console.log($scope.photoRecipe);
             $scope.recipe = new recipeFactory();
             $scope.recipe.data = recipe;
