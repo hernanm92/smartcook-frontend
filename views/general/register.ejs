@@ -11,7 +11,7 @@
         <div class="row">
 
             <div class="col-md-6 col-md-offset-3">
-                <form id="sky-form4" class="log-reg-block sky-form">
+                <form name="userForm" ng-submit="validateForm(userForm.$valid)" id="userForm" class="log-reg-block sky-form">
                     <h2>Crear Nuevo Usuario</h2>
 
                     <div class="login-input reg-input">
@@ -19,7 +19,7 @@
                             <div class="col-sm-6">
                                 <section>
                                     <label class="input">
-                                        <input type="text" name="firstname" placeholder="Primer Nombre"
+                                        <input type="text" name="firstname" placeholder="Primer Nombre" required
                                                class="form-control" ng-model="user.firstName">
                                     </label>
                                 </section>
@@ -27,14 +27,14 @@
                             <div class="col-sm-6">
                                 <section>
                                     <label class="input">
-                                        <input type="text" name="lastname" placeholder="Apellido"
+                                        <input type="text" name="lastname" placeholder="Apellido" required
                                                class="form-control" ng-model="user.lastName">
                                     </label>
                                 </section>
                             </div>
                         </div>
                         <label class="select margin-bottom-15">
-                            <select name="gender" class="form-control">
+                            <select name="gender" class="form-control" required>
                                 <option value="0" selected disabled>Genero</option>
                                 <option value="1">Hombre</option>
                                 <option value="2">Mujer</option>
@@ -45,10 +45,10 @@
                             <div class="col-sm-12">
                                 <p class="input-group">
                                     <input type="text" class="form-control" datepicker-popup="{{format}}"  min-date ="minDate" max-date = "registerMaxDate"
-                                           ng-model="dt" is-open="opened" datepicker-options="dateOptions" 
-                                           ng-required="true" close-text="Cerrar" />
+                                           ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-click="openDatepicker($event)"
+                                           ng-required="true" close-text="Cerrar" readonly/>
                                 <span class="input-group-btn">
-                                  <button type="button" class="btn btn-default" ng-click="open1($event)" style="height: 40.142858000000004px">
+                                  <button type="button" class="btn btn-default" ng-click="openDatepicker($event)" style="height: 40.142858000000004px">
                                       <i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                                 </p>
@@ -56,26 +56,26 @@
                         </div>
                         <section>
                             <label class="input">
-                                <input ng-model="user.userName" type="text" name="username"
+                                <input ng-model="user.userName" type="text" name="username" required
                                        placeholder="Nombre de Usuario" class="form-control">
                             </label>
                         </section>
                         <section>
                             <label class="input">
-                                <input ng-model="user.email" type="email" name="email" placeholder="Direccion Email"
+                                <input ng-model="user.email" type="email" name="email" placeholder="Direccion Email" required
                                        class="form-control">
                             </label>
                         </section>
                         <section>
                             <label class="input">
-                                <input ng-model="user.password" type="password" name="password" placeholder="Contraseña"
+                                <input ng-model="user.password" type="password" name="password" placeholder="Contraseña" required
                                        id="password"
                                        class="form-control">
                             </label>
                         </section>
                         <section>
                             <label class="input">
-                                <input type="password" name="passwordConfirm" placeholder="Confirme Contraseña"
+                                <input type="password" name="passwordConfirm" placeholder="Confirme Contraseña" required
                                        class="form-control">
                             </label>
                         </section>
@@ -86,8 +86,8 @@
                     <!--<i></i>-->
                     <!--I have read agreed with the <a href="#">terms &amp; conditions</a>-->
                     <!--</label>-->
-                    <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Crear Usuario
-                    </button>
+                    <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Crear Usuario</button>
+                    <p ng-show="(userForm.$invalid || !genderSelected()) && submitted" style="color:red;">Los datos ingresados son invalidos</p>
                 </form>
 
                 <div class="margin-bottom-20"></div>
