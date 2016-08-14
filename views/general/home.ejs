@@ -2,15 +2,31 @@
 <div class="container content-md" style="padding-top: 90px; padding-bottom: 0px;">
     <!--=== Illustration v2 ===-->
     <div class="illustration-v2">
-        <ul  class="list-inline owl-slider" >
-            <li class="item" ng-repeat="ingredient in ingredients" on-finish-ingredients-render >
+        <ul class="list-inline owl-slider">
+            <li class="item" ng-repeat="ingredient in ingredients" on-finish-ingredients-render>
                 <div ng-include="'general/ingredients/empty-ing-template'" ng-show="isEmpty(ingredient)"></div>
                 <div ng-include="'general/ingredients/ing-template'" ng-show="!isEmpty(ingredient)"></div>
             </li>
         </ul>
     </div>
     <!--=== End Illustration v2 ===-->
+    <div>
+        <button type="button" class="btn-u btn-u-sea-shop" ng-click="search()">Buscar</button>
+        <button type="button" class="btn-u btn-u-sea-shop" ng-click="removeIngredients()">Remover Ingredientes</button>
+        <button type="button" class="btn-u btn-u-sea-shop" ng-click="advancedSearch()">Busqueda avanzada</button>
+        <div ng-show="advancedSettings" ng-class="animate-show">
+            <label>
+                <input type="checkbox" ng-model = "omitRestriccions"/>
+                No considerar restricciones
+              </label>
+            <label>
+                <input type="checkbox" ng-model = "dislikeIngs"/>
+                No considerar ingredientes que no me gustan
+              </label>
+        </div>
+    </div>
 </div>
+
 <!--=== End Product Content ===-->
 
 <!--=== Content Part ===-->
@@ -57,7 +73,7 @@
                                         <a href="#/">Add to Compare</a>
                                     </li>
                                 </ul>
-                                <button type="button" class="btn-u btn-u-sea-shop" ng-click ="getDetailsRecipe(recipe.id)">Ver receta</button>
+                                <button type="button" class="btn-u btn-u-sea-shop" ng-click="getDetailsRecipe(recipe.id)">Ver receta</button>
                             </div>
                         </div>
                     </div>

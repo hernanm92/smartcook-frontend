@@ -39,6 +39,10 @@ app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/recipe/:id/detail', { templateUrl: 'general/detail-recipe', controller: 'RecipeViewController' });
 }]);
 
+app.config(['$httpProvider', function ($httpProvider) {
+  $httpProvider.interceptors.push('httpInterceptorService');  
+}]);
+
 app.config(function (blockUIConfig) {
   // Change the default overlay message
   blockUIConfig.message = 'Please stop clicking!';

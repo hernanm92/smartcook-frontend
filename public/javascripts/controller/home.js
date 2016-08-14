@@ -1,14 +1,27 @@
 app.controller('HomeController',
-    function ($scope, ingredientFactory, recipeFactory, homeHelper,$location) {
+    function ($scope, ingredientFactory,
+        recipeFactory, homeHelper, $location,
+        notifyHelper, blockUI) {
 
-        $scope.getIngredients = getIngredients;
-        $scope.getRecipes = getRecipes;
+        //private    
+        var self = this;
+        self.ingsToSend = [];
+        self.getRecipes = getRecipes;
+
+        //set Values
         $scope.ingredients = [];
+        $scope.advancedSettings = false;
+
+        //functions
         $scope.isEmpty = isEmpty;
+        $scope.getIngredients = getIngredients;
         $scope.removeIngredient = removeIngredient;
         $scope.updateIngredientToFull = updateIngredientToFull;
         $scope.getDetailIng = getDetailIng;
         $scope.getDetailsRecipe = getDetailsRecipe;
+        $scope.search = search;
+        $scope.removeIngredients = removeIngredients;
+        $scope.advancedSearch = advancedSearch;
 
         $scope.$on('$viewContentLoaded', function () {
             App.init();
@@ -20,12 +33,18 @@ app.controller('HomeController',
 
         init();
 
+        function init() {
+            $scope.ingredients = homeHelper.initIngredients();
+        };
+
         function updateIngredientToFull(ing, index) {
             $scope.ingredients[index].name = ing.name;
             $scope.ingredients[index].image = ing.image_url;
             $scope.ingredients[index].templateType = 'full';
             $scope.ingredients[index].id = ing.id;
             $scope.ingredients[index].category = ing.category;
+            self.ingsToSend.push($scope.ingredients[index]);
+
         }
 
         function updateIngredientToEmpty(index) {
@@ -36,29 +55,21 @@ app.controller('HomeController',
             $scope.ingredients[index].category = null;
         }
 
-        function removeIngredient(index) {
-            updateIngredientToEmpty(index);
+        function removeIngredient(indexTemplate) {
+            var idIng = $scope.ingredients[indexTemplate].id;
+            updateIngredientToEmpty(indexTemplate);
+            var index = homeHelper.getIndexElemFrom(idIng, self.ingsToSend);
+            self.ingsToSend.splice(index, 1);
         }
 
         function isEmpty(ingredient) {
             return ingredient.templateType === 'empty';
         }
 
-        function init() {
-            $scope.ingredients = homeHelper.initIngredients();
-            $scope.getRecipes();
-        };
-
         function getIngredients(text) {
             //getProfileRestriccions() para usar sus preferencias si esta logueado
             return ingredientFactory.query({ text: text }).$promise;
-        };
-
-        function getRecipes() {
-            recipeFactory.query({}, function (recipes) {
-                $scope.recipes = recipes;
-            });
-        };
+        }
 
         function getDetailIng(id) {
             template = '/general/modals/ingredient';
@@ -68,18 +79,44 @@ app.controller('HomeController',
             });
         }
 
-        function getDetailsRecipe(id){
-        template = '/general/modals/recipe';
-        controller = 'RecipeModalController';
-        recipeFactory.get({ id: id }, function (recipe) {
-            homeHelper.openModal(recipe, template, controller);
-        });
+        function getDetailsRecipe(id) {
+            template = '/general/modals/recipe';
+            controller = 'RecipeModalController';
+            recipeFactory.get({ id: id }, function (recipe) {
+                homeHelper.openModal(recipe, template, controller);
+            });
+        }
+
+        function search() {
+            if (self.ingsToSend.length < 1) {
+                notifyHelper.warn('Debes seleccionar al menos un ingrediente');
+            } else {
+                self.getRecipes();
+            }
+        }
+
+        function getRecipes() {
+            blockUI.start();
+            recipeFactory.query({ object: self.ingsToSend }, function (recipes) {
+                $scope.recipes = recipes;
+                blockUI.stop();
+            });
+        }
+
+        function removeIngredients() {
+            for (var ing = 0; ing < $scope.ingredients.length; ing++) {
+                removeIngredient(ing);
+            }
+            self.ingsToSend = [];
+        }
+
+        function advancedSearch() {
+            $scope.advancedSettings = !$scope.advancedSettings
         }
     }
 );
 
 //forma que encontre para que ejecute este jquery cuando terminan de cargarse todas las fotos,
-//se podria probar con $q.
 app.directive('onFinishIngredientsRender', function () {
     return {
         restrict: 'A',

@@ -3,10 +3,11 @@ angular
     .service('homeHelper', homeHelper);
 
 function homeHelper($modal) {
-    return {
-        initIngredients: initIngredients,
-        openModal: openModal
-    }
+    var self = this;
+    self.createEmptyIngredient = createEmptyIngredient
+    self.initIngredients = initIngredients;
+    self.openModal = openModal;
+    self.getIndexElemFrom = getIndexElemFrom;
 
     function createEmptyIngredient() {
         return {
@@ -42,4 +43,17 @@ function homeHelper($modal) {
             windowClass: 'menu-bar-space'
         });
     };
+
+    /*Se para el id del elemento(objeto) y una lista y se obtiene
+      la pos dentro del array
+    */
+    function getIndexElemFrom(id, list) {
+        for (var index = 0; index < list.length; index++) {
+            var element = list[index];
+            if (element.id === id) {
+                return index;
+
+            }
+        }
+    }
 }

@@ -73,20 +73,22 @@ app.get('/ingredients', function (req, res) {
 });
 
 app.get('/ingredients/:id', function (req, res) {
-  var id = req.params.id -1;
+  var id = req.params.id - 1;
   res.status(200);
   res.send(ingredients[id]);
 });
 
 //-------------------------recipes-------------------------
 app.get('/recipes', function (req, res) {
+  var object = req.query;
+  console.log(object);
   res.status(200);
   res.send(recipes);
 });
 
 app.get('/recipes/:id', function (req, res) {
   res.status(200);
-  res.send(recipes[req.params.id-1]);
+  res.send(recipes[req.params.id - 1]);
 });
 
 app.post('/recipes', function (req, res) {
