@@ -9,6 +9,7 @@ app.controller('RegisterController',
         $scope.validateForm = validateForm;
         $scope.openModal = openModal;
         $scope.genderSelected = genderSelected;
+        $scope.hasErrors = hasErrors;
         $scope.openModal = openModal;
         $scope.confirmForm = confirmForm;
         $scope.saveUser = saveUser;
@@ -61,10 +62,14 @@ app.controller('RegisterController',
             return $('select[name="gender"]').val() != null;
         }
 
+        function hasErrors(){
+            return $('.state-error').length != "0";
+        }
+
         function validateForm(isValid){
             $scope.submitted = true;
 
-            if(isValid && genderSelected()){
+            if(isValid && genderSelected() && !hasErrors()){
                 confirmForm();
                 return true;
             }else{
@@ -72,7 +77,7 @@ app.controller('RegisterController',
             }
         };
 
-        function openModal(message) {
+        function openModal(message,title) {
             return $modal.open({
                 animation: true,
                 templateUrl: '/general/confirmForm',
@@ -81,6 +86,9 @@ app.controller('RegisterController',
                 resolve:{
                     message:function () {
                         return message;
+                    },
+                    title:function(){
+                        return title
                     }
                 },
                 windowClass:'menu-bar-space'
@@ -89,13 +97,18 @@ app.controller('RegisterController',
 
         function confirmForm(){
              var message = 'Presione Aceptar para crear el usuario';
-             openModal(message).result.then(function(){
+             var title = 'Crear Usuario';
+             openModal(message,title).result.then(function(){
                  saveUser();
             });
         };
 
         function saveUser() {
-            alert("LISTO");
+            var message = 'El usuario ha sido creado satisfactoriamente.Desea ingresar con su nuevo Usuario?';
+            var title = 'Usuario Creado';
+            openModal(message,title).result.then(function(){
+                 window.location.href = "#/login";
+            });
 //            var recipe = {
 //                "userId":1,//se vera de dnd se saca.
 //                "name":$scope.nameRecipe,
@@ -114,6 +127,8 @@ app.controller('RegisterController',
 
 
 
-        $scope.test = function () { console.log($scope.user.gender) };
+        $scope.test = function () {
+            openModal("MENSAJE DE PRUEBA");
+         };
     }
 );

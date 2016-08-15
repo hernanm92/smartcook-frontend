@@ -87,7 +87,7 @@
                     <!--I have read agreed with the <a href="#">terms &amp; conditions</a>-->
                     <!--</label>-->
                     <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Crear Usuario</button>
-                    <p ng-show="(userForm.$invalid || !genderSelected()) && submitted" style="color:red;">Los datos ingresados son invalidos</p>
+                    <p ng-show="(userForm.$invalid || !genderSelected() || hasErrors()) && submitted" style="color:red;">Los datos ingresados son invalidos</p>
                 </form>
 
                 <div class="margin-bottom-20"></div>
