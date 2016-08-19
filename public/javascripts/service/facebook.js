@@ -2,14 +2,13 @@ angular
     .module('MainApp')
     .service('facebookService', facebookService);
 
-function facebookService($q, $window, $location,blockUI) {
-    var services = {
-        login: login,
-        getUsername: getUsername,
-        logOut: logOut,
-        watchAuthenticationStatusChange: watchAuthenticationStatusChange
-    }
-    return services;
+function facebookService($q, $window, $location, blockUI, UserSession) {
+    var self = this;
+    self.login = login;
+    self.getUsername = getUsername;
+    self.logOut = logOut;
+    self.watchAuthenticationStatusChange = watchAuthenticationStatusChange;
+    self.facebookEvents = ['auth.statusChange', 'auth.login', 'auth.logout'];
 
     function login() {
         var deferred = $q.defer();
@@ -19,7 +18,7 @@ function facebookService($q, $window, $location,blockUI) {
             } else {
                 deferred.reject(null);
             }
-        });
+        },{scope: 'email,public_profile'});
         return deferred.promise;
     }
 
@@ -41,7 +40,6 @@ function facebookService($q, $window, $location,blockUI) {
         var defer = $q.defer();
         blockUI.start();
         FB.logout(function (response) {
-            console.log(response);
             if (!response || response.error) {
                 defer.reject('Error occured');
             } else {
@@ -54,7 +52,7 @@ function facebookService($q, $window, $location,blockUI) {
 
     function watchAuthenticationStatusChange() {
         var defer = $q.defer();
-        blockUI.start()
+        blockUI.start();
         FB.getLoginStatus(function (response) {
             if (!response || response.error) {
                 defer.reject('Error occured');
@@ -65,5 +63,4 @@ function facebookService($q, $window, $location,blockUI) {
         blockUI.stop();
         return defer.promise;
     }
-
 }

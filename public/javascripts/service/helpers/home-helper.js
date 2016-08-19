@@ -8,6 +8,22 @@ function homeHelper($modal) {
     self.initIngredients = initIngredients;
     self.openModal = openModal;
     self.getIndexElemFrom = getIndexElemFrom;
+    self.getIngsWithData = getIngsWithData;
+    self.isEmpty = isEmpty;
+
+    function getIngsWithData(ingsTemplate) {
+        var ingsToSend = [];
+        angular.forEach(ingsTemplate, function (ing) {
+            if(!self.isEmpty(ing)){
+                ingsToSend.push(ing);
+            }
+        });
+        return ingsToSend;
+    }
+
+    function isEmpty(ing) {
+        return ing.templateType === 'empty';
+    }
 
     function createEmptyIngredient() {
         return {
@@ -44,7 +60,7 @@ function homeHelper($modal) {
         });
     };
 
-    /*Se para el id del elemento(objeto) y una lista y se obtiene
+    /*Se pasa el id del elemento(objeto) y una lista y se obtiene
       la pos dentro del array
     */
     function getIndexElemFrom(id, list) {
@@ -52,7 +68,6 @@ function homeHelper($modal) {
             var element = list[index];
             if (element.id === id) {
                 return index;
-
             }
         }
     }

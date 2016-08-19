@@ -67,6 +67,7 @@ module.exports = function(grunt) {
     "public/javascripts/service/facebook.js",
     "public/javascripts/service/interceptor/interceptor.js",
     "public/javascripts/service/helpers/notify.js",
+    "public/javascripts/service/searcher.js",
 
     "public/javascripts/models/recipe.js",
     

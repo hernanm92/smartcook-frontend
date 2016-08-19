@@ -10,19 +10,41 @@
         </ul>
     </div>
     <!--=== End Illustration v2 ===-->
-    <div>
-        <button type="button" class="btn-u btn-u-sea-shop" ng-click="search()">Buscar</button>
-        <button type="button" class="btn-u btn-u-sea-shop" ng-click="removeIngredients()">Remover Ingredientes</button>
-        <button type="button" class="btn-u btn-u-sea-shop" ng-click="advancedSearch()">Busqueda avanzada</button>
-        <div ng-show="advancedSettings" ng-class="animate-show">
-            <label>
-                <input type="checkbox" ng-model = "omitRestriccions"/>
-                No considerar restricciones
+    <div class="row">
+        <div class="col-sm-1">
+            <button type="button" class="btn-u btn-u-sea-shop" ng-click="search()">Buscar</button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn-u btn-u-sea-shop" ng-click="removeIngredients()">Remover Ingredientes</button>
+        </div>
+        <div class=" col-sm-2" ng-show="isLogged()">
+            <button type="button" class="btn-u btn-u-sea-shop" ng-click="advancedSearch()">Opciones de Busqueda</button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn-u btn-u-sea-shop" ng-click="resetSearch()" >Nueva busqueda</button>
+        </div>
+
+    </div>
+    <div ng-show="isLogged()">
+        <div ng-show="advancedSettings" class="box-options animate-show">
+            <div class="form-group">
+                <label class="label-form-ingredient">
+                <input type="checkbox" ng-model = "omitRestrictions" />
+                    Omitir restricciones alimenticias
               </label>
-            <label>
-                <input type="checkbox" ng-model = "dislikeIngs"/>
-                No considerar ingredientes que no me gustan
+            </div>
+            <div class="form-group">
+                <label class="label-form-ingredient">
+                <input type="checkbox" ng-model = "omitDislikeIngs" />
+                    Omitir ingredientes que no me gustan
               </label>
+            </div>
+            <div class="form-group">
+                <label class="label-form-ingredient">
+                <input type="checkbox" ng-model = "omitCategories" />
+                    Omitir categorias excluidas
+              </label>
+            </div>
         </div>
     </div>
 </div>
@@ -68,10 +90,6 @@
                                         <i class="fa fa-heart"></i>
                                         <a href="#/">Agregar a favoritos</a>
                                     </li>
-                                    <li class="compare-in">
-                                        <i class="fa fa-exchange"></i>
-                                        <a href="#/">Add to Compare</a>
-                                    </li>
                                 </ul>
                                 <button type="button" class="btn-u btn-u-sea-shop" ng-click="getDetailsRecipe(recipe.id)">Ver receta</button>
                             </div>
@@ -80,7 +98,6 @@
                 </div>
             </div>
             <!--/end filter resilts-->
-
         </div>
     </div>
     <!--/end row-->
@@ -125,7 +142,8 @@
                     </ul>
                 </div>
                 <div class="item">
-                    <p>New 100% Free Stock Photos. Every. Single. Day. Everything you need for your creative projects. <a href="#/">http://publicdomainarchive.com</a></p>
+                    <p>New 100% Free Stock Photos. Every. Single. Day. Everything you need for your creative projects.
+                        <a href="#/">http://publicdomainarchive.com</a></p>
                     <p><a href="https://twitter.com/htmlstream">@wrapbootstrap</a></p>
                     <ul class="list-inline twitter-icons">
                         <li><a href="#/"><i class="fa fa-reply"></i></a></li>
@@ -156,7 +174,8 @@
         </div>
         <div class="product-service-in">
             <h3>Free Delivery</h3>
-            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...</p>
+            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...
+            </p>
             <a href="#/">+Read More</a>
         </div>
     </div>
@@ -166,7 +185,8 @@
         </div>
         <div class="product-service-in">
             <h3>Customer Service</h3>
-            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...</p>
+            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...
+            </p>
             <a href="#/">+Read More</a>
         </div>
     </div>
@@ -176,7 +196,8 @@
         </div>
         <div class="product-service-in">
             <h3>Free Returns</h3>
-            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...</p>
+            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...
+            </p>
             <a href="#/">+Read More</a>
         </div>
     </div>

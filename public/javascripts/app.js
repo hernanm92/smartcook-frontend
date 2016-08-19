@@ -40,7 +40,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 app.config(['$httpProvider', function ($httpProvider) {
-  $httpProvider.interceptors.push('httpInterceptorService');  
+  $httpProvider.interceptors.push('httpInterceptorService');
 }]);
 
 app.config(function (blockUIConfig) {
@@ -62,31 +62,29 @@ app.config(['flowFactoryProvider', function (flowFactoryProvider) {
   }
 }]);
 
-app.run(['$window', 'facebookService','UserSession','$location',
-  function ($window, facebookService, UserSession,$location) {
+app.run(['$window', 'facebookService', 'UserSession', '$location',
+  function ($window, facebookService, UserSession, $location) {
 
     $window.fbAsyncInit = function () {
       // Executed when the SDK is loaded
 
       FB.init({
         appId: '279845695721419',
-        channelUrl: 'general/channel',
-        status: false,
         version: 'v2.7',
         xfbml: true,
-        cookie:true
       });
 
-      facebookService.watchAuthenticationStatusChange().then(function (res) {
-        if (res.status === 'not_authorized') {
-          UserSession.deleteUser();
-          $location.path('/');
-        }
-        if (res.status === 'unknown') {
-          UserSession.deleteUser();
-          $location.path('/');
-        }
-      });
+      facebookService.watchAuthenticationStatusChange()
+        .then(function (response) {
+          if (response.status === 'connected') {
+          } else if (response.status === 'not_authorized') {
+            $location.path('/');
+            UserSession.deleteUser();
+          } else {
+            $location.path('/');
+            UserSession.deleteUser();
+          }
+        })
     };
 
     (function (d) {
