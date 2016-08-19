@@ -1,5 +1,6 @@
-app.controller('ModalController', function ($scope,$modalInstance,message) {
-    
+app.controller('ModalController', function ($scope,$modalInstance,message,title) {
+
+    $scope.title = title;
     $scope.message = message; 
 
     $scope.ok = function () {

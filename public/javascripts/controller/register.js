@@ -1,12 +1,18 @@
 app.controller('RegisterController',
-    function ($scope, ingredientFactory, eventService) {
+    function ($scope, ingredientFactory, eventService, $modal) {
         $scope.$on('$viewContentLoaded', function () {
             App.init();
             App.initScrollBar();
             Registration.initRegistration();
             StyleSwitcher.initStyleSwitcher();
         });
-
+        $scope.validateForm = validateForm;
+        $scope.openModal = openModal;
+        $scope.genderSelected = genderSelected;
+        $scope.hasErrors = hasErrors;
+        $scope.openModal = openModal;
+        $scope.confirmForm = confirmForm;
+        $scope.saveUser = saveUser;
 
         $scope.user = {
             firstName: '',
@@ -21,7 +27,7 @@ app.controller('RegisterController',
         //---------------------------------DATE PICKER SECTION---------------------------------
 
         function initDatepicker() {
-            $scope.dt = new Date();
+            $scope.dt = null;
             $scope.minDate = new Date(1900, 01, 01);
             $scope.myDate = new Date();
             $scope.registerMaxDate = new Date(
@@ -43,14 +49,86 @@ app.controller('RegisterController',
 
         $scope.format = 'dd-MMMM-yyyy'
 
-        $scope.open1 = function ($event) {
+        $scope.openDatepicker = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
+            $('div[ng-switch="datepickerMode"] button:not([disabled="disabled"]) span').css('color','black');
             $scope.opened = true;
         };
 
+        // -----------------------------------------------------------------------------
+
+        function genderSelected(){
+            return $('select[name="gender"]').val() != null;
+        }
+
+        function hasErrors(){
+            return $('.state-error').length != "0";
+        }
+
+        function validateForm(isValid){
+            $scope.submitted = true;
+
+            if(isValid && genderSelected() && !hasErrors()){
+                confirmForm();
+                return true;
+            }else{
+                return false;
+            }
+        };
+
+        function openModal(message,title) {
+            return $modal.open({
+                animation: true,
+                templateUrl: '/general/confirmForm',
+                controller: 'ModalController',
+                size:'sm',
+                resolve:{
+                    message:function () {
+                        return message;
+                    },
+                    title:function(){
+                        return title
+                    }
+                },
+                windowClass:'menu-bar-space'
+            });
+        };
+
+        function confirmForm(){
+             var message = 'Presione Aceptar para crear el usuario';
+             var title = 'Crear Usuario';
+             openModal(message,title).result.then(function(){
+                 saveUser();
+            });
+        };
+
+        function saveUser() {
+            var message = 'El usuario ha sido creado satisfactoriamente.Desea ingresar con su nuevo Usuario?';
+            var title = 'Usuario Creado';
+            openModal(message,title).result.then(function(){
+                 window.location.href = "#/login";
+            });
+//            var recipe = {
+//                "userId":1,//se vera de dnd se saca.
+//                "name":$scope.nameRecipe,
+//                "ingredients":$scope.ingredients,
+//                "steps":$scope.steps,
+//                "description":$scope.recipeDescription,
+//                "photoRecipe" :$scope.photoRecipe
+//            };
+//            console.log($scope.photoRecipe);
+//            $scope.recipe = new recipeFactory();
+//            $scope.recipe.data = recipe;
+//            recipeFactory.save($scope.recipe,function (res) {
+//                openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion');
+//            });
+       };
 
 
-        $scope.test = function () { console.log($scope.user.gender) };
+
+        $scope.test = function () {
+            openModal("MENSAJE DE PRUEBA");
+         };
     }
 );

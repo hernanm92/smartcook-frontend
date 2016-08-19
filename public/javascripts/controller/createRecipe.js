@@ -38,7 +38,7 @@ app.controller('CreateRecipeController',
             }
         };
 
-        function openModal(message) {
+        function openModal(message,title) {
             return $modal.open({
                 animation: true,
                 templateUrl: '/general/confirmForm',
@@ -47,6 +47,9 @@ app.controller('CreateRecipeController',
                 resolve:{
                     message:function () {
                         return message;
+                    },
+                    title:function(){
+                        return title;
                     }
                 },
                 windowClass:'menu-bar-space'
@@ -55,7 +58,8 @@ app.controller('CreateRecipeController',
             
         function confirmForm(){
              var message = 'La receta sera guardada, desea continuar?';
-             openModal(message).result.then(function(){
+             var title = 'Guardar Receta';
+             openModal(message,title).result.then(function(){
                  saveRecipe();
                 });
             };
@@ -75,7 +79,7 @@ app.controller('CreateRecipeController',
             $scope.recipe = new recipeFactory();
             $scope.recipe.data = recipe;
             recipeFactory.save($scope.recipe,function (res) {
-                openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion');
+                openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion','Receta Guardada');
             });
        };
 
@@ -87,7 +91,7 @@ app.controller('CreateRecipeController',
         };
 
         function deleteStep(index){
-            openModal('Desea eliminar este paso?').result.then(function () {
+            openModal('Desea eliminar este paso?','Eliminar Paso').result.then(function () {
                 $scope.steps.splice(index,1);
             });
         };
