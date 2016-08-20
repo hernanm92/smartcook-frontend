@@ -69,6 +69,7 @@ module.exports = function(grunt) {
     "public/javascripts/service/helpers/notify.js",
 
     "public/javascripts/models/recipe.js",
+    "public/javascripts/models/user.js",
     
     "public/javascripts/service/helpers/home-helper.js"
   ]

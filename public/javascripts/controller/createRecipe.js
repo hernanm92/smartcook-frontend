@@ -59,7 +59,7 @@ app.controller('CreateRecipeController',
         function confirmForm(){
              var message = 'La receta sera guardada, desea continuar?';
              var title = 'Guardar Receta';
-             openModal(message,title).result.then(function(){
+                (message,title).result.then(function(){
                  saveRecipe();
                 });
             };

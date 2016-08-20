@@ -7,3 +7,5 @@ module.factory('userLoginFactory', ['$resource', 'config', function ($resource, 
 module.factory('userFactory', ['$resource', 'config', function ($resource, config) {
     return $resource(config.domain + '/user/:text', { text: "@text" });
 }]);
+
+//TODO: Persistir usuario

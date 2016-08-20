@@ -1,5 +1,5 @@
 app.controller('RegisterController',
-    function ($scope, ingredientFactory, eventService, $modal) {
+    function ($scope, userFactory, eventService, $modal, UserSession, User) {
         $scope.$on('$viewContentLoaded', function () {
             App.init();
             App.initScrollBar();
@@ -52,7 +52,6 @@ app.controller('RegisterController',
         $scope.openDatepicker = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
-            $('div[ng-switch="datepickerMode"] button:not([disabled="disabled"]) span').css('color','black');
             $scope.opened = true;
         };
 
@@ -104,31 +103,25 @@ app.controller('RegisterController',
         };
 
         function saveUser() {
-            var message = 'El usuario ha sido creado satisfactoriamente.Desea ingresar con su nuevo Usuario?';
-            var title = 'Usuario Creado';
-            openModal(message,title).result.then(function(){
-                 window.location.href = "#/login";
+            var user = new User($scope.user.firstName,$scope.user.lastName,$scope.user.gender,
+                $scope.user.dateOfBirth,$scope.user.userName,$scope.user.email,$scope.user.password);
+
+            $scope.newUser = new userFactory();
+            $scope.newUser.data = user;
+            userFactory.save($scope.newUser,function (res) {
+            //TODO: No hecho en userFactory, obtener el ultimo ID + 1 para usuario nuevo
+                var message = 'El usuario ha sido creado satisfactoriamente.Desea ingresar con su nuevo Usuario?';
+                var title = 'Usuario Creado';
+                openModal(message,title).result.then(function(){
+                     window.location.href = "#/login";
+                });
             });
-//            var recipe = {
-//                "userId":1,//se vera de dnd se saca.
-//                "name":$scope.nameRecipe,
-//                "ingredients":$scope.ingredients,
-//                "steps":$scope.steps,
-//                "description":$scope.recipeDescription,
-//                "photoRecipe" :$scope.photoRecipe
-//            };
-//            console.log($scope.photoRecipe);
-//            $scope.recipe = new recipeFactory();
-//            $scope.recipe.data = recipe;
-//            recipeFactory.save($scope.recipe,function (res) {
-//                openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion');
-//            });
        };
 
 
 
         $scope.test = function () {
-            openModal("MENSAJE DE PRUEBA");
+            console.log(UserSession.getUsername());
          };
     }
 );
