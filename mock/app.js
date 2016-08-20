@@ -49,8 +49,9 @@ var categories = [
 ];
 
 var users = [
-  { id: 1, name: 'Boba Fett', email: 'starwars@smartcook.com', avatar: 'img/profile-avatar.jpg' },
-  { id: 2, name: 'Jabba the Hutt', email: 'badguy@smartcook.com', avatar: 'img/profile-avatar.jpg' }
+  { id: 1, name: 'Boba Fett', email: 'starwars@smartcook.com', avatar: 'img/profile-avatar.jpg',facebookId:'0' },
+  { id: 2, name: 'Jabba the Hutt', email: 'badguy@smartcook.com', avatar: 'img/profile-avatar.jpg',facebookId:'1' },
+  { id: 3, name: 'Matias', email: 'matias.leon@smartcook.com', avatar: 'img/profile-avatar.jpg',facebookId:'2', restrictions: restrictions, categories: categories }
 ];
 
 app.get('/categories/:text', function (req, res) {
@@ -125,10 +126,7 @@ app.post('/login', function (req, res) {
       expiresIn: 1440
     });
     res.json({
-      success: true,
-      token: token,
-      nameUser: 'Admin',
-      idUser: 1
+      success: true, token: token, name: 'Admin', id: 1
     });
   } else {
     res.json({
@@ -137,12 +135,42 @@ app.post('/login', function (req, res) {
   }
 });
 
+app.post('/login/facebook', function (req, res) {
+  var user = req.body;
+  var userdb = {
+    id: Math.floor((Math.random() * 100) + 1),
+    facebookId: user.userID,
+    name: user.name
+  };
+  users.push(userdb);
+  res.json({ id: userdb.id });
+});
+
+app.get('/login/facebook/:id', function (req, res) {
+  var reqid = req.params.id;
+  console.log(reqid);
+  var userToSend = -1;
+  for (var index = 0; index < users.length; index++) {
+    var user = users[index];
+    if (Number(user.facebookId) === Number(reqid)) {
+      userToSend = user;
+      //existe usuario, pasar datos
+      break;
+    }
+  }
+  if (userToSend === -1) {
+    var registered = 1;
+  }
+  res.json({ registered: registered, name: userToSend.name, id: userToSend.id });
+  //si id = -1 entonces registered = a 1
+});
+
 //-------------------------users-------------------------
-app.get('/user/:text', function (req, res) {
-  var text = req.params.text
+app.get('/user/:id', function (req, res) {
+  var id = req.params.id
   for (var i = 0; i < users.length; i++) {
     var user = users[i];
-    if (user.id == req.params.text) {
+    if (user.id == req.params.id) {
       var user = {
         "id": user.id,
         "name": user.name,

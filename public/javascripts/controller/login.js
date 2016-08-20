@@ -1,6 +1,8 @@
 app.controller('LoginController', LoginController);
 
-function LoginController($scope, UserSession, userLoginFactory, $location, facebookService, blockUI,$http) {
+function LoginController($scope, UserSession, userLoginFactory,
+    $location, facebookService, blockUI, notifyHelper,
+    userLoginFacebook) {
 
     $scope.login = login;
     $scope.loginFacebook = loginFacebook;
@@ -32,38 +34,57 @@ function LoginController($scope, UserSession, userLoginFactory, $location, faceb
 
     function handleLoginResponse(res) {
         if (res.success) {
-            setUser(res.token, res.nameUser, $scope.rememberUser);
+            setUser(res.token, res.name, $scope.rememberUser, res.id);
             $location.path('/');
         } else {
             $scope.messageLogin = "Usuario o contraseña incorrectas. Intente de nuevo";
         }
     }
 
+    /** 1 -> no esta registrado en la app, 0->esta registrado*/
     function loginFacebook() {
         blockUI.start();
+        $scope.remember = true;
         facebookService.login().then(function (response) {
+
             if (response.status === 'connected') {
-                facebookService.getUsername()
-                    .then(function name(last_name) {
-                        $scope.user.remember = true;
-                        $scope.user.token = response.authResponse.accessToken;
-                        $scope.user.username = last_name;
-                        UserSession.setUser($scope.user);
+
+                userLoginFacebook.get({ id: response.authResponse.userID }, function (user) {
+                    if (user.registered === 1) {
+                        //aca crear el perfil o mandarlo a la vista de regster
+                        facebookService.getUsername()
+                            .then(function name(last_name) {
+                                var user = { userID: response.authResponse.userID, name: last_name }
+                                userLoginFacebook.save(user, function (userid) {
+                                    setUser(response.authResponse.accessToken,
+                                        last_name, $scope.remember, userid);
+                                    $location.path('/');
+                                    blockUI.stop();
+                                });
+                            });
+
+                    } else {
+                        setUser(response.authResponse.accessToken,
+                            user.name,
+                            $scope.remember,
+                            user.id);
                         $location.path('/');
                         blockUI.stop();
-                    });
+                    }
+                });
             } else {
-                $window.alert('No se pudo loguear');
-                blockUI.stop();
+                notifyHelper.error('No se pudo autenticar, intente de nuevo');
+                blockUI();
             }
         });
     }
 
-    function setUser(token, username, remember) {
+    function setUser(token, username, remember, id) {
         var user = {
             token: token,
             username: username,
-            remember: remember
+            remember: remember,
+            id: id
         };
         UserSession.setUser(user);
     }

@@ -36,15 +36,22 @@
 .animate-show {
   padding: 10px;
   background: white;
-   transition: all linear 0.5s;
 }
 
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+.animate-show.ng-show-add, .animate-show.ng-show-remove {
   transition: all linear 0.5s;
 }
 
-.animate-show.ng-hide {
+.animate-show.ng-show {
   line-height: 0;
   opacity: 0;
   padding: 0 10px;
+}
+
+.box-options {
+    margin-left: 5px;
+    margin-top: 20px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: thin;
 }

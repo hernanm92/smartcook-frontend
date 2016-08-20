@@ -1,12 +1,11 @@
 app.controller('HomeController',
     function ($scope, ingredientFactory,
         recipeFactory, homeHelper, $location,
-        notifyHelper, blockUI) {
+        notifyHelper, blockUI, UserSession,searcher) {
 
         //private    
         var self = this;
         self.ingsToSend = [];
-        self.getRecipes = getRecipes;
 
         //set Values
         $scope.ingredients = [];
@@ -22,6 +21,8 @@ app.controller('HomeController',
         $scope.search = search;
         $scope.removeIngredients = removeIngredients;
         $scope.advancedSearch = advancedSearch;
+        $scope.isLogged = isLogged;
+        $scope.resetSearch = resetSearch;
 
         $scope.$on('$viewContentLoaded', function () {
             App.init();
@@ -35,35 +36,34 @@ app.controller('HomeController',
 
         function init() {
             $scope.ingredients = homeHelper.initIngredients();
+            $scope.recipes = searcher.getRecipes();
+            $scope.omitRestrictions = true;
+            $scope.omitDislikeIngs = true;
+            $scope.omitCategories = true;
         };
 
-        function updateIngredientToFull(ing, index) {
-            $scope.ingredients[index].name = ing.name;
-            $scope.ingredients[index].image = ing.image_url;
-            $scope.ingredients[index].templateType = 'full';
-            $scope.ingredients[index].id = ing.id;
-            $scope.ingredients[index].category = ing.category;
-            self.ingsToSend.push($scope.ingredients[index]);
-
+        function updateIngredientToFull(ingSelected, ingFromTemplate) {
+            ingFromTemplate.name = ingSelected.name;
+            ingFromTemplate.image = ingSelected.image_url;
+            ingFromTemplate.templateType = 'full';
+            ingFromTemplate.id = ingSelected.id;
+            ingFromTemplate.category = ingSelected.category;
         }
 
-        function updateIngredientToEmpty(index) {
-            $scope.ingredients[index].name = '';
-            $scope.ingredients[index].image = 'assets/img/blog/09.jpg';
-            $scope.ingredients[index].templateType = 'empty';
-            $scope.ingredients[index].id = null;
-            $scope.ingredients[index].category = null;
+        function updateIngredientToEmpty(ingFromTemplate) {
+            ingFromTemplate.name = '';
+            ingFromTemplate.image = 'assets/img/blog/09.jpg';
+            ingFromTemplate.templateType = 'empty';
+            ingFromTemplate.id = null;
+            ingFromTemplate.category = null;
         }
 
-        function removeIngredient(indexTemplate) {
-            var idIng = $scope.ingredients[indexTemplate].id;
-            updateIngredientToEmpty(indexTemplate);
-            var index = homeHelper.getIndexElemFrom(idIng, self.ingsToSend);
-            self.ingsToSend.splice(index, 1);
+        function removeIngredient(ingFromTemplate) {
+            updateIngredientToEmpty(ingFromTemplate);
         }
 
         function isEmpty(ingredient) {
-            return ingredient.templateType === 'empty';
+            return homeHelper.isEmpty(ingredient);
         }
 
         function getIngredients(text) {
@@ -80,38 +80,37 @@ app.controller('HomeController',
         }
 
         function getDetailsRecipe(id) {
-            template = '/general/modals/recipe';
-            controller = 'RecipeModalController';
             recipeFactory.get({ id: id }, function (recipe) {
-                homeHelper.openModal(recipe, template, controller);
+                 $location.path('/recipe/' + id + '/detail');
             });
         }
 
         function search() {
-            if (self.ingsToSend.length < 1) {
+            var ingsToSend = homeHelper.getIngsWithData($scope.ingredients); 
+            if (ingsToSend.length < 1) {
                 notifyHelper.warn('Debes seleccionar al menos un ingrediente');
             } else {
-                self.getRecipes();
+                $scope.recipes = searcher.getRecipesBy(ingsToSend);
             }
-        }
-
-        function getRecipes() {
-            blockUI.start();
-            recipeFactory.query({ object: self.ingsToSend }, function (recipes) {
-                $scope.recipes = recipes;
-                blockUI.stop();
-            });
         }
 
         function removeIngredients() {
-            for (var ing = 0; ing < $scope.ingredients.length; ing++) {
-                removeIngredient(ing);
-            }
-            self.ingsToSend = [];
+            angular.forEach($scope.ingredients, function (ing) {
+                $scope.removeIngredient(ing);
+            })
         }
 
         function advancedSearch() {
-            $scope.advancedSettings = !$scope.advancedSettings
+            $scope.advancedSettings = !$scope.advancedSettings;
+        }
+
+        function isLogged() {
+            return UserSession.getToken();
+        }
+
+        function resetSearch() {
+            $scope.recipes = [];
+            searcher.resetRecipes();
         }
     }
 );

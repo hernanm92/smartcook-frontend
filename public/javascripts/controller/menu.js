@@ -17,10 +17,8 @@ app.controller('MenuController', function ($scope,
     }
 
     function logOut() {
-        facebookService.logOut().then(function (response) {
-            UserSession.deleteUser();
-            $location.path('/');
-        });
+        UserSession.deleteUser();
+        $location.path('/');
     }
 
     function getItem(text) {

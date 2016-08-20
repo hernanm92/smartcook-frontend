@@ -47,7 +47,7 @@ app.controller('ProfileController',
         }
 
         function loadUser(){
-            userFactory.get({text:1},function(response){
+            userFactory.get({id:1},function(response){
                 $scope.user = response.toJSON();
             });
         }
