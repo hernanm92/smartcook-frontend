@@ -109,8 +109,8 @@ app.controller('RegisterController',
             $scope.newUser = new userFactory();
             $scope.newUser.data = user;
             userFactory.save($scope.newUser,function (res) {
-            //TODO: No hecho en userFactory, obtener el ultimo ID + 1 para usuario nuevo
-                var message = 'El usuario ha sido creado satisfactoriamente.Desea ingresar con su nuevo Usuario?';
+            //TODO: usar /users/newId para obtener nuevo ID y hacer el save()
+                var message = 'El usuario ha sido creado satisfactoriamente. Desea ingresar con su nuevo Usuario?';
                 var title = 'Usuario Creado';
                 openModal(message,title).result.then(function(){
                      window.location.href = "#/login";
