@@ -14,12 +14,12 @@ function UserSession($sessionStorage, $localStorage, userFactory) {
     function setUser(user) {
         if (user.remember) {
             $localStorage.remember = true;
-            $localStorage.username = user.username;
+            $localStorage.userName = user.userName;
             $localStorage.token = user.token;
             $localStorage.id = user.id;
         }
         if (!user.remember) {
-            $sessionStorage.username = user.username;
+            $sessionStorage.userName = user.userName;
             $sessionStorage.token = user.token;
             $sessionStorage.id = user.id;
         }
@@ -27,9 +27,9 @@ function UserSession($sessionStorage, $localStorage, userFactory) {
 
     function getUsername() {
         if ($localStorage.remember) {
-            return $localStorage.username;
+            return $localStorage.userName;
         }
-        return $sessionStorage.username;
+        return $sessionStorage.userName;
     }
 
     function getToken() {
@@ -48,13 +48,13 @@ function UserSession($sessionStorage, $localStorage, userFactory) {
 
     function deleteUser() {
         if ($localStorage.remember) {
-            delete $localStorage.username;
+            delete $localStorage.userName;
             delete $localStorage.token;
             delete $localStorage.remember;
             delete $localStorage.id;
             return;
         }
-        delete $sessionStorage.username;
+        delete $sessionStorage.userName;
         delete $sessionStorage.token;
         delete $sessionStorage.id;
     }

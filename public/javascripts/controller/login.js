@@ -6,7 +6,7 @@ function LoginController($scope, UserSession, userLoginFactory,
 
     $scope.login = login;
     $scope.loginFacebook = loginFacebook;
-    $scope.username = '';
+    $scope.userName = '';
     $scope.user = {};
     $scope.$on('$viewContentLoaded', function () {
         App.init();
@@ -20,7 +20,7 @@ function LoginController($scope, UserSession, userLoginFactory,
         $scope.formSubmited = true;
         if (isValid) {
             var user = {
-                username: $scope.username,
+                userName: $scope.userName,
                 pass: $scope.userPass
             }
             userLoginFactory.save(user, function (res) {
@@ -79,10 +79,10 @@ function LoginController($scope, UserSession, userLoginFactory,
         });
     }
 
-    function setUser(token, username, remember, id) {
+    function setUser(token, userName, remember, id) {
         var user = {
             token: token,
-            username: username,
+            userName: userName,
             remember: remember,
             id: id
         };

@@ -1,5 +1,5 @@
 app.controller('ProfileController',
-    function ($scope,restrictionFactory,ingredientFactory, categoriesFactory, userFactory) {
+    function ($scope,restrictionFactory,ingredientFactory, categoriesFactory, userFactory, UserSession) {
         $scope.user = {};
         loadUser();
         $scope.restrictions = loadRestrictions();
@@ -47,9 +47,7 @@ app.controller('ProfileController',
         }
 
         function loadUser(){
-            userFactory.get({id:1},function(response){
-                $scope.user = response.toJSON();
-            });
+            $scope.user = UserSession.profileInfo();
         }
     }
 );

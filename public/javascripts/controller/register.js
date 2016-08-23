@@ -106,10 +106,7 @@ app.controller('RegisterController',
             var user = new User($scope.user.firstName,$scope.user.lastName,$scope.user.gender,
                 $scope.user.dateOfBirth,$scope.user.userName,$scope.user.email,$scope.user.password);
 
-            $scope.newUser = new userFactory();
-            $scope.newUser.data = user;
-            userFactory.save($scope.newUser,function (res) {
-            //TODO: usar /users/newId para obtener nuevo ID y hacer el save()
+            userFactory.save(user,function (res) {
                 var message = 'El usuario ha sido creado satisfactoriamente. Desea ingresar con su nuevo Usuario?';
                 var title = 'Usuario Creado';
                 openModal(message,title).result.then(function(){

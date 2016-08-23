@@ -59,26 +59,15 @@ app.controller('CreateRecipeController',
         function confirmForm(){
              var message = 'La receta sera guardada, desea continuar?';
              var title = 'Guardar Receta';
-                (message,title).result.then(function(){
+                openModal(message,title).result.then(function(){
                  saveRecipe();
                 });
             };
         
         function saveRecipe() {
-            var recipe = {
-                "userId":1,//se vera de dnd se saca.
-                "name":$scope.nameRecipe,
-                "ingredients":$scope.ingredients,
-                "steps":$scope.steps,
-                "description":$scope.recipeDescription,
-                "photoRecipe" :$scope.photoRecipe
-            };
-
             var recipe = new Recipe(1,$scope.nameRecipe,$scope.ingredients,$scope.steps,$scope.recipeDescription,$scope.photoRecipe)
             console.log($scope.photoRecipe);
-            $scope.recipe = new recipeFactory();
-            $scope.recipe.data = recipe;
-            recipeFactory.save($scope.recipe,function (res) {
+            recipeFactory.save(recipe,function (res) {
                 openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion','Receta Guardada');
             });
        };
