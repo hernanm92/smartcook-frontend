@@ -33,6 +33,8 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/angular-block-ui.min.js",
     "public/javascripts/plugins/spin.js",
     "public/javascripts/plugins/angular-spinner.min.js",
+    "public/javascripts/plugins/ng-file-upload-shim.min.js",
+    "public/javascripts/plugins/ng-file-upload.min.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
@@ -68,6 +70,8 @@ module.exports = function(grunt) {
     "public/javascripts/service/interceptor/interceptor.js",
     "public/javascripts/service/helpers/notify.js",
     "public/javascripts/service/searcher.js",
+    "public/javascripts/service/imgs.js",
+    "public/javascripts/service/azure.js",
 
     "public/javascripts/models/recipe.js",
     

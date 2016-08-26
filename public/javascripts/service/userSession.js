@@ -10,6 +10,7 @@ function UserSession($sessionStorage, $localStorage, userFactory) {
     self.getToken = getToken;
     self.setUser = setUser;
     self.profileInfo = profileInfo;
+    self.getUserId = getUserId;
     
     function setUser(user) {
         if (user.remember) {

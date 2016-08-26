@@ -1,77 +1,54 @@
- <div>
-        <div class="row">
-            <div class="col-sm-4">
-                <a>
-                    <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
-                    <div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
-                </a>
-            </div>
-            <div class="col-sm-8 product-description">
-                <div class="overflow-h margin-bottom-5">
-                    <ul class="list-inline overflow-h">
-                        <li>
-                            <h4 class="title-price "><span>Rating</span></h4>
-                        </li>
-                        <li class="pull-right">
-                            <ul class="list-inline product-ratings">
-                                <li><i class="rating-selected fa fa-star"></i></li>
-                                <li><i class="rating-selected fa fa-star"></i></li>
-                                <li><i class="rating-selected fa fa-star"></i></li>
-                                <li><i class="rating fa fa-star"></i></li>
-                                <li><i class="rating fa fa-star"></i></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="margin-bottom-10">
-                        <span class="title-price margin-right-10">Total de calorias</span>
-                        <span class="title-price ">95.00</span>
-                    </div>
-                    <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
-                    <ul class="list-inline add-to-wishlist margin-bottom-20">
-                        <li class="wishlist-in">
-                            <i class="fa fa-heart"></i>
-                            <a href="">Agregar a favoritos</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<div>
+    <div class="row">
+        <div class="col-sm-4">
+            <a>
+                <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
+                <div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
+            </a>
         </div>
-        <div class="heading heading-v2">
-            <h2>Ingredientes</h3>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="padding-top: 20px;">
-                <div class="heading heading-v2">
-                    <h2>Procedimiento</h2>
+        <div class="col-sm-8 product-description">
+            <div class="overflow-h margin-bottom-5">
+                <ul class="list-inline overflow-h">
+                    <li>
+                        <h4 class="title-price "><span>Rating</span></h4>
+                    </li>
+                    <li class="pull-right">
+                        <ul class="list-inline product-ratings">
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating-selected fa fa-star"></i></li>
+                            <li><i class="rating fa fa-star"></i></li>
+                            <li><i class="rating fa fa-star"></i></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="margin-bottom-10">
+                    <span class="title-price margin-right-10">Total de calorias</span>
+                    <span class="title-price ">95.00</span>
                 </div>
-                <div class="steps-container">
-                    <div class="" ng-repeat=" step in steps track by $index">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <textarea readonly id="item" class="detail-step" msd-elastic ng-model="step.name">
-                                </textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
+                <ul class="list-inline add-to-wishlist margin-bottom-20">
+                    <li class="wishlist-in">
+                        <i class="fa fa-heart"></i>
+                        <a href="">Agregar a favoritos</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12" style="padding-top: 20px;">
-                <div class="heading heading-v2">
-                    <h2><span>Tips</span></h2>
-                </div>
-                <div class="tips-container">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <textarea placeholder="Escriba su Tip..." class="tip-area form-control"></textarea>
-                        </div>
-                        <button type="button" class="btn-u btn-u-sea-shop " ng-click="">Agregar Tip</button>
-                    </form>
-                    <div style="margin-top: 20px; margin-bottom: 20px;">
-                        <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="tip in tips track by $index">
-                            <h4>User dice : </h4>
-                            <textarea readonly id="item" class="detail-step" msd-elastic ng-model="tip.description">
+    </div>
+    <div class="heading heading-v2">
+        <h2>Ingredientes</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="padding-top: 20px;">
+            <div class="heading heading-v2">
+                <h2>Procedimiento</h2>
+            </div>
+            <div class="steps-container">
+                <div class="" ng-repeat=" step in steps track by $index">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <textarea readonly id="item" class="detail-step" msd-elastic ng-model="step.name">
                                 </textarea>
                         </div>
                     </div>
@@ -79,3 +56,30 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12" style="padding-top: 20px;">
+            <div class="heading heading-v2">
+                <h2><span>Tips</span></h2>
+            </div>
+            <div>
+                <div style="padding-bottom:20px;" class="col-md-8 col-md-offset-2">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <textarea placeholder="Escriba su Tip..." class="tip-area form-control"></textarea>
+                        </div>
+                        <div class="col-md-offset-5">
+                            <button type="button" class="btn-u btn-u-sea-shop " ng-click="">Agregar Tip</button>
+                        </div>
+                    </form>
+                </div>
+                <div style="margin-top: 20px; margin-bottom: 20px;">
+                    <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="tip in tips track by $index">
+                        <h4>User dice : </h4>
+                        <textarea readonly id="item" class="detail-step" msd-elastic ng-model="tip.description">
+                                </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

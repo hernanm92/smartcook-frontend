@@ -15,7 +15,8 @@ var app = angular.module('MainApp', [
   'ngMessages',
   'itemModule',
   'blockUI',
-  'angularSpinner'
+  'angularSpinner',
+  'ngFileUpload'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {
@@ -69,7 +70,7 @@ app.run(['$window', 'facebookService', 'UserSession', '$location',
       // Executed when the SDK is loaded
 
       FB.init({
-        appId: '279845695721419',
+        appId: '1207869632588963',
         version: 'v2.7',
         xfbml: true,
       });
