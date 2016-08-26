@@ -9,12 +9,12 @@ app.controller('CreateRecipeController',
         $scope.deleteStep = deleteStep;
         $scope.openModal = openModal;
         $scope.getImage = getImage;
-        $scope.upload = upload 
+        $scope.upload = upload
 
         function upload(file) {
             $scope.picFile = file;
         }
- 
+
         function addStep() {
             $scope.stepErrorMessage = null;
             if ($scope.stepToAdd) {
@@ -68,13 +68,13 @@ app.controller('CreateRecipeController',
         function saveRecipe() {
             //refactor: crear un service recipe para la logica de mapeo. en
             //el html se debe tener un objeto recipeViewModel
-            var photoUrl = imgService.getUrlImg($scope.nameRecipe,'recipes');
+            var photoUrl = imgService.getUrlImg($scope.nameRecipe, 'recipes');
             var recipe = new Recipe(UserSession.getUserId(), $scope.nameRecipe, $scope.ingredients, $scope.steps, $scope.description, photoUrl);
-            imgService.uploadImg($scope.nameRecipe,$scope.picFile,'recipes');
+            imgService.uploadImg($scope.nameRecipe, $scope.picFile, 'recipes');
             recipeFactory.save(recipe, function (res) {
                 openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion', 'Receta Guardada');
             });
-        };
+        }
 
         function loadIngredients(text) {
             //traer ingredientes por texto.Se trndia q validar tambien el perfil
@@ -91,7 +91,7 @@ app.controller('CreateRecipeController',
 
         function getImage() {
             imgService.getImage().then(function (res) {
-               $scope.imgsource = res.data;
+                $scope.imgsource = res.data;
             })
         }
     });

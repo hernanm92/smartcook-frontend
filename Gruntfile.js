@@ -74,6 +74,7 @@ module.exports = function(grunt) {
     "public/javascripts/service/azure.js",
 
     "public/javascripts/models/recipe.js",
+    "public/javascripts/models/user.js",
     
     "public/javascripts/service/helpers/home-helper.js"
   ]

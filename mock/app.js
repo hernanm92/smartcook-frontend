@@ -49,9 +49,12 @@ var categories = [
 ];
 
 var users = [
-  { id: 1, name: 'Boba Fett', email: 'starwars@smartcook.com', avatar: 'img/profile-avatar.jpg',facebookId:'0' },
-  { id: 2, name: 'Jabba the Hutt', email: 'badguy@smartcook.com', avatar: 'img/profile-avatar.jpg',facebookId:'1' },
-  { id: 3, name: 'Matias', email: 'matias.leon@smartcook.com', avatar: 'img/profile-avatar.jpg',facebookId:'2', restrictions: restrictions, categories: categories }
+  { id: 1, firstName: 'Boba', userName:'boba', lastName: 'Fett', email: 'starwars@smartcook.com',
+    gender:'', dateOfBirth:'', password:'', avatar: 'img/profile-avatar.jpg',facebookId:'0' },
+  { id: 2, firstName: 'Jabba', lastName: 'the Hutt', email: 'badguy@smartcook.com',
+   gender:'', dateOfBirth:'', password:'', userName: 'jabba', avatar: 'img/profile-avatar.jpg',facebookId:'1' },
+  { id: 3, firstName: 'Matias', userName: 'matileon', lastName: 'Leon Peralta', email: 'matias.leon@smartcook.com',
+  gender:'', dateOfBirth:'', password:'river', avatar: 'img/profile-avatar.jpg',facebookId:'2', restrictions: restrictions, categories: categories }
 ];
 
 app.get('/categories/:text', function (req, res) {
@@ -93,6 +96,8 @@ app.get('/recipes/:id', function (req, res) {
 });
 
 app.post('/recipes', function (req, res) {
+  var object = req.body;
+  recipes.push(object);
   res.status(200);
   res.send('Llego correctamente la receta');
 });
@@ -117,22 +122,25 @@ app.post('/validateRecipe', function (req, res) {
 
 //-------------------------login-------------------------
 app.post('/login', function (req, res) {
-  var user = {
-    name: "admin",
-    role: "admin"
-  }
-  if (req.body.username.toLowerCase() === 'admin' && req.body.pass === '1234') {
-    var token = jwt.sign(user, app.get('superSecret'), {
-      expiresIn: 1440
-    });
-    res.json({
-      success: true, token: token, name: 'Admin', id: 1
-    });
-  } else {
+    var i = 0;
+    for(i; i < users.length; i++){
+    console.log(i);
+        var iUser = users[i];
+        console.log(req.body);
+        if(req.body.userName.toLowerCase() == iUser.userName.toLowerCase()
+        && req.body.pass == iUser.password){
+            var token = jwt.sign(iUser, app.get('superSecret'), {
+              expiresIn: 1440
+            });
+            res.json({
+              success: true, token: token, name: iUser.userName, id: iUser.id
+            });
+          }
+    }
+    console.log("sali del for");
     res.json({
       success: false
     });
-  }
 });
 
 app.post('/login/facebook', function (req, res) {
@@ -171,17 +179,26 @@ app.get('/user/:id', function (req, res) {
   for (var i = 0; i < users.length; i++) {
     var user = users[i];
     if (user.id == req.params.id) {
-      var user = {
-        "id": user.id,
-        "name": user.name,
-        "email": user.email,
-        "avatar": user.avatar
-      }
-      break;
-    }
-  }
   res.status(200);
   res.send(user);
+    }
+  }
+});
+
+app.get('/users/newId', function (req, res) {
+  var usersIds = [];
+  for(i = 0; i < users.length; i++) usersIds.push(users[i].id);
+  var newId = {"newId": Math.max.apply(null,usersIds)+1};
+  res.status(200);
+  res.send(newId);
+});
+
+app.post('/user',function(req,res){
+    var object = req.body;
+    object["id"] = users.length+1;
+    users.push(object);
+    res.status(200);
+    res.send('Llego correctamente el usuario');
 });
 
 //-------------------------items-----------------------
