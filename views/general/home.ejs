@@ -17,16 +17,13 @@
         <div class="col-sm-2">
             <button type="button" class="btn-u btn-u-sea-shop" ng-click="removeIngredients()">Remover Ingredientes</button>
         </div>
-        <div class=" col-sm-2" ng-show="isLogged()">
-            <button type="button" class="btn-u btn-u-sea-shop" ng-click="advancedSearch()">Opciones de Busqueda</button>
-        </div>
         <div class="col-sm-2">
             <button type="button" class="btn-u btn-u-sea-shop" ng-click="resetSearch()" >Nueva busqueda</button>
         </div>
 
     </div>
     <div ng-show="isLogged()">
-        <div ng-show="advancedSettings" class="box-options animate-show">
+        <div class="box-options animate-show">
             <div class="form-group">
                 <label class="label-form-ingredient">
                 <input type="checkbox" ng-model = "omitRestrictions" />

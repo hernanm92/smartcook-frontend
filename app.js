@@ -4,9 +4,13 @@
 
 var express = require('express')
     , http = require('http')
-    , path = require('path');
-
+    , path = require('path')
+    , azure = require('azure-storage')
 var app = express();
+//azure config
+var AZURE_STORAGE_ACCOUNT = 'imgsmartcook';
+var AZURE_STORAGE_ACCESS_KEY = 'WOtYCCLjVwR8egXn4VV2FFcArVyNPi+lkL6KCGipNiGn0bWRShZ6lLDwLMdiD+EfcKdIBFNYdiGnaiOQXvLFyQ==';
+var blobService = initBlobService();
 
 // all environments
 app.set('port', process.env.PORT || 8080);
@@ -21,9 +25,6 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
-var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart();
-var flow = require('./flow-node.js')('images');
 
 app.get('/', function (req, res) {
     res.render('index');
@@ -70,45 +71,70 @@ app.get('/general/modals/ingredient', function (req, res) {
 app.get('/general/modals/recipe', function (req, res) {
     res.render('general/modals/recipe');
 });
-app.get('/general/detail-recipe', function (req, res) { 
+app.get('/general/detail-recipe', function (req, res) {
     res.render('general/detail-recipe');
 })
-app.get('/general/recipe-detail-template', function (req, res) { 
+app.get('/general/recipe-detail-template', function (req, res) {
     res.render('general/recipe-detail-template');
 })
+app.get('/sas', function (req, res) {
+    var settings = req.query;
+    console.log(req.query);
+    var sas = generateSasToken(settings.container, settings.blobName);
+    res.status(200);
+    res.send(sas);
+})
 
-// Handle uploads through Flow.js
-app.post('/upload', multipartMiddleware, function(req, res) {
-  flow.post(req, function(status, filename, original_filename, identifier) {
-    console.log('POST', status, original_filename, identifier);
-    res.status(status).send();
-  });
-});
+//azure functions
+function initBlobService() {
+    var blobService = azure.createBlobService(AZURE_STORAGE_ACCOUNT, AZURE_STORAGE_ACCESS_KEY);
+    generateProperties(blobService);
+    return blobService;
+}
 
-
-app.options('/upload', function(req, res){
-  console.log('OPTIONS');
-  res.status(200).send();
-});
-
-// Handle status checks on chunks through Flow.js
-app.get('/upload', function(req, res) {
-  flow.get(req, function(status, filename, original_filename, identifier) {
-    console.log('GET', status);
-    if (status == 'found') {
-      status = 200;
-    } else {
-      status = 204;
+function generateProperties(blobService) {
+    var properties = {
+        Cors: {
+            CorsRule: [
+                {
+                    AllowedOrigins: ['*'],
+                    AllowedMethods: ['GET', 'PUT'],
+                    AllowedHeaders: ['*'],
+                    ExposedHeaders: ['*'],
+                    MaxAgeInSeconds: 500,
+                }
+            ]
+        }
     }
-    res.status(status).send();
-  });
-});
+    blobService.setServiceProperties(properties, function (error, result, response) {
+        if (!error) {
+            console.log('Propiedades agregadas');
+        }
+    });
+}
 
-app.get('/download/:identifier', function(req, res) {
-  flow.write(req.params.identifier, res);
-});
+function generateSasToken(container, blobName, permissions) {
+
+    // Create a SAS token that expires in an hour
+    // Set start time to five minutes ago to avoid clock skew.
+    var startDate = new Date();
+    startDate.setMinutes(startDate.getMinutes() - 5);
+    var expiryDate = new Date(startDate);
+    expiryDate.setMinutes(startDate.getMinutes() + 60);
+    permissions = azure.BlobUtilities.SharedAccessPermissions.WRITE || azure.BlobUtilities.SharedAccessPermissions.READ;
+    var sharedAccessPolicy = {
+        AccessPolicy: {
+            Permissions: permissions,
+            Start: startDate,
+            Expiry: expiryDate
+        }
+    };
+    var sasToken = blobService.generateSharedAccessSignature(container, blobName, sharedAccessPolicy);
+    return blobService.getUrl(container, blobName, sasToken, true);
+}
 
 app.listen(3000)
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
+
 });
