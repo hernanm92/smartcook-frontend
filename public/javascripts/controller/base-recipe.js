@@ -1,15 +1,4 @@
 app.controller('baseRecipeController', function ($scope) {
-    $scope.addToFavorites = addToFavorites;
-    $scope.addTip = addTip;
-    $scope.addToFavorites = addToFavorites;
-
-    function addTip() {
-        
-    }
-
-    function addToFavorites() {
-
-    }
 
     $scope.steps = [
         { name: "Para hacer la receta emplearemos tomate frito, que puede ser casero o comprado en el supermercado, así que si vas a utilizarlo casero debes tenerlo ya preparado a la hora de hacer esta receta de canelones. Para mayor comodidad o si tienes poco tiempo para cocinar, puedes emplear uno comprado, los de buena marca dan buen resultado y dan sabor al plato. Y empezamos a preparar el resto de ingredientes para nuestra receta, así que vamos a pelar la cebolla y los dientes de ajo, para picarlos posteriormente en trozos no demasiado grandes. " },
