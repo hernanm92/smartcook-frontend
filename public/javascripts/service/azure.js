@@ -3,26 +3,31 @@ angular
     .module('MainApp')
     .service('azureService', azureService);
 
-function azureService($http) {
+function azureService($http, azureBlob) {
     var self = this;
-    self.getUrlTokenSas = getUrlTokenSas;
-    self.getUrl = getUrl;
-    self.getBlob = getBlob;
+    var azureUrl = 'https://imgsmartcook.blob.core.windows.net';
+    self.upload = upload;
+    self.getUrlImg = getUrlImg;
+
+    function upload(name, photoFile, container) {
+        var settings = { name: photoFile.name, container: container }
+        getTokenSas(settings).then(function (sasToken) {
+            azureBlob.upload({
+                baseUrl: getUrlImg(name, container),
+                sasToken: '?'+ sasToken.data,
+                file: photoFile,
+                complete: function (res) {
+                },
+                blockSize: photoFile.size
+            })
+        })
+    }
 
     function getTokenSas(settings) {
         return $http.get('http://localhost:8080/sas', { params: settings });
     }
 
-    function getUrlTokenSas(blobName, container) {
-        var settings = { blobName: blobName, container: container }
-        return getTokenSas(settings);
+    function getUrlImg(nameBlob, container) {
+        return azureUrl + '/' + container + '/' + nameBlob;
     }
-    function getUrl() {
-        return 'https://imgsmartcook.blob.core.windows.net';
-    }
-
-    function getBlob() {
-       return $http.get('https://imgsmartcook.blob.core.windows.net/recipes/asda')
-    }
-
 }
