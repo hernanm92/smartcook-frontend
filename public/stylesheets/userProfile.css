@@ -32,6 +32,6 @@ position:relative;
 bottom:42px;
 border-color: black black transparent transparent !important;
 border-width:thin !important;
-border-radius: 0px 5px !important;
+border-radius: 0px 5px 0 0 !important;
 background-color:white;
 }

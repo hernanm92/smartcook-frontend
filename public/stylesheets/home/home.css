@@ -55,3 +55,8 @@
     border-style: solid;
     border-width: thin;
 }
+
+.recipe-search-button{
+    width:170px;
+    margin-top:5px;
+}
