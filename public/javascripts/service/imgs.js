@@ -10,14 +10,14 @@ function imgsService(azureService) {
     self.uploadImgIngredient = uploadImgIngredient;
     self.getUrlImgRecipe = getUrlImgRecipe;
     self.getUrlImgIngredient = getUrlImgIngredient;
-    self.getUrlImgProfile =  getUrlImgProfile; 
+    self.getUrlImgProfile = getUrlImgProfile;
 
     function uploadImgProfile(name, photoFile) {
-        return azureService.upload(photoFile, 'profile');
+        return azureService.upload(name, photoFile, 'profile');
     }
 
     function uploadImgIngredient(name, photoFile) {
-        return azureService.upload(photoFile, 'ingredients');
+        return azureService.upload(name, photoFile, 'ingredients');
     }
 
     function uploadImgRecipe(name, photoFile) {
