@@ -16,7 +16,8 @@ var app = angular.module('MainApp', [
   'itemModule',
   'blockUI',
   'angularSpinner',
-  'ngFileUpload'
+  'ngFileUpload', 
+  'azureBlobUpload'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {

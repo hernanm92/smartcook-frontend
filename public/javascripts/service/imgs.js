@@ -2,39 +2,37 @@ angular
     .module('MainApp')
     .service('imgService', imgsService);
 
-function imgsService(Upload, azureService, blockUI) {
+function imgsService(azureService) {
 
     var self = this;
-    self.uploadImg = uploadImg;
-    self.getUrlImg = getUrlImg;
-    self.getImage = getImage;
+    self.uploadImgRecipe = uploadImgRecipe;
+    self.uploadImgProfile = uploadImgProfile;
+    self.uploadImgIngredient = uploadImgIngredient;
+    self.getUrlImgRecipe = getUrlImgRecipe;
+    self.getUrlImgIngredient = getUrlImgIngredient;
+    self.getUrlImgProfile = getUrlImgProfile;
 
-    function uploadImg(namePhoto, photoFile, container) {
-        blockUI.start();
-        azureService.getUrlTokenSas(namePhoto, container).then(function (storageUrl) {
-            photoFile.name = namePhoto;
-            Upload.upload({
-                url: storageUrl.data,
-                method: 'PUT',
-                headers: {
-                    'x-ms-blob-type': 'BlockBlob',
-                    'x-ms-blob-content-type': photoFile.type,
-                    'Content-Type':photoFile.type
-                },
-                data: { file: photoFile }
-            }).then(function (response) {
-                blockUI.stop();
-            });
-        })
+    function uploadImgProfile(name, photoFile) {
+        return azureService.upload(name, photoFile, 'profile');
     }
 
-    function getUrlImg(nameRecipe, container) {
-        var azureUrl = azureService.getUrl();
-        var name = nameRecipe;
-        return azureUrl + '/' + container + '/' + nameRecipe;
+    function uploadImgIngredient(name, photoFile) {
+        return azureService.upload(name, photoFile, 'ingredients');
     }
 
-    function getImage() {
-        return azureService.getBlob();
+    function uploadImgRecipe(name, photoFile) {
+        return azureService.upload(name, photoFile, 'recipes');
+    }
+
+    function getUrlImgRecipe(name) {
+        return azureService.getUrlImg(name, 'recipes');
+    }
+
+    function getUrlImgIngredient(name) {
+        return azureService.getUrlImg(name, 'ingredients');
+    }
+
+    function getUrlImgProfile(name) {
+        return azureService.getUrlImg(name, 'profile');
     }
 }

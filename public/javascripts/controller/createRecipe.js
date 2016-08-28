@@ -1,5 +1,5 @@
 app.controller('CreateRecipeController',
-    function ($scope, recipeFactory, $modal, ingredientFactory, Recipe, imgService, UserSession) {
+    function ($scope, recipeFactory, $modal, ingredientFactory, Recipe, imgService, UserSession, blockUI) {
         //global variables
         $scope.steps = [];
         $scope.ingredients = [];
@@ -8,12 +8,6 @@ app.controller('CreateRecipeController',
         $scope.validateForm = validateForm;
         $scope.deleteStep = deleteStep;
         $scope.openModal = openModal;
-        $scope.getImage = getImage;
-        $scope.upload = upload
-
-        function upload(file) {
-            $scope.picFile = file;
-        }
 
         function addStep() {
             $scope.stepErrorMessage = null;
@@ -67,20 +61,19 @@ app.controller('CreateRecipeController',
 
         function saveRecipe() {
             //refactor: crear un service recipe para la logica de mapeo. en
-            //el html se debe tener un objeto recipeViewModel
-            var photoUrl = imgService.getUrlImg($scope.nameRecipe, 'recipes');
-            var recipe = new Recipe(UserSession.getUserId(), $scope.nameRecipe, $scope.ingredients, $scope.steps, $scope.description, photoUrl);
-            imgService.uploadImg($scope.nameRecipe, $scope.picFile, 'recipes');
+            //el html se debe tener un objeto recipe q reprensente el recipeViewModel
+            blockUI.start();
+            var photoName = imgService.getUrlImgRecipe($scope.nameRecipe);
+            var recipe = new Recipe(UserSession.getUserId(), $scope.nameRecipe, $scope.ingredients, $scope.steps, $scope.description, photoName);
             recipeFactory.save(recipe, function (res) {
+                imgService.uploadImgRecipe($scope.nameRecipe, $scope.picFile);
                 openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion', 'Receta Guardada');
             });
+            blockUI.stop();
         }
 
         function loadIngredients(text) {
-            //traer ingredientes por texto.Se trndia q validar tambien el perfil
-            // del cliente.Ejemplo no puede traer leche si es celiaco .
-
-            return ingredientFactory.query({ text: text }).$promise; //traer los ids
+            return ingredientFactory.query({ text: text }).$promise;
         };
 
         function deleteStep(index) {
@@ -88,11 +81,5 @@ app.controller('CreateRecipeController',
                 $scope.steps.splice(index, 1);
             });
         };
-
-        function getImage() {
-            imgService.getImage().then(function (res) {
-                $scope.imgsource = res.data;
-            })
-        }
     });
 

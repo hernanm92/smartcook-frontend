@@ -1,17 +1,19 @@
-
 <div class="container" style="padding-top: 90px;">
     <form name="recipeForm" ng-submit="validateForm(recipeForm.$valid)" novalidate>
         <div class="row">
             <div class="col-md-4">
                 <div ng-show="picFile">
-                    <div ngf-drop ngf-select="upload($file)" ng-model="picFile" ngf-drag-over-class="'dragover'" accept="image/*">
+                    <div ngf-drop ngf-select ng-model="picFile" ngf-drag-over-class="'dragover'" accept="image/*">
                         <img class="img-rounded" width="300px" height="300px" ngf-thumbnail="picFile">
                     </div>
                 </div>
-                <div ng-show="!picFile" ngf-drop ngf-select="upload($file)" ng-model="picFile" ngf-drag-over-class="'dragover'" accept="image/*">
+                <div ng-show="!picFile" ngf-drop ngf-select ng-model="picFile" ngf-drag-over-class="'dragover'" accept="image/*">
                     <span style="cursor:pointer">
-                        <img class="img-responsive img-rounded" alt="Responsive image" src="img/Placeholder-food.jpg">
+                        <img class="img-responsive" alt="Responsive image" ng-src="img/Placeholder-food.jpg">
                     </span>
+                </div>
+                <div class="col-sm-12" style="padding-left:0px">
+                    <span class="btn fa fa-pencil fa-2x profile-edit-button" ngf-select ng-model="picFile"></span>
                 </div>
             </div>
             <div class="col-md-6 ">
@@ -80,9 +82,7 @@
         <div class="row">
             <div class="col-md-4" style="margin-bottom: 20px;">
                 <button type="submit" class="btn-u btn-u-sea-shop btn-u-md">Guardar Receta</button>
-                <button  ng-click="getImage()" class="btn-u btn-u-sea-shop btn-u-md">VerFoto</button>
             </div>
         </div>
     </form>
 </div>
-<img ng-src="https://imgsmartcook.blob.core.windows.net/recipes/asda?sv=2015-04-05&ss=bqtf&srt=sco&sp=rwdlacup&se=2016-08-26T10%3A51%3A44Z&sig=0zWUkA%2FG6%2By2kOUl%2Fx3vlDL4bjEFITCSH5B2lfNXBKQ%3D" >

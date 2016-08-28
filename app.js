@@ -130,7 +130,7 @@ function generateSasToken(container, blobName, permissions) {
         }
     };
     var sasToken = blobService.generateSharedAccessSignature(container, blobName, sharedAccessPolicy);
-    return blobService.getUrl(container, blobName, sasToken, true);
+    return sasToken;
 }
 
 app.listen(3000)

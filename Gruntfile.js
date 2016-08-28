@@ -35,6 +35,7 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/angular-spinner.min.js",
     "public/javascripts/plugins/ng-file-upload-shim.min.js",
     "public/javascripts/plugins/ng-file-upload.min.js",
+    "public/javascripts/plugins/azure-blob-upload.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
