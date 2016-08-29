@@ -28,7 +28,7 @@ function homeHelper($modal) {
     function createEmptyIngredient() {
         return {
             name: '',
-            image: 'assets/img/blog/09.jpg',
+            image: 'assets/img/newLogo.jpg',
             templateType: 'empty',
             id: '',
             category: ''
