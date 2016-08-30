@@ -52,7 +52,7 @@ app.controller('HomeController',
 
         function updateIngredientToEmpty(ingFromTemplate) {
             ingFromTemplate.name = '';
-            ingFromTemplate.image = 'assets/img/blog/09.jpg';
+            ingFromTemplate.image = 'assets/img/newLogo.jpg';
             ingFromTemplate.templateType = 'empty';
             ingFromTemplate.id = null;
             ingFromTemplate.category = null;

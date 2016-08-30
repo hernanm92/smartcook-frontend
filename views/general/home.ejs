@@ -15,10 +15,14 @@
             <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="search()">Buscar</button>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="removeIngredients()">Remover Ingredientes</button>
+            <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="removeIngredients()">
+                Remover Ingredientes
+            </button>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="resetSearch()" >Nueva busqueda</button>
+            <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="resetSearch()">Nueva
+                busqueda
+            </button>
         </div>
 
     </div>
@@ -26,21 +30,21 @@
         <div class="box-options animate-show">
             <div class="form-group">
                 <label class="label-form-ingredient">
-                <input type="checkbox" ng-model = "omitRestrictions" />
+                    <input type="checkbox" ng-model="omitRestrictions"/>
                     Omitir restricciones alimenticias
-              </label>
+                </label>
             </div>
             <div class="form-group">
                 <label class="label-form-ingredient">
-                <input type="checkbox" ng-model = "omitDislikeIngs" />
+                    <input type="checkbox" ng-model="omitDislikeIngs"/>
                     Omitir ingredientes que no me gustan
-              </label>
+                </label>
             </div>
             <div class="form-group">
                 <label class="label-form-ingredient">
-                <input type="checkbox" ng-model = "omitCategories" />
+                    <input type="checkbox" ng-model="omitCategories"/>
                     Omitir categorias excluidas
-              </label>
+                </label>
             </div>
         </div>
     </div>
@@ -53,7 +57,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="filter-results">
-                <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="recipe in recipes">
+                <div class="list-product-description product-description-brd margin-bottom-30"
+                     ng-repeat="recipe in recipes">
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="shop-ui-inner.html">
@@ -65,7 +70,8 @@
                             <div class="overflow-h margin-bottom-5">
                                 <ul class="list-inline overflow-h">
                                     <li>
-                                        <h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a></h4>
+                                        <h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a>
+                                        </h4>
                                     </li>
                                     <li class="pull-right">
                                         <ul class="list-inline product-ratings">
@@ -88,7 +94,9 @@
                                         <a href="#/">Agregar a favoritos</a>
                                     </li>
                                 </ul>
-                                <button type="button" class="btn-u btn-u-sea-shop" ng-click="getDetailsRecipe(recipe.id)">Ver receta</button>
+                                <button type="button" class="btn-u btn-u-sea-shop"
+                                        ng-click="getDetailsRecipe(recipe.id)">Ver receta
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -105,7 +113,7 @@
 <div class="parallaxBg twitter-block margin-bottom-60">
     <div class="container">
         <div class="heading heading-v1 margin-bottom-20">
-            <h2>Latest Tweets</h2>
+            <h2>COMO EMPEZAR</h2>
         </div>
 
         <div id="carousel-example-generic-v5" class="carousel slide" data-ride="carousel">
@@ -118,34 +126,29 @@
 
             <div class="carousel-inner">
                 <div class="item active">
-                    <p>Unify has reached 10000 plus sales and we just want to thank you to our all customers for being part
-                        of the Unify Template success <a href="http://bit.ly/1c0UN3Y">http://bit.ly/1c0UN3Y</a>
-                        <p>
-                            <p><a href="https://twitter.com/htmlstream">@htmlstream</a></p>
-                            <ul class="list-inline twitter-icons">
-                                <li><a href="#/"><i class="fa fa-reply"></i></a></li>
-                                <li><a href="#/"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#/"><i class="fa fa-star"></i></a></li>
-                            </ul>
-                </div>
-                <div class="item">
-                    <p>the majority have suffered #alteration in some form, by injected humour, or randomised words which don't
-                        look even slightly believable. If you are going to use a passage of Lorem Ipsum</p>
-                    <p><a href="https://twitter.com/htmlstream">@twbootstrap</a></p>
+                    <p>Primero <a href="#/register">create un perfil</a> e ingresa con él.
+                    <p>
                     <ul class="list-inline twitter-icons">
-                        <li><a href="#/"><i class="fa fa-reply"></i></a></li>
-                        <li><a href="#/"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#/"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-user-plus"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-graduation-cap"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-users"></i></a></li>
+
                     </ul>
                 </div>
                 <div class="item">
-                    <p>New 100% Free Stock Photos. Every. Single. Day. Everything you need for your creative projects.
-                        <a href="#/">http://publicdomainarchive.com</a></p>
-                    <p><a href="https://twitter.com/htmlstream">@wrapbootstrap</a></p>
+                    <p>Una vez registrado, <a href="#/Recipe/Create">crea tu propia receta</a>.</p>
                     <ul class="list-inline twitter-icons">
-                        <li><a href="#/"><i class="fa fa-reply"></i></a></li>
-                        <li><a href="#/"><i class="fa fa-retweet"></i></a></li>
-                        <li><a href="#/"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-edit"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-cutlery"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-graduation-cap"></i></a></li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <p>Si queres colaborar, <a href="#/validate">valida recetas de la comunidad!</a></p>
+                    <ul class="list-inline twitter-icons">
+                        <li><a href="#/"><i class="fa fa-check"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-cutlery"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-close"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -165,37 +168,26 @@
 
 <!--=== Product Service ===-->
 <div class="row margin-bottom-60">
-    <div class="col-md-4 product-service md-margin-bottom-30">
+    <div class="col-md-4 col-md-offset-2 product-service md-margin-bottom-30">
         <div class="product-service-heading">
-            <i class="fa fa-truck"></i>
+            <i class="fa fa-trophy"></i>
         </div>
         <div class="product-service-in">
-            <h3>Free Delivery</h3>
-            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...
+            <h3>TOP RECETAS CALIFICADAS</h3>
+            <p>Entra aquí para ver un ranking de las recetas mejor calificadas por los usuarios de SmartCook
             </p>
-            <a href="#/">+Read More</a>
+            <a href="#/">Mejores Calificadas</a>
         </div>
     </div>
     <div class="col-md-4 product-service md-margin-bottom-30">
         <div class="product-service-heading">
-            <i class="icon-earphones-alt"></i>
+            <i class="fa fa-tags"></i>
         </div>
         <div class="product-service-in">
-            <h3>Customer Service</h3>
-            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...
+            <h3>TOP RECETAS CATEGORIAS</h3>
+            <p>Entra aquí para ver un ranking de las recetas mejor calificadas dentro de una categoría específica
             </p>
-            <a href="#/">+Read More</a>
-        </div>
-    </div>
-    <div class="col-md-4 product-service">
-        <div class="product-service-heading">
-            <i class="icon-refresh"></i>
-        </div>
-        <div class="product-service-in">
-            <h3>Free Returns</h3>
-            <p>Integer mattis lacinia felis vel molestie. Ut eu euismod erat, tincidunt pulvinar semper veliUt porta, leo...
-            </p>
-            <a href="#/">+Read More</a>
+            <a href="#/">Mejores según Categoría</a>
         </div>
     </div>
 </div>
@@ -207,70 +199,12 @@
 </div>
 <!--/end container-->
 
-<!--=== Sponsors ===-->
-<div class="container content">
-    <div class="heading heading-v1 margin-bottom-40">
-        <h2>Sponsors</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed odio elit, ultrices vel cursus sed, placerat ut leo.
-            Phasellus in magna erat. Etiam gravida convallis augue non tincidunt. Nunc lobortis dapibus neque quis lacinia.
-            Nam dapibus tellus sit amet odio venenatis</p>
-    </div>
-    <ul class="list-inline owl-slider-v2">
-        <li class="item first-child">
-            <img src="assets/img/clients/07.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/08.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/10.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/11.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/09.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/12.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/07.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/08.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/09.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/10.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/11.png" alt="">
-        </li>
-        <li class="item">
-            <img src="assets/img/clients/12.png" alt="">
-        </li>
-    </ul>
-    <!--/end owl-carousel-->
-</div>
-<!--=== End Sponsors ===-->
-
 <!--=== Shop Suvbscribe ===-->
 <div class="shop-subscribe">
     <div class="container">
         <div class="row">
             <div class="col-md-8 md-margin-bottom-20">
-                <h2>subscribe to our weekly <strong>newsletter</strong></h2>
-            </div>
-            <div class="col-md-4">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Email your email...">
-                    <span class="input-group-btn">
-                        <button class="btn" type="button"><i class="fa fa-envelope-o"></i></button>
-                    </span>
-                </div>
+                <h2>NO PIERDAS TIEMPO Y CONVERTITE EN UN <strong>SMARTCOOK</strong></h2>
             </div>
         </div>
     </div>

@@ -53,6 +53,9 @@ app.get('/general/validate', function (req, res) {
 app.get('/general/createRecipe', function (req, res) {
     res.render('general/createRecipe');
 });
+app.get('/general/aboutus', function (req, res) {
+    res.render('general/aboutUs');
+});
 app.get('/general/confirmForm', function (req, res) {
     res.render('general/confirmForm');
 });
