@@ -85,7 +85,6 @@ app.get('/ingredients/:id', function (req, res) {
 //-------------------------recipes-------------------------
 app.get('/recipes', function (req, res) {
   var object = req.query;
-  console.log(object);
   res.status(200);
   res.send(recipes);
 });
@@ -97,7 +96,14 @@ app.get('/recipes/:id', function (req, res) {
 
 app.post('/recipes', function (req, res) {
   var object = req.body;
-  recipes.push(object);
+  var recipe = {
+    id : recipes.length +1,
+    name:object.name,
+    image_url:object.image_url,
+    stars : 0,
+    description:object.description
+  }
+  recipes.push(recipe);
   res.status(200);
   res.send('Llego correctamente la receta');
 });
