@@ -56,7 +56,9 @@ var users = [
   { id: 3, firstName: 'Matias', userName: 'matileon', lastName: 'Leon Peralta', email: 'matias.leon@smartcook.com',
   gender:'', dateOfBirth:'', password:'river', avatar: 'https://imgsmartcook.blob.core.windows.net/profile/MatiasLeonPeralta.jpg',facebookId:'2', restrictions: restrictions, categories: categories },
   { id: 4, firstName: 'Hernan', userName: 'hmaschwitz', lastName: 'Maschwitz', email: 'hernanm992@gmail.com',
-    gender:'', dateOfBirth:'', password:'outsider', avatar: 'https://imgsmartcook.blob.core.windows.net/profile/HernanMaschwitz.jpg'}
+    gender:'', dateOfBirth:'', password:'outsider', avatar: 'https://imgsmartcook.blob.core.windows.net/profile/HernanMaschwitz.jpg'},
+    { id: 5, firstName: 'Admin', userName:'admin', lastName: 'Admin', email: 'smartcookweb@gmail.com',
+        gender:'', dateOfBirth:'', password:'1234', avatar: 'img/profile-avatar.jpg',facebookId:'0' },
 ];
 
 app.get('/categories/:text', function (req, res) {

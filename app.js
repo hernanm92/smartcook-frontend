@@ -56,6 +56,9 @@ app.get('/general/createRecipe', function (req, res) {
 app.get('/general/aboutus', function (req, res) {
     res.render('general/aboutUs');
 });
+app.get('/general/loadIngredient', function (req, res) {
+    res.render('general/loadIngredient');
+});
 app.get('/general/confirmForm', function (req, res) {
     res.render('general/confirmForm');
 });
