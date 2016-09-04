@@ -1,7 +1,5 @@
 app.controller('LoadIngredientController',
     function ($scope, ingredientFactory, categoriesFactory, $modal, imgService, blockUI) {
-            //global variables
-            $scope.categories = [];
             $scope.validateForm = validateForm;
             $scope.openModal = openModal;
             $scope.calories = 0;
@@ -9,8 +7,18 @@ app.controller('LoadIngredientController',
             $scope.carbohydrates = 0;
             $scope.fats = 0;
 
-            $scope.categories = loadAllCategories();
-            $scope.querySearch = querySearch;
+            $scope.categories = categoriesFactory.query().$promise;
+            $scope.selectedCategory = undefined;
+
+            //DEMO
+            $scope.selected = undefined;
+            $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+
+            $scope.test = test;
+            function test(){
+                console.log($scope.categories);
+            }
 
             function validateForm(isValid) {
                 console.log($scope.fats);
@@ -58,30 +66,6 @@ app.controller('LoadIngredientController',
                 });
                 blockUI.stop();
             }
-
-            function querySearch (query) {
-                  var results = query ? self.categories.filter( createFilterFor(query) ) : self.categories,
-                      deferred;
-                  if (self.simulateQuery) {
-                    deferred = $q.defer();
-                    $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-                    return deferred.promise;
-                  } else {
-                    return results;
-                  }
-                }
-            function loadAllCategories(text) {
-              var allCategories = categoriesFactory.query({ text: text }).$promise;
-              return allCategories;
-            }
-            function createFilterFor(query) {
-              var lowercaseQuery = angular.lowercase(query);
-              return function filterFn(category) {
-                return (category.value.indexOf(lowercaseQuery) === 0);
-              };
-            }
-
-
 
         }
 );

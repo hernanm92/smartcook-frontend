@@ -27,22 +27,21 @@
                     <p ng-show="ingredientForm.nameIngredient.$invalid && submitted" style="color:red; ">El ingrediente
                         debe tener un nombre</p>
                 </div>
-                <div class="form-group ">
+                <div class="form-group">
                     <label class="label-form-ingredient "> Categorias </label>
-                    <md-autocomplete
-                            md-selected-item="selectedItem"
-                            md-search-text="searchText"
-                            md-items="item in querySearch(searchText)"
-                            md-item-text="item.display"
-                            md-min-length="0"
-                            placeholder="Seleccione una Categoria.">
-                        <md-item-template>
-                            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-                        </md-item-template>
-                        <md-not-found>No hay categorias que sean del tipo: "{{ctrl.searchText}}".</md-not-found>
-                    </md-autocomplete>
-                    <p ng-show=" !(categories.length> 0) && submitted" style="color:red;">La receta debe de tener al
-                        menos una Categoria</p>
+                    <button type="button" ng-click="test()">TEST</button>
+
+                    <!--ESTE ES EL QUE QUIERO-->
+                    <!--<pre>Model: {{selectedCategory | json}}</pre>-->
+                    <!--<input type="text" ng-model="selectedCategory"-->
+                           <!--uib-typeahead="category for category in categories | filter:$viewValue | limitTo:8" class="form-control">-->
+
+                    <!--ESTA ES LA DEMO-->
+                    <pre>Model: {{selected | json}}</pre>
+                    <input type="text" ng-model="selected" uib-typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
+
+                    <p ng-show="categories.indexOf(selectedCategory) == -1 && submitted" style="color:red;">
+                        La receta debe de tener al menos una Categoria</p>
                 </div>
                 <div class="row" style="margin-bottom:10px">
                     <div class="col-sm-4">
