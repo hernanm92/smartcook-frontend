@@ -50,7 +50,7 @@ function homeHelper($modal) {
             animation: true,
             templateUrl: template,
             controller: controller,
-            size: 'lg',
+            size: 'md',
             resolve: {
                 item: function () {
                     return item;

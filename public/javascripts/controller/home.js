@@ -6,7 +6,7 @@ app.controller('HomeController',
         //private    
         var self = this;
         self.ingsToSend = [];
-
+        
         //set Values
         $scope.ingredients = [];
         $scope.advancedSettings = false;
@@ -35,7 +35,7 @@ app.controller('HomeController',
         init();
 
         function init() {
-            $scope.ingredients = homeHelper.initIngredients();
+            $scope.ingredients = homeHelper.initIngredients();  
             $scope.recipes = searcher.getRecipes();
             $scope.omitRestrictions = true;
             $scope.omitDislikeIngs = true;

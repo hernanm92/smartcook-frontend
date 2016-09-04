@@ -44,6 +44,7 @@ module.exports = function(grunt) {
     "public/javascripts/factory/user.js",
     "public/javascripts/factory/item.js",
     "public/javascripts/factory/validate.js",
+    "public/javascripts/factory/ingredientPerRecipes.js",
 
 
     "public/javascripts/controller/base.js",
@@ -74,6 +75,8 @@ module.exports = function(grunt) {
     "public/javascripts/service/searcher.js",
     "public/javascripts/service/imgs.js",
     "public/javascripts/service/azure.js",
+    "public/javascripts/service/recipe.js",
+    "public/javascripts/service/ingredient.js",
 
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
