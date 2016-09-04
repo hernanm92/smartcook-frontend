@@ -54,6 +54,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#profile">Perfil</a></li>
+                            <li ng-if="token() && username=='admin'"><a href="#loadIngredient">Cargar Ingrediente</a></li>
                             <li><a ng-click="logOut()">Salir</a></li>
                         </ul>
                     </li>

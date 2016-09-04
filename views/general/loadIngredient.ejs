@@ -1,0 +1,130 @@
+<div class="container" style="padding-top: 90px;">
+    <form name="ingredientForm" ng-submit="validateForm(ingredientForm.$valid)" novalidate>
+        <div class="row">
+            <div class="col-md-4">
+                <div ng-show="picFile">
+                    <div ngf-drop ngf-select ng-model="picFile" ngf-drag-over-class="'dragover'" accept="image/*">
+                        <img class="img-rounded" width="300px" height="300px" ngf-thumbnail="picFile">
+                    </div>
+                </div>
+                <div ng-show="!picFile" ngf-drop ngf-select ng-model="picFile" ngf-drag-over-class="'dragover'"
+                     accept="image/*">
+                    <span style="cursor:pointer">
+                        <img class="img-responsive" alt="Responsive image" ng-src="img/Placeholder-Ingredient.jpg"
+                             style="-webkit-filter: grayscale(100%);">
+                    </span>
+                </div>
+                <div class="col-sm-12" style="padding-left:0px">
+                    <span class="btn fa fa-pencil fa-2x profile-edit-button" ngf-select ng-model="picFile"></span>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="form-group ">
+                    <label class="label-form-ingredient "> Ingrediente </label>
+                    <input name="nameIngredient" ng-model="nameIngredient" type="text" class="form-control"
+                           placeholder="Escriba el nombre del ingrediente aqui"
+                           required>
+                    <p ng-show="ingredientForm.nameIngredient.$invalid && submitted" style="color:red; ">El ingrediente
+                        debe tener un nombre</p>
+                </div>
+                <div class="form-group">
+                    <label class="label-form-ingredient "> Categorias </label>
+                    <button type="button" ng-click="test()">TEST</button>
+
+                    <!--ESTE ES EL QUE QUIERO-->
+                    <!--<pre>Model: {{selectedCategory | json}}</pre>-->
+                    <!--<input type="text" ng-model="selectedCategory"-->
+                           <!--uib-typeahead="category for category in categories | filter:$viewValue | limitTo:8" class="form-control">-->
+
+                    <!--ESTA ES LA DEMO-->
+                    <pre>Model: {{selected | json}}</pre>
+                    <input type="text" ng-model="selected" uib-typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
+
+                    <p ng-show="categories.indexOf(selectedCategory) == -1 && submitted" style="color:red;">
+                        La receta debe de tener al menos una Categoria</p>
+                </div>
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-sm-4">
+                        <label class="label-form-ingredient"> Calorias </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="number" name="input" ng-model="calories" min="0" required>
+                    </div>
+                    <p ng-show="calories == undefined && submitted" style="color:red; ">
+                        El ingrediente debe tener una cantidad de Calorias</p>
+                </div>
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-sm-4">
+                        <label class="label-form-ingredient"> Proteinas </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="number" name="input" ng-model="proteins" min="0" required>
+                    </div>
+                    <p ng-show="proteins == undefined && submitted" style="color:red; ">
+                        El ingrediente debe tener una cantidad de Proteinas</p>
+                </div>
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-sm-4">
+                        <label class="label-form-ingredient"> Carbohidratos </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="number" name="input" ng-model="carbohydrates" min="0" required>
+                    </div>
+                    <p ng-show="carbohydrates == undefined && submitted" style="color:red; ">El ingrediente debe tener
+                        una cantidad de Carbohidratos</p>
+                </div>
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-sm-4">
+                        <label class="label-form-ingredient"> Grasas </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="number" name="input" ng-model="fats" min="0" required>
+                    </div>
+                    <p ng-show="fats == undefined && submitted" style="color:red; ">El ingrediente debe tener una
+                        cantidad de Grasas</p>
+                </div>
+
+                <div class="form-group">
+                    <h1 class="label-form-ingredient text-center" style="margin-top:50px"> APTO PARA RESTRICCIONES </h1>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="roundedTwo" style="display:-webkit-inline-box">
+                                <input type="checkbox" value="None" id="isCeliac" name="check"/>
+                                <label for="isCeliac"></label>
+                            </div>
+                            <label class="label-form-ingredient "> Celiaco </label>
+                        </div>
+                        <div class="row">
+                            <div class="roundedTwo" style="display:-webkit-inline-box">
+                                <input type="checkbox" value="None" id="isVegan" name="check"/>
+                                <label for="isVegan"></label>
+                            </div>
+                            <label class="label-form-ingredient "> Vegano </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="roundedTwo" style="display:-webkit-inline-box">
+                                <input type="checkbox" value="None" id="isVegetarian" name="check"/>
+                                <label for="isVegetarian"></label>
+                            </div>
+                            <label class="label-form-ingredient "> Vegetariano </label>
+                        </div>
+                        <div class="row">
+                            <div class="roundedTwo" style="display:-webkit-inline-box">
+                                <input type="checkbox" value="None" id="isDiabetic" name="check"/>
+                                <label for="isDiabetic"></label>
+                            </div>
+                            <label class="label-form-ingredient "> Diabetico </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" style="margin-bottom: 20px;">
+                <button type="submit" class="btn-u btn-u-sea-shop btn-u-md">Guardar Ingrediente</button>
+            </div>
+        </div>
+    </form>
+</div>
