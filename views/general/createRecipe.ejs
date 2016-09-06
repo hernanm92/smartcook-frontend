@@ -34,12 +34,14 @@
             </div>
         </div>
         <div class = "row">
-            <div class="form-group">
-                <label class="label-form-ingredient">Breve Descripcion</label>
-                <textarea id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripcion aqui..."></textarea>
+            <div class = "col-md-8">
+                <div class="form-group">
+                    <label class="label-form-ingredient">Breve Descripcion</label>
+                    <textarea id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripcion aqui..."></textarea>
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div ng-show = "recipe.ingredients.lenght === 0" class="row">
             <div class = "col-md-6">
                 <table class ="table table-bordered">
                     <thead >

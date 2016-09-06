@@ -3,7 +3,7 @@
     <!--=== Illustration v2 ===-->
     <div class="illustration-v2">
         <ul class="list-inline owl-slider">
-            <li class="item" ng-repeat="ingredient in ingredients" on-finish-ingredients-render>
+            <li class="item" ng-repeat="ingredient in ingredientsTemplate" on-finish-ingredients-render>
                 <div ng-include="'general/ingredients/empty-ing-template'" ng-show="isEmpty(ingredient)"></div>
                 <div ng-include="'general/ingredients/ing-template'" ng-show="!isEmpty(ingredient)"></div>
             </li>
@@ -83,10 +83,6 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <div class="margin-bottom-10">
-                                    <span class="title-price margin-right-10">$60.00</span>
-                                    <span class="title-price line-through">$95.00</span>
-                                </div>
                                 <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
                                 <ul class="list-inline add-to-wishlist margin-bottom-20">
                                     <li class="wishlist-in">

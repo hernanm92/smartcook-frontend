@@ -2,7 +2,7 @@ angular
     .module('MainApp')
     .service('recipeService', recipeService);
 
-    function recipeService (recipeFactory,Recipe, imgService, UserSession, blockUI, notifyHelper, ingredientPerRecipeFactory){
+    function recipeService (recipeFactory,Recipe, imgService, UserSession, blockUI, notifyHelper, ingredientPerRecipeFactory,$interval){
         var self = this;
         self.units = [{name:'gramos'},{name:'Taza'},{name:'Unidad'},{name:'mililitro'}];
         self.recipes = [];
@@ -10,8 +10,11 @@ angular
         self.getUnits = getUnits;
         self.save = save;
         self.create = create;
+        self.refresh = refresh;
 
         init();
+        refresh();
+        
         function init() {
             recipeFactory.query({}, function(recipes){
                  self.recipes = recipes;
@@ -61,5 +64,9 @@ angular
                 amount: ing.quantity,
                 unit: ing.unit.name     
             }
+        }
+
+        function refresh() {
+            $interval(init,20000);
         }
 };

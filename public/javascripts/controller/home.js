@@ -1,5 +1,5 @@
 app.controller('HomeController',
-    function ($scope, ingredientFactory,
+    function ($scope, ingredientService,
         recipeFactory, homeHelper, $location,
         notifyHelper, blockUI, UserSession,searcher) {
 
@@ -8,12 +8,11 @@ app.controller('HomeController',
         self.ingsToSend = [];
         
         //set Values
-        $scope.ingredients = [];
+        $scope.ingredientsTemplate = [];
         $scope.advancedSettings = false;
 
         //functions
         $scope.isEmpty = isEmpty;
-        $scope.getIngredients = getIngredients;
         $scope.removeIngredient = removeIngredient;
         $scope.updateIngredientToFull = updateIngredientToFull;
         $scope.getDetailIng = getDetailIng;
@@ -23,6 +22,7 @@ app.controller('HomeController',
         $scope.advancedSearch = advancedSearch;
         $scope.isLogged = isLogged;
         $scope.resetSearch = resetSearch;
+        $scope.getIngredients = getIngredients;
 
         $scope.$on('$viewContentLoaded', function () {
             App.init();
@@ -35,12 +35,17 @@ app.controller('HomeController',
         init();
 
         function init() {
-            $scope.ingredients = homeHelper.initIngredients();  
+            $scope.ingredientsTemplate = homeHelper.initIngredients();  
             $scope.recipes = searcher.getRecipes();
             $scope.omitRestrictions = true;
             $scope.omitDislikeIngs = true;
             $scope.omitCategories = true;
+
         };
+
+        function getIngredients() {
+            return ingredientService.getIngredients();
+        }
 
         function updateIngredientToFull(ingSelected, ingFromTemplate) {
             ingFromTemplate.name = ingSelected.name;
@@ -66,11 +71,6 @@ app.controller('HomeController',
             return homeHelper.isEmpty(ingredient);
         }
 
-        function getIngredients(text) {
-            //getProfileRestriccions() para usar sus preferencias si esta logueado
-            return ingredientFactory.query({ text: text }).$promise;
-        }
-
         function getDetailIng(id) {
             template = '/general/modals/ingredient';
             controller = 'IngredientModalController';
@@ -86,7 +86,7 @@ app.controller('HomeController',
         }
 
         function search() {
-            var ingsToSend = homeHelper.getIngsWithData($scope.ingredients); 
+            var ingsToSend = homeHelper.getIngsWithData($scope.ingredientsTemplate); 
             if (ingsToSend.length < 1) {
                 notifyHelper.warn('Debes seleccionar al menos un ingrediente');
             } else {
