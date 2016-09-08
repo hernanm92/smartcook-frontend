@@ -6,6 +6,7 @@ app.controller('CreateRecipeController',
         $scope.validateForm = validateForm;
         $scope.deleteStep = deleteStep;
         $scope.openModal = openModal;
+        $scope.isIngredientsEmpty = isIngredientsEmpty;
         $scope.units = [];
         
         init();
@@ -14,13 +15,14 @@ app.controller('CreateRecipeController',
             $scope.recipe = recipeService.create();
         }
 
+        function isIngredientsEmpty() {
+            return $scope.recipe.ingredients.length === 0;
+        }
+
         function addStep() {
             $scope.stepErrorMessage = null;
             if ($scope.stepToAdd ) {
-                var step = {
-                    description: $scope.stepToAdd
-                };
-                $scope.recipe.steps.push(step);
+                $scope.recipe.steps.push($scope.stepToAdd);
                 $scope.stepToAdd = null;
             } else {
                 $scope.stepErrorMessage = 'No puede ingresar un paso en blanco';

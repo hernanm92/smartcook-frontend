@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div ng-show = "recipe.ingredients.lenght === 0" class="row">
+        <div ng-show = "!isIngredientsEmpty()" class="row">
             <div class = "col-md-6">
                 <table class ="table table-bordered">
                     <thead >
@@ -80,8 +80,8 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <h4 class="numberStep"> {{$index + 1 }}</h4>
-                                        <textarea id="item" class="step-textArea" msd-elastic ng-model="step.description" placeholder="Escriba su paso aqui...">
-                                            {{step.description}}
+                                        <textarea id="item" class="step-textArea" msd-elastic ng-model="step" placeholder="Escriba su paso aqui...">
+                                            {{step}}
                                         </textarea>
                                     </div>
                                     <div class="col-md-8">
