@@ -82,7 +82,7 @@ module.exports = function(grunt) {
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
     
-    "public/javascripts/service/helpers/home-helper.js"
+    "public/javascripts/service/home.js"
   ]
 
   var cssFileList = [
@@ -201,7 +201,7 @@ module.exports = function(grunt) {
         },
         constants: {
           config: {
-            domain: 'http://13.85.79.112:5000',
+            domain: 'http://40.117.191.211:3000',
             styleFolder: 'common',
             applicationPrefix: ''
           }

@@ -1,7 +1,7 @@
 app.controller('HomeController',
     function ($scope, ingredientService,
-        recipeFactory, homeHelper, $location,
-        notifyHelper, blockUI, UserSession,searcher) {
+        recipeFactory, homeService, $location,
+        notifyHelper, blockUI, UserSession) {
 
         //private    
         var self = this;
@@ -13,13 +13,12 @@ app.controller('HomeController',
 
         //functions
         $scope.isEmpty = isEmpty;
-        $scope.removeIngredient = removeIngredient;
         $scope.updateIngredientToFull = updateIngredientToFull;
         $scope.getDetailIng = getDetailIng;
         $scope.getDetailsRecipe = getDetailsRecipe;
         $scope.search = search;
+        $scope.removeIngredient = removeIngredient;
         $scope.removeIngredients = removeIngredients;
-        $scope.advancedSearch = advancedSearch;
         $scope.isLogged = isLogged;
         $scope.resetSearch = resetSearch;
         $scope.getIngredients = getIngredients;
@@ -35,8 +34,8 @@ app.controller('HomeController',
         init();
 
         function init() {
-            $scope.ingredientsTemplate = homeHelper.initIngredients();  
-            $scope.recipes = searcher.getRecipes();
+            $scope.ingredientsTemplate = homeService.initIngredients();  
+            $scope.recipes = homeService.getRecipes();
             $scope.omitRestrictions = true;
             $scope.omitDislikeIngs = true;
             $scope.omitCategories = true;
@@ -68,49 +67,44 @@ app.controller('HomeController',
         }
 
         function isEmpty(ingredient) {
-            return homeHelper.isEmpty(ingredient);
+            return homeService.isEmpty(ingredient);
         }
 
         function getDetailIng(id) {
             template = '/general/modals/ingredient';
             controller = 'IngredientModalController';
             ingredientFactory.get({ id: id }, function (ing) {
-                homeHelper.openModal(ing, template, controller);
+                homeService.openModal(ing, template, controller);
             });
         }
 
         function getDetailsRecipe(id) {
-            recipeFactory.get({ id: id }, function (recipe) {
-                 $location.path('/recipe/' + id + '/detail');
-            });
+            $location.path('/recipe/' + id + '/detail');
         }
 
         function search() {
-            var ingsToSend = homeHelper.getIngsWithData($scope.ingredientsTemplate); 
+            var ingsToSend = homeService.getIngsWithData($scope.ingredientsTemplate); 
             if (ingsToSend.length < 1) {
                 notifyHelper.warn('Debes seleccionar al menos un ingrediente');
             } else {
-                $scope.recipes = searcher.getRecipesBy(ingsToSend);
+                //completar settings
+               $scope.recipes =  homeService.search(ingsToSend, $scope.settings);
             }
         }
 
         function removeIngredients() {
-            angular.forEach($scope.ingredients, function (ing) {
+            angular.forEach($scope.ingredientsTemplate, function (ing) {
                 $scope.removeIngredient(ing);
             })
         }
 
-        function advancedSearch() {
-            $scope.advancedSettings = !$scope.advancedSettings;
-        }
-
         function isLogged() {
-            return UserSession.getToken();
+            return UserSession.isLogged();
         }
 
         function resetSearch() {
             $scope.recipes = [];
-            searcher.resetRecipes();
+            homeService.resetRecipes();
         }
     }
 );

@@ -1,5 +1,5 @@
 app.controller('RecipeViewController',
-    function ($scope, $routeParams, recipeFactory, ingredientFactory) {
+    function ($scope, $routeParams, recipeFactory, ingredientPerRecipeFactory) {
         
         $scope.recipe = {};
         $scope.addTip = addTip;
@@ -21,7 +21,7 @@ app.controller('RecipeViewController',
                 $scope.recipe = recipe;
             });
 
-            ingredientFactory.query({recipe_id:id},function(ings){
+            ingredientPerRecipeFactory.query({recipe_id:id},function(ings){
                 $scope.ingredients = ings;
             });
         }

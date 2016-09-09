@@ -1,8 +1,8 @@
 angular
     .module('MainApp')
-    .service('homeHelper', homeHelper);
+    .service('homeService', homeService);
 
-function homeHelper($modal) {
+function homeService($modal, UserSession, searcher ) {
     var self = this;
     self.createEmptyIngredient = createEmptyIngredient
     self.initIngredients = initIngredients;
@@ -10,6 +10,22 @@ function homeHelper($modal) {
     self.getIndexElemFrom = getIndexElemFrom;
     self.getIngsWithData = getIngsWithData;
     self.isEmpty = isEmpty;
+    self.search = search;
+    self.getRecipes = getRecipes;
+    self.resetRecipes = resetRecipes;
+
+    function search(ings, settings) {
+        var result = UserSession.isLogged() ?  searcher.searchByProfile(ings, settings) : searcher.search(ings);
+        return result;
+    }
+
+    function getRecipes() {
+        return searcher.getRecipes();
+    }
+
+    function resetRecipes() {
+        searcher.resetRecipes();
+    }
 
     function getIngsWithData(ingsTemplate) {
         var ingsToSend = [];
