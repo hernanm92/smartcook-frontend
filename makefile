@@ -4,7 +4,6 @@ install:
 
 development:
 	grunt development
-	nohup node mock/app.js &
 	nohup node app.js &
 	grunt watch
 
