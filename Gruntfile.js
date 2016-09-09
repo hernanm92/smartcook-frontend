@@ -44,6 +44,7 @@ module.exports = function(grunt) {
     "public/javascripts/factory/user.js",
     "public/javascripts/factory/item.js",
     "public/javascripts/factory/validate.js",
+    "public/javascripts/factory/ingredientPerRecipes.js",
 
 
     "public/javascripts/controller/base.js",
@@ -75,11 +76,13 @@ module.exports = function(grunt) {
     "public/javascripts/service/searcher.js",
     "public/javascripts/service/imgs.js",
     "public/javascripts/service/azure.js",
+    "public/javascripts/service/recipe.js",
+    "public/javascripts/service/ingredient.js",
 
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
     
-    "public/javascripts/service/helpers/home-helper.js"
+    "public/javascripts/service/home.js"
   ]
 
   var cssFileList = [
@@ -198,7 +201,7 @@ module.exports = function(grunt) {
         },
         constants: {
           config: {
-            domain: 'http://13.85.79.112:5000',
+            domain: 'http://40.117.191.211:3000',
             styleFolder: 'common',
             applicationPrefix: ''
           }

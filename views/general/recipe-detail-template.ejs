@@ -1,18 +1,17 @@
 <div>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-8 col-sm-offset-2">
             <a>
                 <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
-                <div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
+                <img ng-src="{{recipe.image_url}}"  class="img-responsive" alt="Responsive image"></div>
             </a>
-        </div>
-        <div class="col-sm-8 product-description">
+        <div class="col-sm-8 col-sm-offset-2 product-description">
             <div class="overflow-h margin-bottom-5">
                 <ul class="list-inline overflow-h">
                     <li>
                         <h4 class="title-price "><span>Rating</span></h4>
                     </li>
-                    <li class="pull-right">
+                    <li>
                         <ul class="list-inline product-ratings">
                             <li><i class="rating-selected fa fa-star"></i></li>
                             <li><i class="rating-selected fa fa-star"></i></li>
@@ -23,21 +22,31 @@
                     </li>
                 </ul>
                 <div class="margin-bottom-10">
-                    <span class="title-price margin-right-10">Total de calorias</span>
-                    <span class="title-price ">95.00</span>
+                    <span class="title-price margin-right-10">Descripcion</span>
                 </div>
-                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
+                <div>
+                    <textarea readonly id="item" class="detail-step" msd-elastic ng-model="recipe.description">
+                    </textarea>
+                </div>
                 <ul class="list-inline add-to-wishlist margin-bottom-20">
                     <li class="wishlist-in">
                         <i class="fa fa-heart"></i>
-                        <a href="">Agregar a favoritos</a>
+                        <a href="" ng-click="addToFavorites()">Agregar a favoritos</a>
                     </li>
                 </ul>
+            </div>
             </div>
         </div>
     </div>
     <div class="heading heading-v2">
         <h2>Ingredientes</h3>
+        <div class = "row">
+            <div ng-repeat="ing in ingredients track by $index">
+                <div>{{ing.name}}</div>
+                <div>{{ing.amount}}</div>
+                <div>{{ing.unit}}</div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12" style="padding-top: 20px;">
@@ -45,10 +54,10 @@
                 <h2>Procedimiento</h2>
             </div>
             <div class="steps-container">
-                <div class="" ng-repeat=" step in steps track by $index">
+                <div class="" ng-repeat="step in recipe.steps track by $index">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <textarea readonly id="item" class="detail-step" msd-elastic ng-model="step.name">
+                            <textarea readonly id="item" class="detail-step" msd-elastic ng-model="step">
                                 </textarea>
                         </div>
                     </div>

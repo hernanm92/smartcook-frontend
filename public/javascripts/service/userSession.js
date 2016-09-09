@@ -11,6 +11,7 @@ function UserSession($sessionStorage, $localStorage, userFactory) {
     self.setUser = setUser;
     self.profileInfo = profileInfo;
     self.getUserId = getUserId;
+    self.isLogged = isLogged;
     
     function setUser(user) {
         if (user.remember) {
@@ -64,5 +65,9 @@ function UserSession($sessionStorage, $localStorage, userFactory) {
         return userFactory.get({ id: getUserId() }, function (userProfile) {
             return userProfile;
         })
+    }
+
+    function isLogged() {
+        return self.getToken();
     }
 }

@@ -17,7 +17,8 @@ var app = angular.module('MainApp', [
   'blockUI',
   'angularSpinner',
   'ngFileUpload', 
-  'azureBlobUpload'
+  'azureBlobUpload',
+  'ingredientPerRecipeModule'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {

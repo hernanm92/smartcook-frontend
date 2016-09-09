@@ -1,28 +1,27 @@
 app.controller('HomeController',
-    function ($scope, ingredientFactory,
-        recipeFactory, homeHelper, $location,
-        notifyHelper, blockUI, UserSession,searcher) {
+    function ($scope, ingredientService,
+        recipeFactory, homeService, $location,
+        notifyHelper, blockUI, UserSession) {
 
         //private    
         var self = this;
         self.ingsToSend = [];
-
+        
         //set Values
-        $scope.ingredients = [];
+        $scope.ingredientsTemplate = [];
         $scope.advancedSettings = false;
 
         //functions
         $scope.isEmpty = isEmpty;
-        $scope.getIngredients = getIngredients;
-        $scope.removeIngredient = removeIngredient;
         $scope.updateIngredientToFull = updateIngredientToFull;
         $scope.getDetailIng = getDetailIng;
         $scope.getDetailsRecipe = getDetailsRecipe;
         $scope.search = search;
+        $scope.removeIngredient = removeIngredient;
         $scope.removeIngredients = removeIngredients;
-        $scope.advancedSearch = advancedSearch;
         $scope.isLogged = isLogged;
         $scope.resetSearch = resetSearch;
+        $scope.getIngredients = getIngredients;
 
         $scope.$on('$viewContentLoaded', function () {
             App.init();
@@ -35,12 +34,17 @@ app.controller('HomeController',
         init();
 
         function init() {
-            $scope.ingredients = homeHelper.initIngredients();
-            $scope.recipes = searcher.getRecipes();
+            $scope.ingredientsTemplate = homeService.initIngredients();  
+            $scope.recipes = homeService.getRecipes();
             $scope.omitRestrictions = true;
             $scope.omitDislikeIngs = true;
             $scope.omitCategories = true;
+
         };
+
+        function getIngredients() {
+            return ingredientService.getIngredients();
+        }
 
         function updateIngredientToFull(ingSelected, ingFromTemplate) {
             ingFromTemplate.name = ingSelected.name;
@@ -63,54 +67,44 @@ app.controller('HomeController',
         }
 
         function isEmpty(ingredient) {
-            return homeHelper.isEmpty(ingredient);
-        }
-
-        function getIngredients(text) {
-            //getProfileRestriccions() para usar sus preferencias si esta logueado
-            return ingredientFactory.query({ text: text }).$promise;
+            return homeService.isEmpty(ingredient);
         }
 
         function getDetailIng(id) {
             template = '/general/modals/ingredient';
             controller = 'IngredientModalController';
             ingredientFactory.get({ id: id }, function (ing) {
-                homeHelper.openModal(ing, template, controller);
+                homeService.openModal(ing, template, controller);
             });
         }
 
         function getDetailsRecipe(id) {
-            recipeFactory.get({ id: id }, function (recipe) {
-                 $location.path('/recipe/' + id + '/detail');
-            });
+            $location.path('/recipe/' + id + '/detail');
         }
 
         function search() {
-            var ingsToSend = homeHelper.getIngsWithData($scope.ingredients); 
+            var ingsToSend = homeService.getIngsWithData($scope.ingredientsTemplate); 
             if (ingsToSend.length < 1) {
                 notifyHelper.warn('Debes seleccionar al menos un ingrediente');
             } else {
-                $scope.recipes = searcher.getRecipesBy(ingsToSend);
+                //completar settings
+               $scope.recipes =  homeService.search(ingsToSend, $scope.settings);
             }
         }
 
         function removeIngredients() {
-            angular.forEach($scope.ingredients, function (ing) {
+            angular.forEach($scope.ingredientsTemplate, function (ing) {
                 $scope.removeIngredient(ing);
             })
         }
 
-        function advancedSearch() {
-            $scope.advancedSettings = !$scope.advancedSettings;
-        }
-
         function isLogged() {
-            return UserSession.getToken();
+            return UserSession.isLogged();
         }
 
         function resetSearch() {
             $scope.recipes = [];
-            searcher.resetRecipes();
+            homeService.resetRecipes();
         }
     }
 );

@@ -19,22 +19,52 @@
             <div class="col-md-6 ">
                 <div class="form-group ">
                     <label class="label-form-ingredient "> Nombre Receta </label>
-                    <input name="nameRecipe " ng-model="nameRecipe " type="text " class="form-control " placeholder="Escriba el nombre de la receta aqui "
+                    <input name="nameRecipe" ng-model="recipe.name " type="text " class="form-control " placeholder="Escriba el nombre de la receta aqui "
                         required>
                     <p ng-show="recipeForm.nameRecipe.$invalid && submitted " style="color:red; ">La receta debe tener un nombre</p>
                 </div>
                 <div class="form-group ">
                     <label class="label-form-ingredient "> Ingredientes </label>
-                    <tags-input name="ingredients " ng-model="ingredients " placeholder="Escriba el ingrediente aqui" display-property="name "
+                    <tags-input name="ingredients " ng-model="recipe.ingredients " placeholder="Escriba el ingrediente aqui" display-property="name "
                         add-from-autocomplete-only="true ">
-                        <auto-complete min-length="1 " source="loadIngredients($query) " highlight-matched-text=f alse></auto-complete>
+                        <auto-complete min-length="1 " source="loadIngredients($query) " max-results-to-show="10" highlight-matched-text=false></auto-complete>
                     </tags-input>
-                    <p ng-show=" !(ingredients.length> 0) && submitted" style="color:red;">La receta debe de tener al menos un Ingrediente</p>
+                    <p ng-show=" !(recipe.ingredients.length> 0) && submitted" style="color:red;">La receta debe de tener al menos un Ingrediente</p>
                 </div>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-md-8">
                 <div class="form-group">
                     <label class="label-form-ingredient">Breve Descripcion</label>
-                    <textarea id="item" class="desc-text-area" msd-elastic ng-model="description" placeholder="Escriba una breve descripcion aqui..."></textarea>
+                    <textarea id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripcion aqui..."></textarea>
                 </div>
+            </div>
+        </div>
+        <div ng-show = "!isIngredientsEmpty()" class="row">
+            <div class = "col-md-6">
+                <table class ="table table-bordered">
+                    <thead >
+                        <tr>
+                            <th>Ingrediente</th>
+                            <th>Cantidad </th>
+                            <th>Unidad</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="ing in recipe.ingredients track by $index">
+                        <tr>
+                            <td>
+                                {{ing.name}}
+                            </td>
+                            <td>
+                                <input ng-model="ing.quantity" type="number">
+                            </td>
+                            <td>
+                                <select ng-model="ing.unit" ng-options="unity.name for unity in units"></select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="row">
@@ -46,18 +76,18 @@
                         </div>
                         <div class="panel-body">
                             <h3>Pasos</h3>
-                            <div ng-repeat="step in steps track by $index">
+                            <div ng-repeat="step in recipe.steps track by $index">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <h4 class="numberStep"> {{$index + 1 }}</h4>
-                                        <textarea id="item" class="step-textArea" msd-elastic ng-model="steps[$index].step " placeholder="Escriba su paso aqui...">
-                                            {{step.step}}
+                                        <textarea id="item" class="step-textArea" msd-elastic ng-model="step" placeholder="Escriba su paso aqui...">
+                                            {{step}}
                                         </textarea>
                                     </div>
                                     <div class="col-md-8">
                                         <button ng-show="true" type="button" class="btn btn-default btn-xs" ng-click="deleteStep($index)">
                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            </button>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <p ng-show=" !(steps.length > 0) && submitted" style="color:red;">La receta debe de tener al menos un Paso</p>
+                <p ng-show=" !(recipe.steps.length > 0) && submitted" style="color:red;">La receta debe de tener al menos un Paso</p>
             </div>
         </div>
         <div class="row">

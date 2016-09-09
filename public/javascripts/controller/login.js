@@ -48,33 +48,16 @@ function LoginController($scope, UserSession, userLoginFactory,
         facebookService.login().then(function (response) {
 
             if (response.status === 'connected') {
-
-                userLoginFacebook.get({ id: response.authResponse.userID }, function (user) {
-                    if (user.registered === 1) {
-                        //aca crear el perfil o mandarlo a la vista de regster
-                        facebookService.getUsername()
-                            .then(function name(last_name) {
-                                var user = { userID: response.authResponse.userID, name: last_name }
-                                userLoginFacebook.save(user, function (userid) {
-                                    setUser(response.authResponse.accessToken,
-                                        last_name, $scope.remember, userid);
-                                    $location.path('/');
-                                    blockUI.stop();
-                                });
-                            });
-
-                    } else {
-                        setUser(response.authResponse.accessToken,
-                            user.name,
-                            $scope.remember,
-                            user.id);
-                        $location.path('/');
-                        blockUI.stop();
-                    }
+                facebookService.getUsername()
+                .then(function name(last_name) {
+                    setUser(response.authResponse.accessToken,
+                    last_name, $scope.remember,response.authResponse.userID );
+                    $location.path('/');
+                    blockUI.stop();
                 });
             } else {
                 notifyHelper.error('No se pudo autenticar, intente de nuevo');
-                blockUI();
+                blockUI.stop    ();
             }
         });
     }

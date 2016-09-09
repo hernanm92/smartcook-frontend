@@ -1,6 +1,6 @@
 app.controller('RecipeViewController',
-    function ($scope, $routeParams, recipeFactory, $controller) {
-        angular.extend(this, $controller('baseRecipeController', { $scope: $scope }));
+    function ($scope, $routeParams, recipeFactory, ingredientPerRecipeFactory) {
+        
         $scope.recipe = {};
         $scope.addTip = addTip;
         $scope.addToFavorites = addToFavorites;
@@ -15,11 +15,14 @@ app.controller('RecipeViewController',
 
         }
         
-
         function init() {
             var id = $routeParams.id;
             recipeFactory.get({ id: id }, function (recipe) {
                 $scope.recipe = recipe;
+            });
+
+            ingredientPerRecipeFactory.query({recipe_id:id},function(ings){
+                $scope.ingredients = ings;
             });
         }
     });
