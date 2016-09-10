@@ -15,8 +15,7 @@ function homeService($modal, UserSession, searcher ) {
     self.resetRecipes = resetRecipes;
 
     function search(ings, settings) {
-        var result = UserSession.isLogged() ?  searcher.searchByProfile(ings, settings) : searcher.search(ings);
-        return result;
+        return  UserSession.isLogged() ?  searcher.searchByProfile(ings, settings) : searcher.search(ings);
     }
 
     function getRecipes() {
