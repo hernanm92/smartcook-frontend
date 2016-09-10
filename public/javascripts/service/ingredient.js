@@ -2,12 +2,13 @@ angular
     .module('MainApp')
     .service('ingredientService', ingredientService);
     
-    function ingredientService(ingredientFactory, $interval) {
+    function ingredientService(ingredientFactory, $interval, $modal) {
         var self = this;
         self.ingredients = [];
         self.getIngredientsBy = getIngredientsBy;
         self.refresh = refresh;
         self.getIngredients = getIngredients;
+        self.getDetail = getDetail;
 
         init();
         refresh();
@@ -15,6 +16,14 @@ angular
         function init() {
             ingredientFactory.query({},function(ings){
                 self.ingredients = ings;
+            })
+        }
+
+        function getDetail(id) {
+            template = '/general/modals/ingredient';
+            controller = 'IngredientModalController';
+            return ingredientFactory.get({id:id}, function (ing) {
+                openModal(ing,template, controller )
             })
         }
 
@@ -30,4 +39,19 @@ angular
         function getIngredients() {
             return self.ingredients;
         }
+
+        function openModal(item, template, controller) {
+            return $modal.open({
+                animation: true,
+                templateUrl: template,
+                controller: controller,
+                size: 'md',
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
+                },
+                windowClass: 'menu-bar-space'
+            });
+        };
     }

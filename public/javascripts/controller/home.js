@@ -1,7 +1,6 @@
 app.controller('HomeController',
-    function ($scope, ingredientService,
-        recipeFactory, homeService, $location,
-        notifyHelper, blockUI, UserSession) {
+    function ($scope, ingredientService,homeService, $location,
+        notifyHelper, UserSession) {
 
         //private    
         var self = this;
@@ -9,7 +8,9 @@ app.controller('HomeController',
         
         //set Values
         $scope.ingredientsTemplate = [];
-        $scope.advancedSettings = false;
+        $scope.omitRestrictions = false;
+        $scope.omitDislikeIngs = false;
+        $scope.omitCategories = false;
 
         //functions
         $scope.isEmpty = isEmpty;
@@ -36,10 +37,6 @@ app.controller('HomeController',
         function init() {
             $scope.ingredientsTemplate = homeService.initIngredients();  
             $scope.recipes = homeService.getRecipes();
-            $scope.omitRestrictions = true;
-            $scope.omitDislikeIngs = true;
-            $scope.omitCategories = true;
-
         };
 
         function getIngredients() {
@@ -71,11 +68,7 @@ app.controller('HomeController',
         }
 
         function getDetailIng(id) {
-            template = '/general/modals/ingredient';
-            controller = 'IngredientModalController';
-            ingredientFactory.get({ id: id }, function (ing) {
-                homeService.openModal(ing, template, controller);
-            });
+            ingredientService.getDetail(id);
         }
 
         function getDetailsRecipe(id) {
@@ -87,8 +80,16 @@ app.controller('HomeController',
             if (ingsToSend.length < 1) {
                 notifyHelper.warn('Debes seleccionar al menos un ingrediente');
             } else {
-                //completar settings
-               $scope.recipes =  homeService.search(ingsToSend, $scope.settings);
+               var settings = getSettings();
+               $scope.recipes =  homeService.search(ingsToSend, settings);
+            }
+        }
+
+        function getSettings() {
+            return {
+                omitRestrictions: $scope.omitRestrictions,
+                //omitDislikeIngs = $scope.omitDislikeIngs
+                omitCategories : $scope.omitCategories
             }
         }
 

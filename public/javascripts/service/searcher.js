@@ -12,9 +12,10 @@ function searcher(recipeFactory, blockUI, UserSession) {
     self.searchByProfile = searchByProfile;
 
     function searchByProfile(ings, userSettings) {
-        var profile = UserSession.profileInfo();
-        var recipeSearchParams = mapSettings(ings,userSettings);
-       return getRecipesBy(recipeSearchParams);
+        return UserSession.profileInfo().then(function(userSettings){
+            var recipeSearchParams = mapSettings(ings,userSettings);
+            return getRecipesBy(recipeSearchParams);
+        });
     }
 
     function search (ings) {
@@ -25,7 +26,7 @@ function searcher(recipeFactory, blockUI, UserSession) {
     function getRecipes() {
         return self.recipes;
     }
-    
+
     function getRecipesBy(recipeSearchParams) {
         blockUI.start();
         return recipeFactory.query({ recipe_search_params: recipeSearchParams }, function (recipes) {

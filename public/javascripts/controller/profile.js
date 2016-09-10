@@ -1,5 +1,5 @@
 app.controller('ProfileController',
-    function ($scope,ingredientFactory, categoriesFactory, userFactory, UserSession, ingredientService) {
+    function ($scope,ingredientFactory, categoriesFactory, userFactory, UserSession, ingredientService, restrictionsService) {
         $scope.user = {};
         $scope.categories = [];
         loadUser();
@@ -52,7 +52,7 @@ app.controller('ProfileController',
         };
 
         function loadRestrictions(){
-            return ['Celiaco', 'Diabetico', 'Vegetariano', 'Vegano'];
+            return restrictionsService.getRestrictions();
         }
 
         function loadUser(){

@@ -3,10 +3,10 @@ angular
     .service('homeService', homeService);
 
 function homeService($modal, UserSession, searcher ) {
+    
     var self = this;
     self.createEmptyIngredient = createEmptyIngredient
     self.initIngredients = initIngredients;
-    self.openModal = openModal;
     self.getIndexElemFrom = getIndexElemFrom;
     self.getIngsWithData = getIngsWithData;
     self.isEmpty = isEmpty;
@@ -58,22 +58,6 @@ function homeService($modal, UserSession, searcher ) {
             ingredients.push(ing);
         };
         return ingredients;
-    };
-
-
-    function openModal(item, template, controller) {
-        return $modal.open({
-            animation: true,
-            templateUrl: template,
-            controller: controller,
-            size: 'md',
-            resolve: {
-                item: function () {
-                    return item;
-                }
-            },
-            windowClass: 'menu-bar-space'
-        });
     };
 
     /*Se pasa el id del elemento(objeto) y una lista y se obtiene
