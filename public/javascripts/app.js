@@ -22,7 +22,7 @@ var app = angular.module('MainApp', [
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {
-  $httpProvider.defaults.headers.common = {};
+  $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
   $httpProvider.defaults.headers.post = {};
   $httpProvider.defaults.headers.put = {};
   $httpProvider.defaults.headers.patch = {};

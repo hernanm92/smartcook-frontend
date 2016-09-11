@@ -2,7 +2,7 @@ angular
     .module('MainApp')
     .service('ingredientService', ingredientService);
     
-    function ingredientService(ingredientFactory, $interval, $modal) {
+    function ingredientService(ingredientFactory, $interval, $modal, blockUI) {
         var self = this;
         self.ingredients = [];
         self.getIngredientsBy = getIngredientsBy;
@@ -20,9 +20,11 @@ angular
         }
 
         function getDetail(id) {
+            blockUI.start();
             template = '/general/modals/ingredient';
             controller = 'IngredientModalController';
             return ingredientFactory.get({id:id}, function (ing) {
+                blockUI.stop();
                 openModal(ing,template, controller )
             })
         }

@@ -7,3 +7,7 @@ module.factory('recipeFactory', ['$resource', 'config', function ($resource, con
     	}
     });
 }]);
+
+module.factory('recipeSearchFactory', ['$resource', 'config', function ($resource, config) {
+    return $resource(config.domain + '/recipes/search');
+}]);

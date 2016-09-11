@@ -2,7 +2,7 @@ angular
     .module('MainApp')
     .service('searcher', searcher);
 
-function searcher(recipeFactory, blockUI, UserSession) {
+function searcher(blockUI, UserSession, recipeSearchFactory) {
     var self = this;
     self.getRecipesBy = getRecipesBy;
     self.recipes = [];
@@ -12,39 +12,56 @@ function searcher(recipeFactory, blockUI, UserSession) {
     self.searchByProfile = searchByProfile;
 
     function searchByProfile(ings, userSettings) {
-        return UserSession.profileInfo().then(function(userSettings){
-            var recipeSearchParams = mapSettings(ings,userSettings);
-            return getRecipesBy(recipeSearchParams);
+        return UserSession.profileInfo().then(function (profile) {
+            return getRecipesBy(ings, userSettings, profile);
         });
     }
 
-    function search (ings) {
-        var recipe_search_params = {ingredients:ings};
-        return getRecipesBy(recipe_search_params);
-    }
-
-    function getRecipes() {
-        return self.recipes;
-    }
-
-    function getRecipesBy(recipeSearchParams) {
+    function search(ings) {
         blockUI.start();
-        return recipeFactory.query({ recipe_search_params: recipeSearchParams }, function (recipes) {
-            blockUI.stop();
-            return self.recipes = recipes; 
-        });
+        var ingsToSend = []
+        angular.forEach(ings, function (ing) {
+            ingsToSend.push(ing.id);
+        })
+        return recipeSearchFactory.query(
+            { ingredients: JSON.stringify(ingsToSend) },
+            function (recipes) {
+                blockUI.stop();
+                return self.recipes = recipes;
+            });
+    }
+
+    function getRecipesBy(ings, userSettings, profile) {
+        blockUI.start();
+        var params = mapSettings(userSettings, profile)
+        return recipeSearchFactory.query(
+            {
+                ingredients: ings,
+                food_categories: params.food_categories,
+                vegan: params.vegan,
+                vegetarian: params.vegetarian,
+                celiac: params.vegetarian,
+                diabetic: params.diabetic
+            },
+            function (recipes) {
+                blockUI.stop();
+                return self.recipes = recipes;
+            });
     }
 
     function resetRecipes() {
         self.recipes = [];
     }
 
-        function mapSettings(ings, userSettings, profile) {
+    function getRecipes() {
+        return self.recipes;
+    }
+
+    function mapSettings(userSettings, profile) {
         var dto = {};
-        userSettings.omitRestrictions ?  omitRestrictions(dto) : considerRestrictions(dto,profile);
+        userSettings.omitRestrictions ? omitRestrictions(dto) : considerRestrictions(dto, profile);
         //userSettings.omitDislikeIngs ? dto.disLikeIngs = [] : dto.disLikeIngs = profile.disLikeIngs;
         userSettings.omitCategories ? dto.food_categories = [] : dto.food_categories = profile.food_categories;
-        dto.ingredients = ings;
         return dto;
     }
 
@@ -73,5 +90,6 @@ function searcher(recipeFactory, blockUI, UserSession) {
       celiac: params[:celiac],
       diabetic: params[:diabetic]
     }
+    Cambio vegan, vegetarian, etc  x  restrictions 
   end*/
 
