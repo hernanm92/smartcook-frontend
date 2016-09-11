@@ -40,6 +40,7 @@ app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/validate', { templateUrl: 'general/validate', controller: 'ValidateController' });
   $routeProvider.when('/Recipe/Create', { templateUrl: 'general/createRecipe', controller: 'CreateRecipeController' });
   $routeProvider.when('/aboutUs', { templateUrl: 'general/aboutus', controller: 'AboutUsController'});
+  $routeProvider.when('/addCommensal', { templateUrl: 'general/addCommensal', controller: 'AddCommensalController'});
   $routeProvider.when('/loadIngredient', { templateUrl: 'general/loadIngredient', controller: 'LoadIngredientController'});
   $routeProvider.when('/recipe/:id/detail', { templateUrl: 'general/detail-recipe', controller: 'RecipeViewController' });
 }]);
