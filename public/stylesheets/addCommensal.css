@@ -1,0 +1,11 @@
+.addCommensalButton{
+    border-width:0;
+    background-color:transparent;
+    outline-width:0;
+    -webkit-transition: width 2s; /* Safari */
+    transition: width 2s;
+}
+.addCommensalButton i{
+    outline-width:0;
+    color:goldenrod;
+}

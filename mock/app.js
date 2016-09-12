@@ -195,6 +195,11 @@ app.get('/user/:id', function (req, res) {
   }
 });
 
+app.get('/user', function (req, res) {
+  res.status(200);
+  res.send(users);
+});
+
 app.get('/users/newId', function (req, res) {
   var usersIds = [];
   for(i = 0; i < users.length; i++) usersIds.push(users[i].id);
