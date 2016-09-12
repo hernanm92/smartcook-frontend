@@ -11,10 +11,11 @@ app.controller('AddCommensalController',
         }
 
         function updateSearchedUsers(){
-//            var users = userFactory.query().$promise;
-//            $scope.resultUsers = $(users).filter(function(user) {
-//                user.userName.toLowerCase().indexOf($scope.searchedUser.toLowerCase()) != -1;});;
-            $scope.resultUsers = userFactory.query();
+            var users = userFactory.query(function(){
+                $scope.resultUsers = $(users).filter(function() {
+                return this.userName.toLowerCase().indexOf($scope.searchedUser.toLowerCase()) != -1;
+                });
+            });
         };
 
     }

@@ -195,19 +195,6 @@ app.get('/user/:id', function (req, res) {
   }
 });
 
-app.get('/user/:userName', function (req, res) {
-  var userName = req.params.userName
-  var result = [];
-  for (var i = 0; i < users.length; i++) {
-    var user = users[i];
-    if (user.userName.indexOf(userName) > -1) {
-        result.push(user.userName);
-    }
-  res.status(200);
-  res.send(result);
-  }
-});
-
 app.get('/user', function (req, res) {
   res.status(200);
   res.send(users);
