@@ -64,6 +64,7 @@ module.exports = function(grunt) {
     "public/javascripts/controller/modals/ingredient.js",
     "public/javascripts/controller/modals/recipe.js",
     "public/javascripts/controller/recipe-view.js",
+    "public/javascripts/controller/edit-recipe.js",
 
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",

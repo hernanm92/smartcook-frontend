@@ -16,7 +16,7 @@ var app = angular.module('MainApp', [
   'itemModule',
   'blockUI',
   'angularSpinner',
-  'ngFileUpload', 
+  'ngFileUpload',
   'azureBlobUpload',
   'ingredientPerRecipeModule'
 ]);
@@ -39,9 +39,13 @@ app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/top-listing', { templateUrl: 'general/top-listing', controller: 'TopListingController' });
   $routeProvider.when('/validate', { templateUrl: 'general/validate', controller: 'ValidateController' });
   $routeProvider.when('/Recipe/Create', { templateUrl: 'general/createRecipe', controller: 'CreateRecipeController' });
-  $routeProvider.when('/aboutUs', { templateUrl: 'general/aboutus', controller: 'AboutUsController'});
-  $routeProvider.when('/loadIngredient', { templateUrl: 'general/loadIngredient', controller: 'LoadIngredientController'});
+  $routeProvider.when('/aboutUs', { templateUrl: 'general/aboutus', controller: 'AboutUsController' });
+  $routeProvider.when('/loadIngredient', { templateUrl: 'general/loadIngredient', controller: 'LoadIngredientController' });
   $routeProvider.when('/recipe/:id/detail', { templateUrl: 'general/detail-recipe', controller: 'RecipeViewController' });
+  $routeProvider.when('/recipe/:id/edit', {
+    templateUrl: 'general/createRecipe',
+    controller: 'EditRecipeController'
+  });
 }]);
 
 app.config(['$httpProvider', function ($httpProvider) {

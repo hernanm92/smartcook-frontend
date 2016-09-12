@@ -57,10 +57,10 @@
                                 {{ing.name}}
                             </td>
                             <td>
-                                <input ng-model="ing.quantity" type="number">
-                            </td>
+                                <input ng-model="ing.amount" type="number">
+                            </td>   
                             <td>
-                                <select ng-model="ing.unit" ng-options="unity.name for unity in units"></select>
+                                <select  ng-model="ing.unit" ng-options="unit.name for unit in units"></select>
                             </td>
                         </tr>
                     </tbody>
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
                 <p ng-show=" !(recipe.steps.length > 0) && submitted" style="color:red;">La receta debe de tener al menos un Paso</p>
