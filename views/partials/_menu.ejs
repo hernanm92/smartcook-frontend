@@ -62,7 +62,7 @@
                     <!-- End Profile -->
 
                     <!-- Search -->
-                    <li class="dropdown" style ="position: relative" >
+                    <li ng-if="token()" class="dropdown" style ="position: relative" >
                         <a href="#/" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                             Buscar
                         </a>
@@ -90,13 +90,13 @@
                         </a>
                     </li>
                     <!-- End Validate -->
-                    <li class="dropdown">
+                    <li ng-if="token()" class="dropdown">
                         <a href="#/login" ng-if="!token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                             Ingresar
                         </a>
                     </li>
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
+                <form ng-if="token()" class="navbar-form navbar-left" role="search">
                     <div class="form-group">
                         <input 
                             ng-model = "recipeSelected" 

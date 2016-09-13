@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   var fileList = [
     "public/javascripts/config.js",
@@ -36,6 +36,10 @@ module.exports = function(grunt) {
     "public/javascripts/plugins/ng-file-upload-shim.min.js",
     "public/javascripts/plugins/ng-file-upload.min.js",
     "public/javascripts/plugins/azure-blob-upload.js",
+    "public/javascripts/plugins/jquery.countdown.js",
+    "public/javascripts/plugins/jquery.ba-throttle-debounce.min.js",
+    "public/javascripts/plugins/jquery.knob.js",
+    "public/javascripts/plugins/angular_circle_countdown.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
@@ -66,6 +70,7 @@ module.exports = function(grunt) {
     "public/javascripts/controller/modals/recipe.js",
     "public/javascripts/controller/recipe-view.js",
     "public/javascripts/controller/edit-recipe.js",
+    "public/javascripts/controller/counter.js",
 
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",
@@ -84,7 +89,7 @@ module.exports = function(grunt) {
 
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
-    
+
     "public/javascripts/service/home.js"
   ]
 
@@ -108,29 +113,30 @@ module.exports = function(grunt) {
     "public/stylesheets/ui-bootstrap-csp.css",
     "public/stylesheets/home/home.css",
     "public/stylesheets/angular-block-ui.min.css",
-    "public/stylesheets/detail-recipe.css"
+    "public/stylesheets/detail-recipe.css",
+    "public/stylesheets/angular_circle_countdown.css"
   ]
 
   var stageCss = ["public/stylesheets/*.css",
-  //"public/stylesheets/angular-growl.min.css",
-  //"public/stylesheets/loading-button.min.css",
-  //"public/stylesheets/awesome-bootstrap-checkbox.min.css",
-  //"public/stylesheets/loaders.min.css",
-  "public/stylesheets/stage/bootstrap.min.css",
-  "public/stylesheets/stage/fury.css"
+    //"public/stylesheets/angular-growl.min.css",
+    //"public/stylesheets/loading-button.min.css",
+    //"public/stylesheets/awesome-bootstrap-checkbox.min.css",
+    //"public/stylesheets/loaders.min.css",
+    "public/stylesheets/stage/bootstrap.min.css",
+    "public/stylesheets/stage/fury.css"
   ]
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     cssmin: {
-      ugly:{
-        options: {
+      ugly: {
+        options:  {
           processImport: true
         },
         files: {
           'public/minified/all.min.css': cssFileList
         }
       },
-      beautiful:{
+      beautiful: {
         options: {
           advanced: false,
           keepBreaks: true,
@@ -142,14 +148,14 @@ module.exports = function(grunt) {
       },
     },
     jsvalidate: {
-      options:{
+      options: {
         globals: {},
         esprimaOptions: {},
         verbose: false
       },
-      targetName:{
-        files:{
-          src:fileList
+      targetName: {
+        files: {
+          src: fileList
         }
       }
     },
@@ -174,15 +180,16 @@ module.exports = function(grunt) {
         }
       }
     },
-    watch: {  public: {
-      files: ['public/stylesheets/*.css', 'public/javascripts/**/*.js','public/stylesheets/**/*.css'],
+    watch: {
+      public: {
+        files: ['public/stylesheets/*.css', 'public/javascripts/**/*.js', 'public/stylesheets/**/*.css'],
         tasks: ['development'],
         options: {
           event: ['added', 'deleted', 'changed'],
           livereaload: true,
-          reload : true
+          reload: true
         }
-    }
+      }
     },
     ngconstant: {
       development: {
@@ -230,9 +237,9 @@ module.exports = function(grunt) {
   var target = grunt.option('target') || 'development';
   grunt.registerTask('development', ['ngconstant:' + target, 'jsvalidate', 'uglify:beautiful', 'cssmin:beautiful']);
 
-  grunt.registerTask('production', ['ngconstant:production','uglify:ugly', 'cssmin:ugly']);
+  grunt.registerTask('production', ['ngconstant:production', 'uglify:ugly', 'cssmin:ugly']);
 
-  grunt.registerTask('stage', ['ngconstant:stage','uglify:beautiful', 'cssmin:beautiful']);
+  grunt.registerTask('stage', ['ngconstant:stage', 'uglify:beautiful', 'cssmin:beautiful']);
 
   grunt.loadNpmTasks('grunt-ng-constant');
 

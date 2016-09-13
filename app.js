@@ -25,7 +25,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
-
+app.get('/general/countDown', function (req, res) {
+    res.render('general/countDown');
+});
 app.get('/', function (req, res) {
     res.render('index');
 });

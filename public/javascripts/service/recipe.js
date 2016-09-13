@@ -97,15 +97,18 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     function mapToView(ingDesc, ingAmounts) {
         return {
             name: ingDesc.name,
-            amount: ingAmounts.amount
+            amount: ingAmounts.amount,
+            unit: getUnitBy(ingAmounts.unit)
         }
     }
 
     function getUnitBy(name) {
-        return angular.forEach(self.units, function (unit) {
-            if (unit.name.indexOf(name) > -1){
-                return unit;
-            }
-        })
+        var unitFound = null;
+        angular.forEach(self.units, function (unit) {
+            if (unit.name === name){
+                var unitFound = unit;
+            };
+        });
+        return unitFound;
     }
 };

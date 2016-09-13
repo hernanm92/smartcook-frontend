@@ -18,7 +18,8 @@ var app = angular.module('MainApp', [
   'angularSpinner',
   'ngFileUpload',
   'azureBlobUpload',
-  'ingredientPerRecipeModule'
+  'ingredientPerRecipeModule',
+  'circle.countdown'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {
@@ -31,7 +32,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 }]);
 
 app.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider.when('/', { templateUrl: 'general/home', controller: 'HomeController' });
+  $routeProvider.when('/', { templateUrl: 'general/countDown', controller: 'CounterController' });
   $routeProvider.when('/profile', { templateUrl: 'general/profile', controller: 'ProfileController' });
   $routeProvider.when('/login', { templateUrl: 'general/login', controller: 'LoginController' });
   $routeProvider.when('/register', { templateUrl: 'general/register', controller: 'RegisterController' });
