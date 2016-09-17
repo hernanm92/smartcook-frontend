@@ -187,7 +187,7 @@ app.get('/login/facebook/:id', function (req, res) {
 });
 
 //-------------------------users-------------------------
-app.get('/user/:id', function (req, res) {
+app.get('/users/:id', function (req, res) {
   var id = req.params.id
   for (var i = 0; i < users.length; i++) {
     var user = users[i];
@@ -198,7 +198,7 @@ app.get('/user/:id', function (req, res) {
   }
 });
 
-app.get('/user', function (req, res) {
+app.get('/users', function (req, res) {
   res.status(200);
   res.send(users);
 });
@@ -211,7 +211,7 @@ app.get('/users/newId', function (req, res) {
   res.send(newId);
 });
 
-app.post('/user',function(req,res){
+app.post('/users',function(req,res){
     var object = req.body;
     object["id"] = users.length+1;
     users.push(object);
