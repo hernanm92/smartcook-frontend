@@ -100,14 +100,14 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input 
-                            ng-model = "recipeSelected" 
-                            typeahead-min-length="3" 
-                            typeahead-append-to-body="false"  
-                            typeahead-on-select="getDetailRecipe(recipeSelected.id)" 
-                            typeahead = "recipe as recipe.name for recipe in getRecipes() | filter:{name: $viewValue} | orderBy: 'name'| limitTo:10" 
-                            type="text" 
-                            class=" search-input form-control" 
+                        <input
+                            ng-model = "recipeSelected"
+                            typeahead-min-length="3"
+                            typeahead-append-to-body="false"
+                            typeahead-on-select="getDetailRecipe(recipeSelected.id)"
+                            typeahead = "recipe as recipe.name for recipe in getRecipes() | filter:{name: $viewValue} | orderBy: 'name'| limitTo:10"
+                            type="text"
+                            class=" search-input form-control"
                             placeholder="Buscar recetas por nombre"
                             typeahead-input-formatter="empty"
                             >

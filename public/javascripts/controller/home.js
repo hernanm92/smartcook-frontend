@@ -2,10 +2,10 @@ app.controller('HomeController',
     function ($scope, ingredientService,homeService, $location,
         notifyHelper, UserSession) {
 
-        //private    
+        //private
         var self = this;
         self.ingsToSend = [];
-        
+
         //set Values
         $scope.ingredientsTemplate = [];
         $scope.omitRestrictions = false;
@@ -35,7 +35,7 @@ app.controller('HomeController',
         init();
 
         function init() {
-            $scope.ingredientsTemplate = homeService.initIngredients();  
+            $scope.ingredientsTemplate = homeService.initIngredients();
             $scope.recipes = homeService.getRecipes();
         };
 
@@ -76,7 +76,7 @@ app.controller('HomeController',
         }
 
         function search() {
-            var ingsToSend = homeService.getIngsWithData($scope.ingredientsTemplate); 
+            var ingsToSend = homeService.getIngsWithData($scope.ingredientsTemplate);
             if (ingsToSend.length < 1) {
                 notifyHelper.warn('Debes seleccionar al menos un ingrediente');
             } else {

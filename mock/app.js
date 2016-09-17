@@ -58,7 +58,12 @@ var users = [
   { id: 4, firstName: 'Hernan', userName: 'hmaschwitz', lastName: 'Maschwitz', email: 'hernanm992@gmail.com',
     gender:'', dateOfBirth:'', password:'outsider', avatar: 'https://imgsmartcook.blob.core.windows.net/profile/HernanMaschwitz.jpg'},
     { id: 5, firstName: 'Admin', userName:'admin', lastName: 'Admin', email: 'smartcookweb@gmail.com',
-        gender:'', dateOfBirth:'', password:'1234', avatar: 'img/profile-avatar.jpg',facebookId:'0' },
+        gender:'', dateOfBirth:'', password:'1234', avatar: 'img/profile-avatar.jpg',facebookId:'0' }
+];
+
+var frequentCommensal = [
+    {frequent_username:'boba',username:'matileon'},
+    {frequent_username:'hmaschwitz',username:'matileon'}
 ];
 
 app.get('/categories/:text', function (req, res) {
@@ -136,7 +141,6 @@ app.post('/login', function (req, res) {
     for(i; i < users.length; i++){
     console.log(i);
         var iUser = users[i];
-        console.log(req.body);
         if(req.body.userName.toLowerCase() == iUser.userName.toLowerCase()
         && req.body.pass == iUser.password){
             var token = jwt.sign(iUser, app.get('superSecret'), {
@@ -147,7 +151,6 @@ app.post('/login', function (req, res) {
             });
           }
     }
-    console.log("sali del for");
     res.json({
       success: false
     });
@@ -215,7 +218,17 @@ app.post('/user',function(req,res){
     res.status(200);
     res.send('Llego correctamente el usuario');
 });
-
+//-------------------------frequent commensals-------------------------
+app.get('/frequentCommensal/:username', function (req, res) {
+  var user = req.params.username
+  var freqs = [];
+  for (var i = 0; i < frequentCommensal.length; i++) {
+    var freq = frequentCommensal[i];
+    if (freq.username == user) freqs.push(freq.frequent_username.toLowerCase());
+  }
+  res.status(200);
+  res.send(freqs);
+});
 //-------------------------items-----------------------
 app.get('/items/:text', function (req, res) {
   var items = [];
