@@ -3,7 +3,19 @@
         <img class="img-responsive" src="img/banner-commensal.jpg" style="width:100%"/>
     </div>
     <div class="col-sm-12" style="margin-top:20px">
-        <input id="searchedUser" ng-keyup="updateSearchedUsers()" class="form-control" type="text" ng-model="searchedUser"
+        <div ng-repeat="freq in frequentCommensals track by $index" class="col-sm-6" style="margin:10px 0px">
+            <img ng-src="{{freq.avatar}}" class="img-responsive img-circle"
+                 alt="{{freq.userName}} profile picture" style="max-width:100px; display:inline">
+            <h2 style="display:inline; text-transform:uppercase">{{freq.userName}}</h2>
+            <button class="addCommensalButton" type="btn">
+                <i class="fa fa-star fa-2x" aria-hidden="true"
+                   ng-mouseover="hoverAddCommensalButton($event)"
+                   ng-mouseleave="hoverAddCommensalButton($event)"
+                   ng-click="removeCommensal($event)"></i>
+            </button>
+        </div>
+        <input id="searchedUser" ng-keyup="updateSearchedUsers()" class="form-control" type="text"
+               ng-model="searchedUser"
                placeholder="Ingrese el nombre del usuario a encontrar" style="width:100%" autofocus="autofocus"/>
     </div>
     <div id="searchedUsersResults" class="container" style="margin:20px 0px">
@@ -15,7 +27,7 @@
                 <i class="fa fa-star-o fa-2x" aria-hidden="true"
                    ng-mouseover="hoverAddCommensalButton($event)"
                    ng-mouseleave="hoverAddCommensalButton($event)"
-                   ng-click="hoverAddCommensalButton($event)"></i>
+                   ng-click="addCommensal($event)"></i>
             </button>
         </div>
     </div>
