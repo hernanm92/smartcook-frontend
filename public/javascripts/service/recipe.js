@@ -105,7 +105,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     function getUnitBy(name) {
         var unitFound = null;
         angular.forEach(self.units, function (unit) {
-            if (unit.name === name){
+            if (unit.name === name) {
                 var unitFound = unit;
             };
         });
