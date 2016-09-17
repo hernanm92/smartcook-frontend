@@ -17,9 +17,10 @@ var app = angular.module('MainApp', [
   'itemModule',
   'blockUI',
   'angularSpinner',
-  'ngFileUpload', 
+  'ngFileUpload',
   'azureBlobUpload',
-  'ingredientPerRecipeModule'
+  'ingredientPerRecipeModule',
+  'circle.countdown'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {
@@ -32,7 +33,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 }]);
 
 app.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider.when('/', { templateUrl: 'general/home', controller: 'HomeController' });
+  $routeProvider.when('/', { templateUrl: 'general/countDown', controller: 'CounterController' });
   $routeProvider.when('/profile', { templateUrl: 'general/profile', controller: 'ProfileController' });
   $routeProvider.when('/login', { templateUrl: 'general/login', controller: 'LoginController' });
   $routeProvider.when('/register', { templateUrl: 'general/register', controller: 'RegisterController' });
@@ -40,10 +41,14 @@ app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/top-listing', { templateUrl: 'general/top-listing', controller: 'TopListingController' });
   $routeProvider.when('/validate', { templateUrl: 'general/validate', controller: 'ValidateController' });
   $routeProvider.when('/Recipe/Create', { templateUrl: 'general/createRecipe', controller: 'CreateRecipeController' });
-  $routeProvider.when('/aboutUs', { templateUrl: 'general/aboutus', controller: 'AboutUsController'});
+  $routeProvider.when('/aboutUs', { templateUrl: 'general/aboutus', controller: 'AboutUsController' });
+  $routeProvider.when('/loadIngredient', { templateUrl: 'general/loadIngredient', controller: 'LoadIngredientController' });
   $routeProvider.when('/addCommensal', { templateUrl: 'general/addCommensal', controller: 'AddCommensalController'});
-  $routeProvider.when('/loadIngredient', { templateUrl: 'general/loadIngredient', controller: 'LoadIngredientController'});
   $routeProvider.when('/recipe/:id/detail', { templateUrl: 'general/detail-recipe', controller: 'RecipeViewController' });
+  $routeProvider.when('/recipe/:id/edit', {
+    templateUrl: 'general/createRecipe',
+    controller: 'EditRecipeController'
+  });
 }]);
 
 app.config(['$httpProvider', function ($httpProvider) {

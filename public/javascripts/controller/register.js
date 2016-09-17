@@ -42,7 +42,7 @@ app.controller('RegisterController',
         }
 
         initDatepicker();
-        
+
         $scope.clear = function () {
             $scope.dt = null;
         };
@@ -57,68 +57,68 @@ app.controller('RegisterController',
 
         // -----------------------------------------------------------------------------
 
-        function genderSelected(){
+        function genderSelected() {
             return $('select[name="gender"]').val() != null;
         }
 
-        function hasErrors(){
+        function hasErrors() {
             return $('.state-error').length != "0";
         }
 
-        function validateForm(isValid){
+        function validateForm(isValid) {
             $scope.submitted = true;
 
-            if(isValid && genderSelected() && !hasErrors()){
+            if (isValid && genderSelected() && !hasErrors()) {
                 confirmForm();
                 return true;
-            }else{
+            } else {
                 return false;
             }
         };
 
-        function openModal(message,title) {
+        function openModal(message, title) {
             return $modal.open({
                 animation: true,
                 templateUrl: '/general/confirmForm',
                 controller: 'ModalController',
-                size:'sm',
-                resolve:{
-                    message:function () {
+                size: 'sm',
+                resolve: {
+                    message: function () {
                         return message;
                     },
-                    title:function(){
+                    title: function () {
                         return title
                     }
                 },
-                windowClass:'menu-bar-space'
+                windowClass: 'menu-bar-space'
             });
         };
 
-        function confirmForm(){
-             var message = 'Presione Aceptar para crear el usuario';
-             var title = 'Crear Usuario';
-             openModal(message,title).result.then(function(){
-                 saveUser();
+        function confirmForm() {
+            var message = 'Presione Aceptar para crear el usuario';
+            var title = 'Crear Usuario';
+            openModal(message, title).result.then(function () {
+                saveUser();
             });
         };
 
         function saveUser() {
-            var user = new User($scope.user.firstName,$scope.user.lastName,$scope.user.gender,
-                $scope.user.dateOfBirth,$scope.user.userName,$scope.user.email,$scope.user.password);
+            var user = new User($scope.user.firstName, $scope.user.lastName, $scope.user.gender,
+                $scope.user.dateOfBirth, $scope.user.userName, $scope.user.email, $scope.user.password);
 
-            userFactory.save(user,function (res) {
+            userFactory.save(user, function (res) {
                 var message = 'El usuario ha sido creado satisfactoriamente. Desea ingresar con su nuevo Usuario?';
                 var title = 'Usuario Creado';
-                openModal(message,title).result.then(function(){
-                     window.location.href = "#/login";
+                openModal(message, title).result.then(function () {
+                    window.location.href = "#/login";
                 });
             });
-       };
+        };
 
 
 
         $scope.test = function () {
             console.log(UserSession.getUsername());
-         };
+        };
     }
 );

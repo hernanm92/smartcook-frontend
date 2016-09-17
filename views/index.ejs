@@ -55,11 +55,12 @@
 
 </head>
 
-<body flow-prevent-drop class="header-fixed" ng-controller="MenuController">
+<body flow-prevent-drop class="header-fixed" >
     <div id="fb-root"></div>
     <div class="wrapper">
         <% include partials/_menu %>
         <ng-view></ng-view>
+
         <% include partials/_footer %>
     </div><!--/wrapper-->
 
@@ -95,6 +96,8 @@
 <script src="assets/js/forms/page_registration.js"></script>
 <script src="assets/js/plugins/mouse-wheel.js"></script>
 <script src="assets/js/plugins/notify.min.js"></script>
+<script src="assets/js/plugins/jquery.ba-throttle-debounce.min.js"></script>
+<script src="assets/js/plugins/jquery.knob.js"></script>
 
 </body>
 </html>
