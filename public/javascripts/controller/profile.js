@@ -57,8 +57,7 @@ app.controller('ProfileController',
         }
 
         function setValues(values) {
-            $scope.profile = new Profile(null, null,null, [], [], [], []);
-            $scope.profile = values.profile
+            $scope.profile = new Profile(values.profile.username, values.profile.email, values.profile.avatar, [], [], [], []);
             setRestrictions(values.profile);
             $scope.profile.categories = values.categories;
             $scope.profile.recipes = myrecipes;//aca va values.recipe
@@ -116,11 +115,10 @@ app.controller('ProfileController',
         }
 
         function setRestrictions(profile) {
-            $scope.profile.restrictions
-            profile.celiac ? $scope.profile.restrictions.push('Celiaco') : null;
-            profile.vegan ? $scope.profile.restrictions.push('Vegano') : null;
-            profile.vegetarian ? $scope.profile.restrictions.push('Vegetariano') : null;
-            profile.diabetic ? $scope.profile.restrictions.push('Diabetico') : null;
+            $scope.profile.restrictions.push({name:'Celiaco', hasRestriction: profile.celiac});
+            $scope.profile.restrictions.push({name:'Vegano', hasRestriction: profile.vegan});
+            $scope.profile.restrictions.push({name:'Vegetariano', hasRestriction: profile.vegetarian});
+            $scope.profile.restrictions.push({name:'Diabetico', hasRestriction: profile.diabetic});
         }
 
         function addedPhoto(flowObject, event, flow) {

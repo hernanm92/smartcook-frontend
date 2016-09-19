@@ -18,7 +18,7 @@
                     <h3>Mail</h3>
                 </div>
                 <div>
-                    <label class="profile-email">{{profile.mail}}</label>
+                    <label class="profile-email">{{profile.email}}</label>
                 </div>
                 <div>
                     <h3>Fecha de nacimiento</h3>
@@ -36,10 +36,10 @@
                         <div class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <ul class="list-unstyled checkbox-list">
-                                    <li ng-repeat="restriction in restrictions">
+                                    <li ng-repeat="restriction in profile.restrictions">
                                         <label class="checkbox">
                                         <input type="checkbox" 
-                                        ng-checked="profile.restrictions.indexOf(restrictions[$index].name) > -1">
+                                               ng-model="restriction.hasRestriction">
                                         <i></i>
                                         {{restriction.name}}
                                     </label>

@@ -215,7 +215,7 @@ module.exports = function (grunt) {
         },
         constants: {
           config: {
-            domain: 'http://40.117.191.211:3000',
+            domain: 'http://api-smartcook.eastus.cloudapp.azure.com:3000',
             styleFolder: 'common',
             applicationPrefix: ''
           }

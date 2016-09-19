@@ -3,9 +3,9 @@
         factory('Profile', ProfileFactory);
 
     function ProfileFactory() {
-        function Profile(username, mail, avatar, recipes, categories, ingredients, restrictions) {
+        function Profile(username, email, avatar, recipes, categories, ingredients, restrictions) {
             this.username = username;
-            this.mail = mail;
+            this.email = email;
             this.avatar = avatar;
             this.recipes = recipes;
             this.categories = categories;
