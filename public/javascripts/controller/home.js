@@ -1,5 +1,5 @@
 app.controller('HomeController',
-    function ($scope, ingredientService,homeService, $location,
+    function ($scope, ingredientService, homeService, $location,
         notifyHelper, UserSession) {
 
         //private
@@ -80,8 +80,8 @@ app.controller('HomeController',
             if (ingsToSend.length < 1) {
                 notifyHelper.warn('Debes seleccionar al menos un ingrediente');
             } else {
-               var settings = getSettings();
-               $scope.recipes =  homeService.search(ingsToSend, settings);
+                var settings = getSettings();
+                $scope.recipes = homeService.search(ingsToSend, settings);
             }
         }
 
@@ -89,7 +89,7 @@ app.controller('HomeController',
             return {
                 omitRestrictions: $scope.omitRestrictions,
                 //omitDislikeIngs = $scope.omitDislikeIngs
-                omitCategories : $scope.omitCategories
+                omitCategories: $scope.omitCategories
             }
         }
 

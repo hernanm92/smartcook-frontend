@@ -20,7 +20,9 @@ var app = angular.module('MainApp', [
   'ngFileUpload',
   'azureBlobUpload',
   'ingredientPerRecipeModule',
-  'circle.countdown'
+  'circle.countdown',
+  'foodCategoriesPerUserModule',
+  'recipePerUserModule'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {

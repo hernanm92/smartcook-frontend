@@ -14,9 +14,10 @@ function azureService($http, azureBlob) {
         getTokenSas(settings).then(function (sasToken) {
             azureBlob.upload({
                 baseUrl: getUrlImg(name, container),
-                sasToken: '?'+ sasToken.data,
+                sasToken: '?' + sasToken.data,
                 file: photoFile,
                 complete: function (res) {
+                    return res;
                 },
                 blockSize: photoFile.size
             })

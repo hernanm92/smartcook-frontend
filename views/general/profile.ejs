@@ -1,99 +1,128 @@
 <div class="container" style="padding-top: 90px;">
-    <form name="recipeForm" ng-submit="validateForm(recipeForm.$valid)" novalidate>
+    <div class="pull-left profile-username margin-bottom-20">
+        <h2>{{profile.username}}</h2>
+    </div>
+</div>
+<div class="shop-product">
+    <div class="container">
         <div class="row">
-            <div flow-init class="col-sm-6">
-                <div>
-                    <label class="profile-username">{{user.firstName}}</label>
-                </div>
-                <div>
-                    <label class="profile-email">{{user.email}}</label>
-                </div>
-                <div style="width:300px">
-                    <hr>
-                </div>
+            <div flow-init class="col-sm-4">
                 <div flow-drop>
-                    <img flow-img="$flow.files[$flow.files.length-1]" ng-src="{{user.avatar}}" width="300px" height="300px">
+                    <img class="img-rounded" flow-img="$flow.files[0]" flow-file-added="addedPhoto($file, $event, $flow)" ng-src="{{profile.avatar}}"
+                        width="300px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
                 </div>
+                <div>
+                    <h3>Mail</h3>
+                </div>
+                <div>
+                    <label class="profile-email">{{profile.email}}</label>
+                </div>
+                <div>
+                    <h3>Fecha de nacimiento</h3>
+                </div>
+                <div>
+                    <label class="profile-email">{{profile.birthdate}}</label>
+                </div>
             </div>
             <div class="col-sm-6">
-                <div class="row">
-                    <label class="profile-restrictions">Restricciones Alimenticias</label>
+                <div class="shop-product-heading">
+                    <h2>Restricciones Alimenticias</h2>
                 </div>
-                <div ng-repeat="restriction in restrictions" ng-if="$index % 2 == 0" class="row">
-                    <div class="col-sm-6">
-                        <label class="restrictionItem">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <ul class="list-unstyled checkbox-list">
+                                    <li ng-repeat="restriction in profile.restrictions">
+                                        <label class="checkbox">
+                                        <input type="checkbox" 
+                                               ng-model="restriction.hasRestriction">
+                                        <i></i>
+                                        {{restriction.name}}
+                                    </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div ng-repeat="restriction in restrictions" ng-if="$index % 2 == 0" class="row">
+                <div class="col-sm-6">
+                    <label class="restrictionItem">
                             <input
                                     type="checkbox"
                                     name="selectedRestrictions[]"
                                     value="{{restrictions[$index].name}}"
-                                    ng-checked="restrictionsSelection.indexOf(restrictions[$index].name) > -1"
+                                    ng-checked="profile.restrictions.indexOf(restrictions[$index].name) > -1"
                                     ng-click="toggleSelection(restrictions[$index].name)"
                             > {{restrictions[$index].name}}
                         </label>
-                    </div>
-                    <div class="col-sm-6" ng-if="restrictions.length > ($index + 1)">
-                        <label class="restrictionItem">
+                </div>
+                <div class="col-sm-6" ng-if="restrictions.length > ($index + 1)">
+                    <label class="restrictionItem">
                             <input
                                     type="checkbox"
                                     name="selectedRestrictions[]"
                                     value="{{restrictions[$index+1].name}}"
-                                    ng-checked="restrictionsSelection.indexOf(restrictions[$index+1].name) > -1"
+                                    ng-checked="profile.restrictions.indexOf(restrictions[$index+1].name) > -1"
                                     ng-click="toggleSelection(restrictions[$index+1].name)"
                             > {{restrictions[$index+1].name}}
                         </label>
-                    </div>
                 </div>
-                <div class="row" >
-                    <label class="profile-restrictions">Categorias Excluidas</label>
-                    <tags-input ng- ng-model="excludedCategories" display-property="name" add-from-autocomplete-only="true">
-                        <auto-complete highlight-matched-text=false min-length="1"
-                                       source="loadExcludedCategories($query)"></auto-complete>
-                    </tags-input>
+           </div>-->
+
+                <div class="shop-product-heading">
+                    <h2>Categorias Excluidas</h2>
                 </div>
-                <div class="row">
-                    <label class="profile-restrictions">Ingredientes Excluidos</label>
-                    <tags-input ng-model="excludedIngredients" display-property="name"
-                                add-from-autocomplete-only="true">
-                        <auto-complete highlight-matched-text=false min-length="1"
-                                       source="loadExcludedIngredients($query)"></auto-complete>
-                    </tags-input>
+                <tags-input ng- ng-model="profile.categories" display-property="name" add-from-autocomplete-only="true">
+                    <auto-complete highlight-matched-text=false min-length="1" source="loadExcludedCategories($query)"></auto-complete>
+                </tags-input>
+                <div class="shop-product-heading">
+                    <h2>Ingredientes Excluidos</h2>
                 </div>
+                <tags-input ng-model="profile.ingredients" display-property="name" add-from-autocomplete-only="true">
+                    <auto-complete highlight-matched-text=false min-length="1" source="loadExcludedIngredients($query)"></auto-complete>
+                </tags-input>
             </div>
         </div>
-        <div class="row">
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="padding-top: 20px;">
+            <div class="row panel-align" style="margin-right:0px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center">Mis Recetas</h3>
+                    </div>
+                    <div class="panel-body">
 
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="padding-top: 20px;">
-                <div class="row panel-align" style="margin-right:0px;">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title text-center">Mis Recetas</h3>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="col-xs-6 col-md-3 userRecipe" ng-repeat="recipe in userRecipes"
-                                 style="text-align:center">
-                                <label>
+                        <div class="col-xs-6 col-md-3 userRecipe" ng-repeat="recipe in profile.recipes" style="text-align:center">
+                            <label>
                                     {{recipe.name}}
                                 </label>
-                                <a class="thumbnail">
-                                    <img ng-src="{{recipe.photo}}" alt="...">
-                                </a>
-                                <div class="recipeEdit">
-                                    <a href="#/recipe/{{recipe.id}}/edit"> Editar</a>
-                                </div>
+                            <a class="thumbnail">
+                                <img ng-src="{{recipe.photo}}" alt="...">
+                            </a>
+                            <div class="recipeEdit">
+                                <a href="#/recipe/{{recipe.id}}/edit"> Editar</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+    <div class="row">
+        <div class="col-md-4" style="margin-bottom: 20px;">
+            <button type="submit" ng-click="save()" class="btn-u btn-u-sea-shop btn-u-md">Guardar Cambios</button>
+        </div>
+    </div>
 </div>
+
 
 <!--
 El usuario ingresa los siguientes datos:

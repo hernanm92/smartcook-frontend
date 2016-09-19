@@ -2,7 +2,8 @@ angular
     .module('MainApp')
     .service('recipeService', recipeService);
 
-function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper, ingredientPerRecipeFactory, $interval) {
+function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper, 
+                       ingredientPerRecipeFactory, $interval, recipePerUserFactory) {
     var self = this;
     self.units = [{ name: 'gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'mililitro' }, { name: 'Cucharada' }];
     self.recipes = [];
@@ -19,6 +20,17 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     function init() {
         recipeFactory.query({}, function (recipes) {
             self.recipes = recipes;
+            /*angular.forEach(recipes, function (recipe) {
+                var recipePerUser = {
+                    recipe_id: recipe.id,
+                    username: 'matileon',
+                    favorite: true,
+                    owner: true
+                }
+                recipePerUserFactory.save(recipePerUser, function () {
+                })
+            });
+            */
         });
     }
 

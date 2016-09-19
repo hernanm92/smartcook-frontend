@@ -9,7 +9,6 @@ function UserSession($sessionStorage, $localStorage, userFactory) {
     self.deleteUser = deleteUser;
     self.getToken = getToken;
     self.setUser = setUser;
-    self.profileInfo = profileInfo;
     self.getUserId = getUserId;
     self.isLogged = isLogged;
     
@@ -59,12 +58,6 @@ function UserSession($sessionStorage, $localStorage, userFactory) {
         delete $sessionStorage.userName;
         delete $sessionStorage.token;
         delete $sessionStorage.id;
-    }
-
-    function profileInfo() {
-        return userFactory.get({ id: getUserId() }, function (userProfile) {
-            return userProfile;
-        })
     }
 
     function isLogged() {
