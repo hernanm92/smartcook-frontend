@@ -50,7 +50,8 @@ module.exports = function (grunt) {
     "public/javascripts/factory/validate.js",
     "public/javascripts/factory/ingredientPerRecipes.js",
     "public/javascripts/factory/frequentCommensal.js",
-
+    "public/javascripts/factory/foodCategoriesPerUser.js",
+    "public/javascripts/factory/recipePerUser.js",
 
     "public/javascripts/controller/base.js",
     "public/javascripts/controller/menu.js",
@@ -90,6 +91,7 @@ module.exports = function (grunt) {
 
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
+    "public/javascripts/models/profile.js",
 
     "public/javascripts/service/home.js"
   ]

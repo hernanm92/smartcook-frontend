@@ -1,5 +1,7 @@
 .profile-username{
-font-size:36px;
+    color: #687074;
+    font-size: 24px;
+    text-transform: uppercase;
 }
 .profile-email{
 font-weight:normal;

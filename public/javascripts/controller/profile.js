@@ -1,12 +1,15 @@
 app.controller('ProfileController',
-    function ($scope, ingredientFactory, categoriesFactory, userFactory, UserSession,
-        ingredientService, restrictionsService, recipeService) {
-        $scope.user = {};
+    function ($scope, ingredientFactory, categoriesFactory, userFactory, recipeFactory, UserSession,
+        ingredientService, restrictionsService, recipeService, Profile, blockUI, $q, imgService,
+        foodCategoriesPerUserFactory) {
+
         $scope.categories = [];
-        loadUser();
         $scope.restrictions = loadRestrictions();
-        $scope.restrictionsSelection = ['Vegetariano']; // TODO: Load selected mock
-        $scope.userRecipes = [
+        $scope.save = save;
+        $scope.addedPhoto = addedPhoto;
+        //$scope.profile.restrictions = ['Vegetariano']; // TODO: Load selected mock
+        init();
+        var myrecipes = [
             {
                 photo: 'img/chicken-potatoe.jpg',
                 name: 'Chicken Potatoe',
@@ -29,21 +32,45 @@ app.controller('ProfileController',
             }
         ];
 
-        init();
-
         function init() {
+            blockUI.start();
+
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
             });
+            //traer datos de usuario
+            //traer categorias del usuario
+            //traer recetas del usuario
+            var username = { username: 'matileon' };
+            var promises = {
+                profile: userFactory.get(username).$promise,
+                categories: categoriesFactory.query(username).$promise,
+                recipes: recipeFactory.query(username).$promise
+            }
+
+            $q.all(promises).then(function (values) {
+                console.log(values);
+                setValues(values);
+                blockUI.stop();
+            });
+
+        }
+
+        function setValues(values) {
+            $scope.profile = new Profile(null, null,null, [], [], [], []);
+            $scope.profile = values.profile
+            setRestrictions(values.profile);
+            $scope.profile.categories = values.categories;
+            $scope.profile.recipes = myrecipes;//aca va values.recipe
         }
 
         $scope.toggleSelection = function toggleSelection(restriction) { // toggle selection for a given fruit by name
-            var index = $scope.restrictionsSelection.indexOf(restriction);
+            var index = $scope.profile.restrictions.indexOf(restriction);
             if (index > -1) { // is currently selected
-                $scope.restrictionsSelection.splice(index, 1)
+                $scope.profile.restrictions.splice(index, 1)
             }
             else {
-                $scope.restrictionsSelection.push(restriction);// is newly selected
+                $scope.profile.restrictions.push(restriction);// is newly selected
             }
         }
 
@@ -61,8 +88,44 @@ app.controller('ProfileController',
             return restrictionsService.getRestrictions();
         }
 
+        //username, mail, image_url, recipes, categories, ingredients
         function loadUser() {
-            $scope.user = UserSession.profileInfo();
+            //aca traer datos del usuario logueado, el UserSession busca a matileon siempre.
+            //cuando funcione el login, cambiarlo 
+
+        }
+
+        //save profile
+        function save() {
+            //guardar ediciones de la vista
+            //guardar categorias
+            //guardar ings q no l gusta
+            //url de la imagen
+            blockUI.start();
+            var imgUrl = imgService.getUrlImgProfile($scope.profile.username);
+            var promises = {
+                imageProfileAzure: imgService.uploadImgProfile($scope.profile.username,$scope.userImage),
+                updateProfile: userFactory.update($scope.profile),
+                foodCategories: foodCategoriesPerUserFactory.save().$promise
+            };
+
+            $q.all(promises).then(function (values) {
+                blockUI.stop();
+                console.log('Perifl guardado');
+            }); 
+        }
+
+        function setRestrictions(profile) {
+            $scope.profile.restrictions
+            profile.celiac ? $scope.profile.restrictions.push('Celiaco') : null;
+            profile.vegan ? $scope.profile.restrictions.push('Vegano') : null;
+            profile.vegetarian ? $scope.profile.restrictions.push('Vegetariano') : null;
+            profile.diabetic ? $scope.profile.restrictions.push('Diabetico') : null;
+        }
+
+        function addedPhoto(flowObject, event, flow) {
+            flow.files = []; //borro todo lo anterior. Luego se agrega el file
+            $scope.userImage = flowObject.file;
         }
     }
 );
