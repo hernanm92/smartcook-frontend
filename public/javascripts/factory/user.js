@@ -5,7 +5,7 @@ module.factory('userLoginFactory', ['$resource', 'config', function ($resource, 
 }]);
 
 module.factory('userFactory', ['$resource', 'config', function ($resource, config) {
-    return $resource(config.domain + '/users/:username', { username: "@username" }, {
+    return $resource(config.domain + '/users/:id', { id: "@id" }, {
         update: {
             method: 'PUT'
         }
