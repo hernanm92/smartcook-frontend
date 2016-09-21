@@ -1,19 +1,13 @@
 <div class="container" style="padding-top: 90px;">
     <form name="recipeForm" ng-submit="validateForm(recipeForm.$valid)" novalidate>
         <div class="row">
-            <div class="col-md-4">
-                <div ng-show="picFile">
-                    <div ngf-drop ngf-select ng-model="picFile" ngf-drag-over-class="'dragover'" accept="image/*">
-                        <img class="img-rounded" width="300px" height="300px" ngf-thumbnail="picFile">
-                    </div>
-                </div>
-                <div ng-show="!picFile" ngf-drop ngf-select ng-model="picFile" ngf-drag-over-class="'dragover'" accept="image/*">
-                    <span style="cursor:pointer">
-                        <img class="img-responsive" alt="Responsive image" ng-src="img/Placeholder-food.jpg">
-                    </span>
+            <div flow-init class="col-md-4">
+                <div flow-drop>
+                    <img class="img-rounded" alt="Responsive image" flow-img="$flow.files[0]"  flow-file-added="addedPhoto($file, $event, $flow)"
+                        ng-src="{{recipe.image_url}}" width="250px" height="200px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
-                    <span class="btn fa fa-pencil fa-2x profile-edit-button" ngf-select ng-model="picFile"></span>
+                    <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
                 </div>
             </div>
             <div class="col-md-6 ">
@@ -33,18 +27,18 @@
                 </div>
             </div>
         </div>
-        <div class = "row">
-            <div class = "col-md-8">
+        <div class="row">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label class="label-form-ingredient">Breve Descripcion</label>
                     <textarea id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripcion aqui..."></textarea>
                 </div>
             </div>
         </div>
-        <div ng-show = "!isIngredientsEmpty()" class="row">
-            <div class = "col-md-6">
-                <table class ="table table-bordered">
-                    <thead >
+        <div ng-show="!isIngredientsEmpty()" class="row">
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
                             <th>Ingrediente</th>
                             <th>Cantidad </th>
@@ -58,9 +52,9 @@
                             </td>
                             <td>
                                 <input ng-model="ing.amount" type="number">
-                            </td>   
+                            </td>
                             <td>
-                                <select  ng-model="ing.unit" ng-options="unit.name for unit in units"></select>
+                                <select ng-model="ing.unit" ng-options="unit.name for unit in units"></select>
                             </td>
                         </tr>
                     </tbody>
@@ -103,7 +97,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <p ng-show=" !(recipe.steps.length > 0) && submitted" style="color:red;">La receta debe de tener al menos un Paso</p>

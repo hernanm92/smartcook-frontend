@@ -6,7 +6,9 @@ app.controller('CreateRecipeController',
         init();
         function init() {
             $scope.recipe = recipeService.create();
+            $scope.recipe.image_url = "img/Placeholder-food.jpg";
             $scope.units = recipeService.getUnits();
         }
+        
     });
 

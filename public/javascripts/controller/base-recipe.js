@@ -5,6 +5,7 @@ app.controller('baseRecipeController', function ($scope, recipeService, $modal, 
     $scope.validateForm = validateForm;
     $scope.deleteStep = deleteStep;
     $scope.openModal = openModal;
+    $scope.addedPhoto = addedPhoto;
     $scope.isIngredientsEmpty = isIngredientsEmpty;
     $scope.units = [];
 
@@ -68,4 +69,9 @@ app.controller('baseRecipeController', function ($scope, recipeService, $modal, 
             recipeService.save($scope.recipe, $scope.picFile);
         });
     };
+
+    function addedPhoto(flowObject, event, flow) {
+        flow.files = []; //borro todo lo anterior. Luego se agrega el file
+        $scope.picFile = flowObject.file;
+    }
 });

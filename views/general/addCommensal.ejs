@@ -5,8 +5,8 @@
     <div class="col-sm-12" style="margin-top:20px">
         <div ng-repeat="freq in frequentCommensals track by $index" class="col-sm-6" style="margin:10px 0px">
             <img ng-src="{{freq.avatar}}" class="img-responsive img-circle"
-                 alt="{{freq.userName}} profile picture" style="max-width:100px; display:inline">
-            <h2 style="display:inline; text-transform:uppercase">{{freq.userName}}</h2>
+                 alt="{{freq.username}} profile picture" style="max-width:100px; display:inline">
+            <h2 style="display:inline; text-transform:uppercase">{{freq.username}}</h2>
             <button class="addCommensalButton" type="btn">
                 <i class="fa fa-star fa-2x" aria-hidden="true"
                    ng-mouseover="hoverAddCommensalButton($event)"
@@ -21,8 +21,8 @@
     <div id="searchedUsersResults" class="container" style="margin:20px 0px">
         <div ng-repeat="user in resultUsers track by $index" class="col-sm-6" style="margin:10px 0px">
             <img ng-src="{{user.avatar}}" class="img-responsive img-circle"
-                 alt="{{user.userName}} profile picture" style="max-width:100px; display:inline">
-            <h2 style="display:inline; text-transform:uppercase">{{user.userName}}</h2>
+                 alt="{{user.username}} profile picture" style="max-width:100px; display:inline">
+            <h2 style="display:inline; text-transform:uppercase">{{user.username}}</h2>
             <button class="addCommensalButton" type="btn">
                 <i class="fa fa-star-o fa-2x" aria-hidden="true"
                    ng-mouseover="hoverAddCommensalButton($event)"
