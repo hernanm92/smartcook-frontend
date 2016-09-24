@@ -73,6 +73,8 @@ module.exports = function (grunt) {
     "public/javascripts/controller/recipe-view.js",
     "public/javascripts/controller/edit-recipe.js",
     "public/javascripts/controller/counter.js",
+    "public/javascripts/controller/topQualified.js",
+    "public/javascripts/controller/topCategories.js",
 
     "public/javascripts/service/exampleService.js",
     "public/javascripts/service/eventService.js",
@@ -114,6 +116,7 @@ module.exports = function (grunt) {
     "public/stylesheets/userProfile.css",
     "public/stylesheets/loadIngredient.css",
     "public/stylesheets/addCommensal.css",
+    "public/stylesheets/topCategories.css",
     "public/stylesheets/register.css",
     "public/stylesheets/ui-bootstrap-csp.css",
     "public/stylesheets/home/home.css",

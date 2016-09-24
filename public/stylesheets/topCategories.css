@@ -1,0 +1,17 @@
+.topCategories-category{
+    text-align: center;
+}
+.topCategories-category img{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.topCategories-category img:hover{
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+.topCategories-selectedCategory img{
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
