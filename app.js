@@ -49,6 +49,12 @@ app.get('/general/listing', function (req, res) {
 app.get('/general/top-listing', function (req, res) {
     res.render('general/top-listing');
 });
+app.get('/general/topCategories', function (req, res) {
+    res.render('general/topCategories');
+});
+app.get('/general/topQualified', function (req, res) {
+    res.render('general/topQualified');
+});
 app.get('/general/validate', function (req, res) {
     res.render('general/validate');
 });

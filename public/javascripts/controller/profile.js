@@ -17,7 +17,7 @@ app.controller('ProfileController',
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
             });
-            var username = { username: 'matileon' };//esta info se obtiene luego de q el usuario este logueado
+            var username = { username: 'amodugno' };//esta info se obtiene luego de q el usuario este logueado
             var promises = {
                 profile: userFactory.get(username).$promise,
                 categories: categoriesFactory.query(username).$promise,
