@@ -46,18 +46,18 @@ function LoginController($scope, UserSession, userLoginFactory,
         blockUI.start();
         $scope.remember = true;
         facebookService.login().then(function (response) {
-
             if (response.status === 'connected') {
                 facebookService.getUsername()
-                .then(function name(last_name) {
-                    setUser(response.authResponse.accessToken,
-                    last_name, $scope.remember,response.authResponse.userID );
-                    $location.path('/');
-                    blockUI.stop();
-                });
+                    .then(function name(last_name) {
+                        setUser(response.authResponse.accessToken,
+                            last_name, $scope.remember, response.authResponse.userID);
+                        UserSession.initProfileUser('matileon'); //importante    
+                        $location.path('/');
+                        blockUI.stop();
+                    });
             } else {
                 notifyHelper.error('No se pudo autenticar, intente de nuevo');
-                blockUI.stop    ();
+                blockUI.stop();
             }
         });
     }

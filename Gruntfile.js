@@ -89,6 +89,7 @@ module.exports = function (grunt) {
     "public/javascripts/service/ingredient.js",
     "public/javascripts/service/restrictions.js",
     "public/javascripts/service/mergeProfile.js",
+    "public/javascripts/service/mapper.js",
 
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",

@@ -36,13 +36,37 @@
                         <div class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <ul class="list-unstyled checkbox-list">
-                                    <li ng-repeat="restriction in profile.restrictions">
+                                    <li>
                                         <label class="checkbox">
                                         <input type="checkbox" 
-                                               ng-model="restriction.hasRestriction">
+                                               ng-model="profile.celiac">
                                         <i></i>
-                                        {{restriction.name}}
-                                    </label>
+                                            Celiaco
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="checkbox">
+                                        <input type="checkbox" 
+                                               ng-model="profile.vegan">
+                                        <i></i>
+                                            Vegano
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="checkbox">
+                                        <input type="checkbox" 
+                                               ng-model="profile.vegatarian">
+                                        <i></i>
+                                            Vegetariano
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="checkbox">
+                                        <input type="checkbox" 
+                                               ng-model="profile.diabetic">
+                                        <i></i>
+                                            Diabetico
+                                        </label>
                                     </li>
                                 </ul>
                             </div>
@@ -77,9 +101,8 @@
                 <div class="shop-product-heading">
                     <h2>Categorias Excluidas</h2>
                 </div>
-                <tags-input ng-model="profile.categories" display-property="name" add-from-autocomplete-only="true" 
-                            on-tag-added="addCategoryToUser($tag)"
-                            on-tag-removed="removeCategoryOfUser($tag)">
+                <tags-input ng-model="profile.categories" display-property="name" add-from-autocomplete-only="true" on-tag-added="addCategoryToUser($tag)"
+                    on-tag-removed="removeCategoryOfUser($tag)">
                     <auto-complete highlight-matched-text=false min-length="1" source="loadExcludedCategories($query)"></auto-complete>
                 </tags-input>
                 <div class="shop-product-heading">

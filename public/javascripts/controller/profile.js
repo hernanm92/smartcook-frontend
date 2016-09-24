@@ -1,40 +1,24 @@
 app.controller('ProfileController',
     function ($scope, ingredientFactory, categoriesFactory, userFactory, recipeFactory, UserSession,
         ingredientService, restrictionsService, recipeService, Profile, blockUI, $q, imgService,
-        foodCategoriesPerUserFactory, MergeProfile) {
+        foodCategoriesPerUserFactory) {
 
         $scope.categories = [];
-        $scope.restrictions = loadRestrictions();
         $scope.updateRestrictions = updateRestrictions;
         $scope.addedPhoto = addedPhoto;
         $scope.addCategoryToUser = addCategoryToUser;
-        $scope.removeCategoryOfUser = removeCategoryOfUser
-        //$scope.profile.restrictions = ['Vegetariano']; // TODO: Load selected mock
+        $scope.removeCategoryOfUser = removeCategoryOfUser;
         init();
 
         function init() {
             blockUI.start();
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
-            });
-            var username = { username: 'matileon' };//esta info se obtiene luego de q el usuario este logueado
-            var promises = {
-                profile: userFactory.get(username).$promise,
-                categories: categoriesFactory.query(username).$promise,
-                recipes: recipeFactory.query(username).$promise
-            };
-            $q.all(promises).then(function (values) {
-                setValues(values);
+                $scope.profile = UserSession.getUserProfile(); //no hace niguna operacion asincronica
                 blockUI.stop();
             });
         }
 
-        function setValues(values) {
-            $scope.profile = new Profile(values.profile.username, values.profile.email, values.profile.avatar, [], [], [], []);
-            setRestrictions(values.profile);
-            $scope.profile.categories = values.categories;
-            $scope.profile.recipes = values.recipes;
-        }
 
         $scope.toggleSelection = function toggleSelection(restriction) { // toggle selection for a given fruit by name
             var index = $scope.profile.restrictions.indexOf(restriction);
@@ -56,22 +40,10 @@ app.controller('ProfileController',
             return ingredientService.getIngredientsBy(query);
         };
 
-        function loadRestrictions() {
-            return restrictionsService.getRestrictions();
-        }
-
         //save profile
         function updateRestrictions() {
-            MergeProfile.mergeRestrictions($scope.profile);
             $scope.profile.id = $scope.profile.username;
             userFactory.update($scope.profile);
-        }
-
-        function setRestrictions(profile) {
-            $scope.profile.restrictions.push({ name: 'Celiaco', hasRestriction: profile.celiac });
-            $scope.profile.restrictions.push({ name: 'Vegano', hasRestriction: profile.vegan });
-            $scope.profile.restrictions.push({ name: 'Vegetariano', hasRestriction: profile.vegetarian });
-            $scope.profile.restrictions.push({ name: 'Diabetico', hasRestriction: profile.diabetic });
         }
 
         function addedPhoto(flowObject, event, flow) {
@@ -85,14 +57,12 @@ app.controller('ProfileController',
         function addCategoryToUser(categoryTag) {
             var category = { food_category_id: categoryTag.id, username: $scope.profile.username }
             foodCategoriesPerUserFactory.save(category, function (response) {
-                console.log('relacion agregada');
             });
         }
 
         function removeCategoryOfUser(categoryTag) {
             var category = { food_category_id: categoryTag.id, username: $scope.profile.username }
             foodCategoriesPerUserFactory.remove(category, function () {
-                console.log('relacion eliminada');
             })
         }
     }
