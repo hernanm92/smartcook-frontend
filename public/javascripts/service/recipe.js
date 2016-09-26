@@ -2,8 +2,8 @@ angular
     .module('MainApp')
     .service('recipeService', recipeService);
 
-function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper, 
-                       ingredientPerRecipeFactory, $interval, recipePerUserFactory) {
+function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper,
+    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory) {
     var self = this;
     self.units = [{ name: 'gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'mililitro' }, { name: 'Cucharada' }];
     self.recipes = [];
@@ -42,41 +42,29 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
         return self.units;
     }
 
-    function save(recipe, photoRecipe) {
+    function save(recipe, photoRecipe, username) {
         blockUI.start();
         recipe.image_url = imgService.getUrlImgRecipe(recipe.name);
-        recipeFactory.save(mapRecipeFromView(recipe), function (persistedRecipe) {
+        var username = UserSession.getUsername();
+        var promises = {
+            recipePromise: recipeFactory.save(mapperService.mapRecipeForPersist(recipe)).$promise,
+            imgPromise: imgService.uploadImgRecipe(recipe.name, photoRecipe),
+        }
+        $q.all(promises).then(function (values) {
             angular.forEach(recipe.ingredients, function (ing) {
-                ingredientPerRecipeFactory.save(mapIngFromView(ing, persistedRecipe), function (res) {
+                var ingMapped = mapperService.mapIngForPersist(ing, values.recipePromise)
+                ingredientPerRecipePersistFactory.save(ingMapped, function (res) {
                 });
-
-            })
-            imgService.uploadImgRecipe(recipe.name, photoRecipe);
+            });
+            recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, username));
+            blockUI.stop();
             notifyHelper.success('Su receta ha sido guardada exitosamente');
         });
-        blockUI.stop();
+
     }
 
     function create() {
         return new Recipe(UserSession.getUserId(), null, [], [], null, null);
-    }
-
-    function mapRecipeFromView(recipe) {
-        return {
-            name: recipe.name,
-            image_url: recipe.image_url,
-            description: recipe.description,
-            steps: recipe.steps
-        }
-    }
-
-    function mapIngFromView(ing, recipe) {
-        return {
-            ingredient_id: ing.id,
-            recipe_id: recipe.id,
-            amount: ing.amount,
-            unit: ing.unit.name
-        }
     }
 
     function refresh() {

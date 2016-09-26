@@ -8,6 +8,9 @@ function mapperService(Profile) {
     self.mapProfileToModel = mapProfileToModel;
     self.mapIngredientsForSearch = mapIngredientsForSearch;
     self.mapProfileForSearch = mapProfileForSearch;
+    self.mapRecipeForPersist = mapRecipeForPersist;
+    self.mapRecipePerUserOwner = mapRecipePerUserOwner;
+    self.mapIngForPersist = mapIngForPersist;
 
     // username, email, avatar, recipes, categories, ingredients, celiac, vegan, vegetarian, diabetic
     function mapProfileToModel(profileDto, categoriesDto, recipesDto) {
@@ -43,6 +46,35 @@ function mapperService(Profile) {
         return profileDto;
     }
 
+    function mapRecipeForPersist(recipe) {
+        return {
+            name: recipe.name,
+            image_url: recipe.image_url,
+            description: recipe.description,
+            steps: recipe.steps,
+            validated: false
+        }
+    }
+    mapIngForPersist
+
+    function mapIngForPersist(ing, recipe) {
+        return {
+            ingredient_id: ing.id,
+            recipe_id: recipe.id,
+            amount: ing.amount,
+            unit: ing.unit.name
+        }
+    }
+
+    function mapRecipePerUserOwner(recipe, username) {
+        return {
+            recipe_id: recipe.id,
+            username: username,
+            owner: true,
+            favorite: true
+        }
+    }
+
     // private
 
     function considerRestrictions(dto, profile) {
@@ -71,4 +103,13 @@ function mapperService(Profile) {
             return categoriesToSend;
         }
     }
+
+    /**
+ *       recipe_id: params.require(:recipe_id),
+      username: params.require(:username),
+      favorite: params.require(:favorite),
+      owner: params.require(:owner),
+      like: params[:like],
+      vote: params[:vote]
+ * */
 }

@@ -8,3 +8,7 @@ module.factory('ingredientPerRecipeFactory', ['$resource', 'config', function ($
     	}
     });
 }]);
+
+module.factory('ingredientPerRecipePersistFactory', ['$resource', 'config', function ($resource, config) {
+    return $resource(config.domain + '/ingredients_per_recipes/');
+}]);
