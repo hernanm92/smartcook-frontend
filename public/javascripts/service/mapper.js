@@ -24,7 +24,8 @@ function mapperService(Profile) {
             profileDto.celiac,
             profileDto.vegan,
             profileDto.vegetarian,
-            profileDto.diabetic
+            profileDto.diabetic,
+            profileDto.badges
         );
         return profile;
     }

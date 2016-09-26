@@ -8,8 +8,9 @@
         <div class="row">
             <div flow-init class="col-sm-4">
                 <div flow-drop>
-                    <img class="img-rounded" flow-img="$flow.files[0]" flow-file-added="addedPhoto($file, $event, $flow)" ng-src="{{profile.avatar}}"
-                        width="300px" height="300px">
+                    <img class="img-rounded" flow-img="$flow.files[0]"
+                         flow-file-added="addedPhoto($file, $event, $flow)" ng-src="{{profile.avatar}}"
+                         width="300px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
@@ -38,33 +39,29 @@
                                 <ul class="list-unstyled checkbox-list">
                                     <li>
                                         <label class="checkbox">
-                                        <input type="checkbox" 
-                                               ng-model="profile.celiac">
-                                        <i></i>
+                                            <input type="checkbox"
+                                                   ng-model="profile.celiac">
                                             Celiaco
                                         </label>
                                     </li>
                                     <li>
                                         <label class="checkbox">
-                                        <input type="checkbox" 
-                                               ng-model="profile.vegan">
-                                        <i></i>
+                                            <input type="checkbox"
+                                                   ng-model="profile.vegan">
                                             Vegano
                                         </label>
                                     </li>
                                     <li>
                                         <label class="checkbox">
-                                        <input type="checkbox" 
-                                               ng-model="profile.vegatarian">
-                                        <i></i>
+                                            <input type="checkbox"
+                                                   ng-model="profile.vegatarian">
                                             Vegetariano
                                         </label>
                                     </li>
                                     <li>
                                         <label class="checkbox">
-                                        <input type="checkbox" 
-                                               ng-model="profile.diabetic">
-                                        <i></i>
+                                            <input type="checkbox"
+                                                   ng-model="profile.diabetic">
                                             Diabetico
                                         </label>
                                     </li>
@@ -101,15 +98,18 @@
                 <div class="shop-product-heading">
                     <h2>Categorias Excluidas</h2>
                 </div>
-                <tags-input ng-model="profile.categories" display-property="name" add-from-autocomplete-only="true" on-tag-added="addCategoryToUser($tag)"
-                    on-tag-removed="removeCategoryOfUser($tag)">
-                    <auto-complete highlight-matched-text=false min-length="1" source="loadExcludedCategories($query)"></auto-complete>
+                <tags-input ng-model="profile.categories" display-property="name" add-from-autocomplete-only="true"
+                            on-tag-added="addCategoryToUser($tag)"
+                            on-tag-removed="removeCategoryOfUser($tag)">
+                    <auto-complete highlight-matched-text=false min-length="1"
+                                   source="loadExcludedCategories($query)"></auto-complete>
                 </tags-input>
                 <div class="shop-product-heading">
                     <h2>Ingredientes Excluidos</h2>
                 </div>
                 <tags-input ng-model="profile.ingredients" display-property="name" add-from-autocomplete-only="true">
-                    <auto-complete highlight-matched-text=false min-length="1" source="loadExcludedIngredients($query)"></auto-complete>
+                    <auto-complete highlight-matched-text=false min-length="1"
+                                   source="loadExcludedIngredients($query)"></auto-complete>
                 </tags-input>
             </div>
         </div>
@@ -125,10 +125,11 @@
                     </div>
                     <div class="panel-body">
 
-                        <div class="col-xs-6 col-md-3 userRecipe" ng-repeat="recipe in profile.recipes" style="text-align:center">
+                        <div class="col-xs-6 col-md-3 userRecipe" ng-repeat="recipe in profile.recipes"
+                             style="text-align:center">
                             <label>
-                                    {{recipe.name}}
-                                </label>
+                                {{recipe.name}}
+                            </label>
                             <a class="thumbnail">
                                 <img ng-src="{{recipe.image_url}}" alt="...">
                             </a>
@@ -142,19 +143,37 @@
         </div>
     </div>
 </div>
-
-
-<!--
-El usuario ingresa los siguientes datos:
-Nombre y Apellido.
-Género.
-Fecha de nacimiento.
-Foto.
-Dirección de email.
-Contraseña.
-Nombre de usuario.
-El usuario selecciona los ingredientes que desea excluir en la búsqueda de una receta.
-El usuario selecciona los categorías que desea excluir en la búsqueda de una receta.
-El usuario selecciona restricciones alimenticias.
-El usuario selecciona el botón Registrar.
--->
+<div class="container">
+    <textarea id="a"></textarea>
+    <button id="but" type="button" ng-click="upload">SUBIR</button>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="padding-top: 20px;">
+            <div class="row panel-align" style="margin-right:0px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center">Mis Insignias</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-xs-6 col-md-3" ng-repeat="badge in badges"
+                             style="text-align:center">
+                            <div>
+                                <img ng-src="{{badge.image}}"/>
+                            </div>
+                            <h3>
+                                {{badge.name}}
+                            </h3>
+                            <h5>
+                                {{badge.description}}
+                            </h5>
+                            <!--<a class="thumbnail">-->
+                            <!--<img ng-src="{{recipe.image_url}}" alt="...">-->
+                            <!--</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
