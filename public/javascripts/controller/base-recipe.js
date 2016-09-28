@@ -63,11 +63,13 @@ app.controller('baseRecipeController', function ($scope, recipeService, $modal, 
     }
 
     function confirmForm() {
-        var message = 'La receta sera guardada, desea continuar?';
-        var title = 'Guardar Receta';
+        var message = $scope.messageConfirmation;
+        var title = $scope.titleConfirmation;
         openModal(message, title).result.then(function () {
-            recipeService.save($scope.recipe, $scope.picFile);
+            $scope.action($scope.recipe, $scope.picFile, UserSession.getUsername());
+            //recipeService.save($scope.recipe, $scope.picFile);//esto cambia
         });
+
     };
 
     function addedPhoto(flowObject, event, flow) {

@@ -3,7 +3,7 @@ angular
     .service('recipeService', recipeService);
 
 function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper,
-    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory) {
+    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory, $window) {
     var self = this;
     self.units = [{ name: 'gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'mililitro' }, { name: 'Cucharada' }];
     self.recipes = [];
@@ -13,6 +13,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     self.create = create;
     self.refresh = refresh;
     self.getDetailRecipe = getDetailRecipe;
+    self.edit = edit;
 
     init();
     refresh();
@@ -61,6 +62,12 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
             notifyHelper.success('Su receta ha sido guardada exitosamente');
         });
 
+    }
+
+    function edit(recipe, file, username) {
+        $window.alert('Enviando datos');
+        console.log(recipe);
+        console.log(file);
     }
 
     function create() {
