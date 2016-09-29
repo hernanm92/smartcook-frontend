@@ -28,6 +28,10 @@ app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.get('/general/countDown', function (req, res) {
     res.render('general/countDown');
 });
+
+app.get('/general/commensalsModal', function (req, res) {
+    res.render('general/commensalsModal');
+});
 app.get('/', function (req, res) {
     res.render('index');
 });
@@ -90,10 +94,10 @@ app.get('/general/modals/recipe', function (req, res) {
 });
 app.get('/general/detail-recipe', function (req, res) {
     res.render('general/detail-recipe');
-})
+});
 app.get('/general/recipe-detail-template', function (req, res) {
     res.render('general/recipe-detail-template');
-})
+});
 app.get('/sas', function (req, res) {
     var settings = req.query;
     console.log(req.query);

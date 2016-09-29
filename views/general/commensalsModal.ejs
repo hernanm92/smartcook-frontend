@@ -1,0 +1,21 @@
+<div class="modal-content">
+    <div class="modal-header">
+        Agregar comensal a busqueda
+    </div>
+    <div class="modal-body">
+        <div ng-repeat="user in users track by $index">
+            <img ng-src="{{user.avatar}}" class="img-responsive img-circle" alt="{{user.username}} profile picture" style="max-width:100px; display:inline">
+            <h2 style="display:inline; text-transform:uppercase">{{user.username}}</h2>
+            <button class="addCommensalButton" type="btn">
+                <i class="fa fa-star-o fa-2x" aria-hidden="true"
+                   ng-mouseover="hoverAddCommensalButton($event)"
+                   ng-mouseleave="hoverAddCommensalButton($event)"
+                   ng-click="addCommensal($event)"></i>
+            </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button"  class="btn-u btn-u-sea-shop btn-u-sm">Cerrar</button>
+        <button type="button"  class="btn-u btn-u-sea-shop btn-u-sm">Aceptar</button>
+    </div>
+</div>

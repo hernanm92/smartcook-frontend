@@ -5,7 +5,7 @@ angular
 function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper,
     ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory, $window) {
     var self = this;
-    self.units = [{ name: 'gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'mililitro' }, { name: 'Cucharada' }];
+    self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada' }];
     self.recipes = [];
     self.getRecipes = getRecipes;
     self.getUnits = getUnits;

@@ -1,7 +1,7 @@
 app.controller('LoginController', LoginController);
 
 function LoginController($scope, UserSession, userLoginFactory,
-    $location, facebookService, blockUI, notifyHelper,
+    $location, facebookService, blockUI, notifyHelper, userFactory,
     userLoginFacebook) {
 
     $scope.login = login;
@@ -16,6 +16,9 @@ function LoginController($scope, UserSession, userLoginFactory,
         PageContactForm.initPageContactForm();
     });
 
+    var self = this;
+    self.usersAllowed = ['matileon', 'amodugno', 'hmaschwitz'];
+
     function login(isValid) {
         $scope.formSubmited = true;
         if (isValid) {
@@ -23,9 +26,16 @@ function LoginController($scope, UserSession, userLoginFactory,
                 userName: $scope.userName,
                 pass: $scope.userPass
             }
-            userLoginFactory.save(user, function (res) {
-                handleLoginResponse(res);
-            });
+            if (self.usersAllowed.indexOf($scope.userName) > -1) {
+                setUser('sdasdasdasda', $scope.userName, $scope.rememberUser, null);
+                UserSession.initProfileUser($scope.userName);
+                $location.path('/');
+            } else {
+                $scope.messageLogin = "Usuario o contraseña incorrectas. Intente de nuevo";
+            }
+            /* userLoginFactory.save(user, function (res) {
+                 handleLoginResponse(res);
+             });*/
             $scope.formSubmited = false;
             return;
         }

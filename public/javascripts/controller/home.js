@@ -1,6 +1,6 @@
 app.controller('HomeController',
     function ($scope, ingredientService, homeService, $location,
-        notifyHelper, UserSession) {
+        notifyHelper, UserSession, userFactory, blockUI, $modal) {
 
         //private
         var self = this;
@@ -23,6 +23,7 @@ app.controller('HomeController',
         $scope.isLogged = isLogged;
         $scope.resetSearch = resetSearch;
         $scope.getIngredients = getIngredients;
+        $scope.addDiner = addDiner;
 
         $scope.$on('$viewContentLoaded', function () {
             App.init();
@@ -33,6 +34,16 @@ app.controller('HomeController',
         });
 
         init();
+
+        function addDiner() {
+            blockUI.start();
+            template = '/general/commensalsModal';
+            controller = 'comensalsForSearchController';
+            userFactory.query({ chef: UserSession.getUsername() }, function (frequentsUsers) {
+                blockUI.stop();
+                openModal(frequentsUsers, template, controller);
+            });
+        }
 
         function init() {
             $scope.ingredientsTemplate = homeService.initIngredients();
@@ -107,6 +118,21 @@ app.controller('HomeController',
             $scope.recipes = [];
             homeService.resetRecipes();
         }
+
+        function openModal(frequentsUsers, template, controller) {
+            return $modal.open({
+                animation: true,
+                templateUrl: template,
+                controller: controller,
+                size: 'md',
+                resolve: {
+                    frequentsUsers: function () {
+                        return frequentsUsers;
+                    }
+                },
+                windowClass: 'menu-bar-space'
+            });
+        };
     }
 );
 

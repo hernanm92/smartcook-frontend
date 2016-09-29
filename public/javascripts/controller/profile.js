@@ -1,7 +1,7 @@
 app.controller('ProfileController',
     function ($scope, ingredientFactory, categoriesFactory, userFactory, recipeFactory, UserSession,
         ingredientService, restrictionsService, recipeService, Profile, blockUI, $q, imgService,
-        foodCategoriesPerUserFactory, badgeFactory) {
+        foodCategoriesPerUserFactory) {
 
         $scope.categories = [];
         $scope.updateRestrictions = updateRestrictions;
@@ -14,7 +14,7 @@ app.controller('ProfileController',
             blockUI.start();
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
-                $scope.profile = UserSession.getUserProfile(); //no hace niguna operacion asincronica
+                $scope.profile = UserSession.getUserProfile();
                 blockUI.stop();
             });
         }
@@ -67,18 +67,16 @@ app.controller('ProfileController',
         }
 
         $scope.badges = [
-            {'id':'1','name':'Celiaco1','description':'Badge de Celiaco','image':'/img/badges/celiac-copper.jpg'},
-            {'id':'2','name':'Validacion1','description':'Badge de Validador','image':'/img/badges/validation-copper.jpg'},
-            {'id':'3','name':'Diabetes1','description':'Badge de Diabetico','image':'/img/badges/diabetes-silver.jpg'},
-            {'id':'4','name':'General1','description':'Badge de Contribudor','image':'/img/badges/general-gold.jpg'},
-            {'id':'5','name':'Vegano1','description':'Badge de Vegano','image':'/img/badges/vegan-copper.jpg'}
+            { 'id': '1', 'name': 'Celiaco1', 'description': 'Badge de Celiaco', 'image': '/img/badges/celiac-copper.jpg' },
+            { 'id': '2', 'name': 'Validacion1', 'description': 'Badge de Validador', 'image': '/img/badges/validation-copper.jpg' },
+            { 'id': '3', 'name': 'Diabetes1', 'description': 'Badge de Diabetico', 'image': '/img/badges/diabetes-silver.jpg' },
+            { 'id': '4', 'name': 'General1', 'description': 'Badge de Contribudor', 'image': '/img/badges/general-gold.jpg' },
+            { 'id': '5', 'name': 'Vegano1', 'description': 'Badge de Vegano', 'image': '/img/badges/vegan-copper.jpg' }
         ];
 
-        $scope.upload = function(){
+        /*$scope.upload = function () {
             badgeFactory.save($('#a').val());
-//            badgeFactory.save("{name: 'badge1', description: 'soy un badge'}");
-        }
-
-
+            //            badgeFactory.save("{name: 'badge1', description: 'soy un badge'}");
+        }*/
     }
 );

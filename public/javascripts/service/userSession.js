@@ -4,7 +4,7 @@ angular
     .service('UserSession', UserSession);
 
 function UserSession($sessionStorage, $localStorage, userFactory, categoriesFactory, Profile,
-    recipeFactory, $q, mapperService) {
+    recipeFactory, $q, mapperService, blockUI) {
     var self = this;
     self.getUsername = getUsername;
     self.deleteUser = deleteUser;
@@ -30,12 +30,12 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     function setUser(user) {
         if (user.remember) {
             $localStorage.remember = true;
-            $localStorage.userName = 'matileon';
+            $localStorage.userName = user.userName;
             $localStorage.token = user.token;
             $localStorage.id = user.id;
         }
         if (!user.remember) {
-            $sessionStorage.userName = 'matileon';
+            $sessionStorage.userName = user.userName;
             $sessionStorage.token = user.token;
             $sessionStorage.id = user.id;
         }
@@ -81,7 +81,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     }
 
     function getProfile() {
-        return userFactory.get({ username: getUsername() }).$promise;
+        return userFactory.get({username:getUsername()}).$promise;
     }
 
     function getCategories() {
@@ -89,13 +89,14 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     }
 
     function getEntireProfile(username) {
-
+        blockUI.start();
         var promises = {
             profile: self.getProfile(),
             categoriesUser: self.getCategories(),
             recipes: recipeFactory.query({ username: username }).$promise
         };
         $q.all(promises).then(function (values) {
+            blockUI.stop();
             return self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes);
         });
     }
