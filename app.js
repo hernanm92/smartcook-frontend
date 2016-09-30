@@ -59,6 +59,9 @@ app.get('/general/topCategories', function (req, res) {
 app.get('/general/topQualified', function (req, res) {
     res.render('general/topQualified');
 });
+app.get('/general/favorites', function (req, res) {
+    res.render('general/favorites');
+});
 app.get('/general/validate', function (req, res) {
     res.render('general/validate');
 });

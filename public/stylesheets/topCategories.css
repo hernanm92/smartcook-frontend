@@ -10,6 +10,7 @@
 .topCategories-category img:hover{
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
+    cursor:pointer;
 }
 .topCategories-selectedCategory img{
     -webkit-filter: grayscale(0);

@@ -55,6 +55,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'general/topCategories',
         controller: 'TopCategoriesController'
     });
+    $routeProvider.when('/favorites', {templateUrl: 'general/favorites', controller: 'FavoritesController'});
     $routeProvider.when('/recipe/:id/detail', {
         templateUrl: 'general/detail-recipe',
         controller: 'RecipeViewController'

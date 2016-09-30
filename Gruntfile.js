@@ -77,6 +77,7 @@ module.exports = function (grunt) {
     "public/javascripts/controller/counter.js",
     "public/javascripts/controller/topQualified.js",
     "public/javascripts/controller/topCategories.js",
+    "public/javascripts/controller/favorites.js",
     "public/javascripts/controller/modals/comensalsForSearch.js",
 
     "public/javascripts/service/exampleService.js",
