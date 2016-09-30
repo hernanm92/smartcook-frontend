@@ -2,76 +2,69 @@ angular
     .module('MainApp')
     .service('MergeProfile', mergeProfile);
 
-function mergeProfile(Profile, userFactory) {
+function mergeProfile(Profile, userFactory, mapperService) {
     var self = this;
-    self.merge = merge;
+    self.mergeProfiles = mergeProfiles;
     self.setInitProfile = setInitProfile;
     self.initProfile = {};
     self.mergeRestrictions = mergeRestrictions;
     self.originalProfile = new Profile(null, null, null, [], [], [], []);
 
-    //categories --> added, deleted
-    //ings --> added, deleted
-    function merge(profileChanged) {
-        var categories = mergeCategories(profileChanged.categories, self.originalProfile.categories);
-        var ingredients = mergeIngredients(profileChanged.ingredients);
-        mergeRestrictions(profileChanged);
-        profileChanged.categories = categories;
-        return profileChanged;
+
+    function mergeProfiles(commensalsProfiles) {
+        var profile = new Profile(null, null, null, [], [], [], null, null, null, null);
+        angular.forEach(commensalsProfiles, function (commensalProfile) {
+            merge(profile, commensalProfile);
+        })
+        return profile;
     }
 
-    function mergeIngredients(ingredientsChanged) {
-        //TODO: Cuando este implementado en la api
-        return [];
+    function merge(profile1, profile2) {
+        mergeRestrictions(profile1, profile2);
+        //restrictions
+        mergeCategories(profile1, profile2);
+        //categories
+        //excludedIngs
     }
 
-    function mergeCategories(categoriesChanged, userCategories) {
-        var added = getCategoriesAdded(categoriesChanged, userCategories);
-        var deleted = getCategoriesDeleted(categoriesChanged, userCategories);
-        return {
-            added: mapCategoriesToSend(added),
-            deleted: mapCategoriesToSend(deleted)
-        };
+    function mergeCategories(profile1, profile2) {
+        //agregar al perfil1 las categorias sin repetidos.
+        angular.forEach(profile2.categories, function (category) {
+            if (!existCategory(profile1.categories,category)) {
+                profile1.categories.push(category);
+            }
+        });
     }
+
+    function mergeRestrictions(profile1, profile2) {
+        profile1.vegan = profile2.vegan;
+        profile1.vegetarian = profile2.vegetarian;
+        profile1.diabetic = profile2.diabetic;
+        profile1.celiac = profile2.celiac;
+    }
+
+    function existCategory(categories, categoryToSearch) {
+        var exist = false;
+        angular.forEach(categories, function (category) {
+            if(category.id === categoryToSearch.id){
+                exist = true;
+            }
+        });
+        return exist;
+    }
+
+    function getCategoriesIds(categories) {
+        var array = [];
+        angular.forEach(categories, function (category) {
+            var elem = {id:category.id}
+            array.push(elem);
+        })
+        return array;
+    }
+
+
 
     function setInitProfile(profile) {
         self.originalProfile.categories = profile.categories;
-    }
-
-    function mergeRestrictions(profileChanged) {
-        angular.forEach(profileChanged.restrictions, function (restriction) {
-            restriction.name.indexOf('Celiaco') > -1 ? profileChanged.celiac = restriction.hasRestriction : null;
-            restriction.name.indexOf('Vegetariano') > -1 ? profileChanged.vegetarian = restriction.hasRestriction : null;
-            restriction.name.indexOf('Vegano') > -1 ? profileChanged.vegan = restriction.hasRestriction : null;
-            restriction.name.indexOf('Diabetico') > -1 ? profileChanged.diabetic = restriction.hasRestriction : null;
-        });
-    }
-
-    function getCategoriesAdded(categoriesChanged, userCategories) {
-        var added = [];
-        angular.forEach(categoriesChanged, function (category) {
-            if (userCategories.indexOf(category.id) === -1) {
-                added.push(category);
-            };
-        });
-        return added;
-    }
-
-    function getCategoriesDeleted(categoriesChanged, userCategories) {
-        var eliminated = [];
-        angular.forEach(userCategories, function (category) {
-            if (categoriesChanged.indexOf(category.id) === -1) {
-                eliminated.push(category);
-            };
-        });
-        return eliminated;
-    }
-
-    function mapCategoriesToSend(categories) {
-        var mappedCategories = [];
-        angular.forEach(categories, function (category) {
-            mappedCategories.push({ food_category_id: category.id, username: self.originalProfile.username });
-        })
-        return mappedCategories;
     }
 }

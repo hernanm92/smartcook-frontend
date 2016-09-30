@@ -2,9 +2,10 @@ angular
     .module('MainApp')
     .service('homeService', homeService);
 
-function homeService($modal, UserSession, searcher ) {
-    
+function homeService($modal, UserSession, searcher, MergeProfile) {
+
     var self = this;
+    self.commensalsProfile = [];
     self.createEmptyIngredient = createEmptyIngredient
     self.initIngredients = initIngredients;
     self.getIndexElemFrom = getIndexElemFrom;
@@ -13,10 +14,14 @@ function homeService($modal, UserSession, searcher ) {
     self.search = search;
     self.getRecipes = getRecipes;
     self.resetRecipes = resetRecipes;
+    self.setCommensalProfile = setCommensalProfile;
 
     function search(ings, settings) {
-        var profile = UserSession.getUserProfile();
-        return searcher.searchBy(ings, settings, profile);
+        var profile = UserSession.getUserProfile(); 
+        self.commensalsProfile.push(profile);
+        var restrictions = MergeProfile.mergeProfiles(self.commensalsProfile);
+        self.commensalsProfile = [];//para una nueva busqueda 
+        return searcher.searchBy(ings, settings, restrictions);
     }
 
     function getRecipes() {
@@ -30,7 +35,7 @@ function homeService($modal, UserSession, searcher ) {
     function getIngsWithData(ingsTemplate) {
         var ingsToSend = [];
         angular.forEach(ingsTemplate, function (ing) {
-            if(!self.isEmpty(ing)){
+            if (!self.isEmpty(ing)) {
                 ingsToSend.push(ing);
             }
         });
@@ -70,5 +75,9 @@ function homeService($modal, UserSession, searcher ) {
                 return index;
             }
         }
+    }
+
+    function setCommensalProfile(commensal) {
+        self.commensalsProfile.push(commensal);
     }
 }
