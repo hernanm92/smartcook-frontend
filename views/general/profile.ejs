@@ -144,8 +144,7 @@
     </div>
 </div>
 <div class="container">
-    <textarea id="a"></textarea>
-    <button id="but" type="button" ng-click="upload">SUBIR</button>
+    <button class="btn btn-primary btn-lg" id="but" type="button" ng-click="upload()">SUBIR</button>
 </div>
 <div class="container">
     <div class="row">
@@ -159,7 +158,7 @@
                         <div class="col-xs-6 col-md-3" ng-repeat="badge in badges"
                              style="text-align:center">
                             <div>
-                                <img ng-src="{{badge.image}}"/>
+                                <img ng-src="{{badge.image_url}}"/>
                             </div>
                             <h3>
                                 {{badge.name}}

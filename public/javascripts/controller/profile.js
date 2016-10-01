@@ -1,13 +1,15 @@
 app.controller('ProfileController',
     function ($scope, ingredientFactory, categoriesFactory, userFactory, recipeFactory, UserSession,
-        ingredientService, restrictionsService, recipeService, Profile, blockUI, $q, imgService,
-        foodCategoriesPerUserFactory) {
+              ingredientService, restrictionsService, recipeService, Profile, blockUI, $q, imgService,
+              foodCategoriesPerUserFactory, badgeFactory, badgePerUserFactory) {
 
         $scope.categories = [];
+        $scope.badges = [];
         $scope.updateRestrictions = updateRestrictions;
         $scope.addedPhoto = addedPhoto;
         $scope.addCategoryToUser = addCategoryToUser;
         $scope.removeCategoryOfUser = removeCategoryOfUser;
+        $scope.upload = upload;
         init();
 
         function init() {
@@ -16,6 +18,12 @@ app.controller('ProfileController',
                 $scope.categories = categories;
                 $scope.profile = UserSession.getUserProfile();
                 blockUI.stop();
+            });
+            badgePerUserFactory.query({username: UserSession.getUsername()}).$promise.then(function (userBadges) {
+                for (var i = 0; i < userBadges.length; i++)
+                    badgeFactory.get({id: userBadges[i].badge_id}).$promise.then(function (badge) {
+                        $scope.badges.push(badge);
+                    });
             });
         }
 
@@ -55,28 +63,19 @@ app.controller('ProfileController',
         }
 
         function addCategoryToUser(categoryTag) {
-            var category = { food_category_id: categoryTag.id, username: $scope.profile.username }
+            var category = {food_category_id: categoryTag.id, username: $scope.profile.username}
             foodCategoriesPerUserFactory.save(category, function (response) {
             });
         }
 
         function removeCategoryOfUser(categoryTag) {
-            var category = { food_category_id: categoryTag.id, username: $scope.profile.username }
+            var category = {food_category_id: categoryTag.id, username: $scope.profile.username}
             foodCategoriesPerUserFactory.remove(category, function () {
             })
         }
 
-        $scope.badges = [
-            { 'id': '1', 'name': 'Celiaco1', 'description': 'Badge de Celiaco', 'image': '/img/badges/celiac-copper.jpg' },
-            { 'id': '2', 'name': 'Validacion1', 'description': 'Badge de Validador', 'image': '/img/badges/validation-copper.jpg' },
-            { 'id': '3', 'name': 'Diabetes1', 'description': 'Badge de Diabetico', 'image': '/img/badges/diabetes-silver.jpg' },
-            { 'id': '4', 'name': 'General1', 'description': 'Badge de Contribudor', 'image': '/img/badges/general-gold.jpg' },
-            { 'id': '5', 'name': 'Vegano1', 'description': 'Badge de Vegano', 'image': '/img/badges/vegan-copper.jpg' }
-        ];
-
-        /*$scope.upload = function () {
-            badgeFactory.save($('#a').val());
-            //            badgeFactory.save("{name: 'badge1', description: 'soy un badge'}");
-        }*/
+        function upload() {
+            // for(var i = 0; i < badges.length; i++) badgePerUserFactory.save(badges[i]);
+        }
     }
 );

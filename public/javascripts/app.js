@@ -4,6 +4,7 @@ var app = angular.module('MainApp', [
     'ingredientModule',
     'recipeModule',
     'badgeModule',
+    'badgePerUserModule',
     'restrictionModule',
     'categoryModule',
     'userModule',
