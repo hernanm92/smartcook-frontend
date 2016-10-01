@@ -10,7 +10,8 @@
             <input type="text" 
                    ng-model="ingredientSelected" 
                    placeholder="Escriba el ingrediente" 
-                   typeahead="ing as ing.name for ing in getIngredients() | filter: {name: $viewValue} | orderBy :'name'| limitTo : 10"
+                   typeahead="ing as ing.name for ing in getIngredients() | 
+                             filter: {name: $viewValue, celiac:celiac, vegan:vegan, vegetarian:vegetarian, diabetic:diabetic } | orderBy :'name'| limitTo : 10"
                    class="form-control"  
                    typeahead-append-to-body="true" 
                    typeahead-on-select="updateIngredientToFull(ingredientSelected, ingredient)"

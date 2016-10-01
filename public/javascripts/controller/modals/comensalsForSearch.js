@@ -1,17 +1,16 @@
 app.controller('comensalsForSearchController',
-    function ($scope, frequentsUsers, $modalInstance, userFactory, homeService, categoriesFactory, 
-              notifyHelper, blockUI, $q, mapperService) {
+    function ($scope, frequentsUsers, $modalInstance, userFactory, homeService, categoriesFactory,
+        notifyHelper, blockUI, $q, mapperService) {
 
         $scope.users = [];
         init();
         $scope.hoverAddCommensalButton = hoverAddCommensalButton;
-        $scope.addCommensalForSearch = addCommensalForSearch;
+        $scope.actionCommensal = actionCommensal;
 
         function init() {
             angular.forEach(frequentsUsers, function (frequentUser) {
-                userFactory.get({ username: frequentUser.frequent_username }, function (user) {
-                    $scope.users.push(user);
-                })
+                var selected = wasSelected(frequentUser);
+                selected.value ? $scope.users.push(selected.user) : $scope.users.push(frequentUser);
             })
         }
 
@@ -27,6 +26,17 @@ app.controller('comensalsForSearchController',
             $($event.currentTarget).toggleClass('fa-star-o').toggleClass('fa-star');
         }
 
+        function actionCommensal(commensal) {
+            commensal.added ? removeCommensalForSearch(commensal) : addCommensalForSearch(commensal);
+        }
+
+        function removeCommensalForSearch(commensal) {
+            delete commensal.added ;
+            homeService.removeCommensalForSearch(commensal.username);
+            //delete commensal.added;
+            notifyHelper.success('Comensal para busqueda eliminado');
+        }
+
         function addCommensalForSearch(commensal, $event) {
             blockUI.start();
             var promises = {
@@ -37,9 +47,24 @@ app.controller('comensalsForSearchController',
                 blockUI.stop();
                 var commensalProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, null);
                 homeService.setCommensalProfile(commensalProfile);
-                notifyHelper.success('Commensal Agregado');
-                commensal.added = true
+                notifyHelper.success('Comensal Agregado para busqueda');
+                commensal.added = true;
             });
+
+        }
+
+        function wasSelected(commensal) {
+            var commensals = homeService.getCommensalProfile();
+            var wasSelected = false;
+            var user;
+            angular.forEach(commensals, function (comm) {
+                if (comm.username === commensal.username) {
+                    wasSelected = true;
+                    user = comm;
+                    user.added = true;
+                }
+            })
+            return { value: wasSelected, user: user };
         }
 
     });

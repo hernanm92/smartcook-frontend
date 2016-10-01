@@ -15,9 +15,11 @@ function homeService($modal, UserSession, searcher, MergeProfile) {
     self.getRecipes = getRecipes;
     self.resetRecipes = resetRecipes;
     self.setCommensalProfile = setCommensalProfile;
+    self.getCommensalProfile = getCommensalProfile;
+    self.removeCommensalForSearch = removeCommensalForSearch;
 
     function search(ings, settings) {
-        var profile = UserSession.getUserProfile(); 
+        var profile = UserSession.getUserProfile();
         self.commensalsProfile.push(profile);
         var restrictions = MergeProfile.mergeProfiles(self.commensalsProfile);
         self.commensalsProfile = [];//para una nueva busqueda 
@@ -79,5 +81,19 @@ function homeService($modal, UserSession, searcher, MergeProfile) {
 
     function setCommensalProfile(commensal) {
         self.commensalsProfile.push(commensal);
+    }
+
+    function getCommensalProfile() {
+        return self.commensalsProfile;
+    }
+
+    function removeCommensalForSearch(username) {
+        for (var index = 0; index < self.commensalsProfile.length; index++) {
+            var commensal = self.commensalsProfile[index];
+            if (commensal.username === username) {
+                break;
+            }
+        }
+        self.commensalsProfile.splice(index, 1);
     }
 }

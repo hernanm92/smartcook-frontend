@@ -1,6 +1,6 @@
 app.controller('HomeController',
     function ($scope, ingredientService, homeService, $location,
-        notifyHelper, UserSession, userFactory, blockUI, $modal) {
+        notifyHelper, UserSession, userFactory, blockUI, $modal, $q) {
 
         //private
         var self = this;
@@ -46,6 +46,14 @@ app.controller('HomeController',
         }
 
         function init() {
+            if (UserSession.isLogged()) {
+                UserSession.getProfile().then(function (profileUser) {
+                    $scope.vegan = profileUser.vegan ? true : undefined; //con undefined, no lo toma como filtro 
+                    $scope.vegetarian = profileUser.vegetarian ? true : undefined;
+                    $scope.celaic = profileUser.celiac ? true : undefined;
+                    $scope.diabetic = profileUser.diabetic ? true : undefined;
+                });
+            }
             $scope.ingredientsTemplate = homeService.initIngredients();
             $scope.recipes = homeService.getRecipes();
         };
@@ -127,7 +135,16 @@ app.controller('HomeController',
                 size: 'md',
                 resolve: {
                     frequentsUsers: function () {
-                        return frequentsUsers;
+                        var users = []
+                            , promises = [];
+                        angular.forEach(frequentsUsers, function (frequentUser) {
+                            promises.push(userFactory.get({ username: frequentUser.frequent_username }).$promise);
+                        });
+                        return $q.all(promises).then(function (values) {
+                            //
+                            return values;
+                        })
+
                     }
                 },
                 windowClass: 'menu-bar-space'
