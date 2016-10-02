@@ -8,7 +8,7 @@
                          ng-repeat="recipe in recipes track by $index">
                         <div class="row">
                             <div class="col-sm-4">
-                                <a href="shop-ui-inner.html">
+                                <a>
                                     <img class="img-responsive" style="padding:0;" ng-src="{{recipe.image_url}}" alt="">
                                     <!--<div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>-->
                                 </a>
@@ -16,7 +16,7 @@
                             <div class="col-sm-8 product-description">
                                 <div class="overflow-h margin-bottom-5">
                                     <ul class="list-inline overflow-h">
-                                        <li><h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a>
+                                        <li><h4 class="title-price"><a class="text-uppercase">{{recipe.name}}</a>
                                             </h4></li>
                                     </ul>
                                     <div class="margin-bottom-10">
@@ -31,12 +31,15 @@
                                     <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
                                     <ul class="list-inline add-to-wishlist margin-bottom-20">
                                         <li>
-                                            <button type="button" class="btn-u btn-u-sea-shop" ng-click="getDetailsRecipe(recipe.id)">
-                                                Ver receta</button>
+                                            <button type="button" class="btn-u btn-u-sea-shop"
+                                                    ng-click="getDetailsRecipe(recipe.id)">
+                                                Ver receta
+                                            </button>
                                         </li>
                                         <li class="wishlist-in">
                                             <i class="fa fa-heart"></i>
-                                            <a href="#">Agregar a favoritos</a>
+                                            <a ng-click="removeFromFavorites(recipe,$event)" style="cursor: pointer;">
+                                                Remover de favoritos</a>
                                         </li>
                                     </ul>
                                 </div>

@@ -1,6 +1,6 @@
 app.controller('HomeController',
     function ($scope, ingredientService, homeService, $location,
-        notifyHelper, UserSession, userFactory, blockUI, $modal, $q) {
+              notifyHelper, UserSession, userFactory, blockUI, $modal, $q, recipePerUserFactory) {
 
         //private
         var self = this;
@@ -24,6 +24,17 @@ app.controller('HomeController',
         $scope.resetSearch = resetSearch;
         $scope.getIngredients = getIngredients;
         $scope.addDiner = addDiner;
+        $scope.isFavorite = isFavorite;
+        $scope.removeFromFavorites = removeFromFavorites;
+        $scope.addToFavorites = addToFavorites;
+
+        if (isLogged())
+            recipePerUserFactory.query({username: UserSession.getUsername()})
+                .$promise.then(function (favorites) {
+                $scope.userFavorites = favorites;
+            });
+        else
+            $scope.userFavorites = undefined;
 
         $scope.$on('$viewContentLoaded', function () {
             App.init();
@@ -39,7 +50,7 @@ app.controller('HomeController',
             blockUI.start();
             template = '/general/commensalsModal';
             controller = 'comensalsForSearchController';
-            userFactory.query({ chef: UserSession.getUsername() }, function (frequentsUsers) {
+            userFactory.query({chef: UserSession.getUsername()}, function (frequentsUsers) {
                 blockUI.stop();
                 openModal(frequentsUsers, template, controller);
             });
@@ -138,7 +149,7 @@ app.controller('HomeController',
                         var users = []
                             , promises = [];
                         angular.forEach(frequentsUsers, function (frequentUser) {
-                            promises.push(userFactory.get({ username: frequentUser.frequent_username }).$promise);
+                            promises.push(userFactory.get({username: frequentUser.frequent_username}).$promise);
                         });
                         return $q.all(promises).then(function (values) {
                             //
@@ -150,6 +161,22 @@ app.controller('HomeController',
                 windowClass: 'menu-bar-space'
             });
         };
+
+        function isFavorite(recipe) {
+            if($scope.userFavorites == undefined) return false;
+            return $scope.userFavorites.filter(function(r,i){
+                return recipe.id == r.recipe_id
+            }).length > 0
+        }
+
+        function removeFromFavorites(recipe){
+
+        }
+
+        function addToFavorites(recipe){
+            //TODO: Si no esta logueado decirle que se registre / loguee.
+        }
+
     }
 );
 

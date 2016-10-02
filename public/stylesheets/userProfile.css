@@ -1,39 +1,51 @@
-.profile-username{
+.profile-username {
     color: #687074;
     font-size: 24px;
     text-transform: uppercase;
 }
-.profile-email{
-font-weight:normal;
+
+.profile-email {
+    font-weight: normal;
 }
-.profile-restrictions{
-    font-size:24px;
+
+.profile-restrictions {
+    font-size: 24px;
 }
-.userRecipe>img{
-position:absolute;
+
+.userRecipe > img {
+    position: absolute;
 }
-.recipeEdit{
-position:relative;
-bottom:35px;
-background-color:black;
-opacity:0.5;
+
+.recipeEdit {
+    position: relative;
+    bottom: 35px;
+    background-color: black;
+    opacity: 0.5;
 }
-.recipeEdit>a, .recipeEdit>a:visited{
-color:white;
+
+.recipeEdit > a, .recipeEdit > a:visited {
+    color: white;
 }
-.restrictionItem{
-font-weight:normal;
-font-size:22px;
+
+.restrictionItem {
+    font-weight: normal;
+    font-size: 22px;
 }
-.restrictionItem>input{
--webkit-transform:scale(1.8);
-margin-right: 5px;
+
+.restrictionItem > input {
+    -webkit-transform: scale(1.8);
+    margin-right: 5px;
 }
-.profile-edit-button{
-position:relative;
-bottom:42px;
-border-color: black black transparent transparent !important;
-border-width:thin !important;
-border-radius: 0px 5px 0 0 !important;
-background-color:white;
+
+.profile-edit-button {
+    position: relative;
+    bottom: 42px;
+    border-color: black black transparent transparent !important;
+    border-width: thin !important;
+    border-radius: 0px 5px 0 0 !important;
+    background-color: white;
+}
+.userRecipe-image{
+    background-size: cover;
+    height: 180px;
 }

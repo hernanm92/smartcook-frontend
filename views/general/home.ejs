@@ -19,11 +19,11 @@
                 Remover Ingredientes
             </button>
         </div>
-       <!-- <div class="col-sm-2">
-            <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="resetSearch()">Nueva
-                busqueda
-            </button>
-        </div> -->
+        <!-- <div class="col-sm-2">
+             <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="resetSearch()">Nueva
+                 busqueda
+             </button>
+         </div> -->
         <div ng-show="isLogged()" class="col-sm-2">
             <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="addDiner()">
                 Agregar comensales
@@ -64,7 +64,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="filter-results">
-                <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="recipe in recipes">
+                <div class="list-product-description product-description-brd margin-bottom-30"
+                     ng-repeat="recipe in recipes">
                     <div class="row">
                         <div class="col-sm-4">
                             <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
@@ -75,7 +76,7 @@
                             <div class="overflow-h margin-bottom-5">
                                 <ul class="list-inline overflow-h">
                                     <li>
-                                        <h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a>
+                                        <h4 class="title-price"><a class="text-uppercase">{{recipe.name}}</a>
                                         </h4>
                                     </li>
                                     <li class="pull-right">
@@ -92,10 +93,15 @@
                                 <ul class="list-inline add-to-wishlist margin-bottom-20">
                                     <li class="wishlist-in">
                                         <i class="fa fa-heart"></i>
-                                        <a href="#/">Agregar a favoritos</a>
+                                        <!--<a >Agregar a favoritos</a>-->
+                                        <a ng-if="isFavorite(recipe)" ng-click="removeFromFavorites(recipe)"
+                                           style="cursor: pointer;">Remover de favoritos</a>
+                                        <a ng-if="!isFavorite(recipe)" ng-click="addToFavorites(recipe)"
+                                           style="cursor: pointer;">Agregar a favoritos</a>
                                     </li>
                                 </ul>
-                                <button type="button" class="btn-u btn-u-sea-shop" ng-click="getDetailsRecipe(recipe.id)">Ver receta
+                                <button type="button" class="btn-u btn-u-sea-shop"
+                                        ng-click="getDetailsRecipe(recipe.id)">Ver receta
                                 </button>
                             </div>
                         </div>
@@ -119,21 +125,24 @@
         <div id="carousel-example-generic-v5" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li class="active rounded-x" data-target="#carousel-example-generic-v5" data-slide-to="0"></li>
-                <li class="rounded-x" data-target="#carousel-example-generic-v5" data-slide-to="1"></li>
-                <li class="rounded-x" data-target="#carousel-example-generic-v5" data-slide-to="2"></li>
+                <li class="active rounded-x" ng-non-bindable class="left carousel-control"
+                    data-target="#carousel-example-generic-v5" data-slide-to="0"></li>
+                <li class="rounded-x" ng-non-bindable class="left carousel-control"
+                    data-target="#carousel-example-generic-v5" data-slide-to="1"></li>
+                <li class="rounded-x" ng-non-bindable class="left carousel-control"
+                    data-target="#carousel-example-generic-v5" data-slide-to="2"></li>
             </ol>
 
             <div class="carousel-inner">
                 <div class="item active">
                     <p>Primero <a href="#/register">create un perfil</a> e ingresa con él.
-                        <p>
-                            <ul class="list-inline twitter-icons">
-                                <li><a href="#/"><i class="fa fa-user-plus"></i></a></li>
-                                <li><a href="#/"><i class="fa fa-graduation-cap"></i></a></li>
-                                <li><a href="#/"><i class="fa fa-users"></i></a></li>
+                    <p>
+                    <ul class="list-inline twitter-icons">
+                        <li><a href="#/"><i class="fa fa-user-plus"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-graduation-cap"></i></a></li>
+                        <li><a href="#/"><i class="fa fa-users"></i></a></li>
 
-                            </ul>
+                    </ul>
                 </div>
                 <div class="item">
                     <p>Una vez registrado, <a href="#/Recipe/Create">crea tu propia receta</a>.</p>
@@ -154,10 +163,12 @@
             </div>
 
             <div class="carousel-arrow">
-                <a class="left carousel-control" href="#carousel-example-generic-v5" data-slide="prev">
+                <a class="left carousel-control" ng-non-bindable class="left carousel-control"
+                   href="#carousel-example-generic-v5" data-slide="prev">
                     <i class="fa fa-angle-left"></i>
                 </a>
-                <a class="right carousel-control" href="#carousel-example-generic-v5" data-slide="next">
+                <a class="right carousel-control" ng-non-bindable class="left carousel-control"
+                   href="#carousel-example-generic-v5" data-slide="next">
                     <i class="fa fa-angle-right"></i>
                 </a>
             </div>
