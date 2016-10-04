@@ -81,6 +81,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     //userId,name,ingredients,steps,description,image_url)
     function getDetailRecipe(id) {
         blockUI.start();
+        var deferred = $q.defer();
         var recipeToEdit = new Recipe(UserSession.getUserId(), null, [], [], null, null);
         recipeFactory.get({ id: id }, function (recipe) {
             recipeToEdit.name = recipe.name;
@@ -89,16 +90,20 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
             recipeToEdit.steps = recipe.steps;
             //ingsPerRecipe
             ingredientFactory.query({ recipe_id: id }, function (ingsFromRecipe) {
-                angular.forEach(ingsFromRecipe, function (ingFromRecipe) {
+                var promiseIngs = [];
+                angular.forEach(ingsFromRecipe, function (ingFromRecipe, key) {
                     //ingAmounts
                     ingredientPerRecipeFactory.get({ recipe_id: id, ingredient_id: ingFromRecipe.id }, function (ingAmounts) {
-                        recipeToEdit.ingredients.push(mapToView(ingFromRecipe, ingAmounts))
-                        blockUI.stop();
-                    })
+                        recipeToEdit.ingredients.push(mapToView(ingFromRecipe, ingAmounts));
+                        if (ingsFromRecipe.length ===  (key + 1)) { //key es el index, cuando termine con el ultimo termina la oper async
+                            deferred.resolve(recipeToEdit);
+                            blockUI.stop();
+                        }
+                    });
                 });
             });
         });
-        return recipeToEdit;
+        return deferred.promise;
     }
 
     function mapToView(ingDesc, ingAmounts) {

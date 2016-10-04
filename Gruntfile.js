@@ -96,12 +96,14 @@ module.exports = function (grunt) {
     "public/javascripts/service/restrictions.js",
     "public/javascripts/service/mergeProfile.js",
     "public/javascripts/service/mapper.js",
+    "public/javascripts/service/home.js",
 
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
     "public/javascripts/models/profile.js",
 
-    "public/javascripts/service/home.js"
+    "public/javascripts/directives/fix-validate-menu.js"
+    
   ]
 
   var cssFileList = [
