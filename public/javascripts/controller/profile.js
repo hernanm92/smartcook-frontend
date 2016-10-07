@@ -17,6 +17,7 @@ app.controller('ProfileController',
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
                 $scope.profile = UserSession.getUserProfile();
+                if($scope.profile.avatar == undefined) $scope.profile.avatar = 'assets/img/newLogo.jpg';
                 blockUI.stop();
             });
             badgePerUserFactory.query({username: UserSession.getUsername()}).$promise.then(function (userBadges) {

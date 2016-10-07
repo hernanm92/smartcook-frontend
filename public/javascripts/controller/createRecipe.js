@@ -1,8 +1,10 @@
 app.controller('CreateRecipeController',
-    function ($controller, $scope, recipeService, $modal, ingredientService, Recipe, imgService, UserSession) {
+    function ($controller, $scope, recipeService, $modal, ingredientService
+        , Recipe, imgService, UserSession, $location) {
         //global variables
         angular.extend(this, $controller('baseRecipeController', { $scope: $scope }));
 
+        if(!UserSession.isLogged()) $location.path('/login');
         init();
         function init() {
             $scope.recipe = recipeService.create();
