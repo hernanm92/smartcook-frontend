@@ -17,7 +17,7 @@ function LoginController($scope, UserSession, userLoginFactory,
     });
 
     var self = this;
-    self.usersAllowed = ['matileon', 'amodugno', 'hmaschwitz'];
+    self.usersAllowed = ['matileon', 'amodugno', 'hmaschwitz', 'admin'];
 
     function login(isValid) {
         $scope.formSubmited = true;

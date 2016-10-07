@@ -1,6 +1,6 @@
 app.controller('HomeController',
     function ($scope, ingredientService, homeService, $location,
-              notifyHelper, UserSession, userFactory, blockUI, $modal, $q, recipePerUserFactory) {
+              notifyHelper, UserSession, userFactory, blockUI, $modal, $q, RecipeUser) {
 
         //private
         var self = this;
@@ -24,18 +24,23 @@ app.controller('HomeController',
         $scope.resetSearch = resetSearch;
         $scope.getIngredients = getIngredients;
         $scope.addDiner = addDiner;
-        $scope.isFavorite = isFavorite;
-        $scope.removeFromFavorites = removeFromFavorites;
-        $scope.addToFavorites = addToFavorites;
-
-        if (isLogged())
-            recipePerUserFactory.query({username: UserSession.getUsername()})
-                .$promise.then(function (favorites) {
-                $scope.userFavorites = favorites;
+        //-------------------Favorites
+        if (UserSession.isLogged()) {
+            RecipeUser.getRecipesOfUser().then(function (userRecipes) {
+                $scope.userRecipes = userRecipes;
+                $scope.userFavoriteRecipes = RecipeUser.getFavoritesFromRecipes(userRecipes);
             });
-        else
-            $scope.userFavorites = undefined;
-
+            $scope.isFavorite = function (recipe) {
+                return RecipeUser.isFavorite(recipe, $scope.userFavoriteRecipes)
+            };
+            $scope.removeFromFavorites = function (recipe) {
+                RecipeUser.removeFromFavorites(recipe, $scope.userRecipes, $scope.userFavoriteRecipes);
+            };
+            $scope.addToFavorites = function (recipe) {
+                RecipeUser.addToFavorites(recipe, $scope.userRecipes, $scope.userFavoriteRecipes);
+            };
+        }
+        //----------------------------
         $scope.$on('$viewContentLoaded', function () {
             App.init();
             App.initScrollBar();
@@ -160,22 +165,6 @@ app.controller('HomeController',
                 windowClass: 'menu-bar-space'
             });
         };
-
-        function isFavorite(recipe) {
-            if($scope.userFavorites == undefined) return false;
-            return $scope.userFavorites.filter(function(r,i){
-                return recipe.id == r.recipe_id
-            }).length > 0
-        }
-
-        function removeFromFavorites(recipe){
-
-        }
-
-        function addToFavorites(recipe){
-            //TODO: Si no esta logueado decirle que se registre / loguee.
-        }
-
     }
 );
 

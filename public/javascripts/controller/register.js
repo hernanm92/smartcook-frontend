@@ -103,8 +103,18 @@ app.controller('RegisterController',
         };
 
         function saveUser() {
-            var user = new User($scope.user.firstName, $scope.user.lastName, $scope.user.gender,
-                $scope.user.dateOfBirth, $scope.user.userName, $scope.user.email, $scope.user.password);
+            // var user = new User($scope.user.firstName, $scope.user.lastName, $scope.user.gender,
+            //     $scope.user.dateOfBirth, $scope.user.userName, $scope.user.email, $scope.user.password);
+
+            var user = {
+                username: $scope.user.userName,
+                name: $scope.user.firstName.trim() + " " + $scope.user.lastName,
+                email: $scope.user.email,
+                password: $scope.user.password,
+                gender: $scope.user.gender,
+                birthdate: $scope.user.dateOfBirth,
+                avatar: 'assets/img/newLogo.jpg'
+            };
 
             userFactory.save(user, function (res) {
                 var message = 'El usuario ha sido creado satisfactoriamente. Desea ingresar con su nuevo Usuario?';
@@ -113,12 +123,6 @@ app.controller('RegisterController',
                     window.location.href = "#/login";
                 });
             });
-        };
-
-
-
-        $scope.test = function () {
-            console.log(UserSession.getUsername());
         };
     }
 );

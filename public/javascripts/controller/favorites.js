@@ -6,9 +6,10 @@ app.controller('FavoritesController',
             .$promise.then(function (favorites) {
             $scope.favoriteRecipes = favorites;
             for (var i = 0; i < favorites.length; i++)
-                recipeFactory.get({id: favorites[i].recipe_id}).$promise.then(function (recipe) {
-                    $scope.recipes.push(recipe);
-                });
+                if (favorites[i].favorite)
+                    recipeFactory.get({id: favorites[i].recipe_id}).$promise.then(function (recipe) {
+                        $scope.recipes.push(recipe);
+                    });
         });
         $scope.getDetailsRecipe = getDetailsRecipe;
 

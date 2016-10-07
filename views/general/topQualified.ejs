@@ -36,7 +36,11 @@
                                         </li>
                                         <li class="wishlist-in">
                                             <i class="fa fa-heart"></i>
-                                            <a href="#">Agregar a favoritos</a>
+                                            <!--<a >Agregar a favoritos</a>-->
+                                            <a ng-if="isFavorite(recipe)" ng-click="removeFromFavorites(recipe)"
+                                               style="cursor: pointer;">Remover de favoritos</a>
+                                            <a ng-if="!isFavorite(recipe)" ng-click="addToFavorites(recipe)"
+                                               style="cursor: pointer;">Agregar a favoritos</a>
                                         </li>
                                     </ul>
                                 </div>
