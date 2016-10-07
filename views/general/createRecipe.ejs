@@ -3,8 +3,8 @@
         <div class="row">
             <div flow-init class="col-md-4">
                 <div flow-drop>
-                    <img class="img-rounded" alt="Responsive image" flow-img="$flow.files[0]"  flow-file-added="addedPhoto($file, $event, $flow)"
-                        ng-src="{{recipe.image_url}}" width="250px" height="200px">
+                    <img class="img-rounded" alt="Responsive image" flow-img="$flow.files[0]" flow-file-added="addedPhoto($file, $event, $flow)"
+                        ng-src="{{recipe.image_url}}" width="350px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
@@ -25,13 +25,9 @@
                     </tags-input>
                     <p ng-show=" !(recipe.ingredients.length> 0) && submitted" style="color:red;">La receta debe de tener al menos un Ingrediente</p>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
                 <div class="form-group">
                     <label class="label-form-ingredient">Breve Descripcion</label>
-                    <textarea id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripcion aqui..."></textarea>
+                    <textarea id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripcion aqui..." rows="4" ></textarea>
                 </div>
             </div>
         </div>

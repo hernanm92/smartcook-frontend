@@ -137,7 +137,6 @@ app.controller('HomeController',
             $scope.recipes = [];
             homeService.resetRecipes();
         }
-
         function openModal(frequentsUsers, template, controller) {
             return $modal.open({
                 animation: true,

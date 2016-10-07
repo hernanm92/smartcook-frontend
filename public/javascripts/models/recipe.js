@@ -1,10 +1,10 @@
 (function () {
     angular.module('MainApp').
-    factory('Recipe',RecipeFactory);
+        factory('Recipe', RecipeFactory);
 
     function RecipeFactory() {
-        function Recipe(userId,name,ingredients,steps,description,image_url) {
-            this.userId = userId;
+        function Recipe(id, name, ingredients, steps, description, image_url) {
+            this.id = id;
             this.name = name;
             this.ingredients = ingredients;
             this.steps = steps;

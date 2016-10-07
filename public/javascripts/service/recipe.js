@@ -82,7 +82,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     function getDetailRecipe(id) {
         blockUI.start();
         var deferred = $q.defer();
-        var recipeToEdit = new Recipe(UserSession.getUserId(), null, [], [], null, null);
+        var recipeToEdit = new Recipe(id, null, [], [], null, null);
         recipeFactory.get({ id: id }, function (recipe) {
             recipeToEdit.name = recipe.name;
             recipeToEdit.description = recipe.description;

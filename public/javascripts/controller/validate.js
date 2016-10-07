@@ -1,8 +1,7 @@
 app.controller('ValidateController',
-    function ($scope, recipeFactory, validateFactory, eventService, $timeout, recipeService) {
+    function ($scope, recipeFactory, validateFactory, eventService, $timeout, recipeService, UserSession, $q, recipePerUserFactory) {
         $scope.validateRecipeIndex = 0;
         $scope.validateCurrentRecipe = {};
-        $scope.recipes = [];
         $scope.skip = skip;
         $scope.nextRecipe = nextRecipe;
 
@@ -13,30 +12,37 @@ app.controller('ValidateController',
 
         init();
         function init() {
-            recipeFactory.query({}, function (recipes) {
+            var userWithFalseRelation = {
+                username: UserSession.getUsername(),
+                validated: false
+            }
+            recipeFactory.query(userWithFalseRelation, function (recipes) {
                 $scope.recipes = recipes;
-                var id = $scope.recipes.pop().id;
-                recipeService.getDetailRecipe(id).then(function (value) {
-
-                    $scope.validateCurrentRecipe = value;
-                });
+                if (recipes.length > 0) {
+                    var id = $scope.recipes.pop().id;
+                    recipeService.getDetailRecipe(id).then(function (value) {
+                        $scope.validateCurrentRecipe = value;
+                    });
+                } else {
+                    $scope.noRecipesToValidate = true;
+                }
             });
         }
 
         function skip() {
-            $('.validateRecipe-Recipe').animate({ opacity: 0 }, 500, function () {});
+            $('.validateRecipe-Recipe').animate({ opacity: 0 }, 500, function () { });
             setNextRecipe();
         }
 
         function setNextRecipe() {
             if ($scope.recipes.length > 0) {
                 var id = $scope.recipes.pop().id;
-                //aca traer la info getDetail
                 recipeService.getDetailRecipe(id).then(function (value) {
                     $scope.validateCurrentRecipe = value;
                     $('.validateRecipe-Recipe').animate({ opacity: 1 }, 500);
                 });
             } else {
+                $scope.noRecipesToValidate = true;
                 $('.validateRecipe-Recipe').css('visibility', 'hidden');
                 $.notify("No hay mas recetas para validarr", { globalPosition: 'right bottom', className: 'info' });
             }
@@ -51,17 +57,41 @@ app.controller('ValidateController',
         };
 
         function nextRecipe(validation) {
-            $('.validateRecipe-Recipe').animate({ opacity: 0 }, 500, function () {});
-                var validatedRecipe = {
-                    "userId": 1, //TODO: De donde se saca?
-                    "recipeId": $scope.validateCurrentRecipe.id,
-                    "validation": validation
-                };
-                //Integrar con la api cuando este disponible
-                /*validateFactory.save(validatedRecipe, function (response) {
-                    $.notify("Receta Validada", { globalPosition: 'right bottom', className: 'success' });
-                });*/
-                setNextRecipe();
+            $('.validateRecipe-Recipe').animate({ opacity: 0 }, 500, function () { });
+            //updetear o guardar el campo 'positive vote'
+            var recipeId = $scope.validateCurrentRecipe.id;
+            recipePerUserFactory.query({ username: UserSession.getUsername(), recipe_id: recipeId }, function (res) {
+                res.length === 0 ? saveRelation() : updateRelation()
+            });
+        }
+
+        function saveRelation() {
+            var params = {
+                username: UserSession.getUsername(),
+                recipe_id: $scope.validateCurrentRecipe.id,
+                validated: true,
+                owner: false,
+                favorite: false
+            }
+            recipePerUserFactory.save(params, function (res) {
+                handleResponse();
+            });
+        }
+
+        function handleResponse() {
+            //$.notify("Receta Validada", { globalPosition: 'right bottom', className: 'success' });
+            setNextRecipe();
+        }
+
+        function updateRelation() {
+            var params = {
+                username: UserSession.getUsername(),
+                recipe_id: $scope.validateCurrentRecipe.id,
+                validated: true
+            }
+            recipePerUserFactory.update(params, function (res) {
+                handleResponse();
+            });
         }
     }
 );
