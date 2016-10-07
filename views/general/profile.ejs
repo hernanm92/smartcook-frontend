@@ -16,13 +16,13 @@
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
                 </div>
                 <div>
-                    <h3>Mail</h3>
+                    <h3>Email</h3>
                 </div>
                 <div>
                     <label class="profile-email">{{profile.email}}</label>
                 </div>
                 <div>
-                    <h3>Fecha de nacimiento</h3>
+                    <h3>Fecha de Nacimiento</h3>
                 </div>
                 <div>
                     <label class="profile-email">{{profile.birthdate}}</label>
@@ -127,9 +127,9 @@
 
                         <div class="col-md-3 userRecipe" ng-repeat="recipe in profile.recipes"
                              style="text-align:center">
-                            <label>
+                            <h3>
                                 {{recipe.name}}
-                            </label>
+                            </h3>
                             <a class="thumbnail">
                                 <div class="userRecipe-image" style="background-image: url('{{recipe.image_url}}')"></div>
                             </a>
@@ -142,9 +142,6 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <button class="btn btn-primary btn-lg" id="but" type="button" ng-click="upload()">SUBIR</button>
 </div>
 <div class="container">
     <div class="row">

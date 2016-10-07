@@ -1,15 +1,19 @@
 app.controller('EditRecipeController', EditRecipeController);
 
-function EditRecipeController($scope, recipeService, $routeParams, $controller, $window) {
+function EditRecipeController($scope, recipeService, $routeParams, $controller, $window, blockUI) {
     angular.extend(this, $controller('baseRecipeController', { $scope: $scope }));
 
     init();
-
+    $scope.recipe = recipeService.create();
     function init() {
         var id = $routeParams.id;
-        $scope.recipe = recipeService.getDetailRecipe(id);
-        $scope.units = recipeService.getUnits();
-        initBaseController();
+        blockUI.start();
+        recipeService.getDetailRecipe(id).then(function (recipe) {
+            $scope.recipe = recipe;
+            $scope.units = recipeService.getUnits();
+            blockUI.stop();
+            initBaseController();
+        })
     }
 
     function initBaseController() {

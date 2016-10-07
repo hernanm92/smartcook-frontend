@@ -6,23 +6,23 @@
     text-align:center;
 }
 .validateRecipe-Description{
-    text-align:justify;
+    text-align:center;
 }
 .validateRecipe-check{
     transition: background-color 0.5s ease;
-    background-color:palegreen;
+    background-color:palegreen !important
 }
 .validateRecipe-check:hover{
     cursor: pointer;
-    background-color:limegreen;
+    background-color:limegreen !important
 }
 .validateRecipe-cross{
     transition: background-color 0.5s ease;
-    background-color:lightsalmon;
+    background-color:#ff5656 !important
 }
 .validateRecipe-cross:hover{
     cursor: pointer;
-    background-color:tomato;
+    background-color:#f98181 !important
 }
 .row-eq-height {
   display: -webkit-box;
@@ -31,5 +31,24 @@
   display: flex;
 }
 
-.validateRecipe-Recipe{
+.menu-button{
+        border-radius: 10px;
+    margin-right: 15px;
+}
+
+.validateRecipe-skip{
+    transition: background-color 0.5s ease;
+    background-color:#ecb818 !important
+}
+.validateRecipe-skip:hover{
+    cursor: pointer;
+    background-color:#ffda6a !important
+}
+
+.fixed-menu{
+    position: fixed;
+    right: 15%;
+    left: 15%;
+    bottom: 3%;
+    z-index: 1;
 }

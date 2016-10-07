@@ -1,78 +1,134 @@
 <!--=== Content Part ===-->
 <div class="content container">
     <div class="container" style="padding-top: 90px;">
-        <div class="row" style="margin-bottom:10px">
-            <button type="button" class="btn btn-info" ng-click="runBootstro()">Mostrar DEMO</button>
+        <div class="row" style="margin-bottom:10px" validate-menu="fixed-menu">
+              <!--<button type="button" class="btn btn-info" ng-click="runBootstro()">Mostrar DEMO</button>-->
+            <div class="col-md-offset-3 col-md-6" style="text-align: center;">
+                <button type="button" data-bootstro-title="Validar Positivamente" 
+                        data-bootstro-content="Toca en esta zona para indicar que es una receta valida. Podes apretar la L(Like)"
+                        data-bootstro-placement="right" 
+                        data-bootstro-step=1 class="bootstro menu-button  btn-u btn-u-md btn-u-sea-shop"
+                        ng-click="nextRecipe(1)">Me encanta!! </button>
+                <button type="button" class="menu-button validateRecipe-skip btn-u  btn-u-md btn-u-sea-shop " ng-click="skip()">Dejame Pensar</button>
+                <button data-bootstro-title="Validar Negativamente" 
+                        data-bootstro-content="Toca en esta zona para indicar que es una receta invalida. Podes apretar la D(Dislike)"
+                        data-bootstro-placement="left" data-bootstro-step=2 type="button" class=" bootstro menu-button validateRecipe-cross btn-u btn-u-md btn-u-sea-shop"
+                    ng-click="nextRecipe(0)">No esta bueno</button>
+            </div>
         </div>
-        <div class="row row-eq-height">
-            <div data-bootstro-title="Validar Positivamente" data-bootstro-content="Toca en esta zona para indicar que es una receta valida. Podes apretar la L(Like)"
-                data-bootstro-placement="right" data-bootstro-step=1 class="col-xs-1 validateRecipe-check bootstro" ng-click="nextRecipe(1);"></div>
-            <div data-bootstro-title="Receta a Validar" data-bootstro-content="Aca podes ver toda la informacion de la receta a validar"
-                data-bootstro-placement="top" data-bootstro-step=0 class="col-xs-10 validateRecipe-Recipe bootstro">
-                <div class="row validateRecipe-Title">
-                    <h4>{{validateCurrentRecipe.name}}</h4>
-                </div>
-                <div class="row validateRecipe-Image">
-                    <img ng-src="{{validateCurrentRecipe.image_url}}" style="height:290px; background-position:center;background-size: cover;">
-                </div>
-                <div class="row validateRecipe-Description">
-                    <h5>{{validateCurrentRecipe.description}}</h5>
+        <div data-bootstro-title="Receta a Validar" data-bootstro-content="Aca podes ver toda la informacion de la receta a validar"
+            data-bootstro-placement="top" data-bootstro-step=0 class="bootstro row validateRecipe-Recipe">
+            <div class="row validateRecipe-Title">
+                <h4>{{validateCurrentRecipe.name}}</h4>
+            </div>
+            <div class="row validateRecipe-Image">
+                <img ng-src="{{validateCurrentRecipe.image_url}}" style="height:290px; background-position:center;background-size: cover;">
+            </div>
+            <div class="row validateRecipe-Description">
+                <h5>{{validateCurrentRecipe.description}}</h5>
+            </div>
+            <!--INGREDIENTES-->
+            <div class="row">
+                <div class="heading heading-v2">
+                    <h2>Ingredientes</h3>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <ul style="list-style-type:none;">
+                                    <li ng-repeat="ing in validateCurrentRecipe.ingredients track by $index">
+                                        <ul class="list-inline product-ratings">
+                                            <li>
+                                                <h4 class="title-price"> {{ing.name}} </h4>
+                                            </li>
+                                            <li>
+                                                <h4 class="title-price">{{ing.amount}}</h4>
+                                            </li>
+                                            <li>
+                                                <h4 class="title-price">{{ing.unit}}</h4>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                 </div>
             </div>
-            <div data-bootstro-title="Validar Negativamente" data-bootstro-content="Toca en esta zona para indicar que es una receta invalida. Podes apretar la D(Dislike)"
-                data-bootstro-placement="left" data-bootstro-step=2 class="col-xs-1 validateRecipe-cross bootstro" ng-click="nextRecipe(0);"></div>
+            <!--PASOS-->
+            <div class="row">
+                <div class="col-md-12" style="padding-top: 20px;">
+                    <div class="heading heading-v2">
+                        <h2>Procedimiento</h2>
+                    </div>
+                    <div class="steps-container">
+                        <div class="" ng-repeat="step in validateCurrentRecipe.steps track by $index">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <textarea readonly id="item" class="detail-step" msd-elastic ng-model="step">
+                                </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!--<div class="col-xs-1  bootstro">
+                <div data-bootstro-title="Validar Negativamente" data-bootstro-content="Toca en esta zona para indicar que es una receta invalida. Podes apretar la D(Dislike)"
+                    data-bootstro-placement="left" data-bootstro-step=2 class=" col-xs-1 validateRecipe-cross bootstro"></div>
+                <div class="validateRecipe-cross " ng-click="nextRecipe(0);">
+                </div>
+            </div>-->
     </div>
-    <!--<div class="row">-->
-    <!--<div class="col-md-12">-->
-    <!--<div class="filter-results">-->
-    <!--<div class="list-product-description product-description-brd margin-bottom-30"-->
-    <!--ng-repeat="recipe in recipes">-->
-    <!--<div class="row">-->
-    <!--<div class="col-sm-4">-->
-    <!--<a href="shop-ui-inner.html">-->
-    <!--<div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>-->
-    <!--</a>-->
-    <!--</div>-->
-    <!--<div class="col-sm-8 product-description">-->
-    <!--<div class="overflow-h margin-bottom-5">-->
-    <!--<ul class="list-inline overflow-h">-->
-    <!--<li><h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a>-->
-    <!--</h4></li>-->
-    <!--<li class="pull-right">-->
-    <!--<ul class="list-inline product-ratings">-->
-    <!--<li><i class="rating-selected fa fa-star"></i></li>-->
-    <!--<li><i class="rating-selected fa fa-star"></i></li>-->
-    <!--<li><i class="rating-selected fa fa-star"></i></li>-->
-    <!--<li><i class="rating fa fa-star"></i></li>-->
-    <!--<li><i class="rating fa fa-star"></i></li>-->
-    <!--</ul>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--<div class="margin-bottom-10">-->
-    <!--<span class="title-price margin-right-10">$60.00</span>-->
-    <!--<span class="title-price line-through">$95.00</span>-->
-    <!--</div>-->
-    <!--<p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>-->
-    <!--<ul class="list-inline add-to-wishlist margin-bottom-20">-->
-    <!--<li class="wishlist-in">-->
-    <!--<i class="fa fa-heart"></i>-->
-    <!--<a href="#">Agregar a favoritos</a>-->
-    <!--</li>-->
-    <!--<li class="compare-in">-->
-    <!--<i class="fa fa-exchange"></i>-->
-    <!--<a href="#">Add to Compare</a>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--<button type="button" class="btn-u btn-u-sea-shop">Ver receta</button>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>&lt;!&ndash;/end filter resilts&ndash;&gt;-->
+</div>
+<!--<div class="row">-->
+<!--<div class="col-md-12">-->
+<!--<div class="filter-results">-->
+<!--<div class="list-product-description product-description-brd margin-bottom-30"-->
+<!--ng-repeat="recipe in recipes">-->
+<!--<div class="row">-->
+<!--<div class="col-sm-4">-->
+<!--<a href="shop-ui-inner.html">-->
+<!--<div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-sm-8 product-description">-->
+<!--<div class="overflow-h margin-bottom-5">-->
+<!--<ul class="list-inline overflow-h">-->
+<!--<li><h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a>-->
+<!--</h4></li>-->
+<!--<li class="pull-right">-->
+<!--<ul class="list-inline product-ratings">-->
+<!--<li><i class="rating-selected fa fa-star"></i></li>-->
+<!--<li><i class="rating-selected fa fa-star"></i></li>-->
+<!--<li><i class="rating-selected fa fa-star"></i></li>-->
+<!--<li><i class="rating fa fa-star"></i></li>-->
+<!--<li><i class="rating fa fa-star"></i></li>-->
+<!--</ul>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<div class="margin-bottom-10">-->
+<!--<span class="title-price margin-right-10">$60.00</span>-->
+<!--<span class="title-price line-through">$95.00</span>-->
+<!--</div>-->
+<!--<p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>-->
+<!--<ul class="list-inline add-to-wishlist margin-bottom-20">-->
+<!--<li class="wishlist-in">-->
+<!--<i class="fa fa-heart"></i>-->
+<!--<a href="#">Agregar a favoritos</a>-->
+<!--</li>-->
+<!--<li class="compare-in">-->
+<!--<i class="fa fa-exchange"></i>-->
+<!--<a href="#">Add to Compare</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<button type="button" class="btn-u btn-u-sea-shop">Ver receta</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>&lt;!&ndash;/end filter resilts&ndash;&gt;-->
 
-    <!--</div>-->
-    <!--</div>&lt;!&ndash;/end row&ndash;&gt;-->
+<!--</div>-->
+<!--</div>&lt;!&ndash;/end row&ndash;&gt;-->
 </div>
 <!--/end container-->
 <!--=== End Content Part ===-->
