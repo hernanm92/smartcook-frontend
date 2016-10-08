@@ -3,7 +3,7 @@ angular
     .service('recipeService', recipeService);
 
 function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper,
-    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory, $window) {
+    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory) {
     var self = this;
     self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada' }];
     self.recipes = [];
@@ -65,9 +65,11 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     }
 
     function edit(recipe, file, username) {
-        $window.alert('Enviando datos');
-        console.log(recipe);
-        console.log(file);
+        var recipeToEdit = recipe;
+        recipeToEdit.original = recipe.id;
+        //creo una receta pero con original, en el back cuando llega a un x de validacion, se tiene q borrar la vieja y poner la nueva
+        //con original == nil
+        save(recipeToEdit, file, username);
     }
 
     function create() {
@@ -95,7 +97,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
                     //ingAmounts
                     ingredientPerRecipeFactory.get({ recipe_id: id, ingredient_id: ingFromRecipe.id }, function (ingAmounts) {
                         recipeToEdit.ingredients.push(mapToView(ingFromRecipe, ingAmounts));
-                        if (ingsFromRecipe.length ===  (key + 1)) { //key es el index, cuando termine con el ultimo termina la oper async
+                        if (ingsFromRecipe.length === (key + 1)) { //key es el index, cuando termine con el ultimo termina la oper async
                             deferred.resolve(recipeToEdit);
                             blockUI.stop();
                         }
@@ -116,9 +118,10 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
 
     function getUnitBy(name) {
         var unitFound = null;
-        angular.forEach(self.units, function (unit) {
-            if (unit.name === name) {
-                var unitFound = unit;
+        var units = self.units;
+        angular.forEach(units, function (unit) {
+            if (unit.name.toLowerCase() === name.toLowerCase()) {
+                unitFound = unit;
             };
         });
         return unitFound;

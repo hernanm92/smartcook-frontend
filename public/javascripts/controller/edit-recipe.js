@@ -21,11 +21,4 @@ function EditRecipeController($scope, recipeService, $routeParams, $controller, 
         $scope.titleConfirmation = "Editar Receta";
         $scope.action = recipeService.edit;
     }
-
-    function setUnits() {
-        angular.forEach($scope.recipe.ingredients, function (ing) {
-            ing.unit = {}
-            ing.unit.name = 'mililitro';
-        })
-    }
 }

@@ -56,7 +56,6 @@ function mapperService(Profile) {
             validated: false
         }
     }
-    mapIngForPersist
 
     function mapIngForPersist(ing, recipe) {
         return {
@@ -72,7 +71,8 @@ function mapperService(Profile) {
             recipe_id: recipe.id,
             username: username,
             owner: true,
-            favorite: true
+            favorite: true,
+            validated: true
         }
     }
 
