@@ -46,6 +46,12 @@ app.controller('TopCategoriesController',
             $scope.addToFavorites = function (recipe) {
                 RecipeUser.addToFavorites(recipe, $scope.userRecipes, $scope.userFavoriteRecipes);
             };
+        } else {
+            $scope.addToFavorites = function (recipe) {
+                RecipeUser.userNotLoggedIn().result.then(function () {
+                    window.location.href = "#/login";
+                });
+            };
         }
         //----------------------------
 

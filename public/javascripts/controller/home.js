@@ -39,6 +39,12 @@ app.controller('HomeController',
             $scope.addToFavorites = function (recipe) {
                 RecipeUser.addToFavorites(recipe, $scope.userRecipes, $scope.userFavoriteRecipes);
             };
+        } else {
+            $scope.addToFavorites = function (recipe) {
+                RecipeUser.userNotLoggedIn().result.then(function () {
+                    window.location.href = "#/login";
+                });
+            };
         }
         //----------------------------
         $scope.$on('$viewContentLoaded', function () {
@@ -142,6 +148,7 @@ app.controller('HomeController',
             $scope.recipes = [];
             homeService.resetRecipes();
         }
+
         function openModal(frequentsUsers, template, controller) {
             return $modal.open({
                 animation: true,

@@ -23,7 +23,7 @@ app.controller('FavoritesController',
             })[0];
             userRecipe.favorite = false;
             recipePerUserFactory.update(userRecipe);
-            $($event).closest('div.row').remove();
+            $($event.target).closest('div.row').remove();
         }
 
     }

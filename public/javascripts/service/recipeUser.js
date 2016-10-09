@@ -2,7 +2,7 @@ angular
     .module('MainApp')
     .service('RecipeUser', RecipeUser);
 
-function RecipeUser(UserSession, notifyHelper, recipePerUserFactory) {
+function RecipeUser(UserSession, notifyHelper, recipePerUserFactory, $modal) {
 
     var self = this;
     self.getRecipesOfUser = getRecipesOfUser;
@@ -11,6 +11,7 @@ function RecipeUser(UserSession, notifyHelper, recipePerUserFactory) {
     self.isFavorite = isFavorite;
     self.removeFromFavorites = removeFromFavorites;
     self.addToFavorites = addToFavorites;
+    self.userNotLoggedIn = userNotLoggedIn;
 
     function getRecipesOfUser() {
         if (UserSession.isLogged())
@@ -70,6 +71,26 @@ function RecipeUser(UserSession, notifyHelper, recipePerUserFactory) {
         }
         userFavoriteRecipes.push(recipeUser);
         notifyHelper.success('Receta Agregada a Favoritos');
+    }
+
+    function userNotLoggedIn() {
+        var message = 'Para poder agregar recetas como favoritas debe tener un usuario. Desea ingresar con uno?';
+        var title = 'Crear Usuario';
+        return $modal.open({
+            animation: true,
+            templateUrl: '/general/confirmForm',
+            controller: 'ModalController',
+            size: 'sm',
+            resolve: {
+                message: function () {
+                    return message;
+                },
+                title: function () {
+                    return title
+                }
+            },
+            windowClass: 'menu-bar-space'
+        });
     }
 
 };
