@@ -1,0 +1,13 @@
+#searchIcon {
+    color: rgb(24, 175, 134);
+    border: 0px;
+}
+
+#searchText {
+    border: 0px;
+}
+
+#searchText:focus {
+    outline: none;
+    box-shadow: none;
+}
