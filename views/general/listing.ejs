@@ -1,53 +1,62 @@
 <!--=== Content Part ===-->
-<div class="content container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="filter-results">
-        <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="recipe in recipes">
-          <div class="row">
-            <div class="col-sm-4">
-              <a href="shop-ui-inner.html">
-                <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
-                <div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>
-              </a>
-            </div>
-            <div class="col-sm-8 product-description">
-              <div class="overflow-h margin-bottom-5">
-                <ul class="list-inline overflow-h">
-                  <li><h4 class="title-price"><a href="shop-ui-inner.html" class="text-uppercase">{{recipe.name}}</a></h4></li>
-                  <li class="pull-right">
-                    <ul class="list-inline product-ratings">
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating-selected fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                      <li><i class="rating fa fa-star"></i></li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="margin-bottom-10">
-                  <span class="title-price margin-right-10">$60.00</span>
-                  <span class="title-price line-through">$95.00</span>
-                </div>
-                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
-                <ul class="list-inline add-to-wishlist margin-bottom-20">
-                  <li class="wishlist-in">
-                    <i class="fa fa-heart"></i>
-                    <a href="#">Agregar a favoritos</a>
-                  </li>
-                  <li class="compare-in">
-                    <i class="fa fa-exchange"></i>
-                    <a href="#">Add to Compare</a>
-                  </li>
-                </ul>
-                <button type="button" class="btn-u btn-u-sea-shop">Ver receta</button>
-              </div>
-            </div>
-          </div>
+<div class="content container" style="padding-top:90px">
+    <div class="row">
+        <div class="col-md-12 input-group input-group-lg">
+            <span id="searchIcon" class="input-group-addon glyphicon glyphicon-search"></span>
+            <input id="searchText" type="text" class="form-control" placeholder="Escriba el Nombre de la Receta"
+                   ng-keyup="searchRecipe()">
         </div>
-      </div><!--/end filter resilts-->
-
     </div>
-  </div><!--/end row-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="filter-results">
+                <div class="list-product-description product-description-brd margin-bottom-30"
+                     ng-repeat="recipe in filteredRecipes">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a>
+                                <img class="img-responsive" style="padding:0;" ng-src="{{recipe.image_url}}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-sm-8 product-description">
+                            <div class="overflow-h margin-bottom-5">
+                                <ul class="list-inline overflow-h">
+                                    <li><h4 class="title-price"><a class="text-uppercase">{{recipe.name}}</a>
+                                        </h4></li>
+                                </ul>
+                                <div class="margin-bottom-10">
+                                    <ul class="list-inline product-ratings">
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating fa fa-star"></i></li>
+                                        <li><i class="rating fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
+                                <ul class="list-inline add-to-wishlist margin-bottom-20">
+                                    <li>
+                                        <button type="button" class="btn-u btn-u-sea-shop"
+                                                ng-click="getDetailsRecipe(recipe.id)">
+                                            Ver receta
+                                        </button>
+                                    </li>
+                                    <li class="wishlist-in">
+                                        <i class="fa fa-heart"></i>
+                                        <!--<a >Agregar a favoritos</a>-->
+                                        <a ng-if="isFavorite(recipe)" ng-click="removeFromFavorites(recipe)"
+                                           style="cursor: pointer;">Remover de favoritos</a>
+                                        <a ng-if="!isFavorite(recipe)" ng-click="addToFavorites(recipe)"
+                                           style="cursor: pointer;">Agregar a favoritos</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/end filter resilts-->
+
+        </div>
+    </div><!--/end row-->
 </div><!--/end container-->
 <!--=== End Content Part ===-->

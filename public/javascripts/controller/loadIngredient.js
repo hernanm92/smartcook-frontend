@@ -10,11 +10,6 @@ app.controller('LoadIngredientController',
             $scope.categories = categoriesFactory.query().$promise;
             $scope.selectedCategory = undefined;
 
-            $scope.test = test;
-            function test(){
-                console.log($scope.categories);
-            }
-
             function validateForm(isValid) {
                 console.log($scope.fats);
                 $scope.submitted = true;

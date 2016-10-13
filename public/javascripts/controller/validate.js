@@ -1,5 +1,6 @@
 app.controller('ValidateController',
-    function ($scope, recipeFactory, validateFactory, eventService, $timeout, recipeService, UserSession, $q, recipePerUserFactory) {
+    function ($scope, recipeFactory, validateFactory, eventService, $timeout, recipeService
+        , UserSession, $q, recipePerUserFactory, $location) {
         if(!UserSession.isLogged()) $location.path('/login');
         $scope.validateRecipeIndex = 0;
         $scope.validateCurrentRecipe = {};

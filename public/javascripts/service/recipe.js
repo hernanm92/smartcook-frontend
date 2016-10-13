@@ -14,6 +14,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     self.refresh = refresh;
     self.getDetailRecipe = getDetailRecipe;
     self.edit = edit;
+    self.getRecipeByName = getRecipeByName;
 
     init();
     refresh();
@@ -125,5 +126,11 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
             };
         });
         return unitFound;
+    }
+
+    function getRecipeByName(recipeName){
+        return $(self.recipes).filter(function () {
+            return this.name.toLowerCase().indexOf(recipeName.toLowerCase()) >= 0
+        });
     }
 };
