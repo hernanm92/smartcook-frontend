@@ -1,9 +1,10 @@
 var express = require('express'),
   fs = require('fs'),
   morgan = require('morgan'),
-  bodyParser = require('body-parser')
-request = require('request');
-jwt = require('jsonwebtoken');
+  bodyParser = require('body-parser'),
+  request = require('request'),
+  jwt = require('jsonwebtoken')
+  , dataSmartcook = require("./gonza.json");
 var app = express();
 
 var accessLogStream = fs.createWriteStream('mock.log', { flags: 'w' });
@@ -49,21 +50,31 @@ var categories = [
 ];
 
 var users = [
-  { id: 1, firstName: 'Boba', userName:'boba', lastName: 'Fett', email: 'starwars@smartcook.com',
-    gender:'', dateOfBirth:'', password:'', avatar: 'img/profile-avatar.jpg',facebookId:'0' },
-  { id: 2, firstName: 'Jabba', lastName: 'the Hutt', email: 'badguy@smartcook.com',
-   gender:'', dateOfBirth:'', password:'', userName: 'jabba', avatar: 'img/profile-avatar.jpg',facebookId:'1' },
-  { id: 3, firstName: 'Matias', userName: 'matileon', lastName: 'Leon Peralta', email: 'matias.leon@smartcook.com',
-  gender:'', dateOfBirth:'', password:'river', avatar: 'https://imgsmartcook.blob.core.windows.net/profile/MatiasLeonPeralta.jpg',facebookId:'2', restrictions: restrictions, categories: categories },
-  { id: 4, firstName: 'Hernan', userName: 'hmaschwitz', lastName: 'Maschwitz', email: 'hernanm992@gmail.com',
-    gender:'', dateOfBirth:'', password:'outsider', avatar: 'https://imgsmartcook.blob.core.windows.net/profile/HernanMaschwitz.jpg'},
-    { id: 5, firstName: 'Admin', userName:'admin', lastName: 'Admin', email: 'smartcookweb@gmail.com',
-        gender:'', dateOfBirth:'', password:'1234', avatar: 'img/profile-avatar.jpg',facebookId:'0' }
+  {
+    id: 1, firstName: 'Boba', userName: 'boba', lastName: 'Fett', email: 'starwars@smartcook.com',
+    gender: '', dateOfBirth: '', password: '', avatar: 'img/profile-avatar.jpg', facebookId: '0'
+  },
+  {
+    id: 2, firstName: 'Jabba', lastName: 'the Hutt', email: 'badguy@smartcook.com',
+    gender: '', dateOfBirth: '', password: '', userName: 'jabba', avatar: 'img/profile-avatar.jpg', facebookId: '1'
+  },
+  {
+    id: 3, firstName: 'Matias', userName: 'matileon', lastName: 'Leon Peralta', email: 'matias.leon@smartcook.com',
+    gender: '', dateOfBirth: '', password: 'river', avatar: 'https://imgsmartcook.blob.core.windows.net/profile/MatiasLeonPeralta.jpg', facebookId: '2', restrictions: restrictions, categories: categories
+  },
+  {
+    id: 4, firstName: 'Hernan', userName: 'hmaschwitz', lastName: 'Maschwitz', email: 'hernanm992@gmail.com',
+    gender: '', dateOfBirth: '', password: 'outsider', avatar: 'https://imgsmartcook.blob.core.windows.net/profile/HernanMaschwitz.jpg'
+  },
+  {
+    id: 5, firstName: 'Admin', userName: 'admin', lastName: 'Admin', email: 'smartcookweb@gmail.com',
+    gender: '', dateOfBirth: '', password: '1234', avatar: 'img/profile-avatar.jpg', facebookId: '0'
+  }
 ];
 
 var frequentCommensal = [
-    {frequent_username:'boba',username:'matileon'},
-    {frequent_username:'hmaschwitz',username:'matileon'}
+  { frequent_username: 'boba', username: 'matileon' },
+  { frequent_username: 'hmaschwitz', username: 'matileon' }
 ];
 
 app.get('/categories/:text', function (req, res) {
@@ -106,11 +117,11 @@ app.get('/recipes/:id', function (req, res) {
 app.post('/recipes', function (req, res) {
   var object = req.body;
   var recipe = {
-    id : recipes.length +1,
-    name:object.name,
-    image_url:object.image_url,
-    stars : 0,
-    description:object.description
+    id: recipes.length + 1,
+    name: object.name,
+    image_url: object.image_url,
+    stars: 0,
+    description: object.description
   }
   recipes.push(recipe);
   res.status(200);
@@ -137,23 +148,23 @@ app.post('/validateRecipe', function (req, res) {
 
 //-------------------------login-------------------------
 app.post('/login', function (req, res) {
-    var i = 0;
-    for(i; i < users.length; i++){
+  var i = 0;
+  for (i; i < users.length; i++) {
     console.log(i);
-        var iUser = users[i];
-        if(req.body.userName.toLowerCase() == iUser.userName.toLowerCase()
-        && req.body.pass == iUser.password){
-            var token = jwt.sign(iUser, app.get('superSecret'), {
-              expiresIn: 1440
-            });
-            res.json({
-              success: true, token: token, name: iUser.userName, id: iUser.id
-            });
-          }
+    var iUser = users[i];
+    if (req.body.userName.toLowerCase() == iUser.userName.toLowerCase()
+      && req.body.pass == iUser.password) {
+      var token = jwt.sign(iUser, app.get('superSecret'), {
+        expiresIn: 1440
+      });
+      res.json({
+        success: true, token: token, name: iUser.userName, id: iUser.id
+      });
     }
-    res.json({
-      success: false
-    });
+  }
+  res.json({
+    success: false
+  });
 });
 
 app.post('/login/facebook', function (req, res) {
@@ -192,8 +203,8 @@ app.get('/users/:id', function (req, res) {
   for (var i = 0; i < users.length; i++) {
     var user = users[i];
     if (user.id == req.params.id) {
-  res.status(200);
-  res.send(user);
+      res.status(200);
+      res.send(user);
     }
   }
 });
@@ -205,18 +216,18 @@ app.get('/users', function (req, res) {
 
 app.get('/users/newId', function (req, res) {
   var usersIds = [];
-  for(i = 0; i < users.length; i++) usersIds.push(users[i].id);
-  var newId = {"newId": Math.max.apply(null,usersIds)+1};
+  for (i = 0; i < users.length; i++) usersIds.push(users[i].id);
+  var newId = { "newId": Math.max.apply(null, usersIds) + 1 };
   res.status(200);
   res.send(newId);
 });
 
-app.post('/users',function(req,res){
-    var object = req.body;
-    object["id"] = users.length+1;
-    users.push(object);
-    res.status(200);
-    res.send('Llego correctamente el usuario');
+app.post('/users', function (req, res) {
+  var object = req.body;
+  object["id"] = users.length + 1;
+  users.push(object);
+  res.status(200);
+  res.send('Llego correctamente el usuario');
 });
 //-------------------------frequent commensals-------------------------
 app.get('/frequentCommensal/:username', function (req, res) {
@@ -239,6 +250,35 @@ app.get('/items/:text', function (req, res) {
   res.send(ings.concat(recps));
 });
 
+
+//change name_id por id
+/*dataSmartcook.ingredients.forEach(function (ing) {
+  dataSmartcook.recipes.forEach(function (recipe) {
+    recipe.ingredients.forEach(function (ingPerREcipe) {
+      if (ingPerREcipe.name_id === ing.name_id) {
+        ingPerREcipe.name_id = ing.id;
+      }
+    })
+  }, this);
+}, this);*/
+
+/*jsonfile.writeFile(file, dataSmartcook, { spaces: 2 }, function (err) {
+  console.log(err);
+});*/
+
+//------ migration -----
+app.get('/migration/ingredients', function (req, res) {
+  res.status(200);
+  res.send(dataSmartcook.ingredients);
+})
+app.get('/migration/recipes', function (req, res) {
+  res.status(200);
+  res.send(dataSmartcook.recipes);
+})
+app.get('/migration/categories', function (req, res) {
+  res.status(200);
+  res.send(dataSmartcook.categories);
+})
 //------------------------Helpers
 function mapIngredient(ingredient) {
   //Cuando el ingrediente tenga mas datos(descripcion) se va a necesitar mapear.
@@ -285,6 +325,6 @@ function getItemsByNameIn(array, filter, fmap) {
   return itemsFiltered;
 }
 
-var server = app.listen(5000, function () {
-  console.log("Api started in port: 5000");
+var server = app.listen(9000, function () {
+  console.log("Api started in port: 9000");
 });

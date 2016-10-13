@@ -4,20 +4,13 @@
         <div class="row" style="margin-bottom:10px" validate-menu="fixed-menu" ng-if="!noRecipesToValidate">
               <!--<button type="button" class="btn btn-info" ng-click="runBootstro()">Mostrar DEMO</button>-->
             <div class="col-md-offset-3 col-md-6" style="text-align: center;" >
-                <button type="button" data-bootstro-title="Validar Positivamente" 
-                        data-bootstro-content="Toca en esta zona para indicar que es una receta valida. Podes apretar la L(Like)"
-                        data-bootstro-placement="right" 
-                        data-bootstro-step=1 class="bootstro menu-button  btn-u btn-u-md btn-u-sea-shop"
-                        ng-click="nextRecipe(1)">Me encanta!! </button>
+                <button type="button" ng-click="nextRecipe(1)" class="bootstro menu-button  btn-u btn-u-md btn-u-sea-shop">Me encanta!! </button>
                 <button type="button" class="menu-button validateRecipe-skip btn-u  btn-u-md btn-u-sea-shop " ng-click="skip()">Dejame Pensar</button>
-                <button data-bootstro-title="Validar Negativamente" 
-                        data-bootstro-content="Toca en esta zona para indicar que es una receta invalida. Podes apretar la D(Dislike)"
-                        data-bootstro-placement="left" data-bootstro-step=2 type="button" class=" bootstro menu-button validateRecipe-cross btn-u btn-u-md btn-u-sea-shop"
-                    ng-click="nextRecipe(0)">No esta bueno</button>
+                <button type="button" class="  menu-button validateRecipe-cross btn-u btn-u-md btn-u-sea-shop"
+                        ng-click="nextRecipe(0)">No esta bueno</button>
             </div>
         </div>
-        <div data-bootstro-title="Receta a Validar" data-bootstro-content="Aca podes ver toda la informacion de la receta a validar"
-            data-bootstro-placement="top" data-bootstro-step=0 class="bootstro row validateRecipe-Recipe">
+        <div  class="row validateRecipe-Recipe">
             <div class="row validateRecipe-Title">
                 <h4>{{validateCurrentRecipe.name}}</h4>
             </div>
@@ -43,7 +36,7 @@
                                                 <h4 class="title-price">{{ing.amount}}</h4>
                                             </li>
                                             <li>
-                                                <h4 class="title-price">{{ing.unit}}</h4>
+                                                <h4 class="title-price">{{ing.unit.name}}</h4>
                                             </li>
                                         </ul>
                                     </li>

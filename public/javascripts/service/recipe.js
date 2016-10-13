@@ -49,7 +49,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
         var username = UserSession.getUsername();
         var promises = {
             recipePromise: recipeFactory.save(mapperService.mapRecipeForPersist(recipe)).$promise,
-            imgPromise: imgService.uploadImgRecipe(recipe.name, photoRecipe),
+            imgPromise: imgService.uploadImgRecipe(recipe.name, photoRecipe)
         }
         $q.all(promises).then(function (values) {
             angular.forEach(recipe.ingredients, function (ing) {
