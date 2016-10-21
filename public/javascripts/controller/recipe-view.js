@@ -1,18 +1,40 @@
 app.controller('RecipeViewController',
-    function ($scope, $routeParams, recipeFactory, ingredientPerRecipeFactory, ingredientFactory, blockUI, restrictionsService) {
+    function ($scope, $routeParams, recipeFactory, ingredientPerRecipeFactory, ingredientFactory,
+        blockUI, restrictionsService, UserSession, tipFactory, notifyHelper) {
 
         $scope.recipe = {};
+        $scope.tips = [];
         $scope.addTip = addTip;
         $scope.addToFavorites = addToFavorites;
         $scope.ingredients = [];
+        $scope.addTip = addTip;
+        $scope.cancelTip = cancelTip;
         init();
 
-        function addTip() {
-
+        function addTip(tipToAdd) {
+            //validar q este loguedo
+            if (UserSession.isLogged()) {
+                var tip = {
+                    username: UserSession.getUsername(),
+                    recipe_id: $scope.recipe.id,
+                    description: tipToAdd
+                }
+                $scope.tips.push(tipToAdd);
+                tipFactory.save(tip);
+            }
+            else {
+                notifyHelper.warn('Para ayudar necesitas ser un smartcook!!!');
+            }
         }
 
         function addToFavorites() {
+            //sacar codigo de agus
+        }
 
+        function getTips() {
+            tipFactory.query({ recipe_id: $scope.recipe.id }, function (tips) {
+                $scope.tips = tips;
+            })
         }
 
         function init() {
@@ -29,6 +51,7 @@ app.controller('RecipeViewController',
                             $scope.recipe = recipe;
                             $scope.ingredients.push(ingView);
                             $scope.restrictions = restrictionsService.mapRestrictions(recipe);
+                            getTips()
                             blockUI.stop();
                         })
                     });
@@ -42,5 +65,9 @@ app.controller('RecipeViewController',
                 amount: ingAmounts.amount,
                 unit: ingAmounts.unit
             }
+        }
+
+        function cancelTip(tipToAdd) {
+            delete tipToAdd;
         }
     });

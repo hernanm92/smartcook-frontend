@@ -51,13 +51,16 @@
                         <li ng-repeat="ing in ingredients track by $index">
                             <ul class="list-inline product-ratings">
                                 <li>
-                                    <h4 class="title-price"> {{ing.name}} </h4>
-                                </li>
-                                <li>
                                     <h4 class="title-price">{{ing.amount}}</h4>
                                 </li>
                                 <li>
                                     <h4 class="title-price">{{ing.unit}}</h4>
+                                </li>
+                                <li>
+                                    <h4>de</h4>
+                                </li>
+                                <li>
+                                    <h4 class="title-price"> {{ing.name}} </h4>
                                 </li>
                             </ul>
                         </li>
@@ -90,18 +93,21 @@
         </div>
         <div>
             <div style="padding-bottom:20px;" class="col-md-8 col-md-offset-2">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <textarea placeholder="Escriba su Tip..." class="tip-area form-control"></textarea>
+                <div class="form-group">
+                    <textarea placeholder="Escriba su Tip..." msd-elastic ng-model="tipToAdd" class="tip-area form-control"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button type="button" class="btn-u btn-u-sea-shop " ng-click="addTip(tipToAdd)">Agregar</button>
                     </div>
-                    <div class="col-md-offset-5">
-                        <button type="button" class="btn-u btn-u-sea-shop " ng-click="">Agregar Tip</button>
+                    <div class="col-md-2">
+                        <button type="button" class="btn-u btn-u-sea-shop " ng-click="cancelTip(tipToAdd)">Cancelar</button>
                     </div>
-                </form>
+                </div>
             </div>
             <div style="margin-top: 20px; margin-bottom: 20px;">
                 <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="tip in tips track by $index">
-                    <h4>User dice : </h4>
+                    <div>{{tip.username}} agrega:  </div>
                     <textarea readonly id="item" class="detail-step" msd-elastic ng-model="tip.description">
                                 </textarea>
                 </div>

@@ -107,4 +107,11 @@ function MigrationService(recipeService, imgService, ingredientFactory, $timeout
             unit: ing.unit === 'unidad' ? 'Unidad(es)' : ing.unit
         }
     }
+
+    function mapUnit(unit) {
+        ing.unit === 'unidad' ? 'Unidad(es)' : ing.unit;
+        ing.unit === 'gr' ? 'Gramos' : ing.unit;
+        ing.unit === 'cucharada' ? 'Cucharada(s)' : ing.unit
+        ing.unit === 'lata' ? 'Lata(s)' : ing.unit
+    }
 }
