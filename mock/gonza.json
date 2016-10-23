@@ -10223,5 +10223,127 @@
       "email": "badguy@truesmartcook.com",
       "avatar": "img/profile-avatar.jpg"
     }
+  ],
+  "badges": [
+    {
+      "id": 1,
+      "name": "Bronce Vegano",
+      "description": "Has creado una receta para veganos!",
+      "type": "vegan",
+      "amount": 1,
+      "image_url": "img/vegan_bronze.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Plata Vegano",
+      "description": "Has creado 5 recetas para veganos!",
+      "type": "vegan",
+      "amount": 5,
+      "image_url": "img/vegan_silver.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Oro Vegano",
+      "description": "Has creado 10 recetas para veganos!",
+      "type": "vegan",
+      "amount": 10,
+      "image_url": "img/vegan_gold.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Bronce Vegetariano",
+      "description": "Has creado una receta para vegetarianos!",
+      "type": "vegetarian",
+      "amount": 1,
+      "image_url": "img/vegetarian_bronze.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Plata Vegetariano",
+      "description": "Has creado 5 recetas para vegetarianos!",
+      "type": "vegetarian",
+      "amount": 5,
+      "image_url": "img/vegetarian_silver.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Oro Vegetariano",
+      "description": "Has creado 10 recetas para vegetarianos!",
+      "type": "vegetarian",
+      "amount": 10,
+      "image_url": "img/vegetarian_gold.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Bronce Celiaco",
+      "description": "Has creado una receta para celiacos!",
+      "type": "celiac",
+      "amount": 1,
+      "image_url": "img/celiac_bronze.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Plata Celiaco",
+      "description": "Has creado 5 recetas para celiacos!",
+      "type": "celiac",
+      "amount": 5,
+      "image_url": "img/celiac_silver.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Oro Celiaco",
+      "description": "Has creado 10 recetas para celiacos!",
+      "type": "celiac",
+      "amount": 10,
+      "image_url": "img/celiac_gold.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Bronce Diabetico",
+      "description": "Has creado una receta para diabeticos!",
+      "type": "diabetic",
+      "amount": 1,
+      "image_url": "img/diabetic_bronze.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Plata Diabetico",
+      "description": "Has creado 5 recetas para diabeticos!",
+      "type": "diabetic",
+      "amount": 5,
+      "image_url": "img/diabetic_silver.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Oro Diabetico",
+      "description": "Has creado 10 recetas para diabeticos!",
+      "type": "diabetic",
+      "amount": 10,
+      "image_url": "img/diabetic_gold.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Bronce Validador",
+      "description": "Has validado 10 receta!",
+      "type": "validate",
+      "amount": 10,
+      "image_url": "img/validate_bronze.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Plata Validador",
+      "description": "Has validado 50 recetas!",
+      "type": "validate",
+      "amount": 50,
+      "image_url": "img/validate_silver.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Oro Validador",
+      "description": "Has validado 100 recetas!",
+      "type": "validate",
+      "amount": 100,
+      "image_url": "img/validate_gold.jpg"
+    }
   ]
 }
