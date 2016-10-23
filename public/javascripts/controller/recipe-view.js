@@ -19,7 +19,7 @@ app.controller('RecipeViewController',
                     recipe_id: $scope.recipe.id,
                     description: tipToAdd
                 }
-                $scope.tips.push(tipToAdd);
+                $scope.tips.push(tip);
                 tipFactory.save(tip);
             }
             else {
@@ -27,9 +27,11 @@ app.controller('RecipeViewController',
             }
         }
 
+
         function addToFavorites() {
             //sacar codigo de agus
         }
+
 
         function getTips() {
             tipFactory.query({ recipe_id: $scope.recipe.id }, function (tips) {

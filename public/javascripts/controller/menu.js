@@ -1,4 +1,4 @@
-app.controller('MenuController', function ($scope, UserSession, $location, recipeService) {
+app.controller('MenuController', function ($scope, UserSession, $location, recipeService, ingredientService) {
 
     $scope.token = token;
     $scope.isNavActive = isNavActive;

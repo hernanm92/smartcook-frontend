@@ -124,6 +124,7 @@ app.controller('HomeController',
             } else {
                 var settings = getSettings();
                 $scope.recipes = homeService.search(ingsToSend, settings);
+                if ($scope.recipes.length === 0) $scope.noResults = true;
             }
         }
 

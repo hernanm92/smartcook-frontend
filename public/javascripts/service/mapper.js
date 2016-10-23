@@ -11,6 +11,7 @@ function mapperService(Profile) {
     self.mapRecipeForPersist = mapRecipeForPersist;
     self.mapRecipePerUserOwner = mapRecipePerUserOwner;
     self.mapIngForPersist = mapIngForPersist;
+    self.mapRecipeForEdit = mapRecipeForEdit;
 
     // username, email, avatar, recipes, categories, ingredients, celiac, vegan, vegetarian, diabetic
     function mapProfileToModel(profileDto, categoriesDto, recipesDto) {
@@ -53,8 +54,21 @@ function mapperService(Profile) {
             image_url: recipe.image_url,
             description: recipe.description,
             steps: recipe.steps,
-            validated: false
+            validated: false,
+            orginal: null
         }
+    }
+
+    function mapRecipeForEdit(recipe) {
+        var recipeDto = {
+            name: recipe.name,
+            image_url: recipe.image_url,
+            description: recipe.description,
+            steps: recipe.steps,
+            validated: false,
+            original: recipe.id
+        }
+        return recipeDto;
     }
 
     function mapIngForPersist(ing, recipe) {
@@ -67,13 +81,14 @@ function mapperService(Profile) {
     }
 
     function mapRecipePerUserOwner(recipe, username) {
-        return {
+        var recipeDto = {
             recipe_id: recipe.id,
             username: username,
             owner: true,
             favorite: true,
             validated: true
         }
+        return recipeDto;
     }
 
     // private

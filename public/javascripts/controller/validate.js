@@ -6,6 +6,7 @@ app.controller('ValidateController',
         $scope.validateCurrentRecipe = {};
         $scope.skip = skip;
         $scope.nextRecipe = nextRecipe;
+        $scope.recipesPerUser = [];
 
         $("body").keypress(function (e) {
             if (e.which == '108') $scope.nextRecipe(1);
@@ -62,19 +63,18 @@ app.controller('ValidateController',
             $('.validateRecipe-Recipe').animate({ opacity: 0 }, 500, function () { });
             //updetear o guardar el campo 'positive vote'
             var recipeId = $scope.validateCurrentRecipe.id;
-            recipePerUserFactory.query({ username: UserSession.getUsername(), recipe_id: recipeId }, function (res) {
-                res.length === 0 ? saveRelation() : updateRelation()
-            });
+            saveRelation(recipeId);
         }
 
-        function saveRelation() {
+        function saveRelation(recipeId) {
             var params = {
                 username: UserSession.getUsername(),
-                recipe_id: $scope.validateCurrentRecipe.id,
+                recipe_id: recipeId,
                 validated: true,
                 owner: false,
                 favorite: false
             }
+            $scope.recipesPerUser.push(params);
             recipePerUserFactory.save(params, function (res) {
                 handleResponse();
             });
@@ -83,17 +83,6 @@ app.controller('ValidateController',
         function handleResponse() {
             //$.notify("Receta Validada", { globalPosition: 'right bottom', className: 'success' });
             setNextRecipe();
-        }
-
-        function updateRelation() {
-            var params = {
-                username: UserSession.getUsername(),
-                recipe_id: $scope.validateCurrentRecipe.id,
-                validated: true
-            }
-            recipePerUserFactory.update(params, function (res) {
-                handleResponse();
-            });
         }
     }
 );

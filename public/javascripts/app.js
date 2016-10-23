@@ -90,7 +90,7 @@ app.config(['flowFactoryProvider', function (flowFactoryProvider) {
     }
 }]);
 
-app.run(['$window', 'facebookService', 'UserSession', '$location',
+/*app.run(['$window', 'facebookService', 'UserSession', '$location',
     function ($window, facebookService, UserSession, $location) {
 
         $window.fbAsyncInit = function () {
@@ -134,4 +134,4 @@ app.run(['$window', 'facebookService', 'UserSession', '$location',
             ref.parentNode.insertBefore(js, ref);
 
         }(document));
-    }]);
+    }]);*/

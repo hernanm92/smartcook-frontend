@@ -1,7 +1,7 @@
 <div class="container" style="padding-top: 90px;">
     <form name="recipeForm" ng-submit="validateForm(recipeForm.$valid)" novalidate>
         <div class="row">
-            <div flow-init class="col-md-4">
+            <div flow-init class="col-md-4" flow-name="food.flow">
                 <div flow-drop>
                     <img class="img-rounded" alt="Responsive image" flow-img="$flow.files[0]" flow-file-added="addedPhoto($file, $event, $flow)"
                         ng-src="{{recipe.image_url}}" width="350px" height="300px">

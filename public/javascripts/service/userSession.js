@@ -81,7 +81,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     }
 
     function getProfile() {
-        return userFactory.get({username:getUsername()}).$promise;
+        return userFactory.get({ username: getUsername() }).$promise;
     }
 
     function getCategories() {
@@ -93,7 +93,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         var promises = {
             profile: self.getProfile(),
             categoriesUser: self.getCategories(),
-            recipes: recipeFactory.query({ username: username }).$promise
+            recipes: recipeFactory.query({ username: username, owner: true }).$promise
         };
         $q.all(promises).then(function (values) {
             blockUI.stop();
