@@ -5,9 +5,14 @@ app.controller('MenuController', function ($scope, UserSession, $location, recip
     $scope.logOut = logOut;
     $scope.getRecipes = getRecipes;
     $scope.getDetailRecipe = getDetailRecipe;
+    $scope.goToProfile = goToProfile;
 
     function isNavActive(id) {
         return $location.path() == id
+    }
+
+    function goToProfile() {
+        $location.path('/' + UserSession.getUsername() + '/profile');
     }
 
     function token() {

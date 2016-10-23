@@ -49,11 +49,11 @@
 
                     <!-- Profile -->
                     <li class="dropdown" style ="position: relative" >
-                        <a href="#profile" ng-if="token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                        <a ng-click="goToProfile()" ng-if="token()" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                             <div ng-bind="username"></div>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#profile">Perfil</a></li>
+                            <li><a ng-click="goToProfile()">Perfil</a></li>
                             <li><a href="#addCommensal">Agregar Comensal Frecuente</a></li>
                             <li><a href="#favorites">Recetas Favoritas</a></li>
                             <li ng-if="username=='admin'"><a href="#loadIngredient">Cargar Ingrediente</a></li>
@@ -106,7 +106,7 @@
                             typeahead-min-length="3"
                             typeahead-append-to-body="false"
                             typeahead-on-select="getDetailRecipe(recipeSelected.id)"
-                            typeahead = "recipe as recipe.name for recipe in getRecipes() | filter:{name: $viewValue, validated: true} | orderBy: 'name'| limitTo:10"
+                            typeahead = "recipe as recipe.name for recipe in getRecipes() | filter:{name: $viewValue} | orderBy: 'name'| limitTo:10"
                             type="text"
                             class=" search-input form-control"
                             placeholder="Buscar recetas por nombre"

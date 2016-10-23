@@ -93,10 +93,11 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
             profile: self.getProfile(),
             categoriesUser: self.getCategories(),
             recipes: recipeFactory.query({ username: username, owner: true }).$promise
+            //ingredients = ingredientsUser.query({username:getUsername()}).$promises
         };
         $q.all(promises).then(function (values) {
             blockUI.stop();
-            return self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes);
+            return self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes); //values.ingredients
         });
     }
 

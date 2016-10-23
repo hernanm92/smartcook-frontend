@@ -4,7 +4,7 @@ angular
 
 function MigrationService(recipeService, imgService, ingredientFactory, $timeout, $http, $q,
     recipeFactory, categoriesFactory, ingredientPerRecipePersistFactory, recipePerUserFactory, mapperService, $interval) {
-        
+
     var self = this;
     self.init = init;
 
@@ -14,18 +14,17 @@ function MigrationService(recipeService, imgService, ingredientFactory, $timeout
         //getRecipes();
         //crear relaciones con receta
         //insignias
-
     }
 
     function getCategories() {
         $http.get('http://localhost:9000/migration/categories').then(function (categories) {
             self.categories = categories.data;
-            mergeCategories();
+            migrateCategories();
         })
     }
 
 
-    function mergeCategories() {
+    function migrateCategories() {
         $interval(function () {
             var category = self.categories.shift();
             console.log(category + 'enviado');
@@ -57,7 +56,7 @@ function MigrationService(recipeService, imgService, ingredientFactory, $timeout
             self.recipes = recipes.data;
             $http.get('http://localhost:5000/ingredients').then(function (ingredients) {
                 self.ingredients = ingredients.data;
-                migrateRecipes();    
+                migrateRecipes();
             })
         });
     }
@@ -92,7 +91,7 @@ function MigrationService(recipeService, imgService, ingredientFactory, $timeout
     function getIdFrom(name_id, ingredients) {
         var ingredient_id;
         angular.forEach(ingredients, function (ing) {
-            if(ing.name_id === name_id){
+            if (ing.name_id === name_id) {
                 ingredient_id = ing.id
             }
         })
@@ -104,14 +103,35 @@ function MigrationService(recipeService, imgService, ingredientFactory, $timeout
             ingredient_id: ing.ingredient_id,
             recipe_id: recipe.id,
             amount: ing.quantity,
-            unit: ing.unit === 'unidad' ? 'Unidad(es)' : ing.unit
+            unit: mapUnit(ing)
         }
     }
 
-    function mapUnit(unit) {
-        ing.unit === 'unidad' ? 'Unidad(es)' : ing.unit;
-        ing.unit === 'gr' ? 'Gramos' : ing.unit;
-        ing.unit === 'cucharada' ? 'Cucharada(s)' : ing.unit
-        ing.unit === 'lata' ? 'Lata(s)' : ing.unit
+    function mapUnit(ing) {
+        var unit = '';
+        switch (ing.unit) {
+            case 'unidad':
+                unit = 'Unidad(es)';
+                break;
+            case 'gr':
+                unit = 'Gramos';
+                break
+            case 'cucharada':
+                unit = 'Cucharada(s)';
+                break
+            case 'lata':
+                unit = 'Lata(s)';
+                break
+            case 'caja':
+                unit = 'Caja(s)';
+                break
+            case 'ml':
+                unit = 'Mililitros';
+                break
+            default:
+                unit = ing.unit;
+                break;
+        }
+        return unit;
     }
 }

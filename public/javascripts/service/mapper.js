@@ -14,7 +14,7 @@ function mapperService(Profile) {
     self.mapRecipeForEdit = mapRecipeForEdit;
 
     // username, email, avatar, recipes, categories, ingredients, celiac, vegan, vegetarian, diabetic
-    function mapProfileToModel(profileDto, categoriesDto, recipesDto) {
+    function mapProfileToModel(profileDto, categoriesDto, recipesDto) { //TODO: ingredientsDto agregar
         var profile = new Profile(
             profileDto.username,
             profileDto.email,

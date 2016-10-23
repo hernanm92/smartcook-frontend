@@ -41,7 +41,7 @@ app.controller('ProfileController',
 
         $scope.loadExcludedCategories = function (query) {
             return $scope.categories.filter(function (category) {
-                return category.name.toLowerCase().indexOf(query.toLowerCase()) != -1;
+                return category.name.toLowerCase().indexOf(query.toLowerCase()) != -1 && category.name.toLowerCase() != 'otros' ;
             });
         };
 
@@ -73,6 +73,18 @@ app.controller('ProfileController',
             var category = {food_category_id: categoryTag.id, username: $scope.profile.username}
             foodCategoriesPerUserFactory.remove(category, function () {
             })
+        }
+
+          function addIngredientToUser(ingredientTag) {
+            /*var category = {food_category_id: categoryTag.id, username: $scope.profile.username}
+            foodCategoriesPerUserFactory.save(category, function (response) {
+            });*/
+        }
+
+        function removeIngredientOfUser(ingredientTag) {
+            /*var category = {food_category_id: categoryTag.id, username: $scope.profile.username}
+            foodCategoriesPerUserFactory.remove(category, function () {
+            })*/
         }
 
         function upload() {

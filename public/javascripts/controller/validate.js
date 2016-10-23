@@ -63,16 +63,17 @@ app.controller('ValidateController',
             $('.validateRecipe-Recipe').animate({ opacity: 0 }, 500, function () { });
             //updetear o guardar el campo 'positive vote'
             var recipeId = $scope.validateCurrentRecipe.id;
-            saveRelation(recipeId);
+            saveRelation(recipeId, validation);
         }
 
-        function saveRelation(recipeId) {
+        function saveRelation(recipeId, validation) {
             var params = {
                 username: UserSession.getUsername(),
                 recipe_id: recipeId,
                 validated: true,
                 owner: false,
-                favorite: false
+                favorite: false,
+                positive_validation: validation
             }
             $scope.recipesPerUser.push(params);
             recipePerUserFactory.save(params, function (res) {

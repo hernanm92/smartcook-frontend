@@ -38,7 +38,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {templateUrl: 'general/home', controller: 'HomeController'});
-    $routeProvider.when('/profile', {templateUrl: 'general/profile', controller: 'ProfileController'});
+    $routeProvider.when('/:username/profile', {templateUrl: 'general/profile', controller: 'ProfileController'});
     $routeProvider.when('/login', {templateUrl: 'general/login', controller: 'LoginController'});
     $routeProvider.when('/register', {templateUrl: 'general/register', controller: 'RegisterController'});
     $routeProvider.when('/listing', {templateUrl: 'general/listing', controller: 'ListingController'});
