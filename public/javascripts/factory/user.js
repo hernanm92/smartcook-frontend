@@ -1,7 +1,7 @@
 var module = angular.module('userModule', ['ngResource']);
 
 module.factory('userLoginFactory', ['$resource', 'config', function ($resource, config) {
-    return $resource(config.domain + '/login');
+    return $resource(config.domain + '/sessions');
 }]);
 
 module.factory('userFactory', ['$resource', 'config', function ($resource, config) {

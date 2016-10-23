@@ -27,18 +27,17 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         }
     }
 
-    function setUser(user) {
-        if (user.remember) {
+    function setUser(token, username, remember) {
+        if (remember) {
             $localStorage.remember = true;
-            $localStorage.userName = user.userName;
-            $localStorage.token = user.token;
-            $localStorage.id = user.id;
+            $localStorage.userName = username;
+            $localStorage.token = token;
         }
-        if (!user.remember) {
-            $sessionStorage.userName = user.userName;
-            $sessionStorage.token = user.token;
-            $sessionStorage.id = user.id;
+        if (!remember) {
+            $sessionStorage.userName = username;
+            $sessionStorage.token = token;
         }
+        //ubicar el token en el header en el campo autorizacion para validar cada request
     }
 
     function getUsername() {

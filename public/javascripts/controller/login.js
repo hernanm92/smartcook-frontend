@@ -3,11 +3,13 @@ app.controller('LoginController', LoginController);
 function LoginController($scope, UserSession, userLoginFactory,
     $location, facebookService, blockUI, notifyHelper, userFactory,
     userLoginFacebook) {
-
+    
+    var self = this;
     $scope.login = login;
     $scope.loginFacebook = loginFacebook;
     $scope.userName = '';
     $scope.user = {};
+    $scope.rememberUser = true;
     $scope.$on('$viewContentLoaded', function () {
         App.init();
         Login.initLogin();
@@ -16,26 +18,16 @@ function LoginController($scope, UserSession, userLoginFactory,
         PageContactForm.initPageContactForm();
     });
 
-    var self = this;
-    self.usersAllowed = ['matileon', 'amodugno', 'hmaschwitz', 'admin'];
-
     function login(isValid) {
         $scope.formSubmited = true;
         if (isValid) {
             var user = {
-                userName: $scope.userName,
-                pass: $scope.userPass
+                username: $scope.userName,
+                password: $scope.userPass
             }
-            if (self.usersAllowed.indexOf($scope.userName) > -1) {
-                setUser('sdasdasdasda', $scope.userName, $scope.rememberUser, null);
-                UserSession.initProfileUser($scope.userName);
-                $location.path('/');
-            } else {
-                $scope.messageLogin = "Usuario o contraseña incorrectas. Intente de nuevo";
-            }
-            /* userLoginFactory.save(user, function (res) {
+            userLoginFactory.save(user, function (res) {
                  handleLoginResponse(res);
-             });*/
+             });
             $scope.formSubmited = false;
             return;
         }
@@ -43,11 +35,12 @@ function LoginController($scope, UserSession, userLoginFactory,
     }
 
     function handleLoginResponse(res) {
-        if (res.success) {
-            setUser(res.token, res.name, $scope.rememberUser, res.id);
+        if (res.token) {
+            UserSession.setUser(res.token, res.username, $scope.rememberUser);
+            UserSession.initProfileUser($scope.userName);
             $location.path('/');
         } else {
-            $scope.messageLogin = "Usuario o contraseña incorrectas. Intente de nuevo";
+            $scope.messageLogin = "Datos incorrectos. Intente de nuevo";
         }
     }
 
@@ -70,15 +63,5 @@ function LoginController($scope, UserSession, userLoginFactory,
                 blockUI.stop();
             }
         });
-    }
-
-    function setUser(token, userName, remember, id) {
-        var user = {
-            token: token,
-            userName: userName,
-            remember: remember,
-            id: id
-        };
-        UserSession.setUser(user);
     }
 }
