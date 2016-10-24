@@ -1,3 +1,4 @@
+
 {
   "ingredients": [
     {
@@ -528,7 +529,7 @@
     {
       "id": 36,
       "name": "Pepino",
-      "name_id": "pepipno",
+      "name_id": "pepino",
       "food_category_id": 3,
       "image_url": "img/pepino.jpg",
       "calories": 15,
@@ -2105,7 +2106,7 @@
       "name": "Tortuguita",
       "name_id": "tortuguita",
       "food_category_id": 4,
-      "image_url": "img/cuadril.jpg",
+      "image_url": "img/tortuguita.jpg",
       "calories": 134,
       "proteins": 20,
       "carbohydrates": 0,
@@ -3215,7 +3216,7 @@
       "name": "Huevo(Yema)",
       "name_id": "huevo_yema",
       "food_category_id": 16,
-      "image_url": "img/manteca.jpg",
+      "image_url": "img/huevo-yema.jpg",
       "calories": 353,
       "proteins": 16,
       "carbohydrates": 0.2,
@@ -3274,7 +3275,7 @@
       "id": 220,
       "name": "Miel",
       "name_id": "miel",
-      "food_category_id": 17,
+      "food_category_id": 6,
       "image_url": "img/miel.jpg",
       "calories": 300,
       "proteins": 0.3,
@@ -4223,11 +4224,6 @@
           "unit": "diente"
         },
         {
-          "name_id": "queso_rallado",
-          "quantity": 50,
-          "unit": "gr"
-        },
-        {
           "name_id": "aceite_oliva",
           "quantity": 2,
           "unit": "cucharada"
@@ -4880,72 +4876,6 @@
       ]
     },
     {
-      "id": 64,
-      "name": "Donas de banana libre de gluten, lacteos y azúcar",
-      "dificulty": "Media",
-      "image_url": "recipe_img/donas_libre_gluten.jpg",
-      "stars": 4,
-      "description": "Ricas donas de banana perfectas para una merienda.",
-      "validated": true,
-      "celiac": false,
-      "vegan": false,
-      "vegetarian": true,
-      "diabetic": false,
-      "ingredients": [
-        {
-          "name_id": "harina_arroz",
-          "quantity": 1,
-          "unit": "taza"
-        },
-        {
-          "name_id": "maizena",
-          "quantity": 0.25,
-          "unit": "taza"
-        },
-        {
-          "name_id": "polvo_hornear",
-          "quantity": 0.5,
-          "unit": "cucharada"
-        },
-        {
-          "name_id": "leche_coco",
-          "quantity": 0.5,
-          "unit": "taza"
-        },
-        {
-          "name_id": "miel",
-          "quantity": 1,
-          "unit": "cucharada"
-        },
-        {
-          "name_id": "aceite_maiz",
-          "quantity": 0.5,
-          "unit": "cucharada"
-        },
-        {
-          "name_id": "vainilla_esencia",
-          "quantity": 0.5,
-          "unit": "cucharada"
-        },
-        {
-          "name_id": "banana",
-          "quantity": 1,
-          "unit": "unidad"
-        }
-      ],
-      "steps": [
-        "Mezclar en un bowl, la harina, la fécula, el polvo de hornear, la sal a gusto hasta que sea una harina uniforme.",
-        "En otro bowl, aplastar la banana con un tenedor hasta dejar un puré sin grumos, añadir la leche, aceite, miel y el extracto de vainilla mezclar hasta que quede un liquido un poco espeso y uniforme.",
-        "Luego con las manos bien limpias, al bowl de líquidos le vamos añadiendo poco a poco la mezcla de los secos sin y amasando con las manos hasta hacer una masa uniforme de consistencia suave y pegajosa.",
-        "En una bandeja para hornear bien engrasada o con un papel encerado preparado para hacer las donas, nos humedecemos las manos o las engrasamos con un poco de aceite tomamos un poco de masa y hacemos una bolita de masa y la alargamos y lo unimos de los extremos formando el aro de la dona para colocarlo en la bandeja (esta mezcla sirve para 3 donas grandes o varias pequeñas dependiendo de tu preferencia).",
-        "Colocar la bandeja en un horno precalentado a unos 180°C por unos 10 o 15 min hasta que levanten y se doren un poco las donas... (Ojo no dejarlas mucho tiempo porque se endurecen).",
-        "Sacar la bandeja y dejarlas enfriar, colocar el glaseado de tu preferencia y listas para comer!."
-      ],
-      "tips": [
-        {}
-      ]
-    },
-    {
       "id": 14,
       "name": "Donas de banana libre de gluten, lacteos y azúcar",
       "dificulty": "Media",
@@ -5236,7 +5166,7 @@
     },
     {
       "id": 18,
-      "name": "Sopa de verduras de temporada con flautas crujientes",
+      "name": "Sopa de verduras con flautas crujientes",
       "dificulty": "Dificil",
       "image_url": "recipe_img/sopa-verduras-flautas-sin-gluten.jpg",
       "stars": 4,
@@ -6067,7 +5997,7 @@
     },
     {
       "id": 31,
-      "name": "Croquetas de pescado fáciles, sin huevo y aptas celíacos",
+      "name": "Croquetas de pescado sin huevo y aptas celíacos",
       "dificulty": "Media",
       "image_url": "recipe_img/croquetas-pez-celiaco.jpg",
       "stars": 4,
@@ -6173,7 +6103,7 @@
     },
     {
       "id": 33,
-      "name": "Revuelto de Champiñiones con Morrones finos (Menú Vegano)",
+      "name": "Revuelto de Champiñiones con Morrones finos",
       "dificulty": "Media",
       "image_url": "recipe_img/revuelto-champiñiones-vegano.jpg",
       "stars": 4,
@@ -6806,7 +6736,7 @@
           "unit": "unidad"
         },
         {
-          "name_id": "lenteja",
+          "name_id": "lentejas",
           "quantity": 200,
           "unit": "gr"
         },
@@ -7501,7 +7431,7 @@
     },
     {
       "id": 55,
-      "name": "Calabacines rellenos de tofu y champiñones al horno",
+      "name": "Calabacines rellenos de tofu y champiñones",
       "dificulty": "Media",
       "image_url": "recipe_img/calabacines-rellenos-tofu-champinones.jpg",
       "stars": 4,
@@ -7561,7 +7491,7 @@
       "dificulty": "Facil",
       "image_url": "recipe_img/crema-calabaza-zanahoria.jpg",
       "stars": 4,
-      "description": "Una crema vegana perfecta como primer plato caliente. Esta crema se sugiere completar con cuadraditos de pan tostado. Sus ingredientes principales son la calabaza y la zanahoria, y está especiada con nuez moscada, pimienta negra y perejil fresco.",
+      "description": "Una crema vegana perfecta como primer plato caliente. Esta crema se sugiere completar con cuadraditos de pan tostado. Sus ingredientes principales son la calabaza y la zanahoria.",
       "validated": true,
       "celiac": true,
       "vegan": true,
@@ -7610,11 +7540,11 @@
     },
     {
       "id": 57,
-      "name": "Arroz naranja. Arroz integral con zanahoria y calabaza",
+      "name": "Arroz integral con zanahoria y calabaza",
       "dificulty": "Facil",
       "image_url": "recipe_img/.jpg",
       "stars": 4,
-      "description": "",
+      "description": "Una forma distinta de hacer el arroz",
       "validated": true,
       "celiac": true,
       "vegan": true,
@@ -7749,7 +7679,7 @@
       "dificulty": "Facil",
       "image_url": "recipe_img/pure-puerros.jpg",
       "stars": 4,
-      "description": "Fácil y riquísima receta de puré de puerros. El puerro da siempre un sabor intenso y sabroso, por lo que esta receta es un apetitoso primer plato. Servir bien caliente. Se puede acompañar con cuscurros de pan tostado.",
+      "description": "Fácil y riquísima receta de puré de puerros. El puerro da siempre un sabor intenso y sabroso, por lo que esta receta es un apetitoso primer plato.",
       "validated": true,
       "celiac": true,
       "vegan": true,
@@ -7808,7 +7738,7 @@
           "unit": "unidad"
         },
         {
-          "name_id": "pepipno",
+          "name_id": "pepino",
           "quantity": 1.5,
           "unit": "unidad"
         },
@@ -8337,7 +8267,7 @@
     },
     {
       "id": 72,
-      "name": "Puré de arbejas",
+      "name": "Puré de arvejas",
       "dificulty": "Facil",
       "image_url": "recipe_img/crema-guisantes.jpg",
       "stars": 4,
@@ -8349,7 +8279,7 @@
       "diabetic": false,
       "ingredients": [
         {
-          "name_id": "arbeja",
+          "name_id": "arvejas",
           "quantity": 300,
           "unit": "gr"
         },
@@ -8527,7 +8457,7 @@
       "diabetic": true,
       "ingredients": [
         {
-          "name_id": "lenteja",
+          "name_id": "lentejas",
           "quantity": 350,
           "unit": "gr"
         },
@@ -9094,7 +9024,7 @@
     },
     {
       "id": 84,
-      "name": "Morron crudo, relleno con espinaca y adornado con rodajas de zanahoria",
+      "name": "Morron crudo con relleno",
       "dificulty": "Media",
       "image_url": "recipe_img/pimientos-rellenos-poblanos.jpg",
       "stars": 4,
@@ -9169,7 +9099,7 @@
           "unit": "unidad"
         },
         {
-          "name_id": "lenteja",
+          "name_id": "lentejas",
           "quantity": 100,
           "unit": "gr"
         },
@@ -9204,7 +9134,7 @@
     },
     {
       "id": 86,
-      "name": "Berenjenas y calabacines a la napolitana con queso y morron",
+      "name": "Berenjenas y calabacines a la napolitana",
       "dificulty": "Media",
       "image_url": "recipe_img/berenejenas-calabacines-rellenos.jpg",
       "stars": 4,
@@ -9236,7 +9166,7 @@
           "unit": "unidad"
         },
         {
-          "name_id": "pure_tomate",
+          "name_id": "tomate_pure",
           "quantity": 200,
           "unit": "ml"
         },
@@ -9424,7 +9354,7 @@
           "unit": "gr"
         },
         {
-          "name_id": "pure_tomate",
+          "name_id": "tomate_pure",
           "quantity": 250,
           "unit": "gr"
         },
@@ -9439,7 +9369,7 @@
           "unit": "gr"
         },
         {
-          "name_id": "azcuar",
+          "name_id": "azucar",
           "quantity": 1,
           "unit": "cucharada"
         },
@@ -9508,7 +9438,7 @@
       "dificulty": "Media",
       "image_url": "recipe_img/bramborak-tortitas-patata.jpg",
       "stars": 4,
-      "description": "Es una receta tradicional muy popular de la cocina de República Checa. Podemos encontrar muchas variantes, pues en cada casa se prepara de una manera distinta. Hemos elegido esta receta vegana en concreto por su sencillez y el buen resultado final.",
+      "description": "Es una receta tradicional muy popular de la cocina de República Checa. Hemos elegido esta receta vegana en concreto por su sencillez y el buen resultado final.",
       "validated": true,
       "celiac": false,
       "vegan": true,
@@ -9694,7 +9624,7 @@
       "diabetic": false,
       "ingredients": [
         {
-          "name_id": "lenteja",
+          "name_id": "lentejas",
           "quantity": 150,
           "unit": "gr"
         },

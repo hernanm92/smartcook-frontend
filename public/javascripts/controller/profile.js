@@ -1,7 +1,7 @@
 app.controller('ProfileController',
     function ($scope, ingredientFactory, categoriesFactory, userFactory, recipeFactory, UserSession,
               ingredientService, restrictionsService, recipeService, Profile, blockUI, $q, imgService,
-              foodCategoriesPerUserFactory, badgeFactory, badgePerUserFactory) {
+              foodCategoriesPerUserFactory, badgeFactory, badgePerUserFactory, ingredientPerUserFactory) {
 
         $scope.categories = [];
         $scope.badges = [];
@@ -10,6 +10,8 @@ app.controller('ProfileController',
         $scope.addCategoryToUser = addCategoryToUser;
         $scope.removeCategoryOfUser = removeCategoryOfUser;
         $scope.upload = upload;
+        $scope.addIngredientToUser = addIngredientToUser;
+        $scope.removeIngredientOfUser = removeIngredientOfUser;
         init();
 
         function init() {
@@ -28,7 +30,6 @@ app.controller('ProfileController',
             });
         }
 
-
         $scope.toggleSelection = function toggleSelection(restriction) { // toggle selection for a given fruit by name
             var index = $scope.profile.restrictions.indexOf(restriction);
             if (index > -1) { // is currently selected
@@ -41,7 +42,7 @@ app.controller('ProfileController',
 
         $scope.loadExcludedCategories = function (query) {
             return $scope.categories.filter(function (category) {
-                return category.name.toLowerCase().indexOf(query.toLowerCase()) != -1;
+                return category.name.toLowerCase().indexOf(query.toLowerCase()) != -1 && category.name.toLowerCase() != 'otros' ;
             });
         };
 
@@ -72,6 +73,18 @@ app.controller('ProfileController',
         function removeCategoryOfUser(categoryTag) {
             var category = {food_category_id: categoryTag.id, username: $scope.profile.username}
             foodCategoriesPerUserFactory.remove(category, function () {
+            })
+        }
+
+          function addIngredientToUser(ingredientTag) {
+            var ingredient = {ingredient_id: ingredientTag.id, username: $scope.profile.username, excluded:true}
+            ingredientPerUserFactory.save(ingredient, function (response) {
+            });
+        }
+
+        function removeIngredientOfUser(ingredientTag) {
+            var ingredient = {ingredient_id: ingredientTag.id, username: $scope.profile.username}
+            ingredientPerUserFactory.remove(ingredient, function () {
             })
         }
 

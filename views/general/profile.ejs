@@ -107,7 +107,9 @@
                 <div class="shop-product-heading">
                     <h2>Ingredientes Excluidos</h2>
                 </div>
-                <tags-input ng-model="profile.ingredients" display-property="name" add-from-autocomplete-only="true">
+                <tags-input ng-model="profile.ingredients" display-property="name" add-from-autocomplete-only="true"
+                        on-tag-added="addIngredientToUser($tag)"
+                        on-tag-removed = "removeIngredientOfUser($tag)">
                     <auto-complete highlight-matched-text=false min-length="1"
                                    source="loadExcludedIngredients($query)"></auto-complete>
                 </tags-input>

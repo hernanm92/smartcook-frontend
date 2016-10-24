@@ -4,7 +4,7 @@ angular
     .service('UserSession', UserSession);
 
 function UserSession($sessionStorage, $localStorage, userFactory, categoriesFactory, Profile,
-    recipeFactory, $q, mapperService, blockUI) {
+    recipeFactory, $q, mapperService, blockUI, ingredientFactory) {
     var self = this;
     self.getUsername = getUsername;
     self.deleteUser = deleteUser;
@@ -27,18 +27,17 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         }
     }
 
-    function setUser(user) {
-        if (user.remember) {
+    function setUser(token, username, remember) {
+        if (remember) {
             $localStorage.remember = true;
-            $localStorage.userName = user.userName;
-            $localStorage.token = user.token;
-            $localStorage.id = user.id;
+            $localStorage.userName = username;
+            $localStorage.token = token;
         }
-        if (!user.remember) {
-            $sessionStorage.userName = user.userName;
-            $sessionStorage.token = user.token;
-            $sessionStorage.id = user.id;
+        if (!remember) {
+            $sessionStorage.userName = username;
+            $sessionStorage.token = token;
         }
+        //ubicar el token en el header en el campo autorizacion para validar cada request
     }
 
     function getUsername() {
@@ -81,7 +80,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     }
 
     function getProfile() {
-        return userFactory.get({username:getUsername()}).$promise;
+        return userFactory.get({ username: getUsername() }).$promise;
     }
 
     function getCategories() {
@@ -93,11 +92,12 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         var promises = {
             profile: self.getProfile(),
             categoriesUser: self.getCategories(),
-            recipes: recipeFactory.query({ username: username }).$promise
+            recipes: recipeFactory.query({ username: username, owner: true }).$promise,
+            ingredients : ingredientFactory.query({username:getUsername()}).$promise
         };
         $q.all(promises).then(function (values) {
             blockUI.stop();
-            return self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes);
+            return self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes, values.ingredients); //values.ingredients
         });
     }
 

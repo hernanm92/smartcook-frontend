@@ -5,7 +5,7 @@ angular
 function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper,
     ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory) {
     var self = this;
-    self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada(s)' },{ name: 'Lata(s)' } ];
+    self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada(s)' }, { name: 'Lata(s)' }];
     self.recipes = [];
     self.getRecipes = getRecipes;
     self.getUnits = getUnits;
@@ -20,19 +20,10 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     refresh();
 
     function init() {
+        blockUI.start()
         recipeFactory.query({}, function (recipes) {
+            blockUI.stop();
             self.recipes = recipes;
-            /*angular.forEach(recipes, function (recipe) {
-                var recipePerUser = {
-                    recipe_id: recipe.id,
-                    username: 'matileon',
-                    favorite: true,
-                    owner: true
-                }
-                recipePerUserFactory.save(recipePerUser, function () {
-                })
-            });
-            */
         });
     }
 
@@ -44,33 +35,33 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
         return self.units;
     }
 
-    function save(recipe, photoRecipe, username) {
-        blockUI.start();
+    function save(recipe, photoRecipe) {
         recipe.image_url = imgService.getUrlImgRecipe(recipe.name);
-        var username = UserSession.getUsername();
+        sendRecipe(recipe, photoRecipe, mapperService.mapRecipeForPersist);
+    }
+
+    function edit(recipe, file) {
+        //creo una receta pero con original, en el back cuando llega a un x de validacion, se tiene q borrar la vieja y poner la nueva
+        //con original == nil
+        sendRecipe(recipe, file, mapperService.mapRecipeForEdit)
+    }
+
+    function sendRecipe(recipe, photoRecipe, mapper) {
+        blockUI.start();
         var promises = {
-            recipePromise: recipeFactory.save(mapperService.mapRecipeForPersist(recipe)).$promise,
+            recipePromise: recipeFactory.save(mapper(recipe)).$promise,
             imgPromise: imgService.uploadImgRecipe(recipe.name, photoRecipe)
-        }
+        };
         $q.all(promises).then(function (values) {
             angular.forEach(recipe.ingredients, function (ing) {
                 var ingMapped = mapperService.mapIngForPersist(ing, values.recipePromise)
                 ingredientPerRecipePersistFactory.save(ingMapped, function (res) {
                 });
             });
-            recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, username));
+            recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, UserSession.getUsername()));
             blockUI.stop();
             notifyHelper.success('Su receta ha sido guardada exitosamente');
         });
-
-    }
-
-    function edit(recipe, file, username) {
-        var recipeToEdit = recipe;
-        recipeToEdit.original = recipe.id;
-        //creo una receta pero con original, en el back cuando llega a un x de validacion, se tiene q borrar la vieja y poner la nueva
-        //con original == nil
-        save(recipeToEdit, file, username);
     }
 
     function create() {
@@ -128,7 +119,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
         return unitFound;
     }
 
-    function getRecipeByName(recipeName){
+    function getRecipeByName(recipeName) {
         return $(self.recipes).filter(function () {
             return this.name.toLowerCase().indexOf(recipeName.toLowerCase()) >= 0
         });

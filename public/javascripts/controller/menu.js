@@ -1,13 +1,18 @@
-app.controller('MenuController', function ($scope, UserSession, $location, recipeService) {
+app.controller('MenuController', function ($scope, UserSession, $location, recipeService, ingredientService) {
 
     $scope.token = token;
     $scope.isNavActive = isNavActive;
     $scope.logOut = logOut;
     $scope.getRecipes = getRecipes;
     $scope.getDetailRecipe = getDetailRecipe;
+    $scope.goToProfile = goToProfile;
 
     function isNavActive(id) {
         return $location.path() == id
+    }
+
+    function goToProfile() {
+        $location.path('/' + UserSession.getUsername() + '/profile');
     }
 
     function token() {

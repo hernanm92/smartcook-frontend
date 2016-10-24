@@ -8,6 +8,7 @@ app.controller('baseRecipeController', function ($scope, recipeService, $modal, 
     $scope.addedPhoto = addedPhoto;
     $scope.isIngredientsEmpty = isIngredientsEmpty;
     $scope.units = [];
+    $scope.food = {}
 
     function addStep() {
         $scope.stepErrorMessage = null;
@@ -66,7 +67,7 @@ app.controller('baseRecipeController', function ($scope, recipeService, $modal, 
         var message = $scope.messageConfirmation;
         var title = $scope.titleConfirmation;
         openModal(message, title).result.then(function () {
-            $scope.action($scope.recipe, $scope.picFile, UserSession.getUsername());
+            $scope.action($scope.recipe, $scope.food.flow.file);
             //recipeService.save($scope.recipe, $scope.picFile);//esto cambia
         });
 
