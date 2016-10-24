@@ -4,7 +4,7 @@ angular
     .service('UserSession', UserSession);
 
 function UserSession($sessionStorage, $localStorage, userFactory, categoriesFactory, Profile,
-    recipeFactory, $q, mapperService, blockUI) {
+    recipeFactory, $q, mapperService, blockUI, ingredientFactory) {
     var self = this;
     self.getUsername = getUsername;
     self.deleteUser = deleteUser;
@@ -92,12 +92,12 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         var promises = {
             profile: self.getProfile(),
             categoriesUser: self.getCategories(),
-            recipes: recipeFactory.query({ username: username, owner: true }).$promise
-            //ingredients = ingredientsUser.query({username:getUsername()}).$promises
+            recipes: recipeFactory.query({ username: username, owner: true }).$promise,
+            ingredients : ingredientFactory.query({username:getUsername()}).$promise
         };
         $q.all(promises).then(function (values) {
             blockUI.stop();
-            return self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes); //values.ingredients
+            return self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes, values.ingredients); //values.ingredients
         });
     }
 

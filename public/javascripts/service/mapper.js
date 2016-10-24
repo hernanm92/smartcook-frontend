@@ -14,14 +14,14 @@ function mapperService(Profile) {
     self.mapRecipeForEdit = mapRecipeForEdit;
 
     // username, email, avatar, recipes, categories, ingredients, celiac, vegan, vegetarian, diabetic
-    function mapProfileToModel(profileDto, categoriesDto, recipesDto) { //TODO: ingredientsDto agregar
+    function mapProfileToModel(profileDto, categoriesDto, recipesDto, ingredientsDto) { 
         var profile = new Profile(
             profileDto.username,
             profileDto.email,
             profileDto.avatar,
             recipesDto,
             categoriesDto,
-            [],
+            ingredientsDto,
             profileDto.celiac,
             profileDto.vegan,
             profileDto.vegetarian,
