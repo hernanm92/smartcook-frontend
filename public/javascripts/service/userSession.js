@@ -16,8 +16,16 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     self.getCategories = getCategories;
     self.initProfileUser = initProfileUser;
     self.getUserProfile = getUserProfile;
+    self.isAdmin = isAdmin
 
     init();
+
+    function isAdmin() {
+        if ($localStorage.remember) {
+            return $localStorage.admin;
+        }
+        return $sessionStorage.admin;
+    }
 
     function init() {
         if (isLogged()) {
@@ -27,15 +35,17 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         }
     }
 
-    function setUser(token, username, remember) {
+    function setUser(token, username, remember, isAdmin) {
         if (remember) {
             $localStorage.remember = true;
             $localStorage.userName = username;
             $localStorage.token = token;
+            $localStorage.admin = isAdmin;
         }
         if (!remember) {
             $sessionStorage.userName = username;
             $sessionStorage.token = token;
+            $sessionStorage.admin = isAdmin;
         }
         //ubicar el token en el header en el campo autorizacion para validar cada request
     }
@@ -66,12 +76,12 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
             delete $localStorage.userName;
             delete $localStorage.token;
             delete $localStorage.remember;
-            delete $localStorage.id;
+            delete $localStorage.admin;
             return;
         }
         delete $sessionStorage.userName;
         delete $sessionStorage.token;
-        delete $sessionStorage.id;
+        delete $localStorage.admin;
         self.userProfile = new Profile(null, null, null, [], [], [], null, null, null, null);
     }
 
@@ -93,7 +103,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
             profile: self.getProfile(),
             categoriesUser: self.getCategories(),
             recipes: recipeFactory.query({ username: username, owner: true }).$promise,
-            ingredients : ingredientFactory.query({username:getUsername()}).$promise
+            ingredients: ingredientFactory.query({ username: getUsername() }).$promise
         };
         $q.all(promises).then(function (values) {
             blockUI.stop();

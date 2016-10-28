@@ -6,6 +6,11 @@ app.controller('MenuController', function ($scope, UserSession, $location, recip
     $scope.getRecipes = getRecipes;
     $scope.getDetailRecipe = getDetailRecipe;
     $scope.goToProfile = goToProfile;
+    $scope.isAdmin = isAdmin
+
+    function isAdmin() {
+        return UserSession.isAdmin();
+    }
 
     function isNavActive(id) {
         return $location.path() == id

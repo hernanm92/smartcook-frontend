@@ -1,5 +1,5 @@
 app.controller('RegisterController',
-    function ($scope, userFactory, eventService, $modal, UserSession, User) {
+    function ($scope, userFactory, eventService, $modal, UserSession, User, blockUI) {
         $scope.$on('$viewContentLoaded', function () {
             App.init();
             App.initScrollBar();
@@ -105,7 +105,7 @@ app.controller('RegisterController',
         function saveUser() {
             // var user = new User($scope.user.firstName, $scope.user.lastName, $scope.user.gender,
             //     $scope.user.dateOfBirth, $scope.user.userName, $scope.user.email, $scope.user.password);
-
+            blockUI.start();
             var user = {
                 username: $scope.user.userName,
                 name: $scope.user.firstName.trim() + " " + $scope.user.lastName,
@@ -119,6 +119,7 @@ app.controller('RegisterController',
             userFactory.save(user, function (res) {
                 var message = 'El usuario ha sido creado satisfactoriamente. Desea ingresar con su nuevo Usuario?';
                 var title = 'Usuario Creado';
+                blockUI.stop();
                 openModal(message, title).result.then(function () {
                     window.location.href = "#/login";
                 });

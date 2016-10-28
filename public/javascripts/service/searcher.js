@@ -20,6 +20,7 @@ function searcher(blockUI, recipeSearchFactory, mapperService) {
         return recipeSearchFactory.query(
             {
                 ingredients: ingsToSend,
+                excluded_ingredients: profileDto.ingredients_ids,
                 food_categories: profileDto.food_categories_ids,
                 vegan: profileDto.vegan,
                 vegetarian: profileDto.vegetarian,

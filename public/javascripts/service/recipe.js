@@ -48,9 +48,10 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
 
     function sendRecipe(recipe, photoRecipe, mapper) {
         blockUI.start();
+        photoRecipe === undefined ? img = null : img = imgService.uploadImgRecipe(recipe.name, photoRecipe);  
         var promises = {
             recipePromise: recipeFactory.save(mapper(recipe)).$promise,
-            imgPromise: imgService.uploadImgRecipe(recipe.name, photoRecipe)
+            imgPromise: img
         };
         $q.all(promises).then(function (values) {
             angular.forEach(recipe.ingredients, function (ing) {
@@ -69,7 +70,10 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     }
 
     function refresh() {
-        $interval(init, 20000);
+        $interval(
+            recipeFactory.query({}, function (recipes) {
+                self.recipes = recipes;
+            }), 20000);
     }
 
     //userId,name,ingredients,steps,description,image_url)

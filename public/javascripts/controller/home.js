@@ -124,14 +124,14 @@ app.controller('HomeController',
             } else {
                 var settings = getSettings();
                 $scope.recipes = homeService.search(ingsToSend, settings);
-                if ($scope.recipes.length === 0) $scope.noResults = true;
+                $scope.recipes.length === 0 ? $scope.noResults = true : null;
             }
         }
 
         function getSettings() {
             return {
                 omitRestrictions: $scope.omitRestrictions,
-                //omitDislikeIngs = $scope.omitDislikeIngs
+                omitDislikeIngs : $scope.omitDislikeIngs,
                 omitCategories: $scope.omitCategories
             }
         }

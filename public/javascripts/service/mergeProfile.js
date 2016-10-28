@@ -25,6 +25,26 @@ function mergeProfile(Profile, userFactory, mapperService) {
         mergeCategories(profile1, profile2);
         //categories
         //excludedIngs
+        mergeExcludedIngredients(profile1, profile2);
+    }
+
+    function mergeExcludedIngredients(profile1, profile2) {
+        //hacer lo mismo q con las categorias
+        angular.forEach(profile2.ingredients, function (ingredient) {
+            if(!existIngredient(profile1.ingredients, ingredient)){
+                profile1.ingredients.push(ingredient);
+            };
+        });
+    }
+
+    function existIngredient(ingredients, ingredientToSearch) {
+        for (var index = 0; index < ingredients.length; index++) {
+            var ingredient = ingredients[index];
+            if(ingredient.id === ingredientToSearch.id){
+                return true;
+            }
+        }
+        return false;
     }
 
     function mergeCategories(profile1, profile2) {
@@ -61,8 +81,6 @@ function mergeProfile(Profile, userFactory, mapperService) {
         })
         return array;
     }
-
-
 
     function setInitProfile(profile) {
         self.originalProfile.categories = profile.categories;

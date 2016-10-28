@@ -14,7 +14,7 @@ function mapperService(Profile) {
     self.mapRecipeForEdit = mapRecipeForEdit;
 
     // username, email, avatar, recipes, categories, ingredients, celiac, vegan, vegetarian, diabetic
-    function mapProfileToModel(profileDto, categoriesDto, recipesDto, ingredientsDto) { 
+    function mapProfileToModel(profileDto, categoriesDto, recipesDto, ingredientsDto) {
         var profile = new Profile(
             profileDto.username,
             profileDto.email,
@@ -42,9 +42,10 @@ function mapperService(Profile) {
     function mapProfileForSearch(userSettings, profile) {
         var profileDto = {};
         categoriesIds = mapCategories(profile.categories);
+        excludedIngredientsIds = mapExcludedIngredients(profile.ingredients);//falta hacer funcion 
         userSettings.omitRestrictions ? omitRestrictions(profileDto) : considerRestrictions(profileDto, profile);
         userSettings.omitCategories ? profileDto.food_categories_ids = null : profileDto.food_categories_ids = categoriesIds;
-        //userSettings.omitDislikeIngs ? dto.disLikeIngs = [] : dto.disLikeIngs = profile.disLikeIngs;
+        userSettings.omitDislikeIngs ? profileDto.ingredients_ids = null : profileDto.ingredients_ids = excludedIngredientsIds;
         return profileDto;
     }
 
@@ -55,7 +56,7 @@ function mapperService(Profile) {
             description: recipe.description,
             steps: recipe.steps,
             validated: false,
-            orginal: null
+            original: null
         }
     }
 
@@ -117,6 +118,19 @@ function mapperService(Profile) {
         } else {
             categoriesToSend = null;
             return categoriesToSend;
+        }
+    }
+
+    function mapExcludedIngredients(ingredients) {
+        var ingsToSend = [];
+        if (ingredients.length > 0) {
+            angular.forEach(ingredients, function (ingredient) {
+                ingsToSend.push(ingredient.id);
+            })
+            return JSON.stringify(ingsToSend);
+        } else {
+            ingsToSend = null;
+            return ingsToSend;
         }
     }
 

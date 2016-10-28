@@ -3,7 +3,7 @@ app.controller('LoginController', LoginController);
 function LoginController($scope, UserSession, userLoginFactory,
     $location, facebookService, blockUI, notifyHelper, userFactory,
     userLoginFacebook) {
-    
+
     var self = this;
     $scope.login = login;
     $scope.loginFacebook = loginFacebook;
@@ -19,6 +19,7 @@ function LoginController($scope, UserSession, userLoginFactory,
     });
 
     function login(isValid) {
+        blockUI.start();
         $scope.formSubmited = true;
         if (isValid) {
             var user = {
@@ -26,8 +27,8 @@ function LoginController($scope, UserSession, userLoginFactory,
                 password: $scope.userPass
             }
             userLoginFactory.save(user, function (res) {
-                 handleLoginResponse(res);
-             });
+                handleLoginResponse(res);
+            });
             $scope.formSubmited = false;
             return;
         }
@@ -36,12 +37,15 @@ function LoginController($scope, UserSession, userLoginFactory,
 
     function handleLoginResponse(res) {
         if (res.token) {
-            UserSession.setUser(res.token, res.username, $scope.rememberUser);
-            UserSession.initProfileUser($scope.userName);
-            $location.path('/');
+            userFactory.get({ id: res.username }, function (response) {
+                UserSession.setUser(res.token, res.username, $scope.rememberUser, response.admin);
+                UserSession.initProfileUser($scope.userName);
+                $location.path('/');
+            });
         } else {
             $scope.messageLogin = "Datos incorrectos. Intente de nuevo";
         }
+        blockUI.stop();
     }
 
     /** 1 -> no esta registrado en la app, 0->esta registrado*/

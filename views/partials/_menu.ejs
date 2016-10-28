@@ -56,7 +56,7 @@
                             <li><a ng-click="goToProfile()">Perfil</a></li>
                             <li><a href="#addCommensal">Agregar Comensal Frecuente</a></li>
                             <li><a href="#favorites">Recetas Favoritas</a></li>
-                            <li ng-if="username=='admin'"><a href="#loadIngredient">Cargar Ingrediente</a></li>
+                            <li ng-if="isAdmin()"><a href="#loadIngredient">Cargar Ingrediente</a></li>
                             <li><a ng-click="logOut()">Salir</a></li>
                         </ul>
                     </li>
