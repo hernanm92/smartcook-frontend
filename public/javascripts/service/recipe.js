@@ -43,6 +43,9 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     function edit(recipe, file) {
         //creo una receta pero con original, en el back cuando llega a un x de validacion, se tiene q borrar la vieja y poner la nueva
         //con original == nil
+        if (file !== undefined){
+            recipe.image_url = imgService.getUrlImgRecipe(recipe.name);
+        }
         sendRecipe(recipe, file, mapperService.mapRecipeForEdit)
     }
 
@@ -108,7 +111,8 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
         return {
             name: ingDesc.name,
             amount: ingAmounts.amount,
-            unit: getUnitBy(ingAmounts.unit)
+            unit: getUnitBy(ingAmounts.unit),
+            id: ingDesc.id
         }
     }
 
