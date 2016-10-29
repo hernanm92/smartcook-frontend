@@ -8,11 +8,12 @@ function mergeProfile(Profile, userFactory, mapperService) {
     self.setInitProfile = setInitProfile;
     self.initProfile = {};
     self.mergeRestrictions = mergeRestrictions;
-    self.originalProfile = new Profile(null, null, null, [], [], [], []);
+    self.originalProfile = new Profile(null, null, null, null, [], [], [], null, null, null);
+    //reemplzar por userModelFactory.emptyUser()
 
 
     function mergeProfiles(commensalsProfiles) {
-        var profile = new Profile(null, null, null, [], [], [], null, null, null, null);
+        var profile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
         angular.forEach(commensalsProfiles, function (commensalProfile) {
             merge(profile, commensalProfile);
         })
@@ -31,7 +32,7 @@ function mergeProfile(Profile, userFactory, mapperService) {
     function mergeExcludedIngredients(profile1, profile2) {
         //hacer lo mismo q con las categorias
         angular.forEach(profile2.ingredients, function (ingredient) {
-            if(!existIngredient(profile1.ingredients, ingredient)){
+            if (!existIngredient(profile1.ingredients, ingredient)) {
                 profile1.ingredients.push(ingredient);
             };
         });
@@ -40,7 +41,7 @@ function mergeProfile(Profile, userFactory, mapperService) {
     function existIngredient(ingredients, ingredientToSearch) {
         for (var index = 0; index < ingredients.length; index++) {
             var ingredient = ingredients[index];
-            if(ingredient.id === ingredientToSearch.id){
+            if (ingredient.id === ingredientToSearch.id) {
                 return true;
             }
         }
@@ -50,7 +51,7 @@ function mergeProfile(Profile, userFactory, mapperService) {
     function mergeCategories(profile1, profile2) {
         //agregar al perfil1 las categorias sin repetidos.
         angular.forEach(profile2.categories, function (category) {
-            if (!existCategory(profile1.categories,category)) {
+            if (!existCategory(profile1.categories, category)) {
                 profile1.categories.push(category);
             }
         });
@@ -66,7 +67,7 @@ function mergeProfile(Profile, userFactory, mapperService) {
     function existCategory(categories, categoryToSearch) {
         var exist = false;
         angular.forEach(categories, function (category) {
-            if(category.id === categoryToSearch.id){
+            if (category.id === categoryToSearch.id) {
                 exist = true;
             }
         });
@@ -76,7 +77,7 @@ function mergeProfile(Profile, userFactory, mapperService) {
     function getCategoriesIds(categories) {
         var array = [];
         angular.forEach(categories, function (category) {
-            var elem = {id:category.id}
+            var elem = { id: category.id }
             array.push(elem);
         })
         return array;

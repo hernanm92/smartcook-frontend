@@ -31,7 +31,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         if (isLogged()) {
             getEntireProfile(getUsername());
         } else {
-            self.userProfile = new Profile(null, null, null, [], [], [], null, null, null, null);
+            self.userProfile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
         }
     }
 
@@ -82,7 +82,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         delete $sessionStorage.userName;
         delete $sessionStorage.token;
         delete $localStorage.admin;
-        self.userProfile = new Profile(null, null, null, [], [], [], null, null, null, null);
+        self.userProfile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
     }
 
     function isLogged() {
@@ -90,7 +90,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     }
 
     function getProfile() {
-        return userFactory.get({ username: getUsername() }).$promise;
+        return userFactory.get({ id: getUsername() }).$promise;
     }
 
     function getCategories() {

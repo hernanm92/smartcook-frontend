@@ -19,6 +19,7 @@ function mapperService(Profile) {
             profileDto.username,
             profileDto.email,
             profileDto.avatar,
+            profileDto.birthdate,
             recipesDto,
             categoriesDto,
             ingredientsDto,
