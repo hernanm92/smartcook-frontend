@@ -1,7 +1,7 @@
 app.controller('ValidateController',
     function ($scope, recipeFactory, validateFactory, eventService, $timeout, recipeService
         , UserSession, $q, recipePerUserFactory, $location) {
-        if(!UserSession.isLogged()) $location.path('/login');
+        if (!UserSession.isLogged()) $location.path('/login');
         $scope.validateRecipeIndex = 0;
         $scope.validateCurrentRecipe = {};
         $scope.skip = skip;
@@ -15,11 +15,7 @@ app.controller('ValidateController',
 
         init();
         function init() {
-            var userWithFalseRelation = {
-                username: UserSession.getUsername(),
-                validated: false
-            }
-            recipeFactory.query(userWithFalseRelation, function (recipes) {
+            validateFactory.query({username: UserSession.getUsername()}, function (recipes) {
                 $scope.recipes = recipes;
                 if (recipes.length > 0) {
                     var id = $scope.recipes.pop().id;
@@ -32,9 +28,19 @@ app.controller('ValidateController',
             });
         }
 
-        function skip() {
-            $('.validateRecipe-Recipe').animate({ opacity: 0 }, 500, function () { });
-            setNextRecipe();
+        function skip(recipeId) {
+            var params = {
+                username: UserSession.getUsername(),
+                recipe_id: $scope.validateCurrentRecipe.id,
+                validated: true,
+                owner: false,
+                favorite: false,
+                positive_validation: null
+            }
+            $scope.recipesPerUser.push(params);
+            recipePerUserFactory.save(params, function (res) {
+                handleResponse();
+            });
         }
 
         function setNextRecipe() {
