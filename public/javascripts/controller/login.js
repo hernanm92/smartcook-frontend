@@ -40,12 +40,13 @@ function LoginController($scope, UserSession, userLoginFactory,
             userFactory.get({ id: res.username }, function (response) {
                 UserSession.setUser(res.token, res.username, $scope.rememberUser, response.admin);
                 UserSession.initProfileUser($scope.userName);
+                blockUI.stop();
                 $location.path('/');
             });
         } else {
+            blockUI.stop();
             $scope.messageLogin = "Datos incorrectos. Intente de nuevo";
         }
-        blockUI.stop();
     }
 
     /** 1 -> no esta registrado en la app, 0->esta registrado*/
