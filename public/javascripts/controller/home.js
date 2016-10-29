@@ -1,6 +1,6 @@
 app.controller('HomeController',
     function ($scope, ingredientService, homeService, $location,
-        notifyHelper, UserSession, userFactory, blockUI, $modal, $q, RecipeUser, ingredientFactory) {
+        notifyHelper, UserSession, userFactory, blockUI, $modal, $q, RecipeUser, ingredientFactory, commensalPerUserFactory) {
 
         //private
         var self = this;
@@ -62,7 +62,7 @@ app.controller('HomeController',
             blockUI.start();
             template = '/general/commensalsModal';
             controller = 'comensalsForSearchController';
-            userFactory.query({ chef: UserSession.getUsername() }, function (frequentsUsers) {
+            commensalPerUserFactory.query({ id: UserSession.getUsername() }, function (frequentsUsers) {
                 blockUI.stop();
                 openModal(frequentsUsers, template, controller);
             });
@@ -162,7 +162,7 @@ app.controller('HomeController',
                         var users = []
                             , promises = [];
                         angular.forEach(frequentsUsers, function (frequentUser) {
-                            promises.push(userFactory.get({ username: frequentUser.frequent_username }).$promise);
+                            promises.push(userFactory.get({ id: frequentUser.username }).$promise);
                         });
                         return $q.all(promises).then(function (values) {
                             //

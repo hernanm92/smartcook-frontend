@@ -19,7 +19,7 @@
                placeholder="Ingrese el nombre del usuario a encontrar" style="width:100%" autofocus="autofocus"/>
     </div>
     <div id="searchedUsersResults" class="container" style="margin:20px 0px">
-        <div ng-repeat="user in resultUsers track by $index" class="col-sm-6" style="margin:10px 0px">
+        <div ng-repeat="user in resultUsers track by $index " class="col-sm-6" style="margin:10px 0px">
             <img ng-src="{{user.avatar}}" class="img-responsive img-circle"
                  alt="{{user.username}} profile picture" style="max-width:100px; display:inline">
             <h2 style="display:inline; text-transform:uppercase">{{user.username}}</h2>
@@ -27,7 +27,7 @@
                 <i class="fa fa-star-o fa-2x" aria-hidden="true"
                    ng-mouseover="hoverAddCommensalButton($event)"
                    ng-mouseleave="hoverAddCommensalButton($event)"
-                   ng-click="addCommensal($event)"></i>
+                   ng-click="addCommensal(user)"></i>
             </button>
         </div>
     </div>

@@ -1,5 +1,5 @@
 app.controller('AddCommensalController',
-    function ($scope, userFactory, frequentCommensalFactory, UserSession) {
+    function ($scope, userFactory, frequentCommensalFactory, UserSession, commensalPerUserFactory) {
         $scope.searchedUser = "";
         $scope.resultUsers = [];
         $scope.frequentCommensals = [];
@@ -9,42 +9,72 @@ app.controller('AddCommensalController',
         $scope.addCommensal = addCommensal;
         $scope.removeCommensal = removeCommensal;
 
-        userFactory.query({}, function (users) {
-            $scope.users = users;
-        });
-        UserSession.getProfile().then(function (val) {
+        init();
+
+        /*UserSession.getProfile().then(function (val) {
             $scope.currentUser = val.username;
-            userFactory.query({ chef: $scope.currentUser }, function (frequentUsers) {
+            commensalPerUserFactory.query({ id: $scope.currentUser }, function (frequentUsers) {
+                addUserCommensals(frequentUsers);
                 frequentUsers.length > 0 ? $scope.frequentUsers = getUsernamesOf(frequentUsers) : null;
                 $scope.frequentCommensals = $($scope.users).filter(function () {
                     return $scope.frequentUsers.indexOf(this.username.toLowerCase()) >= 0;
                 });
             });
-        });
+        });*/
+
+        function init() {
+            userFactory.query({}, function (users) {
+                $scope.users = users;
+            });
+            commensalPerUserFactory.query({ id: UserSession.getUsername() }, function (frequentUsers) {
+                addUserCommensals(frequentUsers);
+            });
+        }
+
+        function addUserCommensals(frequentUsers) {
+            angular.forEach(frequentUsers, function (frequentUser) {
+                $scope.frequentCommensals.push(frequentUser);
+            })
+        }
 
         function updateSearchedUsers() {
-            $scope.resultUsers = $($scope.users).filter(function () {
-                return (this.username.toLowerCase().indexOf($scope.searchedUser.toLowerCase()) != -1
-                    && $scope.frequentUsers.indexOf(this.username.toLowerCase()) == -1
-                    && this.username.toLowerCase() != $scope.currentUser);
+            $scope.resultUsers = $scope.users.filter(function (user) {
+                return isSearchedUser(user) && isNotFrequentUser(user) && isNotMe(user) && $scope.searchedUser != ''
             });
         };
+
+        function isNotFrequentUser(user) {
+            var isNotUser = true
+            angular.forEach($scope.frequentCommensals, function (frequentUser) {
+                if(frequentUser.username === user.username){
+                    isNotUser = false;
+                }
+            })
+            return isNotUser;
+        }
+
+        function isNotMe(user) {
+            return user.username != UserSession.getUsername();
+        }
+
+        function isSearchedUser(user) {
+            return user.username.toLowerCase().indexOf($scope.searchedUser.toLowerCase()) != -1
+        }
 
         function hoverAddCommensalButton($event) {
             $($event.currentTarget).toggleClass('fa-star-o').toggleClass('fa-star');
         }
 
-        function addCommensal($event) {
-            var addedUser = getUserByUsername($($event.currentTarget).closest('div').find('h2').text().trim());
-            $scope.frequentCommensals.push(addedUser);
-            $scope.frequentUsers.push(addedUser.username);
+        function addCommensal(user) {
+            //var addedUser = getUserByUsername($($event.currentTarget).closest('div').find('h2').text().trim());
+            $scope.frequentCommensals.push(user);
             var frequentCommensal = {
-                frequent_username: addedUser.username,
+                frequent_username: user.username,
                 username: UserSession.getUsername()
             }
             frequentCommensalFactory.save(frequentCommensal, function (res) {
             });
-            removeUserByUsername(addedUser.username, $scope.resultUsers);
+            removeUserByUsername(user.username, $scope.resultUsers);
         }
 
         function removeCommensal($event) {
@@ -79,7 +109,7 @@ app.controller('AddCommensalController',
         function getUsernamesOf(array) {
             var arrayOfUsernames = [];
             angular.forEach(array, function (elem) {
-               arrayOfUsernames.push(elem.frequent_username);
+                arrayOfUsernames.push(elem.frequent_username);
             })
             return arrayOfUsernames;
         }

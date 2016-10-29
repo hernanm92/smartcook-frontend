@@ -25,7 +25,8 @@ var app = angular.module('MainApp', [
     'circle.countdown',
     'foodCategoriesPerUserModule',
     'recipePerUserModule',
-    'ingredientPerUserModule'
+    'ingredientPerUserModule',
+    'commensalPerUserModule'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {

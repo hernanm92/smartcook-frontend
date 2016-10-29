@@ -3,7 +3,7 @@
         <h2>Agregar comensal a busqueda</h2>
     </div>
     <div class="modal-body">
-        <div ng-show="users.length < 1"><h3>No tiene comenesales frecuentes elegidos </h3> </div>
+        <div ng-show="users.length < 1"><h3>No tiene comensales frecuentes elegidos </h3> </div>
         <div ng-repeat="user in users track by $index" style="padding-bottom:15px;">
             <img ng-src="{{user.avatar}}" class="img-responsive img-circle" alt="{{user.username}} profile picture" style="max-width:100px; display:inline">
             <h2 style="display:inline; text-transform:uppercase">{{user.username}}</h2>

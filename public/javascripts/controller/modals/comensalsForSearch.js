@@ -40,7 +40,7 @@ app.controller('comensalsForSearchController',
         function addCommensalForSearch(commensal, $event) {
             blockUI.start();
             var promises = {
-                profile: userFactory.get({ username: commensal.username }).$promise,
+                profile: userFactory.get({ id: commensal.username }).$promise,
                 categoriesUser: categoriesFactory.query({ username: commensal.username }).$promise,
             };
             $q.all(promises).then(function (values) {

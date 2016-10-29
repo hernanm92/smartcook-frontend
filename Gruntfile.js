@@ -56,6 +56,7 @@ module.exports = function (grunt) {
     "public/javascripts/factory/badgePerUsers.js",
     "public/javascripts/factory/tips.js",
     "public/javascripts/factory/ingredientPerUser.js",
+    "public/javascripts/factory/commensalPerUser.js",
 
     "public/javascripts/controller/base.js",
     "public/javascripts/controller/menu.js",
