@@ -18,7 +18,7 @@ function httpInterceptorService($q, notifyHelper, blockUI) {
             }
             return recoverResponse;
         }
-        notifyHelper.error('Surgio un problema en el servidor, reintente de nuevo.Disulpe las molestias');
+        notifyHelper.error('Hubo un problema en el servidor, reintente de nuevo.');
         return $q.reject(response);
     }
 }
