@@ -1,7 +1,7 @@
 app.controller('ProfileController',
     function ($scope, ingredientFactory, categoriesFactory, userFactory, recipeFactory, UserSession,
               ingredientService, restrictionsService, recipeService, Profile, blockUI, $q, imgService,
-              foodCategoriesPerUserFactory, badgeFactory, badgePerUserFactory, ingredientPerUserFactory) {
+              foodCategoriesPerUserFactory, badgeFactory, badgePerUserFactory, ingredientPerUserFactory, $routeParams) {
 
         $scope.categories = [];
         $scope.badges = [];
@@ -16,6 +16,7 @@ app.controller('ProfileController',
 
         function init() {
             blockUI.start();
+            var username = $routeParams.username;
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
                 $scope.profile = UserSession.getUserProfile();

@@ -24,7 +24,7 @@ function searcher(blockUI, recipeSearchFactory, mapperService) {
                 food_categories: profileDto.food_categories_ids,
                 vegan: profileDto.vegan,
                 vegetarian: profileDto.vegetarian,
-                celiac: profileDto.vegetarian,
+                celiac: profileDto.celiac,
                 diabetic: profileDto.diabetic
             },
             function (recipes) {

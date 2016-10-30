@@ -1,6 +1,6 @@
 app.controller('comensalsForSearchController',
     function ($scope, frequentsUsers, $modalInstance, userFactory, homeService, categoriesFactory,
-        notifyHelper, blockUI, $q, mapperService) {
+        notifyHelper, blockUI, $q, mapperService, ingredientFactory) {
 
         $scope.users = [];
         init();
@@ -39,13 +39,15 @@ app.controller('comensalsForSearchController',
 
         function addCommensalForSearch(commensal, $event) {
             blockUI.start();
+            //Esta logica tienen q estar delagada en service UserSession
             var promises = {
                 profile: userFactory.get({ id: commensal.username }).$promise,
                 categoriesUser: categoriesFactory.query({ username: commensal.username }).$promise,
+                ingredients: ingredientFactory.query({ username: commensal.username }).$promise
             };
             $q.all(promises).then(function (values) {
                 blockUI.stop();
-                var commensalProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, null);
+                var commensalProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, null, values.ingredients);
                 homeService.setCommensalProfile(commensalProfile);
                 notifyHelper.success('Comensal Agregado para busqueda');
                 commensal.added = true;

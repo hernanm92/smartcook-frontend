@@ -58,10 +58,10 @@ function mergeProfile(Profile, userFactory, mapperService) {
     }
 
     function mergeRestrictions(profile1, profile2) {
-        profile1.vegan = profile2.vegan;
-        profile1.vegetarian = profile2.vegetarian;
-        profile1.diabetic = profile2.diabetic;
-        profile1.celiac = profile2.celiac;
+        profile1.vegan ? null : profile1.vegan = profile2.vegan;
+        profile1.vegetarian ? null : profile1.vegetarian = profile2.vegetarian;
+        profile1.diabetic ? null : profile1.diabetic = profile2.diabetic;
+        profile1.celiac ? null : profile1.celiac = profile2.celiac;
     }
 
     function existCategory(categories, categoryToSearch) {
