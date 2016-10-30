@@ -43,18 +43,21 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     function edit(recipe, file) {
         //creo una receta pero con original, en el back cuando llega a un x de validacion, se tiene q borrar la vieja y poner la nueva
         //con original == nil
-        if (file !== undefined){
+        if (file !== undefined) {
             recipe.image_url = imgService.getUrlImgRecipe(recipe.name);
         }
         sendRecipe(recipe, file, mapperService.mapRecipeForEdit)
     }
 
+    //refactor
     function sendRecipe(recipe, photoRecipe, mapper) {
         blockUI.start();
-        photoRecipe === undefined ? img = null : img = imgService.uploadImgRecipe(recipe.name, photoRecipe);  
+        var img;
+        if (photoRecipe !== undefined) {
+            imgService.uploadImgRecipe(recipe.name, photoRecipe);
+        }
         var promises = {
             recipePromise: recipeFactory.save(mapper(recipe)).$promise,
-            imgPromise: img
         };
         $q.all(promises).then(function (values) {
             angular.forEach(recipe.ingredients, function (ing) {
