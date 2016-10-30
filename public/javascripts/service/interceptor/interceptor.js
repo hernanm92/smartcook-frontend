@@ -18,6 +18,10 @@ function httpInterceptorService($q, notifyHelper, blockUI) {
             }
             return recoverResponse;
         }
+        if(response.status === 422){
+            notifyHelper.error("No se pudo realizar la transaccion");
+            return $q.reject(response);    
+        }
         notifyHelper.error('Hubo un problema en el servidor, reintente de nuevo.');
         return $q.reject(response);
     }
