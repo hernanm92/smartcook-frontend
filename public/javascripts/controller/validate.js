@@ -1,6 +1,6 @@
 app.controller('ValidateController',
     function ($scope, recipeFactory, validateFactory, eventService, $timeout, recipeService
-        , UserSession, $q, recipePerUserFactory, $location) {
+        , UserSession, $q, recipePerUserFactory, $location, blockUI) {
         if (!UserSession.isLogged()) $location.path('/login');
         $scope.validateRecipeIndex = 0;
         $scope.validateCurrentRecipe = {};
@@ -8,15 +8,12 @@ app.controller('ValidateController',
         $scope.nextRecipe = nextRecipe;
         $scope.recipesPerUser = [];
 
-        $("body").keypress(function (e) {
-            if (e.which == '108') $scope.nextRecipe(1);
-            if (e.which == '100') $scope.nextRecipe(0);
-        });
-
         init();
         function init() {
+            blockUI.start();
             validateFactory.query({username: UserSession.getUsername()}, function (recipes) {
                 $scope.recipes = recipes;
+                blockUI.stop();
                 if (recipes.length > 0) {
                     var id = $scope.recipes.pop().id;
                     recipeService.getDetailRecipe(id).then(function (value) {
