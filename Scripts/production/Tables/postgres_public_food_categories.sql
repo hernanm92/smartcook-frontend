@@ -1,0 +1,16 @@
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (1, 'Carne Blanca', '2016-10-23 23:16:20.992747', '2016-10-23 23:16:20.992747');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (2, 'Frutas', '2016-10-23 23:16:23.376110', '2016-10-23 23:16:23.376110');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (3, 'Hortalizas', '2016-10-23 23:16:26.364987', '2016-10-23 23:16:26.364987');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (4, 'Carne Roja', '2016-10-23 23:16:29.363572', '2016-10-23 23:16:29.363572');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (5, 'Elaborados', '2016-10-23 23:16:32.366706', '2016-10-23 23:16:32.366706');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (6, 'Otros', '2016-10-23 23:16:35.362514', '2016-10-23 23:16:35.362514');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (7, 'Lacteos', '2016-10-23 23:16:38.370741', '2016-10-23 23:16:38.370741');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (8, 'Legumbres', '2016-10-23 23:16:41.369381', '2016-10-23 23:16:41.369381');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (9, 'Setas', '2016-10-23 23:16:44.376550', '2016-10-23 23:16:44.376550');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (10, 'Frutas secas', '2016-10-23 23:16:47.364028', '2016-10-23 23:16:47.364028');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (11, 'Granos', '2016-10-23 23:16:50.381863', '2016-10-23 23:16:50.381863');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (12, 'Semillas', '2016-10-23 23:16:53.381585', '2016-10-23 23:16:53.381585');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (13, 'Queso(Blando)', '2016-10-23 23:16:56.383234', '2016-10-23 23:16:56.383234');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (14, 'Aceites', '2016-10-23 23:16:59.362413', '2016-10-23 23:16:59.362413');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (15, 'Queso(Maduro)', '2016-10-23 23:17:02.364550', '2016-10-23 23:17:02.364550');
+INSERT INTO public.food_categories (id, name, created_at, updated_at) VALUES (16, 'Especias', '2016-10-23 23:17:05.370173', '2016-10-23 23:17:05.370173');
