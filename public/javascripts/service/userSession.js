@@ -4,7 +4,7 @@ angular
     .service('UserSession', UserSession);
 
 function UserSession($sessionStorage, $localStorage, userFactory, categoriesFactory, Profile,
-    recipeFactory, $q, mapperService, blockUI, ingredientFactory) {
+    recipeFactory, $q, mapperService, blockUI, ingredientFactory, $location) {
     var self = this;
     self.getUsername = getUsername;
     self.deleteUser = deleteUser;
@@ -16,9 +16,18 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     self.getCategories = getCategories;
     self.initProfileUser = initProfileUser;
     self.getUserProfile = getUserProfile;
-    self.isAdmin = isAdmin
+    self.isAdmin = isAdmin;
+    self.logout = logout;
 
     init();
+
+    function init() {
+        if (isLogged()) {
+            getEntireProfile(getUsername());
+        } else {
+            self.userProfile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
+        }
+    }
 
     function isAdmin() {
         if ($localStorage.remember) {
@@ -27,12 +36,9 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         return $sessionStorage.admin;
     }
 
-    function init() {
-        if (isLogged()) {
-            getEntireProfile(getUsername());
-        } else {
-            self.userProfile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
-        }
+    function logout() {
+        self.deleteUser();
+        $location.path('/login');
     }
 
     function setUser(token, username, remember, isAdmin) {

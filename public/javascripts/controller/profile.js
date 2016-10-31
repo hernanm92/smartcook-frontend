@@ -1,7 +1,7 @@
 app.controller('ProfileController',
-    function ($scope, ingredientFactory, categoriesFactory, userFactory, recipeFactory, UserSession,
-              ingredientService, restrictionsService, recipeService, Profile, blockUI, $q, imgService,
-              foodCategoriesPerUserFactory, badgeFactory, badgePerUserFactory, ingredientPerUserFactory, $routeParams) {
+    function ($scope, ingredientFactory, categoriesFactory, userFactory, UserSession,
+        ingredientService, restrictionsService, blockUI, imgService,foodCategoriesPerUserFactory, 
+        badgeFactory, badgePerUserFactory, ingredientPerUserFactory, $routeParams, $modal) {
 
         $scope.categories = [];
         $scope.badges = [];
@@ -12,6 +12,7 @@ app.controller('ProfileController',
         $scope.upload = upload;
         $scope.addIngredientToUser = addIngredientToUser;
         $scope.removeIngredientOfUser = removeIngredientOfUser;
+        $scope.disable = disable;
         init();
 
         function init() {
@@ -20,16 +21,47 @@ app.controller('ProfileController',
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
                 $scope.profile = UserSession.getUserProfile();
-                if($scope.profile.avatar == undefined) $scope.profile.avatar = 'assets/img/newLogo.jpg';
+                if ($scope.profile.avatar == undefined) $scope.profile.avatar = 'assets/img/newLogo.jpg';
                 blockUI.stop();
             });
-            badgePerUserFactory.query({username: UserSession.getUsername()}).$promise.then(function (userBadges) {
+            badgePerUserFactory.query({ username: UserSession.getUsername() }).$promise.then(function (userBadges) {
                 for (var i = 0; i < userBadges.length; i++)
-                    badgeFactory.get({id: userBadges[i].badge_id}).$promise.then(function (badge) {
+                    badgeFactory.get({ id: userBadges[i].badge_id }).$promise.then(function (badge) {
                         $scope.badges.push(badge);
                     });
             });
         }
+
+        function disable() {
+            var message = 'Desea cerrar su cuenta de Smartcook?!!!'
+            var title = '';
+            openModal(message, title).result.then(function () {
+                $scope.profile.id = $scope.profile.username;
+                $scope.profile.enabled = false;
+                userFactory.update($scope.profile, function (res) {
+                    UserSession.logout();
+                })
+            });
+
+        };
+
+        function openModal(message, title) {
+            return $modal.open({
+                animation: true,
+                templateUrl: '/general/confirmForm',
+                controller: 'ModalController',
+                size: 'sm',
+                resolve: {
+                    message: function () {
+                        return message;
+                    },
+                    title: function () {
+                        return title;
+                    }
+                },
+                windowClass: 'menu-bar-space'
+            });
+        };
 
         $scope.toggleSelection = function toggleSelection(restriction) { // toggle selection for a given fruit by name
             var index = $scope.profile.restrictions.indexOf(restriction);
@@ -43,7 +75,7 @@ app.controller('ProfileController',
 
         $scope.loadExcludedCategories = function (query) {
             return $scope.categories.filter(function (category) {
-                return category.name.toLowerCase().indexOf(query.toLowerCase()) != -1 && category.name.toLowerCase() != 'otros' ;
+                return category.name.toLowerCase().indexOf(query.toLowerCase()) != -1 && category.name.toLowerCase() != 'otros';
             });
         };
 
@@ -66,25 +98,25 @@ app.controller('ProfileController',
         }
 
         function addCategoryToUser(categoryTag) {
-            var category = {food_category_id: categoryTag.id, username: $scope.profile.username}
+            var category = { food_category_id: categoryTag.id, username: $scope.profile.username }
             foodCategoriesPerUserFactory.save(category, function (response) {
             });
         }
 
         function removeCategoryOfUser(categoryTag) {
-            var category = {food_category_id: categoryTag.id, username: $scope.profile.username}
+            var category = { food_category_id: categoryTag.id, username: $scope.profile.username }
             foodCategoriesPerUserFactory.remove(category, function () {
             })
         }
 
-          function addIngredientToUser(ingredientTag) {
-            var ingredient = {ingredient_id: ingredientTag.id, username: $scope.profile.username, excluded:true}
+        function addIngredientToUser(ingredientTag) {
+            var ingredient = { ingredient_id: ingredientTag.id, username: $scope.profile.username, excluded: true }
             ingredientPerUserFactory.save(ingredient, function (response) {
             });
         }
 
         function removeIngredientOfUser(ingredientTag) {
-            var ingredient = {ingredient_id: ingredientTag.id, username: $scope.profile.username}
+            var ingredient = { ingredient_id: ingredientTag.id, username: $scope.profile.username }
             ingredientPerUserFactory.remove(ingredient, function () {
             })
         }

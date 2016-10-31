@@ -26,8 +26,7 @@ app.controller('MenuController', function ($scope, UserSession, $location, recip
     }
 
     function logOut() {
-        UserSession.deleteUser();
-        $location.path('/login');
+        UserSession.logout();
     }
 
     function getDetailRecipe(id) {
