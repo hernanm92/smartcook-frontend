@@ -13,9 +13,10 @@
             <div class="col-md-6 ">
                 <div class="form-group ">
                     <label class="label-form-ingredient "> Nombre Receta </label>
-                    <input name="nameRecipe" ng-model="recipe.name " type="text " class="form-control " placeholder="Escriba el nombre de la receta aqui "
+                    <input ng-blur="validateName()" name="nameRecipe" ng-model="recipe.name " type="text " class="form-control " placeholder="Escriba el nombre de la receta aqui "
                         required>
                     <p ng-show="recipeForm.nameRecipe.$invalid && submitted " style="color:red; ">La receta debe tener un nombre</p>
+                    <p ng-show="existNameRecipe" style="color:red; ">El nombre ya fue tomado, ingrese otro</p>
                 </div>
                 <div class="form-group ">
                     <label class="label-form-ingredient "> Ingredientes </label>

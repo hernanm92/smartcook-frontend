@@ -1,4 +1,6 @@
-app.controller('baseRecipeController', function ($scope, recipeService, $modal, ingredientService, Recipe, imgService, UserSession) {
+app.controller('baseRecipeController', 
+    function ($scope, recipeService, $modal, ingredientService, Recipe, imgService, UserSession, 
+              recipeFactory) {
 
     $scope.addStep = addStep;
     $scope.loadIngredients = loadIngredients;
@@ -9,6 +11,11 @@ app.controller('baseRecipeController', function ($scope, recipeService, $modal, 
     $scope.isIngredientsEmpty = isIngredientsEmpty;
     $scope.units = [];
     $scope.food = {}
+    $scope.validateName = validateName;
+
+    function validateName() {
+        $scope.existNameRecipe = recipeService.existName($scope.recipe.name);   
+    }
 
     function addStep() {
         $scope.stepErrorMessage = null;

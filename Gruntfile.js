@@ -102,7 +102,8 @@ module.exports = function (grunt) {
     "public/javascripts/service/mapper.js",
     "public/javascripts/service/home.js",
     "public/javascripts/service/migration.js",
-
+    "public/javascripts/service/query.js",
+    
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
     "public/javascripts/models/profile.js",
