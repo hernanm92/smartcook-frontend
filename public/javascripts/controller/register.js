@@ -1,11 +1,13 @@
 app.controller('RegisterController',
-    function ($scope, userFactory, eventService, $modal, UserSession, User, blockUI) {
+    function ($scope, userFactory, eventService, $modal, UserSession, User, blockUI, query) {
         $scope.$on('$viewContentLoaded', function () {
             App.init();
             App.initScrollBar();
             Registration.initRegistration();
             StyleSwitcher.initStyleSwitcher();
         });
+        var self = this;
+        self.users = [];
         $scope.validateForm = validateForm;
         $scope.openModal = openModal;
         $scope.genderSelected = genderSelected;
@@ -13,16 +15,29 @@ app.controller('RegisterController',
         $scope.openModal = openModal;
         $scope.confirmForm = confirmForm;
         $scope.saveUser = saveUser;
+        $scope.validateUsername = validateUsername;
+        $scope.format = 'dd-MMMM-yyyy'
 
-        $scope.user = {
-            firstName: '',
-            lastName: '',
-            gender: 'Genero',
-            dateOfBirth: '',
-            userName: '',
-            email: '',
-            password: ''
-        };
+        init();
+
+        function init() {
+            blockUI.start();
+            $scope.user = {
+                firstName: '',
+                lastName: '',
+                gender: 'Genero',
+                dateOfBirth: '',
+                userName: '',
+                email: '',
+                password: ''
+            };
+            initDatepicker();
+            userFactory.query({}, function (users) {
+                blockUI.stop();
+                self.users = users;
+            });
+        }
+
 
         //---------------------------------DATE PICKER SECTION---------------------------------
 
@@ -41,13 +56,13 @@ app.controller('RegisterController',
             };
         }
 
-        initDatepicker();
-
         $scope.clear = function () {
             $scope.dt = null;
         };
 
-        $scope.format = 'dd-MMMM-yyyy'
+        function validateUsername() {
+            $scope.existusername = query.exists(self.users, 'username', $scope.user.userName);
+        }
 
         $scope.openDatepicker = function ($event) {
             $event.preventDefault();
@@ -120,7 +135,7 @@ app.controller('RegisterController',
                 var message = 'El usuario ha sido creado satisfactoriamente. Desea ingresar con su nuevo Usuario?';
                 var title = 'Usuario Creado';
                 blockUI.stop();
-                openModal(message, title).result.then(function () {
+                openModal(message, title).result.then(function (res) {
                     window.location.href = "#/login";
                 });
             });

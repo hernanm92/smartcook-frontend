@@ -44,10 +44,10 @@
                         <div class="row margin-bottom-10">
                             <div class="col-sm-12">
                                 <p class="input-group">
-                                    <input type="text" class="form-control" datepicker-popup="{{format}}"  min-date ="minDate" max-date = "registerMaxDate"
-                                           ng-model="user.dateOfBirth" is-open="opened" datepicker-options="dateOptions" ng-click="openDatepicker($event)"
-                                           ng-required="true" close-text="Cerrar" readonly/>
-                                <span class="input-group-btn">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" min-date="minDate" max-date="registerMaxDate" ng-model="user.dateOfBirth"
+                                        is-open="opened" datepicker-options="dateOptions" ng-click="openDatepicker($event)" ng-required="true"
+                                        close-text="Cerrar" readonly/>
+                                    <span class="input-group-btn">
                                   <button type="button" class="btn btn-default" ng-click="openDatepicker($event)" style="height: 40.142858000000004px">
                                       <i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
@@ -57,7 +57,9 @@
                         <section>
                             <label class="input">
                                 <input ng-model="user.userName" type="text" name="username" required
-                                       placeholder="Nombre de Usuario" class="form-control" maxlength="20">
+                                       placeholder="Nombre de Usuario" class="form-control" maxlength="20"
+                                       ng-blur="validateUsername()">
+                                       <em  class="invalid" ng-show="existusername" style="color:red; ">Ya existe este usuario, elija otro nombre de usuario</em>                                       
                             </label>
                         </section>
                         <section>
@@ -93,8 +95,10 @@
                 <div class="margin-bottom-20"></div>
                 <p class="text-center">Ya tenes una cuenta? <a href="#/login">Inicia Sesion</a></p>
             </div>
-        </div><!--/end row-->
-    </div><!--/end container-->
+        </div>
+        <!--/end row-->
+    </div>
+    <!--/end container-->
 </div>
 <!--=== End Registre ===-->
 
@@ -106,6 +110,7 @@
                 <h2> No pierdas tiempo y convertite en un <strong>SmartCook</strong></h2>
             </div>
         </div>
-    </div><!--/end container-->
+    </div>
+    <!--/end container-->
 </div>
 <!--=== End Shop Suvbscribe ===-->
