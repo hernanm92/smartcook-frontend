@@ -3,7 +3,8 @@ angular
     .service('recipeService', recipeService);
 
 function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper,
-    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory) {
+    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory, query) {
+
     var self = this;
     self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada(s)' }, { name: 'Lata(s)' }];
     self.recipes = [];
@@ -15,6 +16,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     self.getDetailRecipe = getDetailRecipe;
     self.edit = edit;
     self.getRecipeByName = getRecipeByName;
+    self.existName = existName;
 
     init();
     refresh();
@@ -25,6 +27,10 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
             blockUI.stop();
             self.recipes = recipes;
         });
+    }
+
+    function existName(name) {
+        return query.exists(self.recipes, 'name', name);
     }
 
     function getRecipes() {
@@ -76,10 +82,13 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     }
 
     function refresh() {
-        $interval(
-            recipeFactory.query({}, function (recipes) {
-                self.recipes = recipes;
-            }), 20000);
+        $interval(loadrecipes, 20000);
+    }
+
+    function loadrecipes() {
+        recipeFactory.query({}, function (recipes) {
+            self.recipes = recipes;
+        });
     }
 
     //userId,name,ingredients,steps,description,image_url)

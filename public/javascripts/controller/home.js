@@ -69,14 +69,14 @@ app.controller('HomeController',
         }
 
         function init() {
-            if (UserSession.isLogged()) {
+           /* if (UserSession.isLogged()) {
                 UserSession.getProfile().then(function (profileUser) {
                     $scope.vegan = profileUser.vegan ? true : undefined; //con undefined, no lo toma como filtro 
                     $scope.vegetarian = profileUser.vegetarian ? true : undefined;
                     $scope.celaic = profileUser.celiac ? true : undefined;
                     $scope.diabetic = profileUser.diabetic ? true : undefined;
                 });
-            }
+            }*/
             $scope.ingredientsTemplate = homeService.initIngredients();
             $scope.recipes = homeService.getRecipes();
         };

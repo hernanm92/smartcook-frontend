@@ -38,9 +38,13 @@ function ingredientService(ingredientFactory, $interval, $modal, blockUI) {
     }
 
     function refresh() {
-        $interval(ingredientFactory.query({}, function (ings) {
+        $interval(loadIngredients, 20000);
+    }
+
+    function loadIngredients() {
+        ingredientFactory.query({}, function (ings) {
             self.ingredients = ings;
-        }), 20000);
+        })
     }
 
     function getIngredients() {
