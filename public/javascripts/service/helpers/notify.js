@@ -14,10 +14,10 @@ function notifyHelper(ngNotify) {
         ngNotify.config({
             theme: 'pure',
             position: 'bottom',
-            duration: 1500,
-            sticky: true,
+            duration: 2200,
+            sticky: false,
             button: true,
-            html: false
+            html: false,
         });
     }
 
