@@ -26,7 +26,8 @@ var app = angular.module('MainApp', [
     'foodCategoriesPerUserModule',
     'recipePerUserModule',
     'ingredientPerUserModule',
-    'commensalPerUserModule'
+    'commensalPerUserModule',
+    'ngNotify'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {
