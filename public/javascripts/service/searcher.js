@@ -2,7 +2,7 @@ angular
     .module('MainApp')
     .service('searcher', searcher);
 
-function searcher(blockUI, recipeSearchFactory, mapperService) {
+function searcher(blockUI,  mapperService, recipeFactory) {
     var self = this;
     self.recipes = [];
     self.getRecipes = getRecipes;
@@ -17,7 +17,7 @@ function searcher(blockUI, recipeSearchFactory, mapperService) {
         blockUI.start();
         var ingsToSend = mapperService.mapIngredientsForSearch(ings);
         var profileDto = mapperService.mapProfileForSearch(userSettings, profile);
-        return recipeSearchFactory.query(
+        return recipeFactory.search(
             {
                 ingredients: ingsToSend,
                 excluded_ingredients: profileDto.ingredients_ids,

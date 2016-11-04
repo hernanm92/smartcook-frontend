@@ -37,7 +37,7 @@ function mapperService(Profile) {
         angular.forEach(ings, function (ing) {
             ingsToSend.push(ing.id);
         })
-        return JSON.stringify(ingsToSend);
+        return ingsToSend;
     }
 
     function mapProfileForSearch(userSettings, profile) {
@@ -115,7 +115,7 @@ function mapperService(Profile) {
             angular.forEach(categories, function (category) {
                 categoriesToSend.push(category.id);
             })
-            return JSON.stringify(categoriesToSend);
+            return categoriesToSend;
         } else {
             categoriesToSend = null;
             return categoriesToSend;
@@ -128,7 +128,7 @@ function mapperService(Profile) {
             angular.forEach(ingredients, function (ingredient) {
                 ingsToSend.push(ingredient.id);
             })
-            return JSON.stringify(ingsToSend);
+            return ingsToSend;
         } else {
             ingsToSend = null;
             return ingsToSend;
