@@ -84,7 +84,7 @@ app.controller('RegisterController',
             $scope.submitted = true;
 
             if (isValid && genderSelected() && !hasErrors()) {
-                confirmForm();
+                saveUser();
                 return true;
             } else {
                 return false;
