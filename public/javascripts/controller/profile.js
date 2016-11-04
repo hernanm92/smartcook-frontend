@@ -15,12 +15,14 @@ app.controller('ProfileController',
         $scope.disable = disable;
         init();
 
+
         function init() {
             blockUI.start();
             var username = $routeParams.username;
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
                 $scope.profile = UserSession.getUserProfile();
+                $scope.birthdate = toDate($scope.profile.birthdate);
                 if ($scope.profile.avatar == undefined) $scope.profile.avatar = 'assets/img/newLogo.jpg';
                 blockUI.stop();
             });
@@ -33,7 +35,7 @@ app.controller('ProfileController',
         }
 
         function disable() {
-            var message = 'Desea cerrar su cuenta de Smartcook?!!!'
+            var message = '¡¿Desea cerrar su cuenta de Smartcook?!'
             var title = '';
             openModal(message, title).result.then(function () {
                 $scope.profile.id = $scope.profile.username;
@@ -119,6 +121,16 @@ app.controller('ProfileController',
             var ingredient = { ingredient_id: ingredientTag.id, username: $scope.profile.username }
             ingredientPerUserFactory.remove(ingredient, function () {
             })
+        }
+
+        function toDate(paramDate){
+            var date = new Date(paramDate);
+            var year = date.getFullYear();
+            var month = (1 + date.getMonth()).toString();
+            month = month.length > 1 ? month : '0' + month;
+            var day = date.getDate().toString();
+            day = day.length > 1 ? day : '0' + day;
+            return day + '/' + month + '/' + year;
         }
 
         function upload() {

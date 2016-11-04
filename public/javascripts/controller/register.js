@@ -132,7 +132,7 @@ app.controller('RegisterController',
             };
 
             userFactory.save(user, function (res) {
-                var message = 'El usuario ha sido creado satisfactoriamente. Desea ingresar con su nuevo Usuario?';
+                var message = 'El usuario ha sido creado satisfactoriamente. ¿Desea ingresar con su nuevo Usuario?';
                 var title = 'Usuario Creado';
                 blockUI.stop();
                 openModal(message, title).result.then(function (res) {

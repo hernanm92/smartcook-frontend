@@ -25,10 +25,10 @@
                     <h3>Fecha de Nacimiento</h3>
                 </div>
                 <div>
-                    <label class="profile-email">{{profile.birthdate}}</label>
+                    <label class="profile-email">{{birthdate}}</label>
                 </div>
                 <div>
-                    <a href="" ng-click="disable()"> Cerrar Cuenta</a>
+                    <button type="button" class="btn btn-danger" ng-click="disable()"> Cerrar Cuenta</button>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -44,7 +44,7 @@
                                         <label class="checkbox">
                                             <input type="checkbox" ng-model="profile.celiac">
                                             <i></i>
-                                            Celiaco
+                                            Celíaco
                                         </label>
                                     </li>
                                     <li>
@@ -65,7 +65,7 @@
                                         <label class="checkbox">
                                             <input type="checkbox" ng-model="profile.diabetic">
                                             <i></i>
-                                            Diabetico
+                                            Diabético
                                         </label>
                                     </li>
                                 </ul>

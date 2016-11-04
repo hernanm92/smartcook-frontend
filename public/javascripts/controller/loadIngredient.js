@@ -39,7 +39,7 @@ app.controller('LoadIngredientController',
             };
 
             function confirmForm() {
-                var message = 'El ingrediente sera guardado, desea continuar?';
+                var message = 'El ingrediente será guardado, ¿Desea continuar?';
                 var title = 'Guardar Ingrediente';
                 openModal(message, title).result.then(function () {
                     saveIngredient();
@@ -52,7 +52,7 @@ app.controller('LoadIngredientController',
                 var recipe = new Recipe(UserSession.getUserId(), $scope.nameRecipe, $scope.ingredients, $scope.steps, $scope.description, photoName);
                 recipeFactory.save(recipe, function (res) {
                     imgService.uploadImgRecipe($scope.nameRecipe, $scope.picFile);
-                    openModal('Su receta ha sido guardada exitosamente, entrara al proceso de validacion', 'Receta Guardada');
+                    openModal('Su receta ha sido guardada exitosamente, entrará al proceso de validación', 'Receta Guardada');
                 });
                 blockUI.stop();
             }

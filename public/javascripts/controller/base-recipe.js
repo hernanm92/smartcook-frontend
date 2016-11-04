@@ -61,7 +61,7 @@ app.controller('baseRecipeController',
     };
 
     function deleteStep(index) {
-        openModal('Desea eliminar este paso?', 'Eliminar Paso').result.then(function () {
+        openModal('¿Desea eliminar este paso?', 'Eliminar Paso').result.then(function () {
             $scope.recipe.steps.splice(index, 1);
         });
     };

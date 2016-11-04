@@ -70,7 +70,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#/">Por ingredientes</a></li>
                             <li><a href="#listing">Por nombre</a></li>
-                            <li><a href="#/topCategories" >Top categorias</a></li>
+                            <li><a href="#/topCategories" >Top categorías</a></li>
                         </ul>
                     </li>
                     <!-- End Search -->
@@ -99,21 +99,21 @@
                     </li>
                     <!--End Login-->
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input
-                            ng-model = "recipeSelected"
-                            typeahead-min-length="3"
-                            typeahead-append-to-body="false"
-                            typeahead-on-select="getDetailRecipe(recipeSelected.id)"
-                            typeahead = "recipe as recipe.name for recipe in getRecipes() | filter:{name: $viewValue} | orderBy: 'name'| limitTo:10"
-                            type="text"
-                            class=" search-input form-control"
-                            placeholder="Buscar recetas por nombre"
-                            typeahead-input-formatter="empty"
-                            >
-                    </div>
-                </form>
+                <!--<form class="navbar-form navbar-left" role="search">-->
+                    <!--<div class="form-group">-->
+                        <!--<input-->
+                            <!--ng-model = "recipeSelected"-->
+                            <!--typeahead-min-length="3"-->
+                            <!--typeahead-append-to-body="false"-->
+                            <!--typeahead-on-select="getDetailRecipe(recipeSelected.id)"-->
+                            <!--typeahead = "recipe as recipe.name for recipe in getRecipes() | filter:{name: $viewValue} | orderBy: 'name'| limitTo:10"-->
+                            <!--type="text"-->
+                            <!--class=" search-input form-control"-->
+                            <!--placeholder="Buscar recetas por nombre"-->
+                            <!--typeahead-input-formatter="empty"-->
+                            <!--&gt;-->
+                    <!--</div>-->
+                <!--</form>-->
                 <!-- End Nav Menu -->
             </div>
         </div>

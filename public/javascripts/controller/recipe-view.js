@@ -1,11 +1,10 @@
 app.controller('RecipeViewController',
     function ($scope, $routeParams, recipeFactory, ingredientPerRecipeFactory, ingredientFactory,
-        blockUI, restrictionsService, UserSession, tipFactory, notifyHelper) {
+        blockUI, restrictionsService, UserSession, tipFactory, notifyHelper, RecipeUser) {
 
         $scope.recipe = {};
         $scope.tips = [];
         $scope.addTip = addTip;
-        $scope.addToFavorites = addToFavorites;
         $scope.ingredients = [];
         $scope.addTip = addTip;
         $scope.cancelTip = cancelTip;
@@ -26,12 +25,6 @@ app.controller('RecipeViewController',
                 notifyHelper.warn('Para ayudar necesitas ser un smartcook!!!');
             }
         }
-
-
-        function addToFavorites() {
-            //sacar codigo de agus
-        }
-
 
         function getTips() {
             tipFactory.query({ recipe_id: $scope.recipe.id }, function (tips) {
@@ -72,4 +65,28 @@ app.controller('RecipeViewController',
         function cancelTip(tipToAdd) {
             delete tipToAdd;
         }
+
+        //-------------------Favorites
+        if (UserSession.isLogged()) {
+            RecipeUser.getRecipesOfUser().then(function (userRecipes) {
+                $scope.userRecipes = userRecipes;
+                $scope.userFavoriteRecipes = RecipeUser.getFavoritesFromRecipes(userRecipes);
+            });
+            $scope.isFavorite = function (recipe) {
+                return RecipeUser.isFavorite(recipe, $scope.userFavoriteRecipes)
+            };
+            $scope.removeFromFavorites = function (recipe) {
+                RecipeUser.removeFromFavorites(recipe, $scope.userRecipes, $scope.userFavoriteRecipes);
+            };
+            $scope.addToFavorites = function (recipe) {
+                RecipeUser.addToFavorites(recipe, $scope.userRecipes, $scope.userFavoriteRecipes);
+            };
+        } else {
+            $scope.addToFavorites = function (recipe) {
+                RecipeUser.userNotLoggedIn().result.then(function () {
+                    window.location.href = "#/login";
+                });
+            };
+        }
+        //----------------------------
     });
