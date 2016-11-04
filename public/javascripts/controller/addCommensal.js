@@ -46,7 +46,7 @@ app.controller('AddCommensalController',
         function isNotFrequentUser(user) {
             var isNotUser = true
             angular.forEach($scope.frequentCommensals, function (frequentUser) {
-                if(frequentUser.username === user.username){
+                if (frequentUser.username === user.username) {
                     isNotUser = false;
                 }
             })
@@ -65,8 +65,9 @@ app.controller('AddCommensalController',
             $($event.currentTarget).toggleClass('fa-star-o').toggleClass('fa-star');
         }
 
-        function addCommensal(user) {
+        function addCommensal(user, index) {
             //var addedUser = getUserByUsername($($event.currentTarget).closest('div').find('h2').text().trim());
+            removeUserFrom($scope.resultUsers, index);
             $scope.frequentCommensals.push(user);
             var frequentCommensal = {
                 frequent_username: user.username,
@@ -74,29 +75,22 @@ app.controller('AddCommensalController',
             }
             frequentCommensalFactory.save(frequentCommensal, function (res) {
             });
-            removeUserByUsername(user.username, $scope.resultUsers);
         }
 
-        function removeCommensal($event) {
-            var removedUser = getUserByUsername($($event.currentTarget).closest('div').find('h2').text().trim());
-            removeUserByUsername(removedUser.username, $scope.frequentCommensals);
-            $scope.frequentUsers.splice($scope.frequentUsers.indexOf(removedUser.username), 1);
+        function removeCommensal(user, index) {
+            //var removedUser = getUserByUsername($($event.currentTarget).closest('div').find('h2').text().trim());
+            removeUserFrom($scope.frequentCommensals, index);
+            $scope.frequentUsers.splice($scope.frequentUsers.indexOf(user.username), 1);
             var frequentCommensal = {
-                frequent_username: removedUser.username,
+                frequent_username: user.username,
                 username: UserSession.getUsername()
             }
             frequentCommensalFactory.remove(frequentCommensal, function (res) {
             });
         }
 
-        function removeUserByUsername(username, array) {
-            var removedUser = getUserByUsername(username);
-            for (var i = 0; i < array.length; i++) {
-                if (array[i].id == removedUser.id) {
-                    array.splice(i, 1);
-                    break;
-                }
-            }
+        function removeUserFrom(array, index) {
+            array.splice(index, 1);
         }
 
         function getUserByUsername(username) {
