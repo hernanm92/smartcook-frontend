@@ -39,6 +39,7 @@ app.controller('RecipeViewController',
             recipeFactory.get({ id: id }, function (recipe) {
                 //ingsPerRecipe
                 ingredientFactory.query({ recipe_id: id }, function (ingsFromRecipe) {
+                    validateIngsPerRecipe(ingsFromRecipe);
                     angular.forEach(ingsFromRecipe, function (ingFromRecipe) {
                         //ingAmounts
                         ingredientPerRecipeFactory.get({ recipe_id: id, ingredient_id: ingFromRecipe.id }, function (ingAmounts) {
@@ -49,9 +50,17 @@ app.controller('RecipeViewController',
                             getTips()
                             blockUI.stop();
                         })
+
                     });
                 });
             });
+        }
+
+        function validateIngsPerRecipe(ingsPerRecipe) {
+            if (ingsPerRecipe.length === 0) {
+                notifyHelper.warn('No se pudo cargar la receta');
+                blockUI.stop();
+            }
         }
 
         function mapToView(ingFromRecipe, ingAmounts) {
