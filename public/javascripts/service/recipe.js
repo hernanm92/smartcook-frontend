@@ -141,7 +141,19 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
 
     function getRecipeByName(recipeName) {
         return $(self.recipes).filter(function () {
-            return this.name.toLowerCase().indexOf(recipeName.toLowerCase()) >= 0
+            return removeAccents(this.name.toLowerCase()).indexOf(removeAccents(recipeName.toLowerCase())) >= 0
         });
+    }
+
+    function removeAccents(word) {
+        return word
+            .replace(/[áàãâä]/gi, "a")
+            .replace(/[éè¨ê]/gi, "e")
+            .replace(/[íìïî]/gi, "i")
+            .replace(/[óòöôõ]/gi, "o")
+            .replace(/[úùüû]/gi, "u")
+            .replace(/[ç]/gi, "c")
+            .replace(/[ñ]/gi, "n")
+            .replace(/[^a-zA-Z0-9]/g, " ");
     }
 };

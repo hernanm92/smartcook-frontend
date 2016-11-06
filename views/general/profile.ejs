@@ -132,9 +132,9 @@
 
                         <div class="col-md-3 userRecipe" ng-repeat="recipe in profile.recipes"
                              style="text-align:center">
-                            <h3>
+                            <a href="#/recipe/{{recipe.id}}/detail"><h3 style="cursor:pointer">
                                 {{recipe.name}}
-                            </h3>
+                            </h3></a>
                             <a class="thumbnail">
                                 <div back-img="{{recipe.image_url}}" class="userRecipe-image"></div>
                             </a>

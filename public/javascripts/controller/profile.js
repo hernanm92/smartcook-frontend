@@ -136,5 +136,9 @@ app.controller('ProfileController',
         function upload() {
             // for(var i = 0; i < badges.length; i++) badgePerUserFactory.save(badges[i]);
         }
+
+        $scope.getDetailsRecipe = function getDetailsRecipe(id) {
+            $location.path('/recipe/' + id + '/detail');
+        }
     }
 );

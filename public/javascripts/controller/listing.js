@@ -15,7 +15,6 @@ app.controller('ListingController',
 
         $scope.searchRecipe = searchRecipe;
         function searchRecipe() {
-            //TODO: Aca habria que cancelar las requests que haya para que no haga 1000 juntas
             var text = $('#searchText').val().trim();
             if (text.trim().length > 2)
                 $scope.filteredRecipes = recipeService.getRecipeByName(text);
