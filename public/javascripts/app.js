@@ -40,26 +40,26 @@ app.config(['$httpProvider', function ($httpProvider) {
 }]);
 
 app.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/', {templateUrl: 'general/home', controller: 'HomeController'});
-    $routeProvider.when('/:username/profile', {templateUrl: 'general/profile', controller: 'ProfileController'});
-    $routeProvider.when('/login', {templateUrl: 'general/login', controller: 'LoginController'});
-    $routeProvider.when('/register', {templateUrl: 'general/register', controller: 'RegisterController'});
-    $routeProvider.when('/listing', {templateUrl: 'general/listing', controller: 'ListingController'});
-    $routeProvider.when('/top-listing', {templateUrl: 'general/top-listing', controller: 'TopListingController'});
-    $routeProvider.when('/validate', {templateUrl: 'general/validate', controller: 'ValidateController'});
-    $routeProvider.when('/Recipe/Create', {templateUrl: 'general/createRecipe', controller: 'CreateRecipeController'});
-    $routeProvider.when('/aboutUs', {templateUrl: 'general/aboutus', controller: 'AboutUsController'});
+    $routeProvider.when('/', { templateUrl: 'general/home', controller: 'HomeController' });
+    $routeProvider.when('/:username/profile', { templateUrl: 'general/profile', controller: 'ProfileController' });
+    $routeProvider.when('/login', { templateUrl: 'general/login', controller: 'LoginController' });
+    $routeProvider.when('/register', { templateUrl: 'general/register', controller: 'RegisterController' });
+    $routeProvider.when('/listing', { templateUrl: 'general/listing', controller: 'ListingController' });
+    $routeProvider.when('/top-listing', { templateUrl: 'general/top-listing', controller: 'TopListingController' });
+    $routeProvider.when('/validate', { templateUrl: 'general/validate', controller: 'ValidateController' });
+    $routeProvider.when('/Recipe/Create', { templateUrl: 'general/createRecipe', controller: 'CreateRecipeController' });
+    $routeProvider.when('/aboutUs', { templateUrl: 'general/aboutus', controller: 'AboutUsController' });
     $routeProvider.when('/loadIngredient', {
         templateUrl: 'general/loadIngredient',
         controller: 'LoadIngredientController'
     });
-    $routeProvider.when('/addCommensal', {templateUrl: 'general/addCommensal', controller: 'AddCommensalController'});
-    $routeProvider.when('/topQualified', {templateUrl: 'general/topQualified', controller: 'TopQualifiedController'});
+    $routeProvider.when('/addCommensal', { templateUrl: 'general/addCommensal', controller: 'AddCommensalController' });
+    $routeProvider.when('/topQualified', { templateUrl: 'general/topQualified', controller: 'TopQualifiedController' });
     $routeProvider.when('/topCategories', {
         templateUrl: 'general/topCategories',
         controller: 'TopCategoriesController'
     });
-    $routeProvider.when('/favorites', {templateUrl: 'general/favorites', controller: 'FavoritesController'});
+    $routeProvider.when('/favorites', { templateUrl: 'general/favorites', controller: 'FavoritesController' });
     $routeProvider.when('/recipe/:id/detail', {
         templateUrl: 'general/detail-recipe',
         controller: 'RecipeViewController'
@@ -82,7 +82,7 @@ app.config(function (blockUIConfig) {
 });
 
 app.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
-    usSpinnerConfigProvider.setDefaults({position: 'fixed', zIndex: 1, length: 0, opacity: 0});
+    usSpinnerConfigProvider.setDefaults({ position: 'fixed', zIndex: 1, length: 0, opacity: 0 });
 }]);
 
 app.config(['flowFactoryProvider', function (flowFactoryProvider) {
@@ -96,13 +96,18 @@ app.config(['flowFactoryProvider', function (flowFactoryProvider) {
 app.directive('backImg', function () {
     return {
         restrict: 'A',
+        scope: {
+            image: '=image'
+        },
         link: function (scope, element, attrs) {
-            var url = attrs.backImg;
-            element.css({
-                'background-image': 'url(' + encodeURI(url) + ')',
-                'background-size': 'cover',
-                'background-position': 'center'
-            })
+            scope.$watch('image', function (newImage, oldImage) {
+                if(newImage != undefined )
+                element.css({
+                    'background-image': 'url(' + encodeURI(newImage) + ')',
+                    'background-size': 'cover',
+                    'background-position': 'center'
+                })
+            }, true);
         }
     }
 });

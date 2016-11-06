@@ -9,7 +9,7 @@
             <div flow-init class="col-sm-4">
                 <div flow-drop>
                     <img class="img-rounded img-responsive" flow-img="$flow.files[0]"
-                         flow-file-added="addedPhoto($file, $event, $flow)" back-img="{{profile.avatar}}"
+                         flow-file-added="addedPhoto($file, $event, $flow)" back-img image="profile.avatar"
                          width="300px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
@@ -136,7 +136,7 @@
                                 {{recipe.name}}
                             </h3></a>
                             <a class="thumbnail">
-                                <div back-img="{{recipe.image_url}}" class="userRecipe-image"></div>
+                                <div back-img image="recipe.image_url" class="userRecipe-image"></div>
                             </a>
                             <div class="recipeEdit">
                                 <a href="#/recipe/{{recipe.id}}/edit"> Editar</a>
