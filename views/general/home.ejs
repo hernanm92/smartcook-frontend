@@ -69,8 +69,8 @@
                 <div class="list-product-description product-description-brd margin-bottom-30" ng-repeat="recipe in recipes">
                     <div class="row">
                         <div class="col-sm-4">
-                            <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
-                            <img ng-src="{{recipe.image_url}}" alt="" class="img-responsive">
+                            <!--<div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>-->
+                            <div back-img="{{recipe.image_url}}" style="height:290px"></div>
                             </a>
                         </div>
                         <div class="col-sm-8 product-description">

@@ -3,8 +3,8 @@
         <div class="row">
             <div flow-init class="col-md-4" flow-name="food.flow">
                 <div flow-drop>
-                    <img class="img-rounded" alt="Responsive image" flow-img="$flow.files[0]" flow-file-added="addedPhoto($file, $event, $flow)"
-                        ng-src="{{recipe.image_url}}" width="350px" height="300px">
+                    <img class="img-rounded" flow-img="$flow.files[0]" flow-file-added="addedPhoto($file, $event, $flow)"
+                        back-img="{{recipe.image_url}}" width="350px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>

@@ -93,6 +93,20 @@ app.config(['flowFactoryProvider', function (flowFactoryProvider) {
     }
 }]);
 
+app.directive('backImg', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var url = attrs.backImg;
+            element.css({
+                'background-image': 'url(' + encodeURI(url) + ')',
+                'background-size': 'cover',
+                'background-position': 'center'
+            })
+        }
+    }
+});
+
 /*app.run(['$window', 'facebookService', 'UserSession', '$location',
     function ($window, facebookService, UserSession, $location) {
 

@@ -1,6 +1,6 @@
 app.controller('HomeController',
     function ($scope, ingredientService, homeService, $location,
-        notifyHelper, UserSession, userFactory, blockUI, $modal, $q, RecipeUser, ingredientFactory, commensalPerUserFactory) {
+              notifyHelper, UserSession, userFactory, blockUI, $modal, $q, RecipeUser, ingredientFactory, commensalPerUserFactory) {
 
         //private
         var self = this;
@@ -62,21 +62,21 @@ app.controller('HomeController',
             blockUI.start();
             template = '/general/commensalsModal';
             controller = 'comensalsForSearchController';
-            commensalPerUserFactory.query({ id: UserSession.getUsername() }, function (frequentsUsers) {
+            commensalPerUserFactory.query({id: UserSession.getUsername()}, function (frequentsUsers) {
                 blockUI.stop();
                 openModal(frequentsUsers, template, controller);
             });
         }
 
         function init() {
-           /* if (UserSession.isLogged()) {
-                UserSession.getProfile().then(function (profileUser) {
-                    $scope.vegan = profileUser.vegan ? true : undefined; //con undefined, no lo toma como filtro 
-                    $scope.vegetarian = profileUser.vegetarian ? true : undefined;
-                    $scope.celaic = profileUser.celiac ? true : undefined;
-                    $scope.diabetic = profileUser.diabetic ? true : undefined;
-                });
-            }*/
+            /* if (UserSession.isLogged()) {
+             UserSession.getProfile().then(function (profileUser) {
+             $scope.vegan = profileUser.vegan ? true : undefined; //con undefined, no lo toma como filtro
+             $scope.vegetarian = profileUser.vegetarian ? true : undefined;
+             $scope.celaic = profileUser.celiac ? true : undefined;
+             $scope.diabetic = profileUser.diabetic ? true : undefined;
+             });
+             }*/
             $scope.ingredientsTemplate = homeService.initIngredients();
             $scope.recipes = homeService.getRecipes();
         };
@@ -131,7 +131,7 @@ app.controller('HomeController',
         function getSettings() {
             return {
                 omitRestrictions: $scope.omitRestrictions,
-                omitDislikeIngs : $scope.omitDislikeIngs,
+                omitDislikeIngs: $scope.omitDislikeIngs,
                 omitCategories: $scope.omitCategories
             }
         }
@@ -162,7 +162,7 @@ app.controller('HomeController',
                         var users = []
                             , promises = [];
                         angular.forEach(frequentsUsers, function (frequentUser) {
-                            promises.push(userFactory.get({ id: frequentUser.username }).$promise);
+                            promises.push(userFactory.get({id: frequentUser.username}).$promise);
                         });
                         return $q.all(promises).then(function (values) {
                             //
