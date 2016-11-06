@@ -1,6 +1,6 @@
 app.controller('ValidateController',
     function ($scope, recipeFactory, validateFactory, eventService, $timeout, recipeService
-        , UserSession, $q, recipePerUserFactory, $location, blockUI) {
+        , UserSession, $q, recipePerUserFactory, $location, blockUI, notifyHelper) {
         if (!UserSession.isLogged()) $location.path('/login');
         $scope.validateRecipeIndex = 0;
         $scope.validateCurrentRecipe = {};
@@ -50,7 +50,7 @@ app.controller('ValidateController',
             } else {
                 $scope.noRecipesToValidate = true;
                 $('.validateRecipe-Recipe').css('visibility', 'hidden');
-                $.notify("No hay mas recetas para validarr", { globalPosition: 'right bottom', className: 'info' });
+                notifyHelper.info("No hay mas recetas para validarr");
             }
         }
 
