@@ -88,7 +88,7 @@ function mapperService(Profile) {
             username: username,
             owner: true,
             favorite: true,
-            validated: true
+            validated: false
         }
         return recipeDto;
     }
