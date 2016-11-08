@@ -138,7 +138,7 @@
                             <a class="thumbnail">
                                 <div back-img image="recipe.image_url" class="userRecipe-image"></div>
                             </a>
-                            <div class="recipeEdit">
+                            <div ng-if="recipe.validated" class="recipeEdit">
                                 <a href="#/recipe/{{recipe.id}}/edit"> Editar</a>
                             </div>
                         </div>

@@ -42,7 +42,7 @@ app.controller('baseRecipeController',
         $scope.submitted = true;
         var existSteps = $scope.recipe.steps.length > 0;
         var existIngredients = $scope.recipe.ingredients.length > 0; 
-        if (isValid && existSteps && existIngredients && $scope.hasImage && $scope.existNameRecipe) {
+        if (isValid && existSteps && existIngredients && $scope.hasImage && !$scope.existNameRecipe) {
             confirmForm();
         } else {
             notifyHelper.error('Revise los datos a para crear la receta');
