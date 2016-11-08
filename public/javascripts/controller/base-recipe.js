@@ -1,6 +1,6 @@
 app.controller('baseRecipeController', 
     function ($scope, recipeService, $modal, ingredientService, Recipe, imgService, UserSession, 
-              recipeFactory) {
+              recipeFactory, notifyHelper, $route) {
 
     $scope.addStep = addStep;
     $scope.loadIngredients = loadIngredients;
@@ -12,9 +12,20 @@ app.controller('baseRecipeController',
     $scope.units = [];
     $scope.food = {}
     $scope.validateName = validateName;
+    $scope.isEditView = $route.current.editView;
+
+    init();
+
+    function init() {
+        if($scope.isEditView){
+            $scope.hasImage = true;
+        }else{
+            $scope.hasImage = false;
+        }
+    }
 
     function validateName() {
-        $scope.existNameRecipe = recipeService.existName($scope.recipe.name);   
+        $scope.existNameRecipe = recipeService.existName($scope.recipe.name);
     }
 
     function addStep() {
@@ -30,10 +41,11 @@ app.controller('baseRecipeController',
     function validateForm(isValid) {
         $scope.submitted = true;
         var existSteps = $scope.recipe.steps.length > 0;
-        var existIngredients = $scope.recipe.ingredients.length > 0;
-        if (isValid && existSteps && existIngredients) {
+        var existIngredients = $scope.recipe.ingredients.length > 0; 
+        if (isValid && existSteps && existIngredients && $scope.hasImage && $scope.existNameRecipe) {
             confirmForm();
         } else {
+            notifyHelper.error('Revise los datos a para crear la receta');
             $scope.recipeErrorMessage = "Debe completar los ingredientes y los pasos";
         }
     };
@@ -83,5 +95,8 @@ app.controller('baseRecipeController',
     function addedPhoto(flowObject, event, flow) {
         flow.files = []; //borro todo lo anterior. Luego se agrega el file
         $scope.picFile = flowObject.file;
+        if(!$route.current.editView){
+            $scope.hasImage = true;
+        }
     }
 });

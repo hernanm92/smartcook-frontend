@@ -47,7 +47,11 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/listing', { templateUrl: 'general/listing', controller: 'ListingController' });
     $routeProvider.when('/top-listing', { templateUrl: 'general/top-listing', controller: 'TopListingController' });
     $routeProvider.when('/validate', { templateUrl: 'general/validate', controller: 'ValidateController' });
-    $routeProvider.when('/Recipe/Create', { templateUrl: 'general/createRecipe', controller: 'CreateRecipeController' });
+    $routeProvider.when('/Recipe/Create', { 
+        templateUrl: 'general/createRecipe',
+        controller: 'CreateRecipeController',
+        editView: false
+     });
     $routeProvider.when('/aboutUs', { templateUrl: 'general/aboutus', controller: 'AboutUsController' });
     $routeProvider.when('/loadIngredient', {
         templateUrl: 'general/loadIngredient',
@@ -66,7 +70,8 @@ app.config(['$routeProvider', function ($routeProvider) {
     });
     $routeProvider.when('/recipe/:id/edit', {
         templateUrl: 'general/createRecipe',
-        controller: 'EditRecipeController'
+        controller: 'EditRecipeController',
+        editView: true
     });
 }]);
 
