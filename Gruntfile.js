@@ -41,6 +41,7 @@ module.exports = function (grunt) {
     "public/javascripts/plugins/jquery.knob.js",
     "public/javascripts/plugins/angular_circle_countdown.js",
     "public/javascripts/plugins/ng-notify.min.js",
+    "public/javascripts/plugins/angular-input-stars.js",
 
     "public/javascripts/factory/ingredient.js",
     "public/javascripts/factory/recipe.js",
@@ -137,7 +138,8 @@ module.exports = function (grunt) {
     "public/stylesheets/angular-block-ui.min.css",
     "public/stylesheets/detail-recipe.css",
     "public/stylesheets/angular_circle_countdown.css",
-    "public/stylesheets/ng-notify.min.css"
+    "public/stylesheets/ng-notify.min.css",
+    "public/stylesheets/angular-input-stars.css"
   ]
 
   var stageCss = ["public/stylesheets/*.css",

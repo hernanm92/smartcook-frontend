@@ -12,6 +12,7 @@ function RecipeUser(UserSession, notifyHelper, recipePerUserFactory, $modal) {
     self.removeFromFavorites = removeFromFavorites;
     self.addToFavorites = addToFavorites;
     self.userNotLoggedIn = userNotLoggedIn;
+    self.userVoteOfRecipe = userVoteOfRecipe;
 
     function getRecipesOfUser() {
         if (UserSession.isLogged())
@@ -73,9 +74,7 @@ function RecipeUser(UserSession, notifyHelper, recipePerUserFactory, $modal) {
         notifyHelper.success('Receta Agregada a Favoritos');
     }
 
-    function userNotLoggedIn() {
-        var message = 'Para poder agregar recetas como favoritas debe tener un usuario. Desea ingresar con uno?';
-        var title = 'Crear Usuario';
+    function userNotLoggedIn(message,title) {
         return $modal.open({
             animation: true,
             templateUrl: '/general/confirmForm',
@@ -93,4 +92,9 @@ function RecipeUser(UserSession, notifyHelper, recipePerUserFactory, $modal) {
         });
     }
 
+    function userVoteOfRecipe(recipe,recipeList){
+        if (recipeList == undefined) return null;
+        var r = getRecipeFromId(recipe.id, recipeList);
+        if(r != undefined) return r.stars; else return null;
+    }
 };

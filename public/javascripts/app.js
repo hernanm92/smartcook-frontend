@@ -27,7 +27,8 @@ var app = angular.module('MainApp', [
     'recipePerUserModule',
     'ingredientPerUserModule',
     'commensalPerUserModule',
-    'ngNotify'
+    'ngNotify',
+    'angular-input-stars'
 ]);
 
 app.config(['$httpProvider', function ($httpProvider) {
