@@ -1,5 +1,5 @@
 app.controller('RegisterController',
-    function ($scope, userFactory, eventService, $modal, UserSession, User, blockUI, query) {
+    function ($scope, userFactory, eventService, $modal, UserSession, User, blockUI, query, notifyHelper, NavigationService) {
         $scope.$on('$viewContentLoaded', function () {
             App.init();
             App.initScrollBar();
@@ -132,12 +132,9 @@ app.controller('RegisterController',
             };
 
             userFactory.save(user, function (res) {
-                var message = 'El usuario ha sido creado satisfactoriamente. ¿Desea ingresar con su nuevo Usuario?';
-                var title = 'Usuario Creado';
                 blockUI.stop();
-                openModal(message, title).result.then(function (res) {
-                    window.location.href = "#/login";
-                });
+                notifyHelper.success('El usuario ha sido creado satisfactoriamente. ¿Desea ingresar con su nuevo Usuario?');
+                NavigationService.goToLogin();
             });
         };
     }

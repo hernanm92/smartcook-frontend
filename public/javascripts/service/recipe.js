@@ -3,7 +3,8 @@ angular
     .service('recipeService', recipeService);
 
 function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper,
-    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory, query) {
+    ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory, query,
+    NavigationService) {
 
     var self = this;
     self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada(s)' }, { name: 'Lata(s)' }];
@@ -74,6 +75,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
             recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, UserSession.getUsername()));
             blockUI.stop();
             notifyHelper.success('Su receta ha sido guardada exitosamente');
+            NavigationService.goToRecipeDetail(values.recipePromise.id);
         });
     }
 
