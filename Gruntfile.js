@@ -104,6 +104,7 @@ module.exports = function (grunt) {
     "public/javascripts/service/home.js",
     "public/javascripts/service/migration.js",
     "public/javascripts/service/query.js",
+    "public/javascripts/service/navigation.js",
     
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
