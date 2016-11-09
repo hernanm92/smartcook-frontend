@@ -104,13 +104,13 @@ module.exports = function (grunt) {
     "public/javascripts/service/home.js",
     "public/javascripts/service/migration.js",
     "public/javascripts/service/query.js",
-    
+
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
     "public/javascripts/models/profile.js",
 
     "public/javascripts/directives/fix-validate-menu.js"
-    
+
   ]
 
   var cssFileList = [
@@ -253,6 +253,19 @@ module.exports = function (grunt) {
             applicationPrefix: 'stage-'
           }
         }
+      },
+      agus: {
+        options: {
+          name: 'config',
+          dest: 'public/javascripts/config.js'
+        },
+        constants: {
+          config: {
+            domain: 'http://192.168.3.136:5000',
+            styleFolder: 'common',
+            applicationPrefix: 'stage-'
+          }
+        }
       }
     }
   });
@@ -263,6 +276,8 @@ module.exports = function (grunt) {
   grunt.registerTask('production', ['ngconstant:production', 'uglify:ugly', 'cssmin:ugly']);
 
   grunt.registerTask('stage', ['ngconstant:stage', 'uglify:beautiful', 'cssmin:beautiful']);
+
+  grunt.registerTask('agus', ['ngconstant:agus', 'uglify:beautiful', 'cssmin:beautiful']);
 
   grunt.loadNpmTasks('grunt-ng-constant');
 
