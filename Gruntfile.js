@@ -105,12 +105,7 @@ module.exports = function (grunt) {
     "public/javascripts/service/home.js",
     "public/javascripts/service/migration.js",
     "public/javascripts/service/query.js",
-<<<<<<< HEAD
-
-=======
     "public/javascripts/service/navigation.js",
-    
->>>>>>> 6887063000541268a4eedf99787fcef34d7a6253
     "public/javascripts/models/recipe.js",
     "public/javascripts/models/user.js",
     "public/javascripts/models/profile.js",
