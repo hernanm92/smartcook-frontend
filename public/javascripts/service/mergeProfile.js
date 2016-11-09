@@ -8,12 +8,12 @@ function mergeProfile(Profile, userFactory, mapperService) {
     self.setInitProfile = setInitProfile;
     self.initProfile = {};
     self.mergeRestrictions = mergeRestrictions;
-    self.originalProfile = new Profile(null, null, null, null, [], [], [], null, null, null);
+    self.originalProfile = new Profile(null,null, null, null, null, [], [], [], null, null, null);
     //reemplzar por userModelFactory.emptyUser()
 
 
     function mergeProfiles(commensalsProfiles) {
-        var profile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
+        var profile = new Profile(null, null, null, null, null, [], [], [], null, null, null, null);
         angular.forEach(commensalsProfiles, function (commensalProfile) {
             merge(profile, commensalProfile);
         })

@@ -16,6 +16,7 @@ function mapperService(Profile) {
     // username, email, avatar, recipes, categories, ingredients, celiac, vegan, vegetarian, diabetic
     function mapProfileToModel(profileDto, categoriesDto, recipesDto, ingredientsDto) {
         var profile = new Profile(
+            profileDto.name, 
             profileDto.username,
             profileDto.email,
             profileDto.avatar,
