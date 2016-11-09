@@ -18,12 +18,13 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     self.getUserProfile = getUserProfile;
     self.isAdmin = isAdmin;
     self.logout = logout;
+    self.getEntireProfile = getEntireProfile;
 
     init();
 
     function init() {
         if (isLogged()) {
-            getEntireProfile(getUsername());
+            getDataUser(getUsername());
         } else {
             self.userProfile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
         }
@@ -104,17 +105,21 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     }
 
     function getEntireProfile(username) {
-        blockUI.start();
         var promises = {
             profile: self.getProfile(),
             categoriesUser: self.getCategories(),
             recipes: recipeFactory.query({ username: username, owner: true }).$promise,
             ingredients: ingredientFactory.query({ username: getUsername() }).$promise
         };
-        $q.all(promises).then(function (values) {
+        return $q.all(promises);
+    }
+
+    function getDataUser() {
+        blockUI.start();
+        getEntireProfile(getUsername()).then(function (values) {
+            self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes, values.ingredients);
             blockUI.stop();
-            return self.userProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes, values.ingredients); //values.ingredients
-        });
+        })
     }
 
     function getUserProfile() {
@@ -122,6 +127,6 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     }
 
     function initProfileUser(username) {
-        getEntireProfile(username);
+        getDataUser(username);
     }
 }

@@ -1,7 +1,7 @@
 app.controller('ProfileController',
     function ($scope, ingredientFactory, categoriesFactory, userFactory, UserSession,
-        ingredientService, restrictionsService, blockUI, imgService,foodCategoriesPerUserFactory, 
-        badgeFactory, badgePerUserFactory, ingredientPerUserFactory, $routeParams, $modal) {
+        ingredientService, restrictionsService, blockUI, imgService, foodCategoriesPerUserFactory,
+        badgeFactory, badgePerUserFactory, ingredientPerUserFactory, $routeParams, $modal, mapperService) {
 
         $scope.categories = [];
         $scope.badges = [];
@@ -21,11 +21,15 @@ app.controller('ProfileController',
             var username = $routeParams.username;
             categoriesFactory.query({}, function (categories) {
                 $scope.categories = categories;
-                $scope.profile = UserSession.getUserProfile();
+            });
+
+            UserSession.getEntireProfile($routeParams.username).then(function name(values) {
+                $scope.profile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, values.recipes, values.ingredients);
                 $scope.birthdate = toDate($scope.profile.birthdate);
                 if ($scope.profile.avatar == undefined) $scope.profile.avatar = 'assets/img/newLogo.jpg';
                 blockUI.stop();
             });
+
             badgePerUserFactory.query({ username: UserSession.getUsername() }).$promise.then(function (userBadges) {
                 for (var i = 0; i < userBadges.length; i++)
                     badgeFactory.get({ id: userBadges[i].badge_id }).$promise.then(function (badge) {
@@ -123,7 +127,7 @@ app.controller('ProfileController',
             })
         }
 
-        function toDate(paramDate){
+        function toDate(paramDate) {
             var date = new Date(paramDate);
             var year = date.getFullYear();
             var month = (1 + date.getMonth()).toString();

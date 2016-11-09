@@ -50,7 +50,7 @@ app.controller('ValidateController',
             } else {
                 $scope.noRecipesToValidate = true;
                 $('.validateRecipe-Recipe').css('visibility', 'hidden');
-                notifyHelper.info("No hay mas recetas para validarr");
+                notifyHelper.info("No hay mas recetas para validar");
             }
         }
 

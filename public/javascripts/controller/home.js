@@ -40,12 +40,21 @@ app.controller('HomeController',
             $scope.addToFavorites = function (recipe) {
                 RecipeUser.addToFavorites(recipe, $scope.userRecipes, $scope.userFavoriteRecipes);
             };
+            $scope.voteRecipe = function(recipe){
+                var vote = $(event.target).closest('ul').find('i.active').length;
+                alert('uisa');
+            }
         } else {
             $scope.addToFavorites = function (recipe) {
-                RecipeUser.userNotLoggedIn().result.then(function () {
+                RecipeUser.userNotLoggedIn('Para poder agregar recetas como favoritas debe tener un usuario. Desea ingresar con uno?','Crear Usuario').result.then(function () {
                     window.location.href = "#/login";
                 });
             };
+            $scope.voteRecipe = function(recipe,number){
+                RecipeUser.userNotLoggedIn('Para poder calificar recetas debe tener un usuario. Desea ingresar con uno?','Crear Usuario').result.then(function () {
+                    window.location.href = "#/login";
+                });
+            }
         }
         //----------------------------
         $scope.$on('$viewContentLoaded', function () {

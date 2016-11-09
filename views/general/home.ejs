@@ -81,13 +81,7 @@
                                         </h4>
                                     </li>
                                     <li class="pull-right">
-                                        <ul class="list-inline product-ratings">
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating fa fa-star"></i></li>
-                                            <li><i class="rating fa fa-star"></i></li>
-                                        </ul>
+                                        <input-stars max="5" on-star-click="voteRecipe(recipe)" ng-model="recipe.stars"></input-stars>
                                     </li>
                                 </ul>
                                 <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
