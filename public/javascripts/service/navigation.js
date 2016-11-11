@@ -9,7 +9,7 @@ angular
         self.goToRecipeDetail = goToRecipeDetail;
 
         function goToHome() {
-            $location.path('/home');
+            $location.path('/');
         }
 
         function goToLogin() {

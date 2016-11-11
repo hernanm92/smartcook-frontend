@@ -133,7 +133,7 @@ app.controller('RegisterController',
 
             userFactory.save(user, function (res) {
                 blockUI.stop();
-                notifyHelper.success('El usuario ha sido creado satisfactoriamente. ¿Desea ingresar con su nuevo Usuario?');
+                notifyHelper.success('El usuario ha sido creado satisfactoriamente.');
                 NavigationService.goToLogin();
             });
         };
