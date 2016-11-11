@@ -34,3 +34,7 @@
 .angular-input-stars > li .active.angular-input-stars-hover {
     text-shadow: black 0 0 3px;
 }
+
+.angular-input-stars:hover i, .userVotedStar i{
+    color:#18ba9b !important;
+}

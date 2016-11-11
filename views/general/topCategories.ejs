@@ -35,16 +35,11 @@
                                     <ul class="list-inline overflow-h">
                                         <li><h4 class="title-price"><a class="text-uppercase">{{recipe.name}}</a>
                                             </h4></li>
+                                        <li class="pull-right">
+                                            <input-stars class="userVotedStar" ng-if="userVote(recipe) != null" max="5" ng-model="getUserVote(recipe)" ng-model-options="{getterSetter: true }" readonly></input-stars>
+                                            <input-stars ng-if="userVote(recipe) == null" max="5" on-star-click="voteRecipe(recipe)" ng-model="recipe.stars" ng-attr-readonly="{{ !isLogged }}" ng-click="isConnected()"></input-stars>
+                                        </li>
                                     </ul>
-                                    <div class="margin-bottom-10">
-                                        <ul class="list-inline product-ratings">
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating-selected fa fa-star"></i></li>
-                                            <li><i class="rating fa fa-star"></i></li>
-                                            <li><i class="rating fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
                                     <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
                                     <ul class="list-inline add-to-wishlist margin-bottom-20">
                                         <li>

@@ -92,7 +92,7 @@ app.controller('RecipeViewController',
             };
         } else {
             $scope.addToFavorites = function (recipe) {
-                RecipeUser.userNotLoggedIn('Para poder agregar recetas como favoritas debe tener un usuario. Desea ingresar con uno?','Crear Usuario').result.then(function () {
+                RecipeUser.userNotLoggedIn('Para poder agregar recetas como favoritas debe tener un usuario.¿Desea ingresar con uno?','Crear Usuario').result.then(function () {
                     window.location.href = "#/login";
                 });
             };

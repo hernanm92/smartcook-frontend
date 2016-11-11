@@ -13,6 +13,8 @@ function RecipeUser(UserSession, notifyHelper, recipePerUserFactory, $modal) {
     self.addToFavorites = addToFavorites;
     self.userNotLoggedIn = userNotLoggedIn;
     self.userVoteOfRecipe = userVoteOfRecipe;
+    self.getVotedFromRecipes = getVotedFromRecipes;
+    self.saveUserVote = saveUserVote;
 
     function getRecipesOfUser() {
         if (UserSession.isLogged())
@@ -95,6 +97,33 @@ function RecipeUser(UserSession, notifyHelper, recipePerUserFactory, $modal) {
     function userVoteOfRecipe(recipe,recipeList){
         if (recipeList == undefined) return null;
         var r = getRecipeFromId(recipe.id, recipeList);
-        if(r != undefined) return r.stars; else return null;
+        if(r.length > 0) return r[0].stars; else return null;
+    }
+
+    function getVotedFromRecipes(userRecipes){
+        return userRecipes.filter(function (r, i) {
+            return r.stars != null;
+        });
+    }
+
+    function saveUserVote(recipe,userRecipes,vote){
+        var recipeUser = getRecipeFromId(recipe.id, userRecipes)[0];
+        if (recipeUser != undefined) { // Existe el link usuario-receta
+            recipeUser.stars = vote;
+            recipePerUserFactory.update(recipeUser);
+        } else { // Creo el link usuario-receta
+            recipeUser = {
+                recipe_id: recipe.id,
+                username: UserSession.getUsername(),
+                favorite: false,
+                owner: false,
+                like: false,
+                vote: null,
+                stars: vote
+            }
+            recipePerUserFactory.save(recipeUser, function (res) {
+            });
+        }
+        userRecipes.push(recipeUser);
     }
 };
