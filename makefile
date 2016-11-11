@@ -16,3 +16,7 @@ stage:
 	node -e "require('grunt').tasks(['stage']);"
 	nohup node mock/app.js &
 	nohup node app.js &
+
+agus:
+	node -e "require('grunt').tasks(['agus']);"
+	node app.js

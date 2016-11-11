@@ -26,7 +26,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         if (isLogged()) {
             getDataUser(getUsername());
         } else {
-            self.userProfile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
+            self.userProfile = new Profile(null, null, null, null, null, [], [], [], null, null, null, null);
         }
     }
 
@@ -89,7 +89,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
         delete $sessionStorage.userName;
         delete $sessionStorage.token;
         delete $localStorage.admin;
-        self.userProfile = new Profile(null, null, null, null, [], [], [], null, null, null, null);
+        self.userProfile = new Profile(null, null, null, null, null, [], [], [], null, null, null, null);
     }
 
     function isLogged() {

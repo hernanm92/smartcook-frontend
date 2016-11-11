@@ -3,7 +3,8 @@
         factory('Profile', ProfileFactory);
 
     function ProfileFactory() {
-        function Profile(username, email, avatar, birthdate, recipes, categories, ingredients, celiac, vegan, vegetarian, diabetic, badges) {
+        function Profile(name, username, email, avatar, birthdate, recipes, categories, ingredients, celiac, vegan, vegetarian, diabetic, badges) {
+            this.name =  name;
             this.username = username;
             this.email = email;
             this.avatar = avatar;
