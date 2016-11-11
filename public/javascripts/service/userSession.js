@@ -19,6 +19,7 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
     self.isAdmin = isAdmin;
     self.logout = logout;
     self.getEntireProfile = getEntireProfile;
+    self.setProfile = setProfile;
 
     init();
 
@@ -35,6 +36,10 @@ function UserSession($sessionStorage, $localStorage, userFactory, categoriesFact
             return $localStorage.admin;
         }
         return $sessionStorage.admin;
+    }
+
+    function setProfile(profile) {
+        self.userProfile = profile;
     }
 
     function logout() {
