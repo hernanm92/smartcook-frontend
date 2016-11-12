@@ -101,14 +101,14 @@
                     <h2>Categorias Excluidas</h2>
                 </div>
                 <tags-input ng-model="profile.categories" display-property="name" add-from-autocomplete-only="true" on-tag-added="addCategoryToUser($tag)"
-                    on-tag-removed="removeCategoryOfUser($tag)">
+                    on-tag-removed="removeCategoryOfUser($tag)" placeholder="Agregar categoría">
                     <auto-complete highlight-matched-text=false min-length="1" source="loadExcludedCategories($query)"></auto-complete>
                 </tags-input>
                 <div class="shop-product-heading">
                     <h2>Ingredientes Excluidos</h2>
                 </div>
                 <tags-input ng-model="profile.ingredients" display-property="name" add-from-autocomplete-only="true" on-tag-added="addIngredientToUser($tag)"
-                    on-tag-removed="removeIngredientOfUser($tag)">
+                    on-tag-removed="removeIngredientOfUser($tag)" placeholder="Agregar ingrediente">
                     <auto-complete highlight-matched-text=false min-length="1" source="loadExcludedIngredients($query)"></auto-complete>
                 </tags-input>
             </div>
@@ -131,7 +131,7 @@
                                     {{recipe.name}}
                                 </h3>
                             </a>
-                            <a class="thumbnail" style = "margin-top"> 
+                            <a class="thumbnail" style = "margin-top">
                                 <div back-img image="recipe.image_url" class="userRecipe-image"></div>
                             </a>
                             <div ng-if="recipe.validated" class="recipeEdit">

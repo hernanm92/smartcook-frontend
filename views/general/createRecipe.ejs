@@ -6,7 +6,7 @@
                      <p ng-show="!hasImage && submitted" style="color:red; ">La receta debe tener una foto</p>
                     <img class="img-rounded" flow-img="$flow.files[0]" flow-file-added="addedPhoto($file, $event, $flow)" back-img image="recipe.image_url"
                         width="350px" height="300px">
-                </div>       
+                </div>
                 <div class="col-sm-12" style="padding-left:0px">
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
                 </div>
@@ -14,14 +14,14 @@
             <div class="col-md-6 ">
                 <div class="form-group ">
                     <label class="label-form-ingredient "> Nombre Receta </label>
-                    <input ng-blur="validateName()" name="nameRecipe" ng-model="recipe.name " type="text " class="form-control " placeholder="Escriba el nombre de la receta aqui "
+                    <input ng-blur="validateName()" name="nameRecipe" ng-model="recipe.name " type="text " class="form-control " placeholder="Escriba el nombre de la receta aquí "
                         required>
                     <p ng-show="recipeForm.nameRecipe.$invalid && submitted " style="color:red; ">La receta debe tener un nombre</p>
                     <p ng-show="existNameRecipe" style="color:red; ">El nombre ya fue tomado, ingrese otro</p>
                 </div>
                 <div class="form-group ">
                     <label class="label-form-ingredient "> Ingredientes </label>
-                    <tags-input name="ingredients " ng-model="recipe.ingredients " placeholder="Escriba el ingrediente aqui" display-property="name "
+                    <tags-input name="ingredients " ng-model="recipe.ingredients " placeholder="Escriba el ingrediente aquí" display-property="name "
                         add-from-autocomplete-only="true ">
                         <auto-complete min-length="1 " source="loadIngredients($query) " max-results-to-show="10" highlight-matched-text=false></auto-complete>
                     </tags-input>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label class="label-form-ingredient">Breve Descripción</label>
-                    <textarea name="description" required id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripción aqui..."
+                    <textarea name="description" required id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripción aquí"
                         rows="4"></textarea>
                     <p ng-show="recipeForm.description.$invalid && submitted " style="color:red; ">La receta debe tener una descripción</p>
                 </div>
@@ -66,31 +66,28 @@
                 <div class="row panel-align" style="margin-right:0px;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title text-center">Pasos para la preparacion de la receta</h3>
+                            <h3 class="panel-title text-center">Pasos para la preparación de la receta</h3>
                         </div>
                         <div class="panel-body">
-                            <h3>Pasos</h3>
-                            <div ng-repeat="step in recipe.steps track by $index">
+                            <div class="list-product-description product-description-brd margin-bottom-10 col-sm-12" ng-repeat="step in recipe.steps track by $index" style="padding: 11px 10px;">
                                 <div class="row">
-                                    <div class="col-md-8">
-                                        <h4 class="numberStep"> {{$index + 1 }}</h4>
-                                        <textarea id="item" class="step-textArea" msd-elastic ng-model="step" placeholder="Escriba su paso aqui...">
-                                            {{step}}
-                                        </textarea>
+                                    <div class="col-sm-11">
+                                        <div style="color: #18ba9b;"><h3 style="color: #18ba9b; margin-bottom: 0px;">Paso {{$index + 1 }}:</h3> </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <button ng-show="true" type="button" class="btn btn-default btn-xs" ng-click="deleteStep($index)">
-                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    <div class="col-sm-1">
+                                        <button style="border-color: #18ba9b; color: #18ba9b; background-color: #fff; float: right; padding: 2px 5px;" ng-show="true" type="button" class="btn btn-default btn-xs" ng-click="deleteStep($index)">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true" style="top: 2px; margin-right: 1px;"></span>
                                         </button>
                                     </div>
                                 </div>
+                                <textarea readonly id="item" class="detail-step" msd-elastic ng-model="step" style="width: 100%"></textarea>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <br>
-                                    <textarea class="step-textArea" msd-elastic ng-model="stepToAdd" placeholder="Escriba su paso aqui..."></textarea>
+                                    <textarea class="step-textArea" msd-elastic ng-model="stepToAdd" placeholder="Escriba su paso aquí" style="width: 100%; margin-left: 0%;"></textarea>
                                     <p class="step-location" ng-show=" stepErrorMessage" style="color: red;">{{stepErrorMessage}}</p>
-                                    <div class="step-location">
+                                    <div class="step-location" style="margin-left: 0%;">
                                         <button style="border-color: #18ba9b; color: #18ba9b; background-color: #fff;" ng-click="addStep()" type="button" class="btn btn-default">
                                             <i class="glyphicon glyphicon-plus"> </i>
                                         </button>

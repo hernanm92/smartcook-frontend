@@ -4,7 +4,7 @@ angular
 
 function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, UserSession, blockUI, notifyHelper,
     ingredientPerRecipeFactory, $interval, recipePerUserFactory, mapperService, $q, ingredientPerRecipePersistFactory, query,
-    NavigationService) {
+    NavigationService, $timeout) {
 
     var self = this;
     self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada(s)' }, { name: 'Lata(s)' }];
@@ -59,7 +59,6 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     //refactor
     function sendRecipe(recipe, photoRecipe, mapper) {
         blockUI.start();
-        var img;
         if (photoRecipe !== undefined) {
             imgService.uploadImgRecipe(recipe.name, photoRecipe);
         }
@@ -67,16 +66,21 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
             recipePromise: recipeFactory.save(mapper(recipe)).$promise,
         };
         $q.all(promises).then(function (values) {
-            angular.forEach(recipe.ingredients, function (ing) {
+            angular.forEach(recipe.ingredients, function (ing) { //persisto cada ingrediente
                 var ingMapped = mapperService.mapIngForPersist(ing, values.recipePromise)
                 ingredientPerRecipePersistFactory.save(ingMapped, function (res) {
                 });
+                self.recipeId = values.recipePromise.id;
+                recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, UserSession.getUsername()));
+                $timeout(finishCreation, 2000);
             });
-            recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, UserSession.getUsername()));
-            blockUI.stop();
-            notifyHelper.success('Su receta ha sido guardada exitosamente');
-            NavigationService.goToRecipeDetail(values.recipePromise.id);
         });
+    }
+
+    function finishCreation() {
+        blockUI.stop();
+        notifyHelper.success('Su receta ha sido guardada exitosamente, entrará al proceso de validación');
+        NavigationService.goToRecipeDetail(self.recipeId);
     }
 
     function create() {
