@@ -36,8 +36,7 @@
                                         <li><h4 class="title-price"><a class="text-uppercase">{{recipe.name}}</a>
                                             </h4></li>
                                         <li class="pull-right">
-                                            <input-stars class="userVotedStar" ng-if="userVote(recipe) != null" max="5" ng-model="getUserVote(recipe)" ng-model-options="{getterSetter: true }" readonly></input-stars>
-                                            <input-stars ng-if="userVote(recipe) == null" max="5" on-star-click="voteRecipe(recipe)" ng-model="recipe.stars" ng-attr-readonly="{{ !isLogged }}" ng-click="isConnected()"></input-stars>
+                                            <input-stars max="5" ng-model="recipe.stars" readonly></input-stars>
                                         </li>
                                     </ul>
                                     <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
