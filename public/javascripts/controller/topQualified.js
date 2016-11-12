@@ -1,6 +1,8 @@
 app.controller('TopQualifiedController',
     function ($scope, recipeFactory, $location, RecipeUser, UserSession) {
-        $scope.recipes = recipeFactory.query();
+        $scope.topRecipes = recipeFactory.query().$promise.then(function(recipes) {
+            $scope.topRecipes = recipes.filter(function (r) {return r.stars != null});
+        });
         $scope.getDetailsRecipe = getDetailsRecipe;
 
         function getDetailsRecipe(id) {

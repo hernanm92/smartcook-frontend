@@ -28,7 +28,9 @@ app.controller('TopCategoriesController',
                     recipesPromise = recipeFactory.query({'celiac': 'true'}).$promise;
                     break;
             }
-            if(recipesPromise != null) recipesPromise.then(function(recipes){ $scope.recipes = recipes; });
+            if(recipesPromise != null) recipesPromise.then(function(recipes){
+                $scope.topRecipes = recipes.filter(function (r) {return r.stars != null});
+            });
         }
 
         //-------------------Favorites
