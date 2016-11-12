@@ -7,7 +7,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     NavigationService, $timeout) {
 
     var self = this;
-    self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada(s)' }, { name: 'Lata(s)' }];
+    self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada(s)' }, { name: 'Lata(s)' }, { name: 'Kilogramo(s)' }];
     self.recipes = [];
     self.getRecipes = getRecipes;
     self.getUnits = getUnits;
@@ -70,10 +70,10 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
                 var ingMapped = mapperService.mapIngForPersist(ing, values.recipePromise)
                 ingredientPerRecipePersistFactory.save(ingMapped, function (res) {
                 });
-                self.recipeId = values.recipePromise.id;
-                recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, UserSession.getUsername()));
-                $timeout(finishCreation, 2000);
             });
+            self.recipeId = values.recipePromise.id;
+            recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, UserSession.getUsername()));
+            $timeout(finishCreation, 2000);
         });
     }
 
