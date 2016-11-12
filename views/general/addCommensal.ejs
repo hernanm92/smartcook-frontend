@@ -3,9 +3,17 @@
         <img class="img-responsive" src="img/banner-commensal.jpg" style="width:100%"/>
     </div>
     <div class="col-sm-12" style="margin-top:20px">
-        <div ng-repeat="freq in frequentCommensals track by $index" class="col-sm-6" style="margin:10px 0px">
-            <img ng-src="{{freq.avatar}}" class="img-responsive img-circle" alt="{{freq.username}} profile picture" style="max-width:100px; display:inline">
-            <h2 style="display:inline; text-transform:uppercase">{{freq.username}}</h2>
+        <input id="searchedUser" ng-keyup="updateSearchedUsers()" class="form-control" type="text"
+               ng-model="searchedUser" placeholder="Ingrese el nombre del usuario a encontrar"
+               style="width:100%" autofocus="autofocus"/>
+    </div>
+    <div class="col-sm-12" style="margin-top:20px">
+        <div ng-repeat="freq in frequentCommensals track by $index" class="col-sm-6"
+             style="margin:10px 0px; display:flex">
+            <div back-img image="freq.avatar" class="img-responsive img-circle" alt="{{freq.username}} profile picture"
+                 style="height:100px; width:100px; display:inline-flex">
+            </div>
+            <h2 style="display:inline; text-transform:uppercase; align-self: center;">{{freq.username}}</h2>
             <button class="addCommensalButton" type="btn">
                 <i class="fa fa-star fa-2x" aria-hidden="true"
                    ng-mouseover="hoverAddCommensalButton($event)"
@@ -13,13 +21,13 @@
                    ng-click="removeCommensal(freq, $index)"></i>
             </button>
         </div>
-        <input id="searchedUser" ng-keyup="updateSearchedUsers()" class="form-control" type="text" ng-model="searchedUser" placeholder="Ingrese el nombre del usuario a encontrar"
-            style="width:100%" autofocus="autofocus" />
     </div>
     <div id="searchedUsersResults" class="container" style="margin:20px 0px">
-        <div ng-repeat="user in resultUsers track by $index " class="col-sm-6" style="margin:10px 0px">
-            <img ng-src="{{user.avatar}}" class="img-responsive img-circle" alt="{{user.username}} profile picture" style="max-width:100px; display:inline">
-            <h2 style="display:inline; text-transform:uppercase">{{user.username}}</h2>
+        <div ng-repeat="user in resultUsers track by $index " class="col-sm-6" style="margin:10px 0px; display:flex">
+            <div back-img image="user.avatar" class="img-responsive img-circle" alt="{{user.username}} profile picture"
+                 style="height:100px; width:100px; display:inline-flex">
+            </div>
+            <h2 style="display:inline; text-transform:uppercase; align-self: center;">{{user.username}}</h2>
             <button class="addCommensalButton" type="btn">
                 <i class="fa fa-star-o fa-2x" aria-hidden="true"
                    ng-mouseover="hoverAddCommensalButton($event)"
