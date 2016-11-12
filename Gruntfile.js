@@ -263,7 +263,7 @@ module.exports = function (grunt) {
         },
         constants: {
           config: {
-            domain: 'http://192.168.3.136:5000',
+            domain: 'http://192.168.43.72:5000',
             styleFolder: 'common',
             applicationPrefix: 'stage-'
           }
