@@ -50,7 +50,8 @@ app.controller('RecipeViewController',
                             $scope.recipe = recipe;
                             $scope.ingredients.push(ingView);
                             $scope.restrictions = restrictionsService.mapRestrictions(recipe);
-                            getTips()
+                            getTips();
+                            $('div.host a.remove-button').remove();
                             blockUI.stop();
                         })
 
