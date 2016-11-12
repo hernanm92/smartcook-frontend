@@ -62,7 +62,7 @@ app.controller('LoadIngredientController',
             ingredientFactory.save(ingredient, function (res) {
                 imgService.uploadImgIngredient($scope.name, $scope.picFile);
                 blockUI.stop();
-                notifyHelper.success('Su receta ha sido guardada exitosamente, entrará al proceso de validación');
+                notifyHelper.success('El ingrediente ha sido guardada exitosamente');
                 NavigationService.goToHome();
             });
         }
@@ -98,4 +98,3 @@ app.controller('LoadIngredientController',
 
     }
 );
-

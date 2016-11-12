@@ -74,7 +74,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
             });
             recipePerUserFactory.save(mapperService.mapRecipePerUserOwner(values.recipePromise, UserSession.getUsername()));
             blockUI.stop();
-            notifyHelper.success('Su receta ha sido guardada exitosamente');
+            notifyHelper.success('Su receta ha sido guardada exitosamente, entrará al proceso de validación');
             NavigationService.goToRecipeDetail(values.recipePromise.id);
         });
     }
