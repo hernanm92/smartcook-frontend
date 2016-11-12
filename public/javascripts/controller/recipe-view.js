@@ -8,18 +8,21 @@ app.controller('RecipeViewController',
         $scope.ingredients = [];
         $scope.addTip = addTip;
         $scope.cancelTip = cancelTip;
+        $scope.tipToAdd = {}
         init();
 
-        function addTip(tipToAdd) {
+        function addTip() {
             //validar q este loguedo
             if (UserSession.isLogged()) {
                 var tip = {
                     username: UserSession.getUsername(),
                     recipe_id: $scope.recipe.id,
-                    description: tipToAdd
+                    description: $scope.tipToAdd.description
                 }
-                $scope.tips.push(tip);
-                tipFactory.save(tip);
+                tipFactory.save(tip, function (res) {
+                    $scope.tips.push(tip);
+                    $scope.tipToAdd.description = '';
+                });
             }
             else {
                 notifyHelper.warn('Para ayudar necesitas ser un smartcook!!!');
@@ -71,8 +74,8 @@ app.controller('RecipeViewController',
             }
         }
 
-        function cancelTip(tipToAdd) {
-            delete tipToAdd;
+        function cancelTip() {
+            $scope.tipToAdd.description = '';
         }
 
         //-------------------Favorites
@@ -92,7 +95,7 @@ app.controller('RecipeViewController',
             };
         } else {
             $scope.addToFavorites = function (recipe) {
-                RecipeUser.userNotLoggedIn('Para poder agregar recetas como favoritas debe tener un usuario.¿Desea ingresar con uno?','Crear Usuario').result.then(function () {
+                RecipeUser.userNotLoggedIn('Para poder agregar recetas como favoritas debe tener un usuario.¿Desea ingresar con uno?', 'Crear Usuario').result.then(function () {
                     window.location.href = "#/login";
                 });
             };

@@ -38,6 +38,10 @@ app.controller('ProfileController',
             });
         }
 
+        function refresh() {
+            UserSession.setProfile($scope.profile);
+        }
+
         function disable() {
             var message = '¡¿Desea cerrar su cuenta de Smartcook?!'
             var title = '';
@@ -93,6 +97,7 @@ app.controller('ProfileController',
         function updateRestrictions() {
             $scope.profile.id = $scope.profile.username;
             userFactory.update($scope.profile);
+            refresh();
         }
 
         function addedPhoto(flowObject, event, flow) {
@@ -106,24 +111,28 @@ app.controller('ProfileController',
         function addCategoryToUser(categoryTag) {
             var category = { food_category_id: categoryTag.id, username: $scope.profile.username }
             foodCategoriesPerUserFactory.save(category, function (response) {
+                refresh();
             });
         }
 
         function removeCategoryOfUser(categoryTag) {
             var category = { food_category_id: categoryTag.id, username: $scope.profile.username }
             foodCategoriesPerUserFactory.remove(category, function () {
+                refresh();
             })
         }
 
         function addIngredientToUser(ingredientTag) {
             var ingredient = { ingredient_id: ingredientTag.id, username: $scope.profile.username, excluded: true }
             ingredientPerUserFactory.save(ingredient, function (response) {
+                refresh();
             });
         }
 
         function removeIngredientOfUser(ingredientTag) {
             var ingredient = { ingredient_id: ingredientTag.id, username: $scope.profile.username }
             ingredientPerUserFactory.remove(ingredient, function () {
+                refresh();
             })
         }
 

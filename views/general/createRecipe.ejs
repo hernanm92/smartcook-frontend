@@ -51,7 +51,7 @@
                                 {{ing.name}}
                             </td>
                             <td>
-                                <input ng-model="ing.amount" type="number">
+                                <input ng-model="ing.amount" type="number" min="0" max="999">
                             </td>
                             <td>
                                 <select ng-model="ing.unit" ng-options="unit.name for unit in units"></select>
