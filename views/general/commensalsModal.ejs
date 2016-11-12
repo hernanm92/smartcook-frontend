@@ -4,11 +4,13 @@
     </div>
     <div class="modal-body">
         <div ng-show="users.length < 1"><h3>No tiene comensales frecuentes elegidos </h3> </div>
-        <div ng-repeat="user in users track by $index" style="padding-bottom:15px;">
-            <img ng-src="{{user.avatar}}" class="img-responsive img-circle" alt="{{user.username}} profile picture" style="max-width:100px; display:inline">
-            <h2 style="display:inline; text-transform:uppercase">{{user.username}}</h2>
+        <div ng-repeat="user in users track by $index" style="padding-bottom:15px; display:flex">
+            <div back-img image="user.avatar" class="img-responsive img-circle" alt="{{user.username}} profile picture"
+                 style="height:100px; width:100px; display:inline-flex">
+            </div>
+            <h2 style="display:inline; text-transform:uppercase; align-self: center;">{{user.username}}</h2>
             <button class="addCommensalButton" type="btn">
-                <i class ="fa fa-2x "  ng-class="{'fa-star':user.added, 'fa-star-o':!user.added }" 
+                <i class ="fa fa-2x "  ng-class="{'fa-star':user.added, 'fa-star-o':!user.added }"
                    ng-mouseover="hoverAddCommensalButton($event)"
                    ng-mouseleave="hoverAddCommensalButton($event)"
                    ng-click="actionCommensal(user, $event)"></i>
