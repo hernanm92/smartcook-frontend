@@ -1,8 +1,8 @@
 <!--=== Content Part ===-->
 <div class="content container">
     <div class="container" style="padding-top: 90px;">
-        <div class="row" style="margin-bottom:10px" validate-menu="fixed-menu" ng-if="!noRecipesToValidate">
-            <div class="col-md-offset-3 col-md-6" style="text-align: center;">
+        <div class="row" style="margin-bottom:10px;" validate-menu="fixed-menu" ng-if="!noRecipesToValidate">
+            <div class="col-md-offset-3 col-md-6" align="center" style="text-align: center; width: 100%; margin-left: 11px;">
                 <button type="button" ng-click="nextRecipe(1)" class="bootstro menu-button  btn-u btn-u-md btn-u-sea-shop">Me encanta!! </button>
                 <button type="button" class="menu-button validateRecipe-skip btn-u  btn-u-md btn-u-sea-shop " ng-click="skip()">Dejame Pensar</button>
                 <button type="button" class="  menu-button validateRecipe-cross btn-u btn-u-md btn-u-sea-shop" ng-click="nextRecipe(0)">No está bueno</button>
@@ -119,3 +119,9 @@
 <!--</div>&lt;!&ndash;/end row&ndash;&gt;-->
 <!--/end container-->
 <!--=== End Content Part ===-->
+
+<style>
+    div.fixed-menu {
+        margin-left: 9px;
+    }
+</style>
