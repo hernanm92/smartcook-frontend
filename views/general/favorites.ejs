@@ -15,10 +15,10 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <a>
-                                    <div back-img image="recipe.image_url" style="height:290px"></div>
+                                    <div back-img image="recipe.image_url" style="height:240px"></div>
                                 </a>
                             </div>
-                            <div class="col-sm-8 product-description">
+                            <div class="col-sm-8 product-description" style="padding-bottom: 0px;">
                                 <div class="overflow-h margin-bottom-5">
                                     <ul class="list-inline overflow-h">
                                         <li><h4 class="title-price"><a class="text-uppercase">{{recipe.name}}</a>
@@ -28,8 +28,8 @@
                                             <input-stars ng-if="userVote(recipe) == null" max="5" on-star-click="voteRecipe(recipe)" ng-model="recipe.stars" ng-attr-readonly="{{ !isLogged }}" ng-click="isConnected()"></input-stars>
                                         </li>
                                     </ul>
-                                    <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
-                                    <ul class="list-inline add-to-wishlist margin-bottom-20">
+                                    <p class="margin-bottom-60" style="height: 100px;">{{recipe.description}}</p>
+                                    <ul class="list-inline add-to-wishlist" style="margin-bottom: 0px;">
                                         <li>
                                             <button type="button" class="btn-u btn-u-sea-shop"
                                                     ng-click="getDetailsRecipe(recipe.id)">
