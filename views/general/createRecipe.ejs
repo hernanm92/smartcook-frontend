@@ -40,21 +40,21 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Ingrediente</th>
-                            <th>Cantidad </th>
-                            <th>Unidad</th>
+                            <th><h3 class="text-center" >Ingrediente</span></th>
+                            <th><h3 class="text-center">Cantidad</h3> </th>
+                            <th><h3 class="text-center">Unidad</h3></th>
                         </tr>
                     </thead>
                     <tbody ng-repeat="ing in recipe.ingredients track by $index">
                         <tr>
-                            <td>
+                            <td class="text-center">
                                 {{ing.name}}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <input ng-model="ing.amount" type="number" min="0" max="999">
                             </td>
-                            <td>
-                                <select ng-model="ing.unit" ng-options="unit.name for unit in units"></select>
+                            <td class = "text-center">
+                                <select style="background-color: white;" ng-model="ing.unit" ng-options="unit.name for unit in units"></select>
                             </td>
                         </tr>
                     </tbody>
