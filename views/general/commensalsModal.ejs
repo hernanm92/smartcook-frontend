@@ -3,17 +3,29 @@
         <h2>Agregar comensal a búsqueda</h2>
     </div>
     <div class="modal-body">
-        <div ng-show="users.length < 1"><h3>No tiene comensales frecuentes elegidos </h3> </div>
-        <div ng-repeat="user in users track by $index" style="padding-bottom:15px; display:flex">
-            <div back-img image="user.avatar" class="img-responsive img-circle" alt="{{user.username}} profile picture"
-                 style="height:100px; width:100px; display:inline-flex">
+        <div ng-show="users.length < 1 && usersSelected.length < 1">
+            <h3>No tiene comensales frecuentes elegidos </h3>
+        </div>
+        <div ng-repeat="user in usersSelected track by $index" style="padding-bottom:15px; display:flex">
+            <div back-img image="user.avatar" class="img-responsive img-circle" alt="{{user.username}} profile picture" style="height:100px; width:100px; display:inline-flex">
             </div>
             <h2 style="display:inline; text-transform:uppercase; align-self: center;">{{user.username}}</h2>
             <button class="addCommensalButton" type="btn">
-                <i class ="fa fa-2x "  ng-class="{'fa-star':user.added, 'fa-star-o':!user.added }"
+                <i class ="fa fa-2x fa-star"
                    ng-mouseover="hoverAddCommensalButton($event)"
                    ng-mouseleave="hoverAddCommensalButton($event)"
-                   ng-click="actionCommensal(user, $event)"></i>
+                   ng-click="remove(user, $index)"></i>
+            </button>
+        </div>
+        <div ng-repeat="user in users track by $index" style="padding-bottom:15px; display:flex">
+            <div back-img image="user.avatar" class="img-responsive img-circle" alt="{{user.username}} profile picture" style="height:100px; width:100px; display:inline-flex">
+            </div>
+            <h2 style="display:inline; text-transform:uppercase; align-self: center;">{{user.username}}</h2>
+            <button class="addCommensalButton" type="btn">
+                <i class ="fa fa-2x fa-star-o"
+                   ng-mouseover="hoverAddCommensalButton($event)"
+                   ng-mouseleave="hoverAddCommensalButton($event)"
+                   ng-click="add(user, $index)"></i>
             </button>
         </div>
     </div>

@@ -3,14 +3,16 @@ app.controller('comensalsForSearchController',
         notifyHelper, blockUI, $q, mapperService, ingredientFactory) {
 
         $scope.users = [];
+        $scope.usersSelected = [];
         init();
         $scope.hoverAddCommensalButton = hoverAddCommensalButton;
-        $scope.actionCommensal = actionCommensal;
+        $scope.add = add;
+        $scope.remove = remove;
 
         function init() {
             angular.forEach(frequentsUsers, function (frequentUser) {
                 var selected = wasSelected(frequentUser);
-                selected.value ? $scope.users.push(selected.user) : $scope.users.push(frequentUser);
+                selected.value ? $scope.usersSelected.push(selected.user) : $scope.users.push(frequentUser);
             })
         }
 
@@ -26,18 +28,14 @@ app.controller('comensalsForSearchController',
             $($event.currentTarget).toggleClass('fa-star-o').toggleClass('fa-star');
         }
 
-        function actionCommensal(commensal) {
-            commensal.added ? removeCommensalForSearch(commensal) : addCommensalForSearch(commensal);
-        }
-
-        function removeCommensalForSearch(commensal) {
-            delete commensal.added ;
+        function remove(commensal, index) {
+            removeUserFrom($scope.usersSelected, index);
             homeService.removeCommensalForSearch(commensal.username);
-            //delete commensal.added;
-            notifyHelper.success('Comensal para busqueda eliminado');
+            $scope.users.push(commensal);
+            notifyHelper.success('Comensal eliminado de la búsqueda');
         }
 
-        function addCommensalForSearch(commensal, $event) {
+        function add(commensal, index) {
             blockUI.start();
             //Esta logica tienen q estar delagada en service UserSession
             var promises = {
@@ -49,10 +47,14 @@ app.controller('comensalsForSearchController',
                 blockUI.stop();
                 var commensalProfile = mapperService.mapProfileToModel(values.profile, values.categoriesUser, null, values.ingredients);
                 homeService.setCommensalProfile(commensalProfile);
-                notifyHelper.success('Comensal Agregado para busqueda');
-                commensal.added = true;
+                $scope.usersSelected.push(commensal);
+                notifyHelper.success('Comensal Agregado para búsqueda');
+                removeUserFrom($scope.users, index);
             });
+        }
 
+        function removeUserFrom(array, index) {
+            array.splice(index, 1);
         }
 
         function wasSelected(commensal) {
