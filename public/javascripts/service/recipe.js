@@ -7,7 +7,7 @@ function recipeService(recipeFactory, Recipe, ingredientFactory, imgService, Use
     NavigationService, $timeout) {
 
     var self = this;
-    self.units = [{ name: 'Gramos' }, { name: 'Taza' }, { name: 'Unidad(es)' }, { name: 'Mililitro' }, { name: 'Cucharada(s)' }, { name: 'Lata(s)' }, { name: 'Kilogramo(s)' }];
+    self.units = [{ name: 'Gramo(s)' }, { name: 'Taza(s)' }, { name: 'Unidad(es)' }, { name: 'Mililitro(s)' }, { name: 'Cucharada(s)' }, { name: 'Lata(s)' }, { name: 'Kilogramo(s)' }];
     self.recipes = [];
     self.getRecipes = getRecipes;
     self.getUnits = getUnits;

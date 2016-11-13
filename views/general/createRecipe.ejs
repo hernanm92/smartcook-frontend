@@ -1,17 +1,17 @@
 <div class="container" style="padding-top: 90px;">
     <form name="recipeForm" ng-submit="validateForm(recipeForm.$valid)" novalidate>
         <div class="row">
-            <div flow-init class="col-md-4" flow-name="food.flow">
+            <div flow-init class="col-md-5" flow-name="food.flow">
                 <div flow-drop>
                      <p ng-show="!hasImage && submitted" style="color:red; ">La receta debe tener una foto</p>
                     <img class="img-rounded" flow-img="$flow.files[0]" flow-file-added="addedPhoto($file, $event, $flow)" back-img image="recipe.image_url"
-                        width="350px" height="300px">
+                        width="450px" height="300px">
                 </div>
                 <div class="col-sm-12" style="padding-left:0px">
                     <span class="btn fa fa-pencil fa-2x profile-edit-button" flow-btn></span>
                 </div>
             </div>
-            <div class="col-md-6 ">
+            <div class="col-md-7 ">
                 <div class="form-group ">
                     <label class="label-form-ingredient "> Nombre Receta </label>
                     <input ng-blur="validateName()" name="nameRecipe" ng-model="recipe.name " type="text " class="form-control " placeholder="Escriba el nombre de la receta aquí "
@@ -30,13 +30,13 @@
                 <div class="form-group">
                     <label class="label-form-ingredient">Breve Descripción</label>
                     <textarea name="description" required id="item" class="desc-text-area" msd-elastic ng-model="recipe.description" placeholder="Escriba una breve descripción aquí"
-                        rows="4"></textarea>
+                        rows="4" style="height: 122px;"></textarea>
                     <p ng-show="recipeForm.description.$invalid && submitted " style="color:red; ">La receta debe tener una descripción</p>
                 </div>
             </div>
         </div>
-        <div ng-show="!isIngredientsEmpty()" class="row">
-            <div class="col-md-6">
+        <div ng-show="!isIngredientsEmpty()" class="row" style="padding-bottom: 20px;">
+            <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -47,7 +47,7 @@
                     </thead>
                     <tbody ng-repeat="ing in recipe.ingredients track by $index">
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" style="font-size: 16px">
                                 {{ing.name}}
                             </td>
                             <td class="text-center">
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" style="padding-top: 20px;">
+            <div class="col-md-12">
                 <div class="row panel-align" style="margin-right:0px;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
