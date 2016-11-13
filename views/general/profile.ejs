@@ -124,19 +124,27 @@
                         <h3 class="panel-title text-center">Mis Recetas</h3>
                     </div>
                     <div class="panel-body">
-
-                        <div class="col-md-3 userRecipe" ng-repeat="recipe in profile.recipes" style="text-align:center;">
-                            <a href="#/recipe/{{recipe.id}}/detail">
-                                <h3 style="cursor:pointer; height:54px;">
-                                    {{recipe.name}}
-                                </h3>
-                            </a>
-                            <a class="thumbnail" style = "margin-top">
-                                <div back-img image="recipe.image_url" class="userRecipe-image"></div>
-                            </a>
-                            <div ng-if="recipe.validated" class="recipeEdit">
-                                <a href="#/recipe/{{recipe.id}}/edit"> Editar</a>
-                            </div>
+                        <div class="illustration-v2">
+                            <ul class="list-inline owl-slider">
+                                <li class="item" ng-repeat="recipe in profile.recipes" on-finish-ingredients-render>
+                                    <div class="product-img">
+                                        <a>
+                                            <div back-img image="recipe.image_url" class="userRecipe-image"></div>
+                                        </a>
+                                        <a class="add-to-cart" href="#/recipe/{{recipe.id}}/detail">Ver receta</a>
+                                    </div>
+                                    <div ng-if="recipe.validated" class="recipeEdit" style="text-align:center;">
+                                        <a href="#/recipe/{{recipe.id}}/edit" style="text-transform: uppercase;color:white"> Editar</a>
+                                    </div>
+                                    <div class="product-description product-description-brd" style="height: 67px;">
+                                        <div class="overflow-h margin-bottom-5">
+                                            <div style="text-align:center;">
+                                                <h4 href="#/recipe/{{recipe.id}}/detail" class="title-price text-uppercase">{{recipe.name}}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                         <div ng-if="!profile.recipes.length > 0">
                             <p><span>No tienes Recetas creadas </span></p>
