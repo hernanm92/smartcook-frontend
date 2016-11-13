@@ -32,22 +32,25 @@
     </div>
     <div ng-show="isLogged()">
         <form name="settingsForm">
-            <div class="box-options animate-show">
+            <div class="box-options animate-show checkbox-list">
                 <div class="form-group">
-                    <label class="label-form-ingredient">
+                    <label class="checkbox label-form-ingredient">
                         <input type="checkbox" ng-model="omitRestrictions"/>
+                        <i></i>
                         Omitir restricciones alimenticias
                     </label>
                 </div>
                 <div class="form-group">
-                    <label class="label-form-ingredient">
+                    <label class="checkbox label-form-ingredient">
                         <input type="checkbox" ng-model="omitDislikeIngs"/>
+                        <i></i>
                         Omitir ingredientes que no me gustan
                     </label>
                 </div>
                 <div class="form-group">
-                    <label class="label-form-ingredient">
+                    <label class="checkbox label-form-ingredient">
                         <input type="checkbox" ng-model="omitCategories"/>
+                        <i></i>
                         Omitir categorías excluídas
                     </label>
                 </div>
