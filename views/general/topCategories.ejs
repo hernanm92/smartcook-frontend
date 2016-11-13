@@ -1,10 +1,16 @@
-<div class="container" style="padding-top: 90px;">
+<!--=== Breadcrumbs v3 ===-->
+<div class="breadcrumbs-v3 img-v4">
+    <div class="container text-center">
+        <h1 style="margin-bottom: -7px;margin-top: 51px;">MEJORES RECETAS POR RESTRICCIÓN</h1>
+    </div><!--/end container-->
+</div>
+<!--=== End Breadcrumbs v3 ===-->
+<div class="container" style="padding-top: 20px;">
     <div class="content container">
-        <img class="col-sm-12 img-responsive" src="img/banner-toprestricciones.png" style="padding: 0;"/>
         <div class="row">
-            <div class="col-sm-3 col-xs-6 topCategories-category" ng-click="clickCategory($event,'diabetic');">
-                <img class="img-responsive" src="img/diabetes.png" alt="Categoria Diabetico">
-                <h3 class="text-uppercase">Diabetico</h3>
+            <div class="col-sm-3 col-xs-6 topCategories-category" ng-click="clickCategory($event,'celiac');">
+                <img class="img-responsive" src="img/celiaquismo.jpg" alt="Categoria Celiaco">
+                <h3 class="text-uppercase">Celíaco</h3>
             </div>
             <div class="col-sm-3 col-xs-6 topCategories-category" ng-click="clickCategory($event,'vegetarian');">
                 <img class="img-responsive" src="img/vegetarianismo.jpg" alt="Categoria Vegetariano">
@@ -14,9 +20,9 @@
                 <img class="img-responsive" src="img/veganismo.png" alt="Categoria Vegano">
                 <h3 class="text-uppercase">Vegano</h3>
             </div>
-            <div class="col-sm-3 col-xs-6 topCategories-category" ng-click="clickCategory($event,'celiac');">
-                <img class="img-responsive" src="img/celiaquismo.jpg" alt="Categoria Celiaco">
-                <h3 class="text-uppercase">Celiaco</h3>
+            <div class="col-sm-3 col-xs-6 topCategories-category" ng-click="clickCategory($event,'diabetic');">
+                <img class="img-responsive" src="img/diabetes.png" alt="Categoria Diabetico">
+                <h3 class="text-uppercase">Diabético</h3>
             </div>
         </div>
         <div class="row" ng-if="hasSelectedCategory">
