@@ -1,40 +1,39 @@
 <div class="modal-header">
-    <h3 class="modal-title text-uppercase">{{ingredient.name}}</h3>
+    <h3 class="modal-title text-uppercase" style="text-align: center"><b>{{ingredient.name}}</b></h3>
 </div>
 <div class="modal-body">
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
             <a>
                 <!--<img class="img-responsive sm-margin-bottom-20" style="width: 240px;" src="assets/img/blog/16.jpg" alt="">-->
                 <div back-img image="ingredient.image_url" style="height:290px;"></div>
             </a>
         </div>
-        <div class="col-sm-5 product-description">
+        <div class="col-sm-6 product-description">
             <div class="overflow-h margin-bottom-5">
-                <ul class="list-inline overflow-h">
-                    <li>
-                        <h4 class="title-price">100 Gramos de {{ingredient.name}}: </h4>
-                    </li>
-                </ul>
                 <div class="margin-bottom-10">
-                    <span class="title-price margin-right-10">Categoria: </span>
+                    <span class="title-price margin-right-10"><b style="text-decoration: underline">Categoría</b>:</span>
                     <span class="title-price">{{ingredient.food_category}}</span>
                 </div>
                 <div class="margin-bottom-10">
-                    <span class="title-price margin-right-10">Calorias: </span>
-                    <span class="title-price">{{ingredient.calories}} kcals</span>
+                    <span class="title-price margin-right-10"><b style="text-decoration: underline">Calorías</b>:</span>
+                    <span class="title-price">{{ingredient.calories}}</span>
+                    <span class="title-price" style="font-size: 15px">Kcals/100 grs</span>
                 </div>
                 <div class="margin-bottom-10">
-                    <span class="title-price margin-right-10">Carbohidratos: </span>
-                    <span class="title-price">{{ingredient.carbohydrates}} grs </span>
+                    <span class="title-price margin-right-10"><b style="text-decoration: underline">Carbohidratos</b>:</span>
+                    <span class="title-price">{{ingredient.carbohydrates}}</span>
+                    <span class="title-price" style="font-size: 15px">grs/100 grs</span>
                 </div>
                 <div class="margin-bottom-10">
-                    <span class="title-price margin-right-10">Grasas: </span>
-                    <span class="title-price">{{ingredient.fats}} grs</span>
+                    <span class="title-price margin-right-10"><b style="text-decoration: underline">Grasas</b>:</span>
+                    <span class="title-price">{{ingredient.fats}}</span>
+                    <span class="title-price" style="font-size: 15px">grs/100 grs</span>
                 </div>
                 <div class="margin-bottom-10">
-                    <span class="title-price margin-right-10">Proteinas: </span>
-                    <span class="title-price">{{ingredient.proteins}} grs</span>
+                    <span class="title-price margin-right-10"><b style="text-decoration: underline">Proteínas</b>:</span>
+                    <span class="title-price">{{ingredient.proteins}}</span>
+                    <span class="title-price" style="font-size: 15px">grs/100 grs</span>
                 </div>
             </div>
         </div>
