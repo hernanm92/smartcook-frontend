@@ -1,5 +1,5 @@
 app.controller('LoadIngredientController',
-    function ($scope, ingredientFactory, categoriesFactory, $modal, imgService, blockUI, notifyHelper, NavigationService) {
+    function ($scope, ingredientFactory, categoriesFactory, $modal, imgService, blockUI, notifyHelper, NavigationService, ingredientService) {
 
         $scope.validateForm = validateForm;
         $scope.openModal = openModal;
@@ -60,10 +60,14 @@ app.controller('LoadIngredientController',
             blockUI.start();
             var ingredient = getDataFromView();
             ingredientFactory.save(ingredient, function (res) {
-                imgService.uploadImgIngredient($scope.name, $scope.picFile);
-                blockUI.stop();
-                notifyHelper.success('El ingrediente ha sido guardada exitosamente');
-                NavigationService.goToHome();
+                imgService.uploadImgIngredient($scope.name, $scope.picFile).then(function (res) {
+                    ingredientFactory.query({}, function (ingredients) {
+                        ingredientService.updateIngredients(ingredients);
+                        blockUI.stop();
+                        notifyHelper.success('El ingrediente ha sido guardado exitosamente');
+                        NavigationService.goToHome();
+                    })
+                })
             });
         }
 

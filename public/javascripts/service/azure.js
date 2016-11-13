@@ -3,13 +3,14 @@ angular
     .module('MainApp')
     .service('azureService', azureService);
 
-function azureService($http, azureBlob) {
+function azureService($http, azureBlob, $q, config) {
     var self = this;
     var azureUrl = 'https://imgsmartcook.blob.core.windows.net';
     self.upload = upload;
     self.getUrlImg = getUrlImg;
 
     function upload(name, photoFile, container) {
+        var defer = $q.defer();
         var settings = { name: photoFile.name, container: container }
         getTokenSas(settings).then(function (sasToken) {
             azureBlob.upload({
@@ -17,11 +18,12 @@ function azureService($http, azureBlob) {
                 sasToken: '?' + sasToken.data,
                 file: photoFile,
                 complete: function (res) {
-                    return res;
+                     defer.resolve(res);
                 },
                 blockSize: photoFile.size
             })
         })
+        return defer.promise;
     }
 
     function getTokenSas(settings) {
