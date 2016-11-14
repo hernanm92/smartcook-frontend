@@ -40,6 +40,8 @@ app.controller('RecipeViewController',
             var id = $routeParams.id;
             //recipe
             recipeFactory.get({ id: id }, function (recipe) {
+                $scope.recipe = recipe;
+                $scope.restrictions = restrictionsService.mapRestrictions(recipe);
                 //ingsPerRecipe
                 ingredientFactory.query({ recipe_id: id }, function (ingsFromRecipe) {
                     validateIngsPerRecipe(ingsFromRecipe);
@@ -47,11 +49,9 @@ app.controller('RecipeViewController',
                         //ingAmounts
                         ingredientPerRecipeFactory.get({ recipe_id: id, ingredient_id: ingFromRecipe.id }, function (ingAmounts) {
                             var ingView = mapToView(ingFromRecipe, ingAmounts)
-                            $scope.recipe = recipe;
                             $scope.ingredients.push(ingView);
-                            $scope.restrictions = restrictionsService.mapRestrictions(recipe);
                             getTips();
-                            $('div.host a.remove-button').remove();
+                            $('div.host a.remove-button').remove(); //saco las X de los tags
                             blockUI.stop();
                         })
 
