@@ -60,9 +60,9 @@ app.controller('LoadIngredientController',
             blockUI.start();
             var ingredient = getDataFromView();
             ingredientFactory.save(ingredient, function (res) {
-                imgService.uploadImgIngredient($scope.name, $scope.picFile);
+                imgService.uploadImgIngredient(encodeURI($scope.name), $scope.picFile);
                 blockUI.stop();
-                notifyHelper.success('El ingrediente ha sido guardada exitosamente');
+                notifyHelper.success('El ingrediente ha sido guardado exitosamente');
                 NavigationService.goToHome();
             });
         }
