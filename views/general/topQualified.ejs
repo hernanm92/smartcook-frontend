@@ -1,6 +1,12 @@
-<div class="container" style="padding-top: 90px;">
+<!--=== Breadcrumbs v3 ===-->
+<div class="breadcrumbs-v3 img-v1">
+    <div class="container text-center">
+        <h1 style="margin-bottom: -7px;margin-top: 51px;">MEJORES RECETAS</h1>
+    </div><!--/end container-->
+</div>
+<!--=== End Breadcrumbs v3 ===-->
+<div class="container">
     <div class="content container">
-        <img class="col-sm-12 img-responsive" src="img/banner-topcalificadas.png" style="padding: 0;"/>
         <div class="row">
             <div class="col-md-12">
                 <div class="filter-results">
@@ -9,10 +15,10 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <a>
-                                    <div back-img image="recipe.image_url" style="height:290px"></div>
+                                    <div back-img image="recipe.image_url" style="height:240px"></div>
                                 </a>
                             </div>
-                            <div class="col-sm-8 product-description">
+                            <div class="col-sm-8 product-description" style="padding-bottom: 0px;">
                                 <div class="overflow-h margin-bottom-5">
                                     <ul class="list-inline overflow-h">
                                         <li><h4 class="title-price"><a class="text-uppercase">{{recipe.name}}</a>
@@ -21,8 +27,8 @@
                                             <input-stars max="5" ng-model="recipe.stars" readonly></input-stars>
                                         </li>
                                     </ul>
-                                    <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
-                                    <ul class="list-inline add-to-wishlist margin-bottom-20">
+                                    <p class="margin-bottom-60" style="height: 100px;">{{recipe.description}}</p>
+                                    <ul class="list-inline add-to-wishlist" style="margin-bottom: 0px;">
                                         <li>
                                             <button type="button" class="btn-u btn-u-sea-shop" ng-click="getDetailsRecipe(recipe.id)">
                                                 Ver receta</button>

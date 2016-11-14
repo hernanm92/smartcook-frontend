@@ -35,6 +35,10 @@ app.controller('RecipeViewController',
             })
         }
 
+        function removeTagsCross() {
+            $('div.host a.remove-button').remove();
+        }
+
         function init() {
             blockUI.start();
             var id = $routeParams.id;
@@ -47,11 +51,12 @@ app.controller('RecipeViewController',
                         //ingAmounts
                         ingredientPerRecipeFactory.get({ recipe_id: id, ingredient_id: ingFromRecipe.id }, function (ingAmounts) {
                             var ingView = mapToView(ingFromRecipe, ingAmounts)
-                            $scope.recipe = recipe;
+                            $scope.recipe = recipe; //TODO: esto tiene que estar arriba, no tiene que depender del tiempo
                             $scope.ingredients.push(ingView);
-                            $scope.restrictions = restrictionsService.mapRestrictions(recipe);
+                            $scope.restrictions = restrictionsService.mapRestrictions(recipe); //TODO: esto tiene que estar arriba, no tiene que depender del tiempo
                             getTips();
-                            $('div.host a.remove-button').remove();
+                            $('div.host a.remove-button').remove(); //saco las X de los tags
+                            setTimeout(removeTagsCross, 1000)
                             blockUI.stop();
                         })
 

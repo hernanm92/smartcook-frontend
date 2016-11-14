@@ -444,19 +444,37 @@
 }
 
 .breadcrumbs-v3.img-v1 {
-  background: url(../img/breadcrumbs/img1.jpg) no-repeat;
+  background: url(../../img/header.png) no-repeat;
   background-size: cover;
   background-position: center center;
 }
 
 .breadcrumbs-v3.img-v2 {
-  background: url(../img/breadcrumbs/img2.jpg) no-repeat;
+  background: url(../../img/header5.png) no-repeat;
   background-size: cover;
   background-position: center center;
 }
 
 .breadcrumbs-v3.img-v3 {
-  background: url(../img/breadcrumbs/img3.jpg) no-repeat;
+  background: url(../../img/header14.png) no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.breadcrumbs-v3.img-v4 {
+  background: url(../../img/header7.png) no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.breadcrumbs-v3.img-v5 {
+  background: url(../../img/header9.png) no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.breadcrumbs-v3.img-v6 {
+  background: url(../../img/header11.png) no-repeat;
   background-size: cover;
   background-position: center center;
 }

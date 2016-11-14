@@ -10,46 +10,44 @@
         </ul>
     </div>
     <!--=== End Illustration v2 ===-->
-    <div class="row" style="text-align:center">
-        <div class="col-sm-2">
+    <div class="row" align="center" style="text-align:center">
             <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="search()">Buscar</button>
-        </div>
-        <div class="col-sm-2">
             <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="removeIngredients()">
                 Remover Ingredientes
             </button>
-        </div>
-        <!-- <div class="col-sm-2">
-             <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="resetSearch()">Nueva
+             <!--<button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="resetSearch()">Nueva
                  busqueda
-             </button>
-         </div> -->
-        <div ng-show="isLogged()" class="col-sm-2">
-            <button type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="addDiner()">
+             </button>-->
+            <button ng-show="isLogged()" type="button" class="btn-u btn-u-sea-shop recipe-search-button" ng-click="addDiner()">
                 Agregar comensales
             </button>
-        </div>
     </div>
     <div ng-show="isLogged()">
         <form name="settingsForm">
-            <div class="box-options animate-show">
-                <div class="form-group">
-                    <label class="label-form-ingredient">
-                        <input type="checkbox" ng-model="omitRestrictions"/>
-                        Omitir restricciones alimenticias
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label class="label-form-ingredient">
-                        <input type="checkbox" ng-model="omitDislikeIngs"/>
-                        Omitir ingredientes que no me gustan
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label class="label-form-ingredient">
-                        <input type="checkbox" ng-model="omitCategories"/>
-                        Omitir categorías excluídas
-                    </label>
+            <div class="box-options animate-show checkbox-list">
+                <h2 align="center">Opciones de búsqueda</h2>
+                <div class="row" style="padding-left: 60px;">
+                    <div class="col-sm-4 form-group">
+                        <label class="checkbox label-form-ingredient">
+                            <input type="checkbox" ng-model="omitRestrictions"/>
+                            <i></i>
+                            Omitir mis restricciones alimenticias
+                        </label>
+                    </div>
+                    <div class=" col-sm-4 form-group">
+                        <label class="checkbox label-form-ingredient">
+                            <input type="checkbox" ng-model="omitDislikeIngs"/>
+                            <i></i>
+                            Omitir mis ingredientes excluídos
+                        </label>
+                    </div>
+                    <div class=" col-sm-4 form-group">
+                        <label class="checkbox label-form-ingredient">
+                            <input type="checkbox" ng-model="omitCategories"/>
+                            <i></i>
+                            Omitir mis categorías excluídas
+                        </label>
+                    </div>
                 </div>
             </div>
         </form>
@@ -70,10 +68,10 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <!--<div style="background-image: url({{recipe.image_url}}); height:290px; background-position:center;background-size: cover;"></div>-->
-                            <div back-img image="recipe.image_url" style="height:290px"></div>
+                            <div back-img image="recipe.image_url" style="height:240px"></div>
                             </a>
                         </div>
-                        <div class="col-sm-8 product-description">
+                        <div class="col-sm-8 product-description" style="padding-bottom: 0px;">
                             <div class="overflow-h margin-bottom-5">
                                 <ul class="list-inline overflow-h">
                                     <li>
@@ -85,17 +83,23 @@
                                         <input-stars ng-if="userVote(recipe) == null" max="5" on-star-click="voteRecipe(recipe)" ng-model="recipe.stars" ng-attr-readonly="{{ !isLogged }}" ng-click="isConnected()"></input-stars>
                                     </li>
                                 </ul>
-                                <p class="margin-bottom-20" style="height: 100px;">{{recipe.description}}</p>
-                                <ul class="list-inline add-to-wishlist margin-bottom-20">
+                                <p class="margin-bottom-60" style="height: 100px;">{{recipe.description}}</p>
+                                <ul class="list-inline add-to-wishlist" style="margin-bottom: 0px;">
+                                    <li>
+                                        <button type="button" class="btn-u btn-u-sea-shop"
+                                                ng-click="getDetailsRecipe(recipe.id)">
+                                            Ver receta
+                                        </button>
+                                    </li>
                                     <li class="wishlist-in">
                                         <i class="fa fa-heart"></i>
                                         <!--<a >Agregar a favoritos</a>-->
-                                        <a ng-if="isFavorite(recipe)" ng-click="removeFromFavorites(recipe)" style="cursor: pointer;">Remover de favoritos</a>
-                                        <a ng-if="!isFavorite(recipe)" ng-click="addToFavorites(recipe)" style="cursor: pointer;">Agregar a favoritos</a>
+                                        <a ng-if="isFavorite(recipe)" ng-click="removeFromFavorites(recipe)"
+                                           style="cursor: pointer;">Remover de favoritos</a>
+                                        <a ng-if="!isFavorite(recipe)" ng-click="addToFavorites(recipe)"
+                                           style="cursor: pointer;">Agregar a favoritos</a>
                                     </li>
                                 </ul>
-                                <button type="button" class="btn-u btn-u-sea-shop" ng-click="getDetailsRecipe(recipe.id)">Ver receta
-                                </button>
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ function ingredientService(ingredientFactory, $interval, $modal, blockUI) {
     self.refresh = refresh;
     self.getIngredients = getIngredients;
     self.getDetail = getDetail;
+    self.updateIngredients = updateIngredients;
 
     init();
     refresh();
@@ -19,6 +20,10 @@ function ingredientService(ingredientFactory, $interval, $modal, blockUI) {
             blockUI.stop();
             self.ingredients = ings;
         })
+    }
+
+    function updateIngredients(ingredients) {
+        self.ingredients = ingredients;
     }
 
     function getDetail(id) {
